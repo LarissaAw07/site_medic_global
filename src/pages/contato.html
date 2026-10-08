@@ -1,0 +1,75 @@
+<!--@{
+  "title": "Contato | Endereço, telefones e WhatsApp | MedicGLOBAL",
+  "description": "Fale com a MedicGLOBAL: R. Alcebíades Wohlers, 02, Extrema/MG. Telefone (35) 3435-4442, WhatsApp por setor e formulário de contato.",
+  "active": "voce",
+  "og": "reception",
+  "crumbs": [["Atendimento", "atendimento.html"], ["Contato", "contato.html"]]
+}@-->
+
+<section class="page-hero" aria-labelledby="t" style="padding-bottom:48px">
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid"><div class="c-1-8"><span class="eyebrow">Contato</span><h1 id="t" class="balance">Fale com a MedicGLOBAL.</h1></div></div>
+  </div>
+</section>
+
+<section aria-label="Onde estamos">
+  <div class="wrap wrap--wide">
+    <div class="place">
+      <div class="place-card">
+        <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
+        <h2>Extrema, Minas Gerais</h2>
+        <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
+        <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02<br>Extrema/MG · CEP 37640-000</p></div>
+        <dl>
+          <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
+          <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
+          <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
+          <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
+        </dl>
+        <div class="btn-row"><a class="btn btn--light" href="{{L.address.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--ghost-light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+      </div>
+      <div class="place-media" data-carousel>
+        <iframe class="is-active" title="Mapa: R. Alcebíades Wohlers, 02 - Extrema/MG" src="{{L.address.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="opacity:1"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="f-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Formulário</span>
+        <h2 id="f-t" class="balance">Escolha o assunto e envie sua mensagem.</h2>
+        <p class="lead">Direcionamos a mensagem ao setor certo. Para urgências de autorização, prefira o WhatsApp.</p>
+        <a class="link" href="atendimento.html">Ver todos os canais por setor {{i:arrow-right}}</a>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="contato" action="#" method="post">
+          <fieldset style="border:0;padding:0;margin:0"><legend class="field label" style="font-family:var(--f-head);font-weight:500;margin-bottom:12px">Setor</legend>
+            <div class="topic-grid">
+              <input type="radio" name="setor" id="s1" value="Atendimento" checked><label for="s1">Atendimento</label>
+              <input type="radio" name="setor" id="s2" value="Comercial"><label for="s2">Comercial</label>
+              <input type="radio" name="setor" id="s3" value="Financeiro"><label for="s3">Financeiro</label>
+              <input type="radio" name="setor" id="s4" value="Faturamento"><label for="s4">Faturamento</label>
+              <input type="radio" name="setor" id="s5" value="Ouvidoria"><label for="s5">Ouvidoria</label>
+              <input type="radio" name="setor" id="s6" value="Credenciamento"><label for="s6">Credenciamento</label>
+            </div>
+          </fieldset>
+          <div class="form-grid">
+            <div class="field"><label for="c-nome">Nome</label><input id="c-nome" name="nome" autocomplete="name" required aria-describedby="c-nome-err"><span class="error" id="c-nome-err">Informe o seu nome.</span></div>
+            <div class="field"><label for="c-tel">WhatsApp</label><input id="c-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="c-tel-err"><span class="error" id="c-tel-err">Informe um telefone.</span></div>
+            <div class="field"><label for="c-mail">E-mail</label><input id="c-mail" name="email" type="email" autocomplete="email" required aria-describedby="c-mail-err"><span class="error" id="c-mail-err">Informe um e-mail válido.</span></div>
+            <div class="field"><label for="c-perfil">Perfil</label><select id="c-perfil" name="perfil"><option>Visitante</option><option>Cliente</option><option>Empresa cliente</option><option>Prestador de serviços</option><option>Colaborador</option></select></div>
+            <div class="field full"><label for="c-assunto">Assunto</label><select id="c-assunto" name="assunto" required aria-describedby="c-assunto-err"><option value="">Selecione</option><option>Compra</option><option>Dúvida</option><option>Elogio</option><option>Prestação de serviço</option><option>Reclamação</option><option>Solicitação</option><option>Credenciamento</option></select><span class="error" id="c-assunto-err">Selecione o assunto.</span></div>
+            <div class="field full"><label for="c-msg">Mensagem</label><textarea id="c-msg" name="mensagem" required aria-describedby="c-msg-hint c-msg-err"></textarea><span class="hint" id="c-msg-hint">Não inclua informações de saúde neste formulário.</span><span class="error" id="c-msg-err">Escreva a sua mensagem.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="c-ok-err"><span>Autorizo o uso destes dados para responder ao meu contato, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span></label><span class="error" id="c-ok-err">É necessário autorizar.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Enviar mensagem {{i:arrow-right}}</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Mensagem enviada. Retornaremos em breve.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

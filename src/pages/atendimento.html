@@ -1,0 +1,94 @@
+<!--@{
+  "title": "Central de atendimento | Telefones, WhatsApp e ouvidoria | MedicGLOBAL",
+  "description": "Canais de atendimento MedicGLOBAL para beneficiários, empresas, prestadores, comercial, financeiro, autorizações e ouvidoria. Telefone (35) 3435-4442.",
+  "active": "voce",
+  "og": "woman",
+  "crumbs": [["Atendimento", "atendimento.html"]],
+  "jsonld": [{"@context":"https://schema.org","@type":"ContactPage","name":"Central de atendimento MedicGLOBAL","url":"https://medicglobal.com.br/atendimento/"}]
+}@-->
+
+<section class="page-hero" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="c-1-7"><span class="eyebrow">Central de atendimento</span><h1 id="t" class="balance">Estamos aqui para ajudar.</h1><p class="lead">Escolha quem você é e veja apenas os canais que fazem sentido para a sua necessidade.</p></div>
+      <div class="c-8-13" style="align-self:end">
+        <a class="place-card" href="{{L.phones.central.tel}}" style="padding:28px;gap:8px" data-track="click_telefone"><span class="eyebrow" style="margin:0">Central e ouvidoria</span><span style="font-family:var(--f-head);font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem);color:#fff;letter-spacing:-.02em">{{L.phones.central.label}}</span><span class="small" style="color:var(--on-deep-2)">{{L.phones.ouvidoriaHours}}</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Canais por público" data-filter data-filter-items="#canais .support">
+  <div class="wrap">
+    <div class="audience mb-7" role="group" aria-label="Quem é você?">
+      <button class="pill" type="button" data-filter-group="who" data-value="all" aria-pressed="true">Todos os canais</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="beneficiario" data-anchor="beneficiario" aria-pressed="false">Beneficiário</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="empresa" data-anchor="empresa" aria-pressed="false">Empresa</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="prestador" data-anchor="prestador" aria-pressed="false">Prestador</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="futuro" data-anchor="comercial" aria-pressed="false">Quero contratar</button>
+    </div>
+    <div class="support-grid" id="canais">
+      <article class="support" data-who="beneficiario" id="beneficiario"><span class="ico">{{i:user}}</span><span class="who">Beneficiário</span><h3>Central de atendimento</h3><p>Dúvidas sobre o plano, rede credenciada e serviços.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></li><li><a href="beneficiario.html">{{i:user}} Área do Beneficiário</a></li></ul></article>
+      <article class="support" data-who="beneficiario prestador" id="autorizacoes-canal"><span class="ico">{{i:file-check}}</span><span class="who">Beneficiário · Prestador</span><h3>Autorizações</h3><p>Solicitação de autorização de exames e procedimentos.</p><ul><li><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.autorizacoes.label}}</a></li><li><a href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Autorizador Web (prestador)</a></li></ul></article>
+      <article class="support" data-who="beneficiario empresa"><span class="ico">{{i:receipt}}</span><span class="who">Beneficiário · Empresa</span><h3>Financeiro</h3><p>Boletos, pagamentos e questões financeiras.</p><ul><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.financeiro.label}}</a></li><li><a href="{{L.links.boleto}}" target="_blank" rel="noopener">{{i:receipt}} 2ª via de boleto</a></li></ul></article>
+      <article class="support" data-who="futuro empresa" id="comercial"><span class="ico">{{i:user-plus}}</span><span class="who">Quero contratar · Empresa</span><h3>Comercial</h3><p>Planos, propostas e contratação para você, sua família ou sua empresa.</p><ul><li><a href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.comercial.label}}</a></li><li><a href="planos.html#contato">{{i:mail}} Solicitar proposta</a></li></ul></article>
+      <article class="support" data-who="prestador" id="prestador"><span class="ico">{{i:briefcase}}</span><span class="who">Prestador</span><h3>Faturamento</h3><p>Faturamento, guias TISS e informações operacionais.</p><ul><li><a href="{{L.wa.faturamento.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.faturamento.label}}</a></li><li><a href="documentos.html#tiss">{{i:doc}} Guias e TISS</a></li></ul></article>
+      <article class="support" data-who="empresa" id="empresa"><span class="ico">{{i:building}}</span><span class="who">Empresa cliente</span><h3>Portal da empresa</h3><p>Acesso exclusivo para empresas clientes.</p><ul><li><a href="{{L.links.empresa}}" target="_blank" rel="noopener">{{i:lock}} Acessar portal</a></li><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Financeiro</a></li></ul></article>
+      <article class="support" data-who="beneficiario empresa prestador futuro"><span class="ico">{{i:chat}}</span><span class="who">Todos</span><h3>Ouvidoria</h3><p>Se a sua demanda não foi resolvida pelos canais de atendimento, registre uma manifestação.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="mailto:{{L.mail.ouvidoria}}">{{i:mail}} {{L.mail.ouvidoria}}</a></li><li><a href="#ouvidoria">{{i:doc}} Formulário</a></li></ul></article>
+      <article class="support" data-who="beneficiario futuro"><span class="ico">{{i:pin}}</span><span class="who">Presencial</span><h3>Onde estamos</h3><p>{{L.address.full}}</p><ul><li><a href="contato.html">{{i:pin}} Ver mapa e horários</a></li></ul></article>
+      <article class="support" data-who="colaborador"><span class="ico">{{i:users}}</span><span class="who">Colaborador</span><h3>Acesso interno</h3><p>Webmail para colaboradores MedicGLOBAL.</p><ul><li><a href="{{L.links.webmail}}" target="_blank" rel="noopener">{{i:lock}} Webmail</a></li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" aria-labelledby="faq-t" id="duvidas" data-filter data-filter-items="#duvidas .faq-item" data-filter-empty="#faq-none">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5">
+        <span class="eyebrow">Dúvidas frequentes</span><h2 id="faq-t" class="balance">Resolva rápido.</h2>
+        <div class="faq-tools mt-7"><div class="field"><label for="fq">Buscar</label><input id="fq" type="search" data-filter-search placeholder="Ex.: boleto"></div></div>
+      </div>
+      <div class="c-6-13">
+        <details class="faq-item"><summary>Como emito a segunda via do boleto?</summary><div class="ans">Acesse o <a href="{{L.links.boleto}}" target="_blank" rel="noopener">sistema de boletos</a>. Em caso de dúvida, fale com o financeiro pelo WhatsApp {{L.wa.financeiro.label}}.</div></details>
+        <details class="faq-item"><summary>Como solicito uma autorização?</summary><div class="ans">Envie a solicitação pelo WhatsApp de autorizações {{L.wa.autorizacoes.label}}, com o pedido do profissional e os dados do beneficiário.</div></details>
+        <details class="faq-item"><summary>Como encontro um médico ou laboratório?</summary><div class="ans">Use a <a href="rede-credenciada.html">busca da rede credenciada</a> ou o aplicativo MedicGLOBAL.</div></details>
+        <details class="faq-item"><summary>Como acesso a telemedicina?</summary><div class="ans">Veja o passo a passo na página de <a href="telemedicina.html">telemedicina</a>.</div></details>
+        <details class="faq-item"><summary>Esqueci a senha da Área do Beneficiário.</summary><div class="ans">Use a opção <a href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Esqueci minha senha</a>. Se for o seu primeiro acesso, faça o <a href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">cadastro inicial</a>.</div></details>
+        <details class="faq-item"><summary>Quando devo procurar a ouvidoria?</summary><div class="ans">Quando a sua solicitação não tiver sido resolvida pelos canais de atendimento. A ouvidoria atende em {{L.phones.ouvidoriaHours}}.</div></details>
+        <p class="faq-empty" id="faq-none" hidden>Não encontrou? Use um dos canais acima.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ouvidoria" aria-labelledby="ov-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Ouvidoria</span>
+        <h2 id="ov-t" class="balance">Sua manifestação é ouvida.</h2>
+        <p class="lead">Canal de atendimento ao beneficiário em dias úteis, de segunda a sexta-feira, das 7h30 às 17h30.</p>
+        <ul class="checklist small"><li>{{L.phones.central.label}}</li><li>{{L.mail.ouvidoria}}</li><li>Informe o número de protocolo, se já tiver um.</li></ul>
+        <p class="xs muted">Também é possível registrar manifestações junto à ANS: Disque ANS 0800 701 9656.</p>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="ouvidoria" action="#" method="post">
+          <div class="form-grid">
+            <div class="field full"><label for="o-nome">Nome completo</label><input id="o-nome" name="nome" autocomplete="name" required aria-describedby="o-nome-err"><span class="error" id="o-nome-err">Informe o seu nome.</span></div>
+            <div class="field"><label for="o-tel">WhatsApp</label><input id="o-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="o-tel-err"><span class="error" id="o-tel-err">Informe um telefone.</span></div>
+            <div class="field"><label for="o-mail">E-mail</label><input id="o-mail" name="email" type="email" autocomplete="email" required aria-describedby="o-mail-err"><span class="error" id="o-mail-err">Informe um e-mail válido.</span></div>
+            <div class="field"><label for="o-perfil">Perfil</label><select id="o-perfil" name="perfil"><option>Beneficiário</option><option>Empresa cliente</option><option>Prestador de serviços</option><option>Visitante</option></select></div>
+            <div class="field"><label for="o-prot">Protocolo anterior <span class="muted">(opcional)</span></label><input id="o-prot" name="protocolo"></div>
+            <div class="field full"><label for="o-assunto">Assunto</label><select id="o-assunto" name="assunto" required aria-describedby="o-assunto-err"><option value="">Selecione</option><option>Reclamação</option><option>Solicitação</option><option>Dúvida</option><option>Elogio</option><option>Sugestão</option></select><span class="error" id="o-assunto-err">Selecione o assunto.</span></div>
+            <div class="field full"><label for="o-msg">Mensagem</label><textarea id="o-msg" name="mensagem" required aria-describedby="o-msg-hint o-msg-err"></textarea><span class="hint" id="o-msg-hint">Para proteger a sua privacidade, não inclua detalhes de diagnóstico ou exames além do necessário.</span><span class="error" id="o-msg-err">Escreva a sua mensagem.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="o-ok-err"><span>Autorizo o uso destes dados para o tratamento da minha manifestação, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span></label><span class="error" id="o-ok-err">É necessário autorizar.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Enviar manifestação</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Manifestação recebida. A ouvidoria vai retornar pelos contatos informados.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

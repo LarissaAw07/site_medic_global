@@ -1,0 +1,32 @@
+<!--@{
+  "title": "Página não encontrada | MedicGLOBAL",
+  "description": "A página que você procura não foi encontrada. Busque o que precisa ou volte para o início.",
+  "noindex": true,
+  "headerDark": true
+}@-->
+
+<section class="deep" style="min-height:100vh;display:grid;align-items:center;padding:calc(var(--header-h) + 48px) 0 96px">
+  <div class="wrap">
+    <div class="grid" style="align-items:center">
+      <div class="c-1-6">
+        <div class="radar" aria-hidden="true">
+          <div class="sweep"></div>
+          <svg viewBox="0 0 100 100" fill="none" stroke="rgba(255,255,255,.14)" stroke-width=".3"><circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="33"/><circle cx="50" cy="50" r="16"/><path d="M50 1v98M1 50h98"/><circle cx="68" cy="38" r="1.2" fill="#4FC3C3" stroke="none"/><circle cx="34" cy="62" r="1" fill="#4FC3C3" stroke="none"/></svg>
+          <span class="lbl" style="left:20px;top:20px">Busca · rede</span><span class="lbl" style="right:20px;bottom:20px">Sinal: não encontrado</span>
+        </div>
+      </div>
+      <div class="c-7-13 stack">
+        <p style="font-family:var(--f-display);font-size:clamp(5rem,4rem + 6vw,10rem);line-height:.9;letter-spacing:-.06em;color:#fff">4<span class="accent">0</span>4</p>
+        <h1 style="font-size:var(--t-h3)">Não encontramos esta página.</h1>
+        <p class="lead">Ela pode ter mudado de endereço com o novo site. Diga o que você precisa:</p>
+        <form class="intent-search" data-intent role="search" autocomplete="off">
+          {{i:search}}<label class="sr-only" for="q404">O que você precisa?</label>
+          <input id="q404" type="search" placeholder="Ex.: boleto, consulta, autorização" role="combobox" aria-expanded="false" aria-controls="s404">
+          <button type="submit" aria-label="Buscar">{{i:arrow-right}}</button>
+          <div class="intent-suggest" id="s404" role="listbox"></div>
+        </form>
+        <div class="btn-row"><a class="btn btn--light" href="index.html">{{i:home}} Voltar ao início</a><a class="btn btn--ghost-light" href="atendimento.html">{{i:headset}} Falar com o atendimento</a></div>
+      </div>
+    </div>
+  </div>
+</section>

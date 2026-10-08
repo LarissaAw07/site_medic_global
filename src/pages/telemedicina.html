@@ -1,0 +1,87 @@
+<!--@{
+  "title": "Telemedicina | Fale com um profissional de saúde a distância | MedicGLOBAL",
+  "description": "Entenda o que é, como funciona e como acessar a telemedicina MedicGLOBAL. Atendimento a distância para beneficiários, conforme as condições do plano.",
+  "active": "servicos",
+  "og": "phonedoc",
+  "headerDark": true,
+  "crumbs": [["Serviços", "servicos.html"], ["Telemedicina", "telemedicina.html"]],
+  "jsonld": [{"@context":"https://schema.org","@type":"Service","name":"Telemedicina MedicGLOBAL","serviceType":"Telemedicina","provider":{"@type":"Organization","name":"MedicGLOBAL"},"areaServed":"BR","url":"https://medicglobal.com.br/telemedicina/"}]
+}@-->
+
+<section class="page-hero deep page-hero--media" aria-labelledby="t" style="padding-bottom:0;overflow:hidden">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid" style="align-items:end">
+      <div class="c-1-6" style="padding-bottom:clamp(48px,5vw,120px)">
+        <span class="eyebrow">Telemedicina</span>
+        <h1 id="t" class="balance">Precisa falar com um profissional de saúde?</h1>
+        <p class="lead">Com a telemedicina, você é atendido a distância, de onde estiver, conforme as condições do seu plano.</p>
+        <div class="btn-row mt-7"><a class="btn btn--light" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Acessar telemedicina {{i:external}}</a><a class="btn btn--ghost-light" href="#como-funciona">Como funciona</a></div>
+      </div>
+      <div class="c-7-13"><div class="img-round page-hero-img--bleed" style="aspect-ratio:5/4;border-radius:var(--r-lg) var(--r-lg) 0 0">{{pic:laptop|Pessoa em atendimento por computador, com estetoscópio sobre a mesa|1600|(min-width:1100px) 55vw, 100vw|eager}}</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="oque-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5"><span class="eyebrow">O que é</span><h2 id="oque-t" class="balance">Atendimento de saúde, sem sair de casa.</h2></div>
+      <div class="c-7-13 stack">
+        <p class="lead">A telemedicina é o atendimento realizado por um profissional de saúde por meio digital. É uma forma prática de buscar orientação quando um atendimento presencial não é necessário de imediato.</p>
+        <div class="feature-list mt-7">
+          <div><span class="ico">{{i:home}}</span><div><h3>De onde você estiver</h3><p>Pelo computador ou celular, com conexão à internet.</p></div></div>
+          <div><span class="ico">{{i:shield}}</span><div><h3>Acesso do beneficiário</h3><p>Entrada com os seus dados de acesso, em ambiente próprio.</p></div></div>
+          <div><span class="ico">{{i:stethoscope}}</span><div><h3>Profissionais de saúde</h3><p>Avaliação e orientação feitas por profissional habilitado.</p></div></div>
+          <div><span class="ico">{{i:layers}}</span><div><h3>Conforme o seu plano</h3><p>O acesso segue as condições contratuais do seu produto.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="como-funciona" aria-labelledby="cf-t">
+  <div class="wrap">
+    <div class="grid mb-8"><div class="c-1-7"><span class="eyebrow">Como funciona</span><h2 id="cf-t" class="balance">Quatro passos para ser atendido.</h2></div></div>
+    <div class="steps">
+      <div class="steps-line" aria-hidden="true"><span></span></div>
+      <div class="step"><span class="dot">1</span><h3>Acesse a plataforma</h3><p>Entre no ambiente de telemedicina da MedicGLOBAL pelo computador ou celular.</p></div>
+      <div class="step"><span class="dot">2</span><h3>Identifique-se</h3><p>Use os seus dados de acesso de beneficiário.</p></div>
+      <div class="step"><span class="dot">3</span><h3>Siga as orientações</h3><p>A própria plataforma conduz você até o início do atendimento.</p></div>
+      <div class="step"><span class="dot">4</span><h3>Seja atendido</h3><p>Converse com o profissional de saúde e receba as orientações.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="quem-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow">Quem pode utilizar</span>
+        <h2 id="quem-t" class="balance">Para beneficiários MedicGLOBAL.</h2>
+        <p class="lead">A telemedicina está disponível para beneficiários, conforme as condições e características do plano contratado. Em caso de dúvida sobre o seu acesso, fale com a central.</p>
+        <a class="link" href="atendimento.html">Tirar dúvidas com a central {{i:arrow-right}}</a>
+      </div>
+      <div class="glass-feature" style="min-height:420px">
+        {{pic:woman|Mulher sorrindo em ambiente iluminado|1000|(min-width:1100px) 45vw, 100vw}}
+        <div class="inner" style="grid-template-columns:1fr">
+          <div class="glass-card">
+            <span class="label">Importante</span>
+            <p class="mt-4">A telemedicina não substitui o atendimento de urgência e emergência. Em situação de risco à vida, ligue <strong>192</strong> ou procure o pronto-socorro mais próximo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="deep mosaic" aria-labelledby="entrar-t">
+  {{> mosaic}}
+  <div class="wrap mosaic-content">
+    <span class="eyebrow">Como entrar</span>
+    <h2 id="entrar-t" class="balance">Pronto para ser atendido?</h2>
+    <p class="lead center">Acesse a plataforma e entre com os seus dados de beneficiário.</p>
+    <div class="btn-row"><a class="btn btn--light" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Acessar telemedicina {{i:external}}</a><a class="btn btn--ghost-light" href="beneficiario.html">Área do Beneficiário</a></div>
+  </div>
+</section>

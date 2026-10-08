@@ -1,0 +1,93 @@
+<!--@{
+  "title": "Área do Beneficiário | Boleto, carteirinha, autorizações e rede | MedicGLOBAL",
+  "description": "Acesse a Área do Beneficiário MedicGLOBAL: segunda via de boleto, carteirinha, autorizações, informações do plano, rede credenciada e telemedicina.",
+  "active": "voce",
+  "og": "woman",
+  "crumbs": [["Para você", "beneficiario.html"], ["Área do Beneficiário", "beneficiario.html"]]
+}@-->
+
+<section class="page-hero" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid" style="align-items:center">
+      <div class="c-1-7">
+        <span class="eyebrow">Sou beneficiário</span>
+        <h1 id="t" class="balance">Tudo o que você precisa, em um só lugar.</h1>
+        <p class="lead">Acesse seus dados, autorizações e benefícios. E, se precisar de algo rápido, use os atalhos abaixo.</p>
+      </div>
+      <div class="c-8-13">
+        <div class="place-card" style="gap:20px">
+          <span class="eyebrow">Área do Beneficiário</span>
+          <h2 style="font-size:var(--t-h3)">Entre com sua matrícula e senha.</h2>
+          <p class="small" style="color:var(--on-deep-2)">O acesso acontece no ambiente seguro do sistema de beneficiários, em uma nova aba.</p>
+          <a class="btn btn--light" href="{{L.links.beneficiario}}" target="_blank" rel="noopener" data-track="click_area_beneficiario">{{i:lock}} Acessar Área do Beneficiário</a>
+          <div class="legal-links small"><a class="accent" href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">Primeiro acesso</a><a class="accent" href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Esqueci minha senha</a><a class="accent" href="{{L.links.beneficiarioLegado}}" target="_blank" rel="noopener">Portal do beneficiário (versão anterior)</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Atalhos do beneficiário">
+  <div class="wrap">
+    <div class="needs" role="list" style="margin-top:0">
+      <a class="need" role="listitem" href="#boleto"><span class="need-ico">{{i:receipt}}</span><span><strong>Precisa da segunda via?</strong><small>Emitir boleto</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="rede-credenciada.html" data-track="click_rede"><span class="need-ico">{{i:pin}}</span><span><strong>Encontre atendimento</strong><small>Rede credenciada</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="telemedicina.html" data-track="click_telemedicina"><span class="need-ico">{{i:video}}</span><span><strong>Falar com um profissional</strong><small>Telemedicina</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="servicos.html#autorizacoes"><span class="need-ico">{{i:file-check}}</span><span><strong>Preciso de autorização</strong><small>WhatsApp dedicado</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="boleto" aria-labelledby="bol-t">
+  <div class="wrap">
+    <div class="split split--57">
+      <div class="stack">
+        <span class="eyebrow">Boleto</span>
+        <h2 id="bol-t" class="balance">Precisa da segunda via?</h2>
+        <p class="lead">Em caso de perda ou não recebimento do boleto, emita a segunda via pelo sistema de boletos da MedicGLOBAL.</p>
+        <div class="btn-row"><a class="btn" href="{{L.links.boleto}}" target="_blank" rel="noopener" data-track="emitir_boleto">Emitir boleto {{i:external}}</a><a class="btn btn--ghost" href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Financeiro</a></div>
+      </div>
+      <div class="feature-list">
+        <div><span class="ico">{{i:receipt}}</span><div><h3>Segunda via</h3><p>Para boletos perdidos ou não recebidos.</p></div></div>
+        <div><span class="ico">{{i:chat}}</span><div><h3>Dúvidas financeiras</h3><p>WhatsApp do financeiro: {{L.wa.financeiro.label}}.</p></div></div>
+        <div><span class="ico">{{i:doc}}</span><div><h3>Reajustes</h3><p>Percentuais publicados na <a class="accent" href="documentos.html#reajuste">central de documentos</a>.</p></div></div>
+        <div><span class="ico">{{i:briefcase}}</span><div><h3>Empresa cliente</h3><p>Acesse o <a class="accent" href="{{L.links.empresa}}" target="_blank" rel="noopener">portal da empresa</a>.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Carteirinha, plano e exames">
+  <div class="wrap">
+    <div class="indexed">
+      <div id="carteirinha"><span class="num">01 · Carteirinha</span><h3 class="mt-5">Sua identificação na rede</h3><p class="mt-4 muted small">Consulte os dados da carteirinha na Área do Beneficiário ou no aplicativo e apresente no atendimento.</p><a class="link mt-6" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Acessar carteirinha {{i:external}}</a></div>
+      <div id="plano"><span class="num">02 · Informações do plano</span><h3 class="mt-5">Abrangência e cobertura do seu contrato</h3><p class="mt-4 muted small">Confira as condições do seu produto antes de agendar e mantenha seus dados atualizados.</p><a class="link mt-6" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Ver meu plano {{i:external}}</a></div>
+      <div id="exames"><span class="num">03 · Exames</span><h3 class="mt-5">Autorizações e acompanhamento</h3><p class="mt-4 muted small">Acompanhe autorizações na Área do Beneficiário. Os resultados de exames são disponibilizados pelo prestador que realizou o atendimento.</p><a class="link mt-6" href="servicos.html#autorizacoes">Autorizações {{i:arrow-right}}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" aria-labelledby="app-t" style="overflow:hidden">
+  <div class="wrap">
+    <div class="eco">
+      <div class="stack">
+        <span class="eyebrow">Aplicativo MedicGLOBAL</span>
+        <h2 id="app-t" class="balance">A rede credenciada no seu bolso.</h2>
+        <p class="lead">Encontre prestadores, salve favoritos, entre em contato e veja como chegar ao local do atendimento.</p>
+        <div class="btn-row"><a class="btn btn--light" href="{{L.links.play}}" target="_blank" rel="noopener">Google Play</a><a class="btn btn--ghost-light" href="{{L.links.appstore}}" target="_blank" rel="noopener">App Store</a></div>
+      </div>
+      <div class="phone-stage">{{> orbits}}{{> phone}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="ajuda-t">
+  <div class="wrap">
+    <div class="flex-between">
+      <div><span class="eyebrow">Ainda precisa de ajuda?</span><h2 id="ajuda-t" style="font-size:var(--t-h3)">Atendimento e ouvidoria para beneficiários.</h2></div>
+      <div class="btn-row"><a class="btn" href="atendimento.html#beneficiario">Falar com a MedicGLOBAL</a><a class="btn btn--ghost" href="atendimento.html#ouvidoria">Ouvidoria</a></div>
+    </div>
+  </div>
+</section>

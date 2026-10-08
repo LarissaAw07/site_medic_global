@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /mapa-de-migracao.html
+Sitemap: https://medicglobal.com.br/sitemap.xml

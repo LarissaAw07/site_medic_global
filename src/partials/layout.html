@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="robots" content="{{robots}}">
+<link rel="canonical" href="{{canonical}}">
+<meta name="theme-color" content="#00626D">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="MedicGLOBAL">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{ogImage}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/brand/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/main.css">
+{{extraHead}}
+{{jsonld}}
+<!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
+     Substituir GTM-XXXXXXX pelo ID real. Eventos enviados ao dataLayer:
+     click_area_beneficiario, click_rede, click_telemedicina, click_whatsapp, click_telefone, click_quero_ser_cliente,
+     envio_formulario, download_documento, acesso_planos, busca_rede, busca_necessidade, busca_global, filtro -->
+</head>
+<body class="{{bodyClass}}">
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header{{headerClass}}">
+  <div class="utility">
+    <div class="wrap">
+      <span class="utility-label">Acesso rápido</span>
+      <nav aria-label="Acesso rápido">
+        <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}} Telemedicina</a>
+        <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Rede credenciada</a>
+        <a href="beneficiario.html#boleto">{{i:receipt}} 2ª via de boleto</a>
+        <a href="servicos.html#autorizacoes">{{i:file-check}} Autorizações</a>
+        <a href="atendimento.html">{{i:headset}} Atendimento</a>
+        <a href="documentos.html">{{i:doc}} Documentos</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="brand" href="index.html">{{> logo}}</a>
+    <ul class="nav-main" role="list">
+      <li><button class="nav-trigger{{act:voce}}" aria-expanded="false" aria-controls="mega-voce">Para você {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:planos}}" aria-expanded="false" aria-controls="mega-planos">Planos {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:rede}}" aria-expanded="false" aria-controls="mega-rede">Rede de cuidado {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:servicos}}" aria-expanded="false" aria-controls="mega-servicos">Serviços {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:institucional}}" aria-expanded="false" aria-controls="mega-mg">MedicGLOBAL {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:conteudos}}" aria-expanded="false" aria-controls="mega-conteudos">Conteúdos {{i:chevron-down}}</button></li>
+    </ul>
+    <div class="bar-actions">
+      <button class="icon-btn" type="button" data-open-search aria-label="Buscar no site (Ctrl+K)">{{i:search}}</button>
+      <a class="btn btn--benef btn--sm" href="beneficiario.html" data-track="click_area_beneficiario" aria-label="Área do Beneficiário">{{i:user}} <span class="benef-label">Área do Beneficiário</span></a>
+      <a class="btn btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">{{i:menu}}</button>
+    </div>
+  </div>
+
+  <!-- Mega menus organizados por intenção -->
+  <div class="mega" id="mega-voce">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Para você</span><h3>O que você precisa resolver hoje?</h3><p>Atalhos para as necessidades mais comuns de quem já é beneficiário — e de quem quer ser.</p></div>
+      <div class="mega-links">
+        <a href="beneficiario.html">Sou beneficiário</a>
+        <a href="planos.html">Quero contratar</a>
+        <a href="rede-credenciada.html">Encontre seu atendimento</a>
+        <a href="telemedicina.html">Telemedicina</a>
+        <a href="beneficiario.html#boleto">Segunda via de boleto</a>
+        <a href="servicos.html#autorizacoes">Autorizações</a>
+        <a href="atendimento.html">Atendimento</a>
+        <a href="servicos.html#urgencia">Urgência e emergência</a>
+      </div>
+      <a class="mega-feature" href="telemedicina.html">{{pic:phonedoc|Profissional de saúde usando o celular|600|300px}}<strong>Precisa falar com um profissional de saúde?</strong><span>Telemedicina conforme as condições do seu plano →</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-planos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Planos</span><h3>Um plano para a sua realidade.</h3><p>Quatro produtos EMED GLOBAL BLUE com abrangências diferentes, do municipal ao regional.</p></div>
+      <div class="mega-links">
+        <a href="planos.html">Conheça os planos</a>
+        <a href="planos.html#comparar">Compare planos</a>
+        <a href="planos.html#abrangencia">Abrangência</a>
+        <a href="planos.html#contato">Solicite uma proposta</a>
+        <a href="planos.html#duvidas">Dúvidas frequentes</a>
+        <a href="documentos.html#reajuste">Reajustes (RN 565)</a>
+      </div>
+      <a class="mega-feature" href="planos.html#comparar">{{pic:beach|Família reunida ao pôr do sol|600|300px}}<strong>Compare abrangências lado a lado</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre →</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-rede">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Rede de cuidado</span><h3>Encontre atendimento perto de você.</h3><p>Profissionais, clínicas, hospitais e laboratórios da rede, entre Bragança Paulista/SP e Pouso Alegre/MG.</p></div>
+      <div class="mega-links">
+        <a href="rede-credenciada.html">Rede credenciada</a>
+        <a href="rede-credenciada.html#buscar">Buscar profissional</a>
+        <a href="rede-credenciada.html#especialidades">Buscar especialidade</a>
+        <a href="rede-credenciada.html#buscar">Hospitais</a>
+        <a href="rede-credenciada.html#buscar">Clínicas</a>
+        <a href="rede-credenciada.html#buscar">Laboratórios</a>
+        <a href="{{L.links.guia}}" target="_blank" rel="noopener">Guia médico ↗</a>
+        <a href="servicos.html#abramge">Atendimento em trânsito</a>
+      </div>
+      <a class="mega-feature" href="rede-credenciada.html#mapa">{{pic:corridor|Corredor de hospital iluminado|600|300px}}<strong>Mapa da área de atuação</strong><span>Veja as cidades da rede MedicGLOBAL →</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-servicos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Serviços</span><h3>Serviços que facilitam o seu cuidado.</h3><p>Do agendamento à autorização, tudo pensado para ser simples.</p></div>
+      <div class="mega-links">
+        <a href="telemedicina.html">Telemedicina</a>
+        <a href="servicos.html#programas">Programas de saúde</a>
+        <a href="servicos.html#autorizacoes">Autorizações</a>
+        <a href="servicos.html#abramge">ABRAMGE</a>
+        <a href="servicos.html#aplicativo">Aplicativo</a>
+        <a href="atendimento.html">Atendimento</a>
+      </div>
+      <a class="mega-feature" href="servicos.html#aplicativo">{{pic:laptop|Mãos digitando em notebook com estetoscópio ao lado|600|300px}}<strong>Seu plano no celular</strong><span>Rede, favoritos e contato com prestadores →</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-mg">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">MedicGLOBAL</span><h3>Mais de 40 anos cuidando de pessoas.</h3><p>De Extremamedic a MedicGLOBAL: a mesma razão social e o mesmo registro na ANS, com uma nova forma de cuidar.</p></div>
+      <div class="mega-links">
+        <a href="medicglobal.html">Nossa história</a>
+        <a href="medicglobal.html#estrutura">Nossa estrutura</a>
+        <a href="medicglobal.html#atuacao">Nossa atuação</a>
+        <a href="documentos.html">Informações regulatórias</a>
+        <a href="trabalhe-conosco.html">Trabalhe conosco</a>
+        <a href="contato.html">Onde estamos</a>
+      </div>
+      <a class="mega-feature" href="medicglobal.html">{{pic:hands|Mãos entrelaçadas em gesto de cuidado|600|300px}}<strong>Mesma essência. Nova experiência.</strong><span>Conheça a nossa trajetória →</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-conteudos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Conteúdos</span><h3>Informação para cuidar melhor.</h3><p>Saúde, notícias, comunicados e informações sobre a rede.</p></div>
+      <div class="mega-links">
+        <a href="conteudos.html#cat=saude">Saúde</a>
+        <a href="conteudos.html#cat=noticias">Notícias</a>
+        <a href="conteudos.html#cat=comunicados">Comunicados</a>
+        <a href="conteudos.html#cat=hospitais">Hospitais</a>
+        <a href="conteudos.html#cat=beneficiario">Informativos ao beneficiário</a>
+        <a href="conteudos.html">Todos os conteúdos</a>
+      </div>
+      <a class="mega-feature" href="conteudos.html">{{pic:food|Prato com alimentos frescos e coloridos|600|300px}}<strong>Portal de conteúdo</strong><span>Busque por tema ou categoria →</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Menu mobile: prioriza as necessidades -->
+<div class="drawer" id="drawer" inert>
+  <nav aria-label="Menu principal (mobile)">
+    <div class="drawer-quick">
+      <a href="beneficiario.html" data-track="click_area_beneficiario">Área do Beneficiário {{i:user}}</a>
+      <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Rede credenciada</a>
+      <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}} Telemedicina</a>
+      <a href="beneficiario.html#boleto">{{i:receipt}} 2ª via de boleto</a>
+      <a href="atendimento.html">{{i:headset}} Atendimento</a>
+    </div>
+    <details><summary>Planos</summary><ul><li><a href="planos.html">Conheça os planos</a></li><li><a href="planos.html#comparar">Compare planos</a></li><li><a href="planos.html#abrangencia">Abrangência</a></li><li><a href="planos.html#contato">Solicite uma proposta</a></li></ul></details>
+    <details><summary>Serviços</summary><ul><li><a href="servicos.html#autorizacoes">Autorizações</a></li><li><a href="servicos.html#programas">Programas de saúde</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Aplicativo</a></li><li><a href="servicos.html#urgencia">Urgência e emergência</a></li></ul></details>
+    <details><summary>MedicGLOBAL</summary><ul><li><a href="medicglobal.html">Nossa história</a></li><li><a href="medicglobal.html#estrutura">Nossa estrutura</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li><li><a href="contato.html">Contato</a></li></ul></details>
+    <details><summary>Conteúdos</summary><ul><li><a href="conteudos.html">Todos os conteúdos</a></li><li><a href="conteudos.html#cat=comunicados">Comunicados</a></li><li><a href="conteudos.html#cat=saude">Saúde</a></li></ul></details>
+    <details><summary>Documentos</summary><ul><li><a href="documentos.html">Central documental</a></li><li><a href="documentos.html#ans">ANS e IDSS</a></li><li><a href="documentos.html#tiss">TISS e guias</a></li></ul></details>
+    <div class="drawer-cta">
+      <a class="btn" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
+      <button class="btn btn--ghost" type="button" data-open-search>{{i:search}} Buscar no site</button>
+    </div>
+  </nav>
+</div>
+
+<main id="conteudo" tabindex="-1">
+{{content}}
+</main>
+
+<footer class="site-footer">
+  <svg class="footer-globe" viewBox="0 0 600 600" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="300" cy="300" r="299"/><circle cx="300" cy="300" r="220"/><ellipse cx="300" cy="300" rx="120" ry="299"/><ellipse cx="300" cy="300" rx="299" ry="110"/><path d="M1 300h598M300 1v598"/></svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="eyebrow">Estamos aqui para ajudar</span>
+        <h2>Fale com a MedicGLOBAL.</h2>
+      </div>
+      <div class="footer-contact">
+        <a href="{{L.phones.central.tel}}"><small>Central e Ouvidoria</small><strong>{{L.phones.central.label}}</strong></a>
+        <a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener"><small>WhatsApp Autorizações</small><strong>{{L.wa.autorizacoes.label}}</strong></a>
+        <a href="atendimento.html"><small>Todos os canais</small><strong>Central de atendimento →</strong></a>
+      </div>
+    </div>
+    <nav class="footer-cols" aria-label="Rodapé">
+      <div><h3>Para você</h3><ul><li><a href="beneficiario.html">Sou beneficiário</a></li><li><a href="planos.html">Quero contratar</a></li><li><a href="telemedicina.html">Telemedicina</a></li><li><a href="beneficiario.html#boleto">2ª via de boleto</a></li><li><a href="servicos.html#autorizacoes">Autorizações</a></li></ul></div>
+      <div><h3>Planos</h3><ul><li><a href="planos.html">EMED GLOBAL BLUE</a></li><li><a href="planos.html#comparar">Comparar planos</a></li><li><a href="planos.html#abrangencia">Abrangência</a></li><li><a href="planos.html#contato">Solicitar proposta</a></li></ul></div>
+      <div><h3>Rede e serviços</h3><ul><li><a href="rede-credenciada.html">Rede credenciada</a></li><li><a href="{{L.links.guia}}" target="_blank" rel="noopener">Guia médico</a></li><li><a href="servicos.html#programas">Programas de saúde</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Aplicativo</a></li></ul></div>
+      <div><h3>Institucional</h3><ul><li><a href="medicglobal.html">Nossa história</a></li><li><a href="medicglobal.html#estrutura">Nossa estrutura</a></li><li><a href="conteudos.html">Conteúdos</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li><li><a href="contato.html">Contato</a></li></ul></div>
+      <div><h3>Regulatório</h3><ul><li><a href="documentos.html#ans">ANS · IDSS</a></li><li><a href="documentos.html#ans">Fator de Qualidade</a></li><li><a href="documentos.html#tiss">TISS · Guias</a></li><li><a href="documentos.html#reajuste">Reajustes</a></li><li><a href="documentos.html">Central documental</a></li></ul></div>
+      <div><h3>Acessos</h3><ul><li><a href="beneficiario.html">Área do Beneficiário</a></li><li><a href="{{L.links.empresa}}" target="_blank" rel="noopener">Empresa cliente</a></li><li><a href="{{L.links.autorizador}}" target="_blank" rel="noopener">Prestador · TISS 3.0</a></li><li><a href="{{L.links.webmail}}" target="_blank" rel="noopener">Colaboradores</a></li><li><a href="atendimento.html#ouvidoria">Ouvidoria</a></li></ul></div>
+    </nav>
+    <div class="footer-legal">
+      <a class="ans-box" href="{{L.links.ans}}" target="_blank" rel="noopener" aria-label="Agência Nacional de Saúde Suplementar — registro ANS nº {{L.ans}}"><b>ANS</b><span>nº {{L.ans}}</span></a>
+      <div class="stack" style="--s-5:8px">
+        <p><span class="pending">{{L.legal.razao}} · {{L.legal.cnpj}}</span> · {{L.address.full}}</p>
+        <p>Disque ANS: 0800 701 9656 · <a href="{{L.links.ans}}" target="_blank" rel="noopener">www.gov.br/ans</a></p>
+        <div class="legal-links"><a href="privacidade.html">Política de Privacidade</a><a href="privacidade.html#cookies">Cookies</a><button type="button" data-cookie-prefs style="background:none;border:0;padding:0;color:inherit;text-decoration:underline;font-size:inherit">Preferências de cookies</button><a href="privacidade.html#termos">Termos de Uso</a><a href="privacidade.html#lgpd">LGPD · Canal de privacidade</a><a href="documentos.html">Informações regulatórias</a></div>
+      </div>
+      <p>© <span data-year>{{year}}</span> MedicGLOBAL</p>
+    </div>
+  </div>
+  <div class="footer-word" aria-hidden="true">MedicGLOBAL</div>
+</footer>
+
+<nav class="dock" aria-label="Atalhos">
+  <a href="beneficiario.html" data-track="click_area_beneficiario">{{i:user}}Beneficiário</a>
+  <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}}Rede</a>
+  <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}}Telemedicina</a>
+  <a href="atendimento.html">{{i:headset}}Atendimento</a>
+</nav>
+
+<div class="search-overlay" role="dialog" aria-modal="true" aria-label="Buscar no site" inert>
+  <div class="search-panel">
+    <form role="search">
+      {{i:search}}
+      <label class="sr-only" for="global-search">O que você precisa?</label>
+      <input id="global-search" type="search" placeholder="O que você precisa? Ex.: boleto, consulta, autorização" autocomplete="off">
+      <button class="icon-btn" type="button" onclick="document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}))" aria-label="Fechar busca">{{i:close}}</button>
+    </form>
+    <div class="search-results" aria-live="polite"></div>
+    <p class="search-hint">Dica: pressione <kbd>Ctrl</kbd> + <kbd>K</kbd> em qualquer página para buscar.</p>
+  </div>
+</div>
+
+<div class="cookie" role="region" aria-label="Aviso de cookies">
+  <strong>Sua privacidade importa.</strong>
+  <p>Usamos cookies essenciais para o site funcionar e, com a sua permissão, cookies de medição para melhorar a experiência. Saiba mais na <a href="privacidade.html#cookies">Política de Cookies</a>.</p>
+  <div class="btn-row"><button class="btn btn--ghost btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
+</div>
+
+<script src="assets/js/main.js" defer></script>
+{{extraScripts}}
+</body>
+</html>

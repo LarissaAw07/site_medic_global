@@ -1,0 +1,101 @@
+<!--@{
+  "title": "Documentos e informações regulatórias | ANS, IDSS, TISS e reajustes | MedicGLOBAL",
+  "description": "Central documental MedicGLOBAL: registro ANS nº 41186-8, IDSS, Fator de Qualidade, guias TISS, Declaração de Saúde CID-10, guia médico e reajustes RN 565.",
+  "active": "institucional",
+  "og": "coworkers",
+  "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Documentos", "documentos.html"]]
+}@-->
+
+<section class="page-hero" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="c-1-8"><span class="eyebrow">Central documental</span><h1 id="t" class="balance">Informações regulatórias, claras e organizadas.</h1></div>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Registro na ANS, indicadores de qualidade, guias TISS, manuais e reajustes — com fonte, categoria e data de atualização.</p></div>
+    </div>
+    <div class="flex-between mt-8" style="align-items:center;padding:20px 24px;border:1px solid var(--line-2);border-radius:var(--r-lg)">
+      <div style="display:flex;gap:16px;align-items:center"><span class="ans-box" style="color:var(--ink);border-color:var(--ink)"><b style="background:var(--ink);color:#fff">ANS</b><span>nº {{L.ans}}</span></span><span class="small muted">Operadora registrada na Agência Nacional de Saúde Suplementar</span></div>
+      <span class="small">Disque ANS <strong>0800 701 9656</strong> · <a class="accent" href="{{L.links.ans}}" target="_blank" rel="noopener">gov.br/ans</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Documentos" data-filter data-filter-items="#doc-list .doc" data-filter-empty="#doc-none">
+  <div class="wrap">
+    <div class="doc-layout">
+      <aside class="doc-side">
+        <div class="field"><label for="doc-q">Buscar documento</label><input id="doc-q" type="search" data-filter-search placeholder="Ex.: guia de consulta"></div>
+        <div>
+          <p class="filter-label">Categorias</p>
+          <div class="doc-cats" role="group" aria-label="Categorias de documentos">
+            <button type="button" data-filter-group="cat" data-value="all" aria-pressed="true">Todos <span data-count-for="all" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="ans" data-anchor="ans" aria-pressed="false">ANS e IDSS <span data-count-for="ans" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="tiss" data-anchor="tiss" aria-pressed="false">TISS e guias <span data-count-for="tiss" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="manuais" aria-pressed="false">Manuais <span data-count-for="manuais" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="reajustes" aria-pressed="false">Reajustes <span data-count-for="reajustes" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Comunicados <span data-count-for="comunicados" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="legais" aria-pressed="false">Informações legais <span data-count-for="legais" data-count-group="cat"></span></button>
+          </div>
+        </div>
+        <p class="xs muted">Prestador? Os documentos TISS e o Autorizador Web estão na categoria “TISS e guias”.</p>
+      </aside>
+
+      <div>
+        <p class="small muted mb-6"><span data-filter-count></span> documentos</p>
+        <span id="ans"></span><span id="tiss"></span>
+        <div class="doc-list" id="doc-list">
+          <article class="doc" data-cat="ans"><span class="doc-ico">ANS</span><div><h3>Registro da operadora na ANS</h3><p>MedicGLOBAL — registro ANS nº {{L.ans}}. A razão social e o registro foram mantidos após a mudança de marca.</p><div class="meta"><b>ANS</b><span>Informação institucional</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.links.ans}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">IDSS</span><div><h3>IDSS — Índice de Desempenho da Saúde Suplementar</h3><p>Parte do Programa de Qualificação de Operadoras da ANS, avalia anualmente o desempenho das operadoras a partir de indicadores agrupados em quatro dimensões. Histórico de 2018 a 2025.</p><div class="meta"><b>ANS · IDSS</b><span>Atualização: IDSS 2025 (ano-base 2024)</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.links.idss}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">PQO</span><div><h3>Programa de Qualificação de Operadoras</h3><p>Informações oficiais da ANS sobre a qualificação e a avaliação das operadoras.</p><div class="meta"><b>ANS</b><span>Fonte: gov.br/ans</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.links.qualificacaoAns}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">FQ</span><div><h3>Fator de Qualidade</h3><p>Cadastro e informações da ANS sobre o Fator de Qualidade aplicado a prestadores.</p><div class="meta"><b>ANS</b><span>Fonte: ANS</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.links.fatorQualidade}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Guia de Consulta (TISS)</h3><p>Modelo de guia de consulta no padrão TISS.</p><div class="meta"><b>TISS · Guias</b><span>Atualização: 20/01/2025</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaConsulta}}" target="_blank" rel="noopener" data-doc="Guia de Consulta">{{i:eye}} Visualizar</a><a class="btn btn--sm" href="{{L.docs.guiaConsulta}}" download data-doc="Guia de Consulta">{{i:download}} Baixar</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Guia de Internação (TISS)</h3><p>Modelo de guia de solicitação de internação no padrão TISS.</p><div class="meta"><b>TISS · Guias</b><span>Atualização: 20/01/2025</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaInternacao}}" target="_blank" rel="noopener" data-doc="Guia de Internação">{{i:eye}} Visualizar</a><a class="btn btn--sm" href="{{L.docs.guiaInternacao}}" download data-doc="Guia de Internação">{{i:download}} Baixar</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Guia de Serviço Profissional (TISS)</h3><p>Modelo de guia de serviço profissional no padrão TISS.</p><div class="meta"><b>TISS · Guias</b><span>Atualização: 20/01/2025</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaServico}}" target="_blank" rel="noopener" data-doc="Guia de Serviço Profissional">{{i:eye}} Visualizar</a><a class="btn btn--sm" href="{{L.docs.guiaServico}}" download data-doc="Guia de Serviço Profissional">{{i:download}} Baixar</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Guia de SP/SADT (TISS)</h3><p>Guia de Serviço Profissional / Serviço Auxiliar de Diagnóstico e Terapia.</p><div class="meta"><b>TISS · Guias</b><span class="review-flag">Documento em atualização</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="atendimento.html#prestador">Solicitar ao atendimento</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">WEB</span><div><h3>Autorizador Web — TISS 3.0</h3><p>Sistema para prestadores solicitarem e acompanharem autorizações.</p><div class="meta"><b>TISS · Prestador</b><span>Acesso restrito</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Acessar</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">CID</span><div><h3>Declaração de Saúde — CID-10</h3><p>Sistema de declaração de saúde com classificação CID-10.</p><div class="meta"><b>CID-10</b><span>Acesso restrito</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.cid10}}" target="_blank" rel="noopener">{{i:lock}} Acessar</a></div></article>
+          <article class="doc" data-cat="manuais"><span class="doc-ico">WEB</span><div><h3>Guia médico e guia de serviços</h3><p>Consulte prestadores por tipo de guia, estado e cidade.</p><div class="meta"><b>Manuais</b><span>Atualização contínua</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">RN</span><div><h3>Reajuste — agrupamento de contratos (RN 565)</h3><p>Percentuais aplicados ao agrupamento de contratos coletivos com até 30 vidas, de 2013 a 2026.</p><div class="meta"><b>Reajustes</b><span>Atualização: período 2026/2027</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="#reajuste">{{i:eye}} Ver tabela</a><a class="btn btn--sm" href="{{L.links.rn565}}" target="_blank" rel="noopener">{{i:external}} Detalhes</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Empresas para o reajuste da RN 309 — 2013</h3><p>Relação de contratos do agrupamento para o reajuste de 2013.</p><div class="meta"><b>Reajustes</b><span>Ano de referência: 2013</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2013}}" target="_blank" rel="noopener" data-doc="RN309 2013">{{i:eye}} Visualizar</a><a class="btn btn--sm" href="{{L.docs.rn309_2013}}" download data-doc="RN309 2013">{{i:download}} Baixar</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Empresas para o reajuste da RN 309 — 2014</h3><p>Relação de contratos do agrupamento para o reajuste de 2014.</p><div class="meta"><b>Reajustes</b><span>Ano de referência: 2014</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2014}}" target="_blank" rel="noopener" data-doc="RN309 2014">{{i:eye}} Visualizar</a><a class="btn btn--sm" href="{{L.docs.rn309_2014}}" download data-doc="RN309 2014">{{i:download}} Baixar</a></div></article>
+          <article class="doc" data-cat="comunicados"><span class="doc-ico">COM</span><div><h3>Comunicado — recomposição do reajuste 2020</h3><p>Suspensão dos reajustes de setembro a dezembro de 2020 determinada pela ANS.</p><div class="meta"><b>Comunicados</b><span>Publicado em 08/06/2024</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="artigo-reajuste-2020.html">{{i:eye}} Visualizar</a></div></article>
+          <article class="doc" data-cat="legais"><span class="doc-ico">LGPD</span><div><h3>Política de Privacidade, Cookies e Termos de Uso</h3><p>Como tratamos dados pessoais, uso de cookies e canal de privacidade.</p><div class="meta"><b>Informações legais</b><span class="review-flag">Pendente de validação jurídica</span></div></div><div class="doc-actions"><a class="btn btn--ghost btn--sm" href="privacidade.html">{{i:eye}} Visualizar</a></div></article>
+        </div>
+        <p id="doc-none" class="muted mt-6" hidden>Nenhum documento encontrado. <a class="link" href="atendimento.html">Fale com a MedicGLOBAL</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="reajuste" aria-labelledby="rj-t">
+  <div class="wrap">
+    <div class="grid mb-7">
+      <div class="c-1-6"><span class="eyebrow">Reajustes · RN 565</span><h2 id="rj-t" class="balance" style="font-size:var(--t-h3)">Agrupamento de contratos com até 30 vidas.</h2></div>
+      <div class="c-7-13" style="align-self:end"><p class="muted">Percentuais publicados por período de aplicação. Para a relação de contratos de cada ano, consulte os <a class="accent" href="{{L.links.rn565}}" target="_blank" rel="noopener">detalhes do agrupamento</a>.</p></div>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix" style="min-width:480px">
+        <caption class="sr-only">Percentuais de reajuste do agrupamento de contratos por período</caption>
+        <thead><tr><th scope="col">Ano</th><th scope="col" style="text-align:left">Período de aplicação</th><th scope="col">Percentual</th></tr></thead>
+        <tbody class="tnum">
+          <tr><th scope="row">2026</th><td style="text-align:left">01/05/2026 a 30/04/2027</td><td><strong>8,70%</strong></td></tr>
+          <tr><th scope="row">2025</th><td style="text-align:left">01/05/2025 a 30/04/2026</td><td>6,55%</td></tr>
+          <tr><th scope="row">2024</th><td style="text-align:left">01/05/2024 a 30/04/2025</td><td>11,98%</td></tr>
+          <tr><th scope="row">2023</th><td style="text-align:left">01/05/2023 a 30/04/2024</td><td>9,00%</td></tr>
+          <tr><th scope="row">2022</th><td style="text-align:left">01/05/2022 a 30/04/2023</td><td>10,00%</td></tr>
+          <tr><th scope="row">2021</th><td style="text-align:left">01/05/2021 a 30/04/2022</td><td>5,00%</td></tr>
+          <tr><th scope="row">2020</th><td style="text-align:left">01/05/2020 a 30/04/2021</td><td>7,35%</td></tr>
+          <tr><th scope="row">2019</th><td style="text-align:left">01/05/2019 a 30/04/2020</td><td>9,40%</td></tr>
+          <tr><th scope="row">2018</th><td style="text-align:left">01/05/2018 a 30/04/2019</td><td>22,22%</td></tr>
+          <tr><th scope="row">2017</th><td style="text-align:left">01/05/2017 a 30/04/2018</td><td>17,96%</td></tr>
+          <tr><th scope="row">2016</th><td style="text-align:left">01/05/2016 a 30/04/2017</td><td><span class="review-flag">Não informado</span></td></tr>
+          <tr><th scope="row">2015</th><td style="text-align:left">01/05/2015 a 30/04/2016</td><td>20,97%</td></tr>
+          <tr><th scope="row">2014</th><td style="text-align:left">01/05/2014 a 30/04/2015</td><td>13,24%</td></tr>
+          <tr><th scope="row">2013</th><td style="text-align:left">01/05/2013 a 30/04/2014</td><td>11,33%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="xs muted mt-5">Fonte: publicação de agrupamento de contratos MedicGLOBAL (RN 565/RN 309).</p>
+  </div>
+</section>

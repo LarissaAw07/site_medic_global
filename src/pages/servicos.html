@@ -1,0 +1,122 @@
+<!--@{
+  "title": "Serviços | Telemedicina, autorizações, ABRAMGE e aplicativo | MedicGLOBAL",
+  "description": "Telemedicina, programas de saúde, autorizações, atendimento em trânsito pelo Sistema ABRAMGE, urgência e emergência e aplicativo MedicGLOBAL.",
+  "active": "servicos",
+  "og": "laptop",
+  "crumbs": [["Serviços", "servicos.html"]]
+}@-->
+<style>
+.bento { display: grid; gap: 16px; }
+@media (min-width: 1100px) { .bento { grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(260px, auto); gap: 20px; } }
+.tile { position: relative; border-radius: var(--r-lg); overflow: hidden; padding: 32px; display: flex; flex-direction: column; gap: 14px; background: var(--mist); min-height: 260px; transition: transform .5s var(--ease); }
+.tile:hover { transform: translateY(-3px); }
+.tile h3 { font-size: var(--t-h4); max-width: 18ch; }
+.tile p { color: var(--ink-3); font-size: var(--t-sm); max-width: 34ch; }
+.tile .go { margin-top: auto; }
+.tile--img { color: #fff; justify-content: flex-end; }
+.tile--img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.tile--img::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,26,29,.05) 30%, rgba(2,26,29,.82)); z-index: 1; }
+.tile--img > *:not(img) { position: relative; z-index: 2; }
+.tile--img h3, .tile--img .link { color: #fff; }
+.tile--img p { color: rgba(255,255,255,.8); }
+.tile--img:hover img { transform: scale(1.04); }
+.tile--deep { background: var(--deep); color: var(--on-deep); }
+.tile--deep h3 { color: #fff; } .tile--deep p { color: var(--on-deep-2); } .tile--deep .link { color: var(--glow); }
+.tile--globo { background: var(--globo); color: #fff; } .tile--globo h3 { color: #fff; } .tile--globo p { color: rgba(255,255,255,.8); } .tile--globo .link { color: #fff; }
+.tile .ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--white); color: var(--globo); }
+.tile--deep .ico, .tile--globo .ico { background: rgba(255,255,255,.08); color: var(--glow); }
+.tile .ico svg { width: 22px; height: 22px; }
+@media (min-width: 1100px) {
+  .t-a { grid-column: span 7; grid-row: span 2; } .t-b { grid-column: span 5; } .t-c { grid-column: span 5; }
+  .t-d { grid-column: span 4; } .t-e { grid-column: span 4; } .t-f { grid-column: span 4; }
+}
+.detail { display: grid; gap: 40px; padding-block: 72px; border-top: 1px solid var(--line-2); }
+@media (min-width: 1100px) { .detail { grid-template-columns: 4fr 1fr 7fr; } .detail > :last-child { grid-column: 3; } }
+.detail h2 { font-size: var(--t-h3); }
+</style>
+
+<section class="page-hero" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="c-1-8"><span class="eyebrow">Serviços</span><h1 id="t" class="balance">Serviços que simplificam o cuidado.</h1></div>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Do atendimento a distância às autorizações, tudo o que você usa com mais frequência — explicado de forma direta.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Visão geral dos serviços">
+  <div class="wrap">
+    <div class="bento">
+      <a class="tile tile--img t-a reveal" href="telemedicina.html" data-track="click_telemedicina">{{pic:phonedoc|Profissional de saúde segurando um celular|1400|(min-width:1100px) 58vw, 100vw}}<span class="eyebrow" style="color:#fff">Telemedicina</span><h3>Precisa falar com um profissional de saúde?</h3><p>Acesse a telemedicina de onde estiver, conforme as condições do seu plano.</p><span class="link">Acessar telemedicina {{i:arrow-right}}</span></a>
+      <a class="tile tile--globo t-b reveal reveal-d1" href="#autorizacoes"><span class="ico">{{i:file-check}}</span><h3>Precisa de uma autorização?</h3><p>Solicite pelo WhatsApp dedicado às autorizações.</p><span class="link go">Solicitar autorização {{i:arrow-right}}</span></a>
+      <a class="tile t-c reveal reveal-d2" href="#abramge"><span class="ico">{{i:route}}</span><h3>Vai viajar?</h3><p>Urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional.</p><span class="link go">Entender o atendimento {{i:arrow-right}}</span></a>
+      <a class="tile t-d reveal" href="#programas"><span class="ico">{{i:heart}}</span><h3>Programas de saúde</h3><p>Mais facilidade para agendar consultas e exames.</p><span class="link go">Ver programas {{i:arrow-right}}</span></a>
+      <a class="tile tile--deep t-e reveal reveal-d1" href="#aplicativo"><span class="ico">{{i:smartphone}}</span><h3>Aplicativo</h3><p>Rede credenciada, favoritos e contato com prestadores no celular.</p><span class="link go">Baixar o aplicativo {{i:arrow-right}}</span></a>
+      <a class="tile t-f reveal reveal-d2" href="#urgencia"><span class="ico">{{i:siren}}</span><h3>Urgência e emergência</h3><p>Saiba onde buscar atendimento imediato.</p><span class="link go">Ver orientações {{i:arrow-right}}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Detalhes dos serviços">
+  <div class="wrap">
+    <article class="detail" id="autorizacoes">
+      <div><span class="eyebrow">Autorizações</span><h2 class="balance">Seu exame ou procedimento precisa de autorização?</h2></div>
+      <div class="stack">
+        <p class="lead">Envie a sua solicitação pelo WhatsApp de autorizações da MedicGLOBAL. Tenha em mãos o pedido do profissional e os dados do beneficiário.</p>
+        <div class="btn-row"><a class="btn" href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Solicitar autorização</a><a class="btn btn--ghost" href="{{L.wa.autorizacoes.tel}}">{{L.wa.autorizacoes.label}}</a></div>
+        <div class="notice">{{i:briefcase}}<span>É prestador? Utilize o <a class="accent" href="{{L.links.autorizador}}" target="_blank" rel="noopener">Autorizador Web TISS 3.0</a> e as <a class="accent" href="documentos.html#tiss">guias TISS</a>.</span></div>
+      </div>
+    </article>
+
+    <article class="detail" id="programas">
+      <div><span class="eyebrow">Programas de saúde</span><h2 class="balance">Cuidado contínuo, com mais facilidade.</h2></div>
+      <div class="stack">
+        <p class="lead">Os programas de saúde da MedicGLOBAL facilitam o agendamento de consultas e exames.</p>
+        <p class="muted">Para saber quais programas estão disponíveis para o seu plano e como participar, fale com a central de atendimento.</p>
+        <div class="btn-row"><a class="btn btn--ghost" href="atendimento.html">Falar com a MedicGLOBAL {{i:arrow-right}}</a></div>
+      </div>
+    </article>
+
+    <article class="detail" id="abramge">
+      <div><span class="eyebrow">ABRAMGE</span><h2 class="balance">Atendimento em trânsito pelo Brasil.</h2></div>
+      <div class="split" style="gap:40px">
+        <div class="stack">
+          <p class="lead">Fora da área de atuação, você conta com atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional, conforme as condições do seu contrato.</p>
+          <a class="link" href="{{L.links.abramge}}" target="_blank" rel="noopener">Fale com a ABRAMGE {{i:external}}</a>
+        </div>
+        <div class="img-round" style="aspect-ratio:4/3">{{pic:reach|Duas mãos se aproximando em gesto de apoio|900|(min-width:1100px) 30vw, 100vw}}</div>
+      </div>
+    </article>
+
+    <article class="detail" id="urgencia">
+      <div><span class="eyebrow">Urgência e emergência</span><h2 class="balance">Em uma situação urgente, saiba o que fazer.</h2></div>
+      <div class="stack">
+        <ul class="checklist">
+          <li><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
+          <li><span><strong>Na área de atuação:</strong> consulte os hospitais da <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</span></li>
+          <li><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo <a class="accent" href="#abramge">Sistema ABRAMGE</a>.</span></li>
+          <li><span><strong>Autorização urgente:</strong> WhatsApp de autorizações <a class="accent" href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a>.</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="detail" id="aplicativo">
+      <div><span class="eyebrow">Aplicativo</span><h2 class="balance">Seu plano no bolso.</h2></div>
+      <div class="split" style="gap:40px">
+        <div class="stack">
+          <p class="lead">Acesse a rede credenciada e as informações do seu plano pelo aplicativo: salve favoritos, fale com prestadores e veja a localização do atendimento.</p>
+          <div class="btn-row"><a class="btn" href="{{L.links.play}}" target="_blank" rel="noopener">{{i:smartphone}} Google Play</a><a class="btn btn--ghost" href="{{L.links.appstore}}" target="_blank" rel="noopener">{{i:smartphone}} App Store</a></div>
+          <p class="xs muted">Nas lojas, o aplicativo ainda pode aparecer com o nome anterior, Extremamedic.</p>
+        </div>
+        <div class="deep" style="border-radius:var(--r-lg);padding:32px 0;display:grid;place-items:center">{{> phone}}</div>
+      </div>
+    </article>
+
+    <article class="detail" id="atendimento">
+      <div><span class="eyebrow">Atendimento</span><h2 class="balance">Ainda com dúvidas?</h2></div>
+      <div class="stack"><p class="lead">A central reúne telefones, WhatsApp e ouvidoria, separados pelo que você precisa.</p><a class="btn" href="atendimento.html">Ir para a central de atendimento {{i:arrow-right}}</a></div>
+    </article>
+  </div>
+</section>

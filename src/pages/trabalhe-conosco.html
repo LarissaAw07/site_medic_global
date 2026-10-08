@@ -1,0 +1,73 @@
+<!--@{
+  "title": "Trabalhe conosco | Faça parte da MedicGLOBAL",
+  "description": "Venha fazer parte da MedicGLOBAL. Cadastre seu currículo no banco de talentos e participe dos processos de seleção.",
+  "active": "institucional",
+  "og": "team",
+  "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Trabalhe conosco", "trabalhe-conosco.html"]]
+}@-->
+
+<section class="page-hero page-hero--media" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="c-1-6 stack">
+        <span class="eyebrow">Trabalhe conosco</span>
+        <h1 id="t" class="balance">Faça parte da MedicGLOBAL.</h1>
+        <p class="lead">Deixe seu contato e participe dos nossos processos de seleção. Construa com a gente uma forma mais simples de cuidar das pessoas.</p>
+        <div class="btn-row"><a class="btn" href="#curriculo">Enviar currículo {{i:arrow-right}}</a></div>
+      </div>
+      <div class="c-7-13"><div class="img-round page-hero-img--bleed" style="aspect-ratio:16/11">{{pic:coworkers|Equipe trabalhando junta em uma mesa com notebooks|1600|(min-width:1100px) 55vw, 100vw|eager}}</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-labelledby="cult-t">
+  <div class="wrap">
+    <div class="grid mb-8"><div class="c-1-6"><span class="eyebrow">Cultura</span><h2 id="cult-t" class="balance">Tradição de cuidado, olhar para o futuro.</h2></div><div class="c-7-13" style="align-self:end"><p class="lead">Mais de 40 anos cuidando da saúde das pessoas nos ensinaram que proximidade e dedicação fazem diferença — e que é preciso inovar para continuar cuidando bem.</p></div></div>
+    <div class="indexed">
+      <div><span class="num">01 · Valor</span><h3 class="mt-5">Cuidado</h3><p class="mt-4 muted small">Cuidar de cada beneficiário e de sua família com dedicação.</p></div>
+      <div><span class="num">02 · Valor</span><h3 class="mt-5">Solidez</h3><p class="mt-4 muted small">Uma trajetória construída com confiança, transparência e responsabilidade.</p></div>
+      <div><span class="num">03 · Valor</span><h3 class="mt-5">Inovação</h3><p class="mt-4 muted small">Evoluir produtos, serviços e experiências olhando para as necessidades das pessoas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" aria-labelledby="op-t">
+  <div class="wrap">
+    <div class="split split--57">
+      <div class="stack">
+        <span class="eyebrow">Oportunidades</span>
+        <h2 id="op-t" class="balance">Banco de talentos sempre aberto.</h2>
+        <p class="lead">Quando surgir uma oportunidade compatível com o seu perfil, nosso time entra em contato para os próximos passos do processo seletivo.</p>
+      </div>
+      <div class="steps" style="grid-template-columns:1fr">
+        <div class="step" style="display:flex;gap:20px"><span class="dot" style="flex-shrink:0;margin:0">1</span><div><h3>Envie seu currículo</h3><p>Preencha o formulário com seus contatos.</p></div></div>
+        <div class="step" style="display:flex;gap:20px"><span class="dot" style="flex-shrink:0;margin:0">2</span><div><h3>Banco de talentos</h3><p>Seu perfil fica disponível para as próximas seleções.</p></div></div>
+        <div class="step" style="display:flex;gap:20px"><span class="dot" style="flex-shrink:0;margin:0">3</span><div><h3>Contato</h3><p>Retornamos quando houver uma vaga compatível.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="curriculo" aria-labelledby="cv-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack"><span class="eyebrow">Currículo</span><h2 id="cv-t" class="balance">Envie seu currículo.</h2><p class="muted">Arquivos em PDF ou DOC, até 5 MB. Seus dados serão usados apenas para fins de recrutamento e seleção.</p></div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="trabalhe_conosco" action="#" method="post" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="field full"><label for="t-nome">Nome completo</label><input id="t-nome" name="nome" autocomplete="name" required aria-describedby="t-nome-err"><span class="error" id="t-nome-err">Informe o seu nome.</span></div>
+            <div class="field"><label for="t-mail">E-mail</label><input id="t-mail" name="email" type="email" autocomplete="email" required aria-describedby="t-mail-err"><span class="error" id="t-mail-err">Informe um e-mail válido.</span></div>
+            <div class="field"><label for="t-tel">WhatsApp</label><input id="t-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="t-tel-err"><span class="error" id="t-tel-err">Informe um telefone.</span></div>
+            <div class="field full"><label for="t-area">Área de interesse <span class="muted">(opcional)</span></label><input id="t-area" name="area" placeholder="Ex.: atendimento, administrativo, saúde"></div>
+            <div class="field full"><label for="t-cv">Currículo</label><input id="t-cv" name="curriculo" type="file" accept=".pdf,.doc,.docx" required aria-describedby="t-cv-err"><span class="error" id="t-cv-err">Anexe o seu currículo.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="t-ok-err"><span>Autorizo o tratamento dos meus dados para recrutamento e seleção, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span></label><span class="error" id="t-ok-err">É necessário autorizar.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">{{i:upload}} Enviar currículo</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Currículo recebido. Obrigado pelo interesse em fazer parte da MedicGLOBAL!</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

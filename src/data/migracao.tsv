@@ -1,0 +1,50 @@
+Home — título "A melhor opção em saúde!"	medicglobal.com.br/	Home	Hero	REESCREVER	Superlativo removido; nova headline orientada à necessidade	Sim — validar copy final
+Home — bloco "Rede Credenciada" (melhor rede do Sul de Minas, 5 hospitais, ABRAMGE)	medicglobal.com.br/	Home · MedicGLOBAL	Rede de cuidado · Estrutura	REESCREVER	"A melhor rede" removido; fatos preservados (ambulatorial, hospitalar, obstetrícia, 5 hospitais, ABRAMGE)	Sim — confirmar número e nomes dos 5 hospitais
+Atalho "Quero contratar" / botões "Contrate"	/vendas/ (página "em construção" da KingHost)	Planos	Solicitar proposta	REORGANIZAR	Novo formulário comercial enxuto + WhatsApp comercial	Sim — definir integração (CRM/e-mail)
+Atalho "Especialidades médicas"	extremamedic.com/index.asp	Rede credenciada	Buscar especialidade	REORGANIZAR	Lista parcial de especialidades + link para o sistema oficial	Sim — lista completa via integração
+Atalho "2ª via boleto"	/segundaviaboleto → 187.60.158.90:8080/boletoonline	Área do Beneficiário	Boleto	MANTER	Link oficial mantido	Não
+Atalho "Chamada de emergência" / "Solicitação de autorizações"	wa.link/iaub5d (WhatsApp 35 98845-9074)	Serviços	Autorizações · Urgência	REORGANIZAR	Rótulo "emergência" substituído por "Autorização urgente"; orientação 192/SAMU adicionada	Sim — validar orientação de urgência
+Card "Telemedicina — consulte em menos de 5 minutos"	medicglobal.com.br/	Telemedicina	Página dedicada	REESCREVER	Promessa de tempo removida; criado conteúdo O que é / Como funciona / Quem pode / Como entrar	Sim — validar fluxo real de acesso
+Card "Programas de Saúde"	medicglobal.com.br/	Serviços	Programas de saúde	ATUALIZAR	Site atual não nomeia os programas; imagem com nome de outra operadora descartada	Sim — listar programas oficiais
+Cards "Profissional / Prestador" e "Especialidade"	medicglobal.com.br/	Rede credenciada	Busca	REORGANIZAR	Unificados na busca principal da rede	Não
+Card "ABRAMGE"	medicglobal.com.br/	Serviços	ABRAMGE	MANTER	Texto reescrito, conceito preservado	Não
+Página "Nossa História"	/extrema-medic/	MedicGLOBAL	Timeline · Números	REESCREVER	Transformada em linha do tempo; removidos "cobertura completa", "melhor escolha", "máxima qualidade"	Sim — validar marcos e, se houver, anos
+Introdução da página Planos	/planos/	Planos	Hero · Rede	REESCREVER	Fatos preservados; erros de digitação corrigidos	Não
+Planos BLUE 100 / 200 / 300 / 400 (abrangência e acomodação)	/planos/	Planos · Home	Cards · Matriz de abrangência	MANTER	Dados mantidos literalmente; demais itens como "Consulte condições"	Sim — diferença entre BLUE 300 e 400; segmentação; contratação; nº de registro dos produtos (498019241, 498018242, 500176245, 500177243, 505336256, 500178241 — variações CA/CE/SO)
+Inclusão de Extrema/MG na abrangência do BLUE 200	inferência geográfica (Bragança Paulista → Cambuí)	Planos	Matriz	VALIDAR	Marcado na matriz com nota de fonte	Sim
+Contatos por setor (faturamento, comercial, financeiro, autorizações)	/contato/	Atendimento · Contato	Cards por público	REORGANIZAR	Separados por público (beneficiário, empresa, prestador, quero contratar)	Sim — Comercial: número exibido (35) 3435-4442 diverge do WhatsApp (35) 98826-9853; adotado o WhatsApp
+Formulário de contato (setor, perfil, assunto)	/contato/	Contato	Formulário	REORGANIZAR	Seleção de assunto em chips; "Elógio" corrigido; consentimento LGPD	Não
+WhatsApp flutuante +55 16 99700-1616	wa.link/xuf2ry	—	—	ARQUIVAR	Removido (DDD fora da região, provável resíduo de template)	Sim — confirmar
+Ouvidoria — horário, telefone e e-mail	pop-up do site / extremamedic.com	Atendimento	Ouvidoria	MANTER	Texto reescrito	Sim — e-mail ainda no domínio extremamedic.com.br
+Formulário de Ouvidoria	/ouvidoria/	Atendimento	Ouvidoria	REORGANIZAR	Campos de perfil e protocolo; aviso para não incluir dados de saúde	Não
+Trabalhe conosco (Nome, E-mail, WhatsApp, currículo)	/trabalhe-conosco/	Trabalhe conosco	Formulário	MANTER	Fluxo preservado; adicionados Cultura, Valores, Banco de talentos	Sim — validar valores propostos
+Portal de conteúdo (4 posts)	/portal-de-conteudo/	Conteúdos	Portal	ATUALIZAR	3 posts têm corpo de texto de enchimento: exibidos como "Em atualização"	Sim — produzir textos (Depressão, Coração, Santa Casa de Bragança)
+Comunicado — Recomposição do reajuste 2020	/comunicado-recomposicao-...-2020/	Conteúdos	Artigo	REESCREVER	Fatos e fonte (Comunicado ANS nº 85) preservados	Sim
+Newsletter (link de privacidade quebrado)	/portal-de-conteudo/	Conteúdos	Novidades	REORGANIZAR	Consentimento aponta para a nova política	Não
+Política de Privacidade	/politica-de-privacidade/ (404)	Privacidade	Política · Cookies · Termos · LGPD	VALIDAR	Documento-modelo criado	Sim — jurídico e DPO
+Área do Beneficiário (dois portais)	187.60.158.90:8080/CSSOL_BENEFICIARIO e extremamedic.com/cliente	Área do Beneficiário	Acesso	VALIDAR	Adotado extremamedic.com/cliente (HTTPS) como principal; o anterior como alternativa	Sim — definir portal oficial; portais em IP sem HTTPS
+Portal Empresa cliente	187.60.158.90:8080/CSSOL_Clientes	Atendimento · Rodapé	Empresa	MANTER	—	Recomendado HTTPS
+Autorizador TISS 3.0 ("TIS 3.0")	187.60.158.90:8080/AUTORIZADORWEB	Documentos · Serviços	TISS	MANTER	Grafia corrigida	Recomendado HTTPS
+Declaração de Saúde CID-10	187.60.158.90:8080/DeclaracaoSaudeCid10	Documentos	TISS e guias	MANTER	—	Não
+Webmail de colaboradores	webmail.medicglobal.com.br	Rodapé · Atendimento	Colaborador	MANTER	—	Não
+IDSS 2018–2025	extremamedic.com/idss_historico.php	Documentos	ANS e IDSS	MANTER	Texto institucional do IDSS reescrito	Sim — resultados publicados apenas como imagem; publicar em texto/PDF acessível
+Reajustes RN 565 (2013–2026)	extremamedic.com/agrupamento.php	Documentos	Tabela de reajustes	MANTER	Percentuais transcritos	Sim — 2016 sem percentual; títulos RN 309 x RN 565 divergentes
+Empresas para reajuste RN 309 — 2013 e 2014 (PDF)	wp-content/uploads/2024/10	Documentos	Reajustes	MANTER	Visualizar / Baixar	Não
+Guias TISS 2025 — Consulta, Internação, Serviço Profissional (PDF)	wp-content/uploads/2025/01	Documentos	TISS e guias	MANTER	Visualizar / Baixar	Não
+Guia SP/SADT (PDF)	extremamedic.com/docs/guia_spsadt.pdf (quebrado)	Documentos	TISS e guias	ATUALIZAR	Marcado como "em atualização"	Sim — publicar PDF
+Fator de Qualidade	ans.gov.br (link legado, HTTP)	Documentos	ANS	VALIDAR	Link mantido	Sim — atualizar para gov.br/ans
+Guia médico / guia de serviços	extremamedic.com/manual	Rede · Documentos	Manuais	MANTER	—	Não
+Aviso da rede ("planos posteriores à lei")	extremamedic.com/rede_credenciada.php	Rede credenciada	Antes de agendar	REESCREVER	Lei nº 9.656/98 explicitada	Sim — validar redação
+Links do aplicativo (marca Extremamedic)	Google Play / App Store	Serviços · Beneficiário	Aplicativo	MANTER	Aviso de nome anterior nas lojas	Sim — atualizar marca do app
+Selo ANS nº 41186-8 (imagem)	wp-content/uploads/2024/04	Rodapé · Documentos	ANS	MANTER	Convertido em texto acessível	Não
+Logo (JPG/PNG, versão verde)	wp-content/uploads/2024/04	Global	Header · Favicon	VALIDAR	Recriado em SVG nas cores oficiais #00626D / #008C8C	Sim — substituir pelo vetor oficial
+Endereço (somente em imagem de mapa)	/contato/	Contato · Rodapé · Schema	Onde estamos	MANTER	Convertido em texto + mapa interativo	Não
+Razão social e CNPJ	inexistente no site atual	Rodapé	Informações legais	VALIDAR	Espaço reservado e sinalizado	Sim — obrigatório
+Disque ANS 0800 701 9656	inexistente no site atual	Rodapé · Documentos · Ouvidoria	ANS	VALIDAR	Inserido (canal público da ANS)	Sim
+Redes sociais	inexistente no site atual	Rodapé	—	VALIDAR	Não exibidas até confirmação	Sim — informar perfis oficiais
+Barra de acessibilidade e banner de cookies (Complianz)	global	Global	Acessibilidade nativa · Consentimento	REORGANIZAR	Contraste, foco e tipografia acessíveis por padrão; consentimento LGPD com GA4 condicionado	Não
+Página /manutencao/	/manutencao/	—	—	ARQUIVAR	Sem conteúdo	Não
+Comunicado de atendimento na pandemia (25/03/2020)	extremamedic.com/index.asp	—	—	ARQUIVAR	Desatualizado; telefones antigos	Não
+Fotos genéricas dos cards de planos e posts	wp-content/uploads	—	—	ARQUIVAR	Substituídas por fotografia editorial provisória	Sim — licenciar/produzir banco próprio de imagens
+Imagens de hospitais (HCSL, Hospital Renascentista)	biblioteca de mídia	MedicGLOBAL	Estrutura	VALIDAR	Não utilizadas	Sim — usar se confirmados como rede
+Fonte Agenor Neue	identidade fornecida	Global	Títulos	VALIDAR	@font-face pronto em /assets/fonts	Sim — fornecer arquivos WOFF2 licenciados

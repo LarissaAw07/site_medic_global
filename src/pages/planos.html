@@ -1,0 +1,166 @@
+<!--@{
+  "title": "Planos de saúde EMED GLOBAL BLUE | MedicGLOBAL",
+  "description": "Conheça e compare os planos EMED GLOBAL BLUE 100, 200, 300 e 400: abrangência de Extrema/MG a Bragança Paulista/SP e Pouso Alegre/MG. Solicite uma proposta.",
+  "active": "planos",
+  "og": "beach",
+  "crumbs": [["Planos", "planos.html"]]
+}@-->
+
+<section class="page-hero page-hero--media" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="c-1-7">
+        <span class="eyebrow">Planos EMED GLOBAL BLUE</span>
+        <h1 id="t" class="balance">Um plano de saúde pensado para a sua realidade.</h1>
+        <p class="lead">Quatro produtos com abrangências diferentes — do municipal, em Extrema/MG, ao regional, de Bragança Paulista/SP a Pouso Alegre/MG. Compare e escolha com calma.</p>
+        <div class="btn-row mt-7"><a class="btn" href="#comparar" data-track="acesso_planos">Comparar planos {{i:arrow-right}}</a><a class="btn btn--ghost" href="#contato" data-track="click_quero_ser_cliente">Solicitar contato</a></div>
+      </div>
+      <div class="c-8-13"><div class="img-arch">{{pic:beach|Família de mãos dadas na praia ao pôr do sol|900|(min-width:1100px) 35vw, 100vw|eager}}</div></div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Nesta página">
+  <div class="wrap"><a href="#comparar">Planos</a><a href="#abrangencia">Abrangência</a><a href="#rede">Rede</a><a href="#duvidas">Dúvidas</a><a href="#contato">Solicitar proposta</a></div>
+</nav>
+
+<section class="section mist" id="comparar" aria-labelledby="comp-t" data-filter data-filter-items="#comparar .plan" data-filter-mode="dim">
+  <div class="wrap">
+    <div class="grid mb-7">
+      <div class="c-1-7"><span class="eyebrow">Compare</span><h2 id="comp-t" class="balance">Qual plano atende onde você vive e circula?</h2></div>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Selecione a sua região: destacamos os planos cuja abrangência informada inclui essa cidade.</p></div>
+    </div>
+    <div class="filters mb-7">
+      <fieldset>
+        <legend>Por região</legend>
+        <div class="type-pills">
+          <button class="pill" type="button" data-filter-group="regiao" data-value="all" aria-pressed="true">Todas</button>
+          <button class="pill" type="button" data-filter-group="regiao" data-value="extrema" aria-pressed="false">Extrema/MG</button>
+          <button class="pill" type="button" data-filter-group="regiao" data-value="cambui" aria-pressed="false">Cambuí/MG</button>
+          <button class="pill" type="button" data-filter-group="regiao" data-value="braganca" aria-pressed="false">Bragança Paulista/SP</button>
+          <button class="pill" type="button" data-filter-group="regiao" data-value="pousoalegre" aria-pressed="false">Pouso Alegre/MG</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Por perfil</legend>
+        <div class="type-pills" data-pill-target="perfil">
+          <button class="pill" type="button" data-value="Para mim e minha família" aria-pressed="false">Para mim e minha família</button>
+          <button class="pill" type="button" data-value="Para minha empresa" aria-pressed="false">Para minha empresa</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Por tipo de contratação</legend>
+        <div class="type-pills" data-pill-target="contratacao">
+          <button class="pill" type="button" data-value="Coletivo empresarial" aria-pressed="false">Coletivo empresarial</button>
+                    <button class="pill" type="button" data-value="Ainda não sei" aria-pressed="false">Ainda não sei</button>
+        </div>
+      </fieldset>
+    </div>
+    <div class="plans">
+      {{> plan-cards}}
+    </div>
+    <div class="notice mt-6">{{i:info}}<span>Perfil e tipo de contratação são enviados ao nosso time comercial junto com a sua solicitação: a disponibilidade de cada produto para o seu perfil é confirmada no atendimento. Segmentação, carências, coparticipação e valores: consulte condições e características do plano.</span></div>
+  </div>
+</section>
+
+<section class="section" id="abrangencia" aria-labelledby="abr-t">
+  <div class="wrap">
+    <div class="grid mb-8">
+      <div class="c-1-6"><span class="eyebrow">Abrangência</span><h2 id="abr-t" class="balance">Onde cada plano oferece atendimento.</h2></div>
+      <div class="c-7-13" style="align-self:end"><p class="lead">Leitura rápida da área geográfica de cada produto, conforme as informações vigentes. A lista completa de municípios faz parte do contrato.</p></div>
+    </div>
+    <div class="matrix-wrap reveal">
+      <table class="matrix">
+        <caption class="sr-only">Abrangência geográfica dos planos EMED GLOBAL BLUE</caption>
+        <thead><tr><th scope="col">Cidade / referência</th><th scope="col">BLUE 100</th><th scope="col">BLUE 200</th><th scope="col">BLUE 300</th><th scope="col">BLUE 400</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Extrema/MG</th><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Bragança Paulista/SP</th><td><span class="cell no" role="img" aria-label="Não incluído">—</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Cambuí/MG</th><td><span class="cell no" role="img" aria-label="Não incluído">—</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Pouso Alegre/MG</th><td><span class="cell no" role="img" aria-label="Não incluído">—</span></td><td><span class="cell no" role="img" aria-label="Não incluído">—</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Incluído">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Tipo de abrangência</th><td class="small">Municipal</td><td class="small">Regional</td><td class="small">Regional</td><td class="small">Regional</td></tr>
+          <tr><th scope="row">Acomodação</th><td class="small">Coletiva</td><td class="small">Coletiva</td><td class="small">Coletiva</td><td class="small">Coletiva</td></tr>
+          <tr><th scope="row">Urgência e emergência em trânsito (ABRAMGE)</th><td class="small muted" colspan="4">Consulte condições e características do plano</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="xs muted mt-5 measure">Fonte: informações de abrangência publicadas pela MedicGLOBAL para os produtos EMED GLOBAL BLUE. A inclusão de cidades intermediárias depende da relação oficial de municípios de cada produto.</p>
+  </div>
+</section>
+
+<section class="section section--flush-top" id="rede" aria-labelledby="rede-t">
+  <div class="wrap">
+    <div class="split split--75">
+      <div class="img-round bleed-right" style="aspect-ratio:16/10">{{pic:ward|Ala de internação com leitos organizados e iluminação natural|1600|(min-width:1100px) 55vw, 100vw}}</div>
+      <div class="stack">
+        <span class="eyebrow">Rede de cuidado</span>
+        <h2 id="rede-t" class="balance">Atendimento ambulatorial, hospitalar e obstétrico.</h2>
+        <p class="lead">Consultórios, clínicas e cinco hospitais entre Bragança Paulista/SP e Pouso Alegre/MG, com atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</p>
+        <a class="link" href="rede-credenciada.html" data-track="click_rede">Encontrar atendimento {{i:arrow-right}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="duvidas" aria-labelledby="faq-t" data-filter data-filter-items="#duvidas .faq-item" data-filter-empty="#faq-none">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5">
+        <span class="eyebrow">Dúvidas</span>
+        <h2 id="faq-t" class="balance">Antes de contratar.</h2>
+        <div class="faq-tools mt-7">
+          <div class="field"><label for="faq-q">Buscar uma dúvida</label><input id="faq-q" type="search" data-filter-search placeholder="Ex.: abrangência"></div>
+          <div class="type-pills">
+            <button class="pill" type="button" data-filter-group="topic" data-value="all" aria-pressed="true">Todas</button>
+            <button class="pill" type="button" data-filter-group="topic" data-value="cobertura" aria-pressed="false">Cobertura</button>
+            <button class="pill" type="button" data-filter-group="topic" data-value="contratacao" aria-pressed="false">Contratação</button>
+          </div>
+        </div>
+      </div>
+      <div class="c-6-13">
+        <details class="faq-item" data-topic="cobertura"><summary>Qual é a diferença entre os planos BLUE 100, 200, 300 e 400?</summary><div class="ans">A principal diferença informada é a abrangência geográfica: o BLUE 100 é municipal (Extrema/MG); o BLUE 200 é regional, de Bragança Paulista/SP até Cambuí/MG; BLUE 300 e BLUE 400 atendem de Bragança Paulista/SP até Pouso Alegre/MG. As demais características de cada produto são apresentadas pelo time comercial.</div></details>
+        <details class="faq-item" data-topic="cobertura"><summary>Os planos têm cobertura hospitalar com obstetrícia?</summary><div class="ans">A MedicGLOBAL oferece produtos com atendimento ambulatorial e hospitalar com obstetrícia, de acordo com o Rol de Procedimentos da ANS. A segmentação de cada produto é confirmada na proposta e no contrato.</div></details>
+        <details class="faq-item" data-topic="cobertura"><summary>E se eu precisar de atendimento fora da minha região?</summary><div class="ans">Há atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE, conforme as condições do seu contrato. <a href="servicos.html#abramge">Saiba como funciona</a>.</div></details>
+        <details class="faq-item" data-topic="contratacao"><summary>Como funcionam as carências?</summary><div class="ans">Os prazos de carência seguem a regulamentação da ANS e constam no contrato de cada produto. Consulte condições e características do plano com o nosso time.</div></details>
+        <details class="faq-item" data-topic="contratacao"><summary>Como faço para contratar?</summary><div class="ans">Preencha o formulário abaixo ou fale com o comercial pelo WhatsApp <a href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">{{L.wa.comercial.label}}</a>. Nosso time entra em contato para entender o seu perfil e apresentar as opções disponíveis.</div></details>
+        <details class="faq-item" data-topic="contratacao"><summary>Onde consulto os reajustes aplicados?</summary><div class="ans">Os percentuais de reajuste do agrupamento de contratos (RN 565) estão publicados na <a href="documentos.html#reajuste">central de documentos</a>.</div></details>
+        <p class="faq-empty" id="faq-none" hidden>Não encontramos essa dúvida. <a class="link" href="atendimento.html">Fale com a MedicGLOBAL</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contato" aria-labelledby="ct-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Solicitar proposta</span>
+        <h2 id="ct-t" class="balance">Quer entender qual opção faz sentido para você?</h2>
+        <p class="lead">Deixe seus dados e o nosso time comercial entra em contato. Pedimos apenas o necessário para retornar a você.</p>
+        <ul class="checklist small">
+          <li>Sem perguntas sobre a sua saúde neste formulário.</li>
+          <li>Seus dados são usados só para responder à solicitação.</li>
+          <li>Prefere conversar agora? <a class="accent" href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">WhatsApp comercial</a></li>
+        </ul>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="proposta_planos" action="#" method="post">
+          <div class="form-grid">
+            <div class="field full"><label for="f-nome">Nome completo</label><input id="f-nome" name="nome" autocomplete="name" required aria-describedby="f-nome-err"><span class="error" id="f-nome-err">Informe o seu nome.</span></div>
+            <div class="field"><label for="f-tel">WhatsApp ou telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-tel-err" placeholder="(35) 9 0000-0000"><span class="error" id="f-tel-err">Informe um telefone para contato.</span></div>
+            <div class="field"><label for="f-mail">E-mail <span class="muted">(opcional)</span></label><input id="f-mail" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-cidade">Cidade</label><input id="f-cidade" name="cidade" autocomplete="address-level2" required aria-describedby="f-cidade-err"><span class="error" id="f-cidade-err">Informe a sua cidade.</span></div>
+            <div class="field"><label for="plano">Plano de interesse</label><select id="plano" name="plano"><option value="">Ainda não sei</option><option>BLUE 100</option><option>BLUE 200</option><option>BLUE 300</option><option>BLUE 400</option></select></div>
+            <div class="field"><label for="perfil">Perfil</label><select id="perfil" name="perfil"><option value="">Selecione</option><option>Para mim e minha família</option><option>Para minha empresa</option></select></div>
+            <div class="field"><label for="contratacao">Tipo de contratação</label><select id="contratacao" name="contratacao"><option value="">Selecione</option><option>Coletivo empresarial</option><option>Outra modalidade</option><option>Ainda não sei</option></select></div>
+            <div class="full"><label class="check"><input type="checkbox" name="consentimento" required aria-describedby="f-ok-err"><span>Autorizo a MedicGLOBAL a usar estes dados para entrar em contato sobre a minha solicitação, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span></label><span class="error" id="f-ok-err">É necessário autorizar o contato.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Solicitar contato {{i:arrow-right}}</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Recebemos a sua solicitação. O time comercial da MedicGLOBAL vai entrar em contato em breve.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

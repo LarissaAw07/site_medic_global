@@ -1,0 +1,231 @@
+<!--@{
+  "title": "MedicGLOBAL | Plano de saúde no Sul de Minas e região de Bragança Paulista",
+  "description": "Planos de saúde, rede credenciada, telemedicina e atendimento entre Bragança Paulista/SP e Pouso Alegre/MG. Encontre atendimento, emita seu boleto ou conheça os planos EMED GLOBAL BLUE.",
+  "active": "home",
+  "og": "family"
+}@-->
+
+<!-- 1 · HERO — começa pela necessidade, não pela história -->
+<section class="hero" aria-labelledby="hero-title">
+  {{> orbits}}
+  <div class="wrap">
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow reveal">Saúde integrada · Sul de Minas e região</span>
+        <h1 id="hero-title" class="balance reveal reveal-d1">Cuidar da sua saúde pode ser <em>mais simples.</em></h1>
+        <p class="lead reveal reveal-d2">Planos, rede de cuidado, telemedicina e atendimento pensados para acompanhar você e sua família onde precisar.</p>
+        <div class="btn-row reveal reveal-d3">
+          <a class="btn" href="planos.html" data-track="acesso_planos">Conhecer planos {{i:arrow-right}}</a>
+          <a class="btn btn--ghost" href="beneficiario.html" data-track="click_area_beneficiario">Já sou beneficiário</a>
+        </div>
+        <div class="hero-foot reveal reveal-d3">
+          <span><b>+40 anos</b> de história</span>
+          <span><b>5 hospitais</b> na área de atuação</span>
+          <span><b>ANS nº {{L.ans}}</b></span>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:family|Pai sorrindo com os dois filhos no colo, ao ar livre|1800|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:video}}</i><span>Telemedicina<small>de onde você estiver</small></span></span>
+          <span class="chip"><i>{{i:pin}}</i><span>Rede credenciada<small>Bragança Paulista → Pouso Alegre</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · NAVEGAÇÃO POR NECESSIDADE -->
+<section class="section" aria-labelledby="ajuda-title">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-6">
+        <span class="eyebrow">Como podemos ajudar?</span>
+        <h2 id="ajuda-title" class="balance">Diga o que você precisa. A gente mostra o caminho.</h2>
+      </div>
+      <div class="c-8-13" style="align-self:end">
+        <form class="intent-search" data-intent role="search" autocomplete="off">
+          {{i:search}}
+          <label class="sr-only" for="intent-q">O que você precisa?</label>
+          <input id="intent-q" type="search" placeholder="Ex.: preciso de uma consulta" role="combobox" aria-expanded="false" aria-controls="intent-list" aria-autocomplete="list">
+          <button type="submit" aria-label="Buscar">{{i:arrow-right}}</button>
+          <div class="intent-suggest" id="intent-list" role="listbox"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="needs" role="list">
+      <a class="need reveal" role="listitem" href="beneficiario.html" data-track="click_area_beneficiario"><span class="need-ico">{{i:user}}</span><span><strong>Sou beneficiário</strong><small>Área do Beneficiário e carteirinha</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d1" role="listitem" href="planos.html" data-track="click_quero_ser_cliente"><span class="need-ico">{{i:user-plus}}</span><span><strong>Quero contratar um plano</strong><small>Conheça e compare os planos</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d2" role="listitem" href="rede-credenciada.html" data-track="click_rede"><span class="need-ico">{{i:stethoscope}}</span><span><strong>Preciso encontrar um médico</strong><small>Rede credenciada e guia médico</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d3" role="listitem" href="telemedicina.html" data-track="click_telemedicina"><span class="need-ico">{{i:video}}</span><span><strong>Quero acessar a telemedicina</strong><small>Fale com um profissional a distância</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal" role="listitem" href="servicos.html#autorizacoes"><span class="need-ico">{{i:file-check}}</span><span><strong>Preciso de uma autorização</strong><small>Exames e procedimentos</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d1" role="listitem" href="beneficiario.html#boleto"><span class="need-ico">{{i:receipt}}</span><span><strong>Quero emitir meu boleto</strong><small>Segunda via, sem complicação</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d2" role="listitem" href="beneficiario.html#exames"><span class="need-ico">{{i:flask}}</span><span><strong>Quero consultar meus exames</strong><small>Informações na sua área exclusiva</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need reveal reveal-d3" role="listitem" href="atendimento.html"><span class="need-ico">{{i:chat}}</span><span><strong>Quero falar com a MedicGLOBAL</strong><small>Telefone, WhatsApp e ouvidoria</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · REDE DE CUIDADO — full width, ferramenta de localização -->
+<section class="section deep hub-section" aria-labelledby="rede-title">
+  <div class="wrap">
+    <div class="grid" style="align-items:center">
+      <div class="c-1-6">
+        <span class="eyebrow">Rede de cuidado</span>
+        <h2 id="rede-title" class="balance">Onde você precisar, encontre atendimento.</h2>
+        <p class="lead mt-6">Uma rede preparada para atendimento ambulatorial, hospitalar e obstétrico, com presença entre Bragança Paulista/SP e Pouso Alegre/MG — e atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</p>
+        <form class="finder mt-7" action="rede-credenciada.html" method="get" data-rede>
+          <div class="field-dark"><label for="h-tipo">O que você procura</label>
+            <select id="h-tipo" name="tipo"><option value="profissional">Profissional</option><option value="especialidade">Especialidade</option><option value="clinica">Clínica</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratório</option></select></div>
+          <div class="field-dark"><label for="h-cidade">Cidade</label>
+            <select id="h-cidade" name="cidade"><option value="">Todas as cidades</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>
+          <button class="btn btn--light" type="submit">Buscar na rede {{i:search}}</button>
+        </form>
+      </div>
+      <div class="c-7-13">
+        <div class="hub reveal">
+          <svg class="rings" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" stroke-width=".25"/><circle cx="50" cy="50" r="28" stroke-width=".2" stroke-dasharray="1 2"/><g class="spokes" stroke-width=".25"><line x1="50" y1="50" x2="50" y2="10"/><line x1="50" y1="50" x2="84.6" y2="30"/><line x1="50" y1="50" x2="84.6" y2="70"/><line x1="50" y1="50" x2="50" y2="90"/><line x1="50" y1="50" x2="15.4" y2="70"/><line x1="50" y1="50" x2="15.4" y2="30"/></g></svg>
+          <div class="hub-core"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M24.5 2.5C19 14 17.5 27 22 39c3 7.5 7 12 9.5 15"/><path d="M3 31c9-7 24-12.5 43-15.5"/><path d="M10.5 31c4 9 12 17.5 21 22"/><path d="M46 15.5c4.5 10.5 3 22.5-6.5 31.5"/></g></svg><span>MedicGLOBAL</span></div>
+          <a class="hub-node" style="left:50%;top:10%" href="rede-credenciada.html?tipo=hospital"><i>{{i:hospital}}</i>Hospitais</a>
+          <a class="hub-node" style="left:84.6%;top:30%" href="rede-credenciada.html?tipo=clinica"><i>{{i:clinic}}</i>Clínicas</a>
+          <a class="hub-node" style="left:84.6%;top:70%" href="rede-credenciada.html?tipo=laboratorio"><i>{{i:microscope}}</i>Laboratórios</a>
+          <a class="hub-node" style="left:50%;top:90%" href="telemedicina.html"><i>{{i:video}}</i>Telemedicina</a>
+          <a class="hub-node" style="left:15.4%;top:70%" href="rede-credenciada.html?tipo=especialidade"><i>{{i:stethoscope}}</i>Especialidades</a>
+          <a class="hub-node" style="left:15.4%;top:30%" href="rede-credenciada.html?tipo=profissional"><i>{{i:user}}</i>Profissionais</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="marquee mt-9" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Atendimento ambulatorial</span><span class="marquee-item">Hospitalar com obstetrícia</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Urgência e emergência em trânsito · ABRAMGE</span><span class="marquee-item">Telemedicina</span>
+      <span class="marquee-item">Atendimento ambulatorial</span><span class="marquee-item">Hospitalar com obstetrícia</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Urgência e emergência em trânsito · ABRAMGE</span><span class="marquee-item">Telemedicina</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · MEDICGLOBAL — mensagem institucional curta -->
+<section class="section" aria-labelledby="mg-title">
+  <div class="wrap wrap--wide">
+    <div class="glass-feature reveal">
+      {{pic:scan|Profissionais de saúde analisando exames de imagem em uma tela|2000|100vw}}
+      <div class="inner">
+        <div>
+          <span class="eyebrow" style="color:#fff">MedicGLOBAL</span>
+          <h2 id="mg-title" class="balance">Uma história sólida que pensa no futuro.</h2>
+          <p class="lead mt-5" style="color:rgba(255,255,255,.85)">A Extremamedic evoluiu para MedicGLOBAL. Mantivemos a razão social, o registro na ANS e a tradição — e ampliamos produtos, território e serviços.</p>
+          <div class="btn-row mt-7"><a class="btn btn--light" href="medicglobal.html">Conheça a MedicGLOBAL {{i:arrow-right}}</a></div>
+        </div>
+        <div class="glass-card">
+          <span class="label">Em números</span>
+          <div class="row mt-5"><div class="stat-big tnum"><span data-count="40" data-prefix="+">+40</span></div><p class="xs">anos de história</p></div>
+          <div class="row"><div class="stat-big tnum"><span data-count="5">5</span></div><p class="xs">hospitais na área de atuação</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · SERVIÇOS -->
+<section class="section section--flush-top" aria-labelledby="serv-title">
+  <div class="wrap">
+    <div class="grid mb-8">
+      <div class="c-1-7"><span class="eyebrow">Serviços</span><h2 id="serv-title" class="balance">Serviços que facilitam o seu dia a dia.</h2></div>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Do primeiro contato ao acompanhamento, reunimos em um só lugar o que você usa com mais frequência.</p></div>
+    </div>
+    <div class="indexed">
+      <a class="is-focal reveal" href="telemedicina.html" data-track="click_telemedicina"><span class="num">01</span><h3>Precisa falar com um profissional de saúde?</h3><p>Tenha acesso à telemedicina de onde estiver, conforme as condições do seu plano.</p><span class="go">Acessar telemedicina {{i:arrow-right}}</span></a>
+      <a class="reveal reveal-d1" href="servicos.html#autorizacoes"><span class="num">02</span><h3>Autorizações</h3><p>Solicite autorizações de exames e procedimentos pelo WhatsApp dedicado.</p><span class="go">Solicitar autorização {{i:arrow-right}}</span></a>
+      <a class="reveal reveal-d2" href="servicos.html#programas"><span class="num">03</span><h3>Programas de saúde</h3><p>Mais facilidade para agendar consultas e exames.</p><span class="go">Ver programas {{i:arrow-right}}</span></a>
+      <a class="reveal" href="servicos.html#abramge"><span class="num">04</span><h3>ABRAMGE</h3><p>Atendimento de urgência e emergência em trânsito, em todo o território nacional.</p><span class="go">Entender o atendimento {{i:arrow-right}}</span></a>
+      <a class="reveal reveal-d1" href="servicos.html#aplicativo"><span class="num">05</span><h3>Aplicativo</h3><p>Rede credenciada e informações do seu plano no celular.</p><span class="go">Baixar o aplicativo {{i:arrow-right}}</span></a>
+      <a class="reveal reveal-d2" href="servicos.html#urgencia"><span class="num">06</span><h3>Urgência e emergência</h3><p>Saiba onde buscar atendimento imediato e como acionar a MedicGLOBAL.</p><span class="go">Ver orientações {{i:arrow-right}}</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · PLANOS -->
+<section class="section mist" aria-labelledby="planos-title">
+  <div class="wrap">
+    <div class="flex-between mb-8">
+      <div><span class="eyebrow">Planos EMED GLOBAL BLUE</span><h2 id="planos-title" class="balance" style="max-width:16ch">Um plano pensado para a sua realidade.</h2></div>
+      <a class="btn btn--ghost" href="planos.html#comparar" data-track="acesso_planos">Comparar planos {{i:arrow-right}}</a>
+    </div>
+    <div class="plans">
+      {{> plan-cards}}
+    </div>
+    <div class="notice mt-6">{{i:info}}<span>Segmentação, tipo de contratação, carências e valores dependem do produto e do contrato. Consulte condições e características do plano com o nosso time comercial.</span></div>
+  </div>
+</section>
+
+<!-- 7 · ÁREA DO BENEFICIÁRIO — ecossistema digital -->
+<section class="section deep" aria-labelledby="benef-title" style="overflow:hidden">
+  <div class="wrap">
+    <div class="eco">
+      <div>
+        <span class="eyebrow">Área do Beneficiário</span>
+        <h2 id="benef-title" class="balance">Tudo o que você precisa, em um só lugar.</h2>
+        <p class="lead mt-6">Acesse seus dados, autorizações e benefícios pela Área do Beneficiário — ou leve a rede credenciada no bolso com o aplicativo.</p>
+        <nav class="eco-list mt-7" aria-label="Serviços do beneficiário">
+          <a href="beneficiario.html" data-track="click_area_beneficiario">{{i:user}} Área do Beneficiário</a>
+          <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Rede credenciada</a>
+          <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}} Telemedicina</a>
+          <a href="beneficiario.html#boleto">{{i:receipt}} Boleto</a>
+          <a href="servicos.html#autorizacoes">{{i:file-check}} Autorizações</a>
+          <a href="beneficiario.html#carteirinha">{{i:card}} Carteirinha</a>
+          <a href="beneficiario.html#plano">{{i:layers}} Informações do plano</a>
+          <a href="atendimento.html">{{i:headset}} Atendimento</a>
+          <a href="atendimento.html#ouvidoria">{{i:chat}} Ouvidoria</a>
+          <a href="servicos.html#aplicativo">{{i:smartphone}} Aplicativo</a>
+        </nav>
+        <div class="btn-row mt-7"><a class="btn btn--light" href="beneficiario.html" data-track="click_area_beneficiario">Acessar sua Área do Beneficiário {{i:arrow-right}}</a></div>
+      </div>
+      <div class="phone-stage">
+        {{> orbits}}
+        {{> phone}}
+        <div class="float-tag" style="left:2%;top:18%" aria-hidden="true"><span class="chip"><i>{{i:star}}</i><span>Favoritos<small>seus prestadores salvos</small></span></span></div>
+        <div class="float-tag" style="right:0;bottom:20%" aria-hidden="true"><span class="chip"><i>{{i:route}}</i><span>Como chegar<small>localização do atendimento</small></span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · CONTEÚDOS -->
+<section class="section" aria-labelledby="cont-title">
+  <div class="wrap">
+    <div class="flex-between mb-8">
+      <div><span class="eyebrow">Conteúdos</span><h2 id="cont-title">Informação que cuida.</h2></div>
+      <a class="link" href="conteudos.html">Ver todos os conteúdos {{i:arrow-right}}</a>
+    </div>
+    <div class="posts">
+      <a class="post-feature reveal" href="artigo-reajuste-2020.html">
+        <div class="img">{{pic:reach|Duas mãos se estendendo uma em direção à outra|1200|(min-width:1100px) 55vw, 100vw}}</div>
+        <div class="post-meta"><span class="cat">Comunicados</span><span>ANS · Reajustes</span></div>
+        <h3>Recomposição do reajuste dos planos de saúde 2020</h3>
+        <p class="muted measure">Entenda a decisão da ANS que suspendeu os reajustes de setembro a dezembro de 2020 e como foi feita a recomposição.</p>
+      </a>
+      <div class="reading-list">
+        <a href="documentos.html#reajuste"><h4>Reajuste do agrupamento de contratos 2026/2027</h4><div class="post-meta"><span class="cat">Comunicados</span></div><span class="n">01</span></a>
+        <a href="telemedicina.html"><h4>Telemedicina: como acessar</h4><div class="post-meta"><span class="cat">Beneficiário</span></div><span class="n">02</span></a>
+        <a href="servicos.html#abramge"><h4>Vai viajar? Conheça o atendimento em trânsito</h4><div class="post-meta"><span class="cat">Beneficiário</span></div><span class="n">03</span></a>
+        <a href="medicglobal.html"><h4>Agora a Extremamedic é MedicGLOBAL</h4><div class="post-meta"><span class="cat">Notícias</span></div><span class="n">04</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · CTA FINAL -->
+<section class="deep mosaic" aria-labelledby="cta-title">
+  {{> mosaic}}
+  <div class="wrap mosaic-content">
+    <span class="eyebrow">Depois da contratação</span>
+    <h2 id="cta-title" class="balance">Seu cuidado continua depois da contratação.</h2>
+    <p class="lead center">Atendimento, rede e serviços disponíveis para você ao longo de toda a jornada.</p>
+    <div class="btn-row">
+      <a class="btn btn--light" href="beneficiario.html" data-track="click_area_beneficiario">Área do Beneficiário</a>
+      <a class="btn btn--ghost-light" href="atendimento.html">Atendimento</a>
+      <a class="btn btn--ghost-light" href="rede-credenciada.html" data-track="click_rede">Rede credenciada</a>
+    </div>
+  </div>
+</section>

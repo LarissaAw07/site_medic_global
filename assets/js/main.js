@@ -222,12 +222,25 @@
   /* Timeline */
   var tl = $(".timeline"), tlBar = $(".timeline-progress");
   if (tl && tlBar) {
+    var tItems = $$(".t-item", tl), tlTick = false;
     var upd = function () {
+      tlTick = false;
       var r = tl.getBoundingClientRect(), vh = window.innerHeight;
       var p = Math.min(1, Math.max(0, (vh * .6 - r.top) / r.height));
       tlBar.style.height = (p * (r.height - 16)) + "px";
+      /* Foco na rolagem: o item mais perto da linha de leitura fica nítido; os demais esmaecem */
+      var best = null, bestD = Infinity;
+      tItems.forEach(function (it) {
+        var b = it.getBoundingClientRect(), c = b.top + Math.min(b.height, 160) / 2;
+        var d = (c - vh * .6) / (vh * .45), ad = Math.min(1, Math.abs(d));
+        it.style.setProperty("--tf", (1 - ad).toFixed(3));
+        it.classList.toggle("is-past", d < 0);
+        if (Math.abs(d) < bestD) { bestD = Math.abs(d); best = it; }
+      });
+      tItems.forEach(function (it) { it.classList.toggle("is-active", it === best && bestD < 1); });
     };
-    window.addEventListener("scroll", upd, { passive: true }); upd();
+    window.addEventListener("scroll", function () { if (!tlTick) { tlTick = true; requestAnimationFrame(upd); } }, { passive: true });
+    window.addEventListener("resize", upd); upd();
   }
 
   /* Comparação arrastável */

@@ -523,7 +523,7 @@ html:not(.js) .hero-nav { display: none; }
 
 .needs { margin-top: var(--s-8); display: grid; gap: 12px; }
 .need {
-  display: grid; grid-template-columns: 44px 1fr 28px; align-items: center; gap: 16px;
+  display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 16px;
   padding: 20px; border-radius: var(--r-lg); position: relative;
   background: var(--tint); color: var(--ink);
   transition: padding .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
@@ -533,21 +533,23 @@ html:not(.js) .hero-nav { display: none; }
 }
 @media (min-width: 1100px) {
   .needs { grid-template-columns: repeat(4, 1fr); }
-  .need { grid-template-columns: 1fr; align-content: space-between; gap: 48px; min-height: 230px; padding: 28px; }
+  .need { grid-template-columns: 1fr; align-content: space-between; gap: 28px; min-height: 184px; padding: 24px; }
 }
 .need-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--white); color: var(--globo); transition: background .3s, color .3s; }
 .need-ico svg { width: 22px; height: 22px; }
 .need strong { font-family: var(--f-head); font-weight: 500; font-size: 1.125rem; line-height: 1.3; display: block; letter-spacing: -.01em; }
 .need small { display: block; color: var(--ink-3); font-size: var(--t-xs); margin-top: 4px; transition: color .4s var(--ease); }
-.need .arrow { width: 28px; height: 28px; color: var(--globo); transition: transform .4s var(--ease), color .4s var(--ease); }
+/* Seta sempre visível, no mesmo padrão da caixa do ícone */
+.need .arrow { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--white); color: var(--globo); transition: background .3s, color .3s; }
+.need .arrow svg { width: 20px; height: 20px; transform: rotate(-45deg); transition: transform .4s var(--ease); }
+.need:hover .arrow svg, .need:focus-visible .arrow svg { transform: rotate(-45deg) translateX(3px); }
 @media (min-width: 1100px) {
-  .need .arrow { position: absolute; right: 28px; top: 32px; opacity: 0; transform: translate(-6px, 6px) rotate(-45deg); }
-  .need:hover .arrow, .need:focus-visible .arrow { opacity: 1; transform: rotate(-45deg); }
+  .need .arrow { position: absolute; right: 24px; top: 24px; }
 }
 .need:hover, .need:focus-visible { background: var(--globo); color: var(--white); }
 .need:hover small, .need:focus-visible small { color: rgba(255,255,255,.75); }
 .need:hover .need-ico, .need:focus-visible .need-ico { background: rgba(255,255,255,.14); color: var(--white); }
-.need:hover .arrow, .need:focus-visible .arrow { color: var(--glow); }
+.need:hover .arrow, .need:focus-visible .arrow { background: rgba(255,255,255,.14); color: var(--white); }
 
 /* ---------- Rede de cuidado (hub orbital) ---------- */
 .hub-section { overflow: hidden; }

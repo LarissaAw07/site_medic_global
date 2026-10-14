@@ -352,6 +352,41 @@
     $$("[data-carousel-next]", c).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); }); });
   });
 
+  /* Carrossel do hero (home): troca a cada 7s, pausa com cursor/foco e no botão "Pausar" */
+  $$("[data-hero-slider]").forEach(function (s) {
+    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s), pauseBtn = $("[data-slide-pause]", s);
+    var i = 0, timer = null, paused = reduce, hover = false;
+    function go(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (el, k) {
+        var on = k === i;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-hidden", on ? "false" : "true");
+        if ("inert" in el) el.inert = !on;
+      });
+      dots.forEach(function (d, k) { if (k === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (!paused && !hover) timer = setTimeout(function () { go(i + 1); schedule(); }, 7000);
+    }
+    function setPaused(p) {
+      paused = p;
+      if (pauseBtn) { pauseBtn.textContent = p ? "Reproduzir" : "Pausar"; pauseBtn.setAttribute("aria-pressed", p ? "true" : "false"); }
+      schedule();
+    }
+    $$("[data-slide-prev]", s).forEach(function (b) { b.addEventListener("click", function () { go(i - 1); schedule(); }); });
+    $$("[data-slide-next]", s).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); schedule(); }); });
+    dots.forEach(function (d) { d.addEventListener("click", function () { go(parseInt(d.getAttribute("data-slide-to"), 10)); schedule(); }); });
+    if (pauseBtn) pauseBtn.addEventListener("click", function () { setPaused(!paused); });
+    s.addEventListener("mouseenter", function () { hover = true; schedule(); });
+    s.addEventListener("mouseleave", function () { hover = false; schedule(); });
+    s.addEventListener("focusin", function () { hover = true; schedule(); });
+    s.addEventListener("focusout", function (e) { if (!s.contains(e.relatedTarget)) { hover = false; schedule(); } });
+    go(0);
+    setPaused(paused);
+  });
+
   /* ---------- Formulários (validação acessível + LGPD) ---------- */
   $$("form[data-validate]").forEach(function (f) {
     f.setAttribute("novalidate", "");

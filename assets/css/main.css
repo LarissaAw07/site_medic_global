@@ -415,6 +415,87 @@ ul, ol { margin: 0; padding: 0; }
 .hero-foot { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line-2); font-size: var(--t-sm); color: var(--ink-3); max-width: 34rem; }
 .hero-foot b { font-family: var(--f-head); font-weight: 500; color: var(--ink); }
 
+/* Carrossel do hero: slides empilhados na mesma célula (altura = maior slide) */
+.hero-track { display: grid; grid-template-columns: minmax(0, 1fr); }
+.hero-slide { grid-area: 1 / 1; min-width: 0; opacity: 0; visibility: hidden; transition: opacity .8s var(--ease), visibility 0s linear .8s; }
+.hero-slide.is-active { opacity: 1; visibility: visible; transition: opacity .8s var(--ease), visibility 0s; z-index: 1; }
+.hero-slide .wrap { position: relative; height: 100%; }
+.hero-slide .grid { height: 100%; align-content: center; }
+.hero-title { font-family: var(--f-display); font-size: var(--t-h1); letter-spacing: -.035em; margin-bottom: 28px; }
+.hero-title em { font-style: normal; color: var(--medic); }
+.hero-ans {
+  display: block; margin-bottom: 20px;
+  font-family: var(--f-head); font-size: .72rem; font-weight: 500; letter-spacing: .16em; color: var(--ink-3);
+}
+@media (min-width: 1100px) {
+  .hero-ans { position: absolute; left: calc(var(--gutter) / 2 - .5em); top: 0; margin: 0; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .hero-slide--area .hero-ans { z-index: 2; color: var(--on-deep-2); top: 32px; }
+}
+
+/* Slide 2 · Telemedicina */
+.hero-slide--tele .hero-copy { display: flex; flex-direction: column; }
+.hero-stat {
+  display: inline-grid; gap: 4px; align-self: flex-start; margin-top: 44px; padding: 20px 24px;
+  border-radius: var(--r-lg); background: var(--tint); border-left: 3px solid var(--globo);
+}
+.hero-stat b { font-family: var(--f-head); font-weight: 500; font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem); line-height: 1; color: var(--globo); text-transform: uppercase; letter-spacing: -.02em; }
+.hero-stat span { font-family: var(--f-head); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.hero-box {
+  position: absolute; z-index: 3; left: 16px; right: 16px; bottom: 16px;
+  display: flex; align-items: center; gap: 14px; padding: 18px 22px 18px 18px; border-radius: var(--r-lg);
+  background: rgba(255,255,255,.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px -12px rgba(2,26,29,.3);
+  font-family: var(--f-head); font-weight: 500; font-size: var(--t-sm); line-height: 1.35; text-transform: uppercase; letter-spacing: .04em; color: var(--ink);
+}
+.hero-box i { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--globo); color: var(--white); }
+.hero-box i svg { width: 20px; height: 20px; }
+@media (min-width: 1100px) {
+  .hero-box { left: -96px; right: auto; bottom: auto; top: 50%; transform: translateY(-50%); max-width: 320px; }
+}
+
+/* Slide 3 · Área de cobertura */
+.hero-slide--area .grid { align-items: center; }
+.hero-map {
+  position: relative; border-radius: var(--r-lg) var(--r-lg) 120px var(--r-lg); overflow: hidden;
+  background: var(--deep); color: var(--glow); aspect-ratio: 8 / 7;
+}
+@media (min-width: 1100px) {
+  .hero-map { margin-left: calc(-1 * var(--gutter)); aspect-ratio: auto; height: min(78vh, 820px); border-radius: 0 0 320px 0; }
+}
+.hero-map svg { width: 100%; height: 100%; display: block; }
+.hm-border { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 2 7; opacity: .35; }
+.hm-state { font-family: var(--f-head); font-size: 13px; letter-spacing: .3em; fill: currentColor; opacity: .45; }
+.hm-route { fill: none; stroke: currentColor; stroke-width: 2; stroke-dasharray: 5 9; }
+.hm-pin { fill: var(--white); }
+.hm-pin .hm-halo { fill: currentColor; opacity: .22; }
+.hm-label { font-family: var(--f-head); font-size: 20px; font-weight: 500; fill: var(--white); }
+@media (prefers-reduced-motion: no-preference) {
+  .hm-route { animation: dash 2.4s linear infinite; }
+  .hm-pin .hm-halo { animation: pulse 3.6s var(--ease) infinite; }
+}
+.hero-logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+.hero-logo svg { height: 44px; width: auto; }
+.hero-logo span { font-family: var(--f-head); font-weight: 600; font-size: .8rem; letter-spacing: .3em; color: var(--medic); padding-left: 12px; border-left: 1px solid var(--line); }
+@media (min-width: 1100px) { .hero-copy--area { align-self: stretch; display: flex; flex-direction: column; justify-content: center; } .hero-logo { position: absolute; top: 0; right: var(--gutter); margin: 0; } }
+.hero-copy--area .lead a { color: var(--globo); text-decoration: underline; text-underline-offset: 3px; }
+.hero-info {
+  display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; padding: 14px 22px 14px 14px;
+  border-radius: var(--r-pill); background: var(--tint); color: var(--ink-2); font-size: var(--t-sm); transition: background .3s, color .3s;
+}
+.hero-info svg { width: 36px; height: 36px; padding: 9px; border-radius: 50%; background: var(--globo); color: var(--white); }
+.hero-info b { font-family: var(--f-head); font-weight: 500; color: var(--globo); font-size: 1.05rem; transition: color .3s; }
+.hero-info:hover { background: var(--globo); color: rgba(255,255,255,.8); }
+.hero-info:hover b { color: var(--white); }
+
+/* Controles do carrossel */
+.hero-nav { position: relative; z-index: 4; display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+.hero-dots { display: flex; gap: 8px; }
+.hero-dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: var(--r-pill); background: var(--mist-2); cursor: pointer; transition: width .4s var(--ease), background .3s; }
+.hero-dots button[aria-current="true"] { width: 32px; background: var(--globo); }
+.hero-pause { margin-left: 4px; padding: 8px 4px; border: 0; background: none; cursor: pointer; font-family: var(--f-head); font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.hero-pause:hover { color: var(--globo); }
+html:not(.js) .hero-nav { display: none; }
+
 /* ---------- Intenção / "Como podemos ajudar?" ---------- */
 .intent-search { position: relative; max-width: 640px; }
 .intent-search input {

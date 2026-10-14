@@ -179,8 +179,8 @@
 </div>
 
 <main id="conteudo" tabindex="-1">
-<!-- 1 · HERO — começa pela necessidade, não pela história -->
-<section class="hero" aria-labelledby="hero-title">
+<!-- 1 · HERO — carrossel de destaques (slide 1 começa pela necessidade, não pela história) -->
+<section class="hero" aria-roledescription="carrossel" aria-label="Destaques MedicGLOBAL" data-hero-slider>
   <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
   <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
   <circle cx="400" cy="400" r="300" opacity=".35"/>
@@ -189,6 +189,8 @@
   <g class="spin-slow" opacity=".4"><ellipse cx="400" cy="400" rx="300" ry="200" transform="rotate(38 400 400)"/><circle cx="160" cy="250" r="3.5" fill="currentColor" class="orbit-dot"/></g>
 </svg>
 
+  <div class="hero-track">
+  <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 de 3">
   <div class="wrap">
     <div class="grid">
       <div class="hero-copy c-1-6">
@@ -213,6 +215,77 @@
         </div>
       </div>
     </div>
+  </div>
+  </div>
+
+  <!-- Slide 2 · Telemedicina -->
+  <div class="hero-slide hero-slide--tele" role="group" aria-roledescription="slide" aria-label="2 de 3">
+    <div class="wrap">
+      <span class="hero-ans">ANS 41186-8</span>
+      <div class="grid">
+        <div class="hero-copy c-1-6">
+          <h2 class="hero-title balance">Sim, nós temos <em>TELEMEDICINA</em></h2>
+          <div class="btn-row">
+            <a class="btn" href="telemedicina.html" data-track="click_telemedicina">Acessar telemedicina <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="hero-stat">
+            <b>5 minutos</b>
+            <span>entre a solicitação e a consulta</span>
+          </div>
+        </div>
+        <div class="hero-media c-7-13">
+          <div class="frame"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=72" srcset="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=480&q=72 480w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=72 800w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=72 1200w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=72 1600w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=72 1800w" sizes="(min-width: 1100px) 60vw, 100vw" alt="Profissional de saúde atendendo pelo celular" loading="lazy" decoding="async"></div>
+          <div class="hero-box">
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5"/></svg></i>
+            <span>Consultas de onde você estiver e sem custo extra</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 · Área de cobertura -->
+  <div class="hero-slide hero-slide--area" role="group" aria-roledescription="slide" aria-label="3 de 3">
+    <div class="wrap">
+      <span class="hero-ans">ANS 41186-8</span>
+      <div class="grid">
+        <div class="hero-map c-1-7">
+          <svg viewBox="0 0 640 560" role="img" aria-label="Mapa da área de cobertura: Bragança Paulista, SP, e Pouso Alegre, MG">
+            <defs>
+              <pattern id="hm-dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="currentColor" opacity=".18"/></pattern>
+            </defs>
+            <rect width="640" height="560" fill="url(#hm-dots)"/>
+            <path class="hm-border" d="M40 470 C140 430 170 360 250 350 S360 330 400 270 S500 210 600 120"/>
+            <text class="hm-state" x="96" y="530">SÃO PAULO</text>
+            <text class="hm-state" x="430" y="70">MINAS GERAIS</text>
+            <path class="hm-route" d="M190 410 C260 380 300 330 330 290 S400 210 450 170"/>
+            <g class="hm-pin" transform="translate(190 410)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
+            <g class="hm-pin" transform="translate(450 170)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
+            <text class="hm-label" x="214" y="448">Bragança Paulista - SP</text>
+            <text class="hm-label" x="450" y="128" text-anchor="middle">Pouso Alegre - MG</text>
+          </svg>
+        </div>
+        <div class="hero-copy hero-copy--area c-8-13">
+          <div class="hero-logo" aria-hidden="true"><svg viewBox="0 0 168 56" role="img" aria-label="MedicGLOBAL — página inicial"><circle cx="28" cy="28" r="26" fill="#00626D"/><g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M24.5 2.5C19 14 17.5 27 22 39c3 7.5 7 12 9.5 15"/><path d="M3 31c9-7 24-12.5 43-15.5"/><path d="M10.5 31c4 9 12 17.5 21 22"/><path d="M46 15.5c4.5 10.5 3 22.5-6.5 31.5"/></g><g fill="#fff"><circle cx="21" cy="23" r="4"/><circle cx="10.5" cy="31" r="3.6"/><circle cx="46" cy="15.5" r="4"/><circle cx="40" cy="46.5" r="3.6"/><circle cx="31.5" cy="53" r="3.2"/></g><g class="wordmark" fill="#00626D" font-family="Poppins, Arial, sans-serif"><text x="64" y="25" font-size="24" font-weight="500" letter-spacing="-.5">Medic</text><text x="64" y="48" font-size="22.5" font-weight="600" letter-spacing=".6">GLOBAL</text></g></svg>
+<span>SAÚDE</span></div>
+          <h2 class="hero-title balance">Área de <em>Cobertura</em></h2>
+          <p class="lead">Atendimento em trânsito em todo território nacional pelo sistema <a href="servicos.html#abramge">ABRAMGE</a>.</p>
+          <a class="hero-info" href="tel:08007227511" data-track="click_telefone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> <span>Informações: <b>0800.722.7511</b></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="wrap hero-nav">
+    <button class="icon-btn" type="button" data-slide-prev aria-label="Destaque anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 6-6 6 6 6"/></svg></button>
+    <div class="hero-dots" role="group" aria-label="Escolher destaque">
+      <button type="button" data-slide-to="0" aria-label="Destaque 1" aria-current="true"></button>
+      <button type="button" data-slide-to="1" aria-label="Destaque 2"></button>
+      <button type="button" data-slide-to="2" aria-label="Destaque 3"></button>
+    </div>
+    <button class="icon-btn" type="button" data-slide-next aria-label="Próximo destaque"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></button>
+    <button class="hero-pause" type="button" data-slide-pause aria-pressed="false">Pausar</button>
   </div>
 </section>
 

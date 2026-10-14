@@ -352,9 +352,10 @@
     $$("[data-carousel-next]", c).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); }); });
   });
 
-  /* Carrossel do hero (home): troca a cada 7s, pausa com cursor/foco e no botão "Pausar" */
+  /* Carrossel do hero (home): troca a cada 7s, pausa com cursor/foco e no botão de pausa.
+     Cada slide tem sua própria cópia dos controles (sobre a imagem); todas ficam sincronizadas. */
   $$("[data-hero-slider]").forEach(function (s) {
-    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s), pauseBtn = $("[data-slide-pause]", s);
+    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s), pauseBtns = $$("[data-slide-pause]", s);
     var i = 0, timer = null, paused = reduce, hover = false;
     function go(n) {
       i = (n + slides.length) % slides.length;
@@ -364,7 +365,13 @@
         el.setAttribute("aria-hidden", on ? "false" : "true");
         if ("inert" in el) el.inert = !on;
       });
-      dots.forEach(function (d, k) { if (k === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+      dots.forEach(function (d) { if (+d.getAttribute("data-slide-to") === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    }
+    // Ao usar um controle, o foco passa para o mesmo controle no slide que entrou
+    function goFrom(btn, n, sel) {
+      var hadFocus = document.activeElement === btn;
+      go(n); schedule();
+      if (hadFocus) { var t = $(sel, slides[i]); if (t) t.focus(); }
     }
     function schedule() {
       clearTimeout(timer);
@@ -372,13 +379,13 @@
     }
     function setPaused(p) {
       paused = p;
-      if (pauseBtn) { pauseBtn.textContent = p ? "Reproduzir" : "Pausar"; pauseBtn.setAttribute("aria-pressed", p ? "true" : "false"); }
+      pauseBtns.forEach(function (b) { b.setAttribute("aria-pressed", p ? "true" : "false"); b.setAttribute("aria-label", p ? "Retomar rotação" : "Pausar rotação"); });
       schedule();
     }
-    $$("[data-slide-prev]", s).forEach(function (b) { b.addEventListener("click", function () { go(i - 1); schedule(); }); });
-    $$("[data-slide-next]", s).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); schedule(); }); });
-    dots.forEach(function (d) { d.addEventListener("click", function () { go(parseInt(d.getAttribute("data-slide-to"), 10)); schedule(); }); });
-    if (pauseBtn) pauseBtn.addEventListener("click", function () { setPaused(!paused); });
+    $$("[data-slide-prev]", s).forEach(function (b) { b.addEventListener("click", function () { goFrom(b, i - 1, "[data-slide-prev]"); }); });
+    $$("[data-slide-next]", s).forEach(function (b) { b.addEventListener("click", function () { goFrom(b, i + 1, "[data-slide-next]"); }); });
+    dots.forEach(function (d) { d.addEventListener("click", function () { var n = +d.getAttribute("data-slide-to"); goFrom(d, n, '[data-slide-to="' + n + '"]'); }); });
+    pauseBtns.forEach(function (b) { b.addEventListener("click", function () { setPaused(!paused); }); });
     s.addEventListener("mouseenter", function () { hover = true; schedule(); });
     s.addEventListener("mouseleave", function () { hover = false; schedule(); });
     s.addEventListener("focusin", function () { hover = true; schedule(); });

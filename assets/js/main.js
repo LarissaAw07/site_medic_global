@@ -352,11 +352,12 @@
     $$("[data-carousel-next]", c).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); }); });
   });
 
-  /* Carrossel do hero (home): troca a cada 7s, pausa com cursor/foco e no botão de pausa.
-     Cada slide tem sua própria cópia dos controles (sobre a imagem); todas ficam sincronizadas. */
+  /* Carrossel do hero (home): troca a cada 8s, inclusive com o cursor sobre o banner.
+     Os traços ficam sobre a imagem de cada slide (uma cópia por slide, todas sincronizadas).
+     Só pausa enquanto o foco do teclado está dentro do banner, para não trocar o conteúdo durante a leitura. */
   $$("[data-hero-slider]").forEach(function (s) {
-    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s), pauseBtns = $$("[data-slide-pause]", s);
-    var i = 0, timer = null, paused = reduce, hover = false;
+    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s);
+    var i = 0, timer = null, focused = false;
     function go(n) {
       i = (n + slides.length) % slides.length;
       slides.forEach(function (el, k) {
@@ -367,31 +368,22 @@
       });
       dots.forEach(function (d) { if (+d.getAttribute("data-slide-to") === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
     }
-    // Ao usar um controle, o foco passa para o mesmo controle no slide que entrou
-    function goFrom(btn, n, sel) {
-      var hadFocus = document.activeElement === btn;
-      go(n); schedule();
-      if (hadFocus) { var t = $(sel, slides[i]); if (t) t.focus(); }
-    }
     function schedule() {
       clearTimeout(timer);
-      if (!paused && !hover) timer = setTimeout(function () { go(i + 1); schedule(); }, 7000);
+      if (!reduce && !focused) timer = setTimeout(function () { go(i + 1); schedule(); }, 8000);
     }
-    function setPaused(p) {
-      paused = p;
-      pauseBtns.forEach(function (b) { b.setAttribute("aria-pressed", p ? "true" : "false"); b.setAttribute("aria-label", p ? "Retomar rotação" : "Pausar rotação"); });
-      schedule();
-    }
-    $$("[data-slide-prev]", s).forEach(function (b) { b.addEventListener("click", function () { goFrom(b, i - 1, "[data-slide-prev]"); }); });
-    $$("[data-slide-next]", s).forEach(function (b) { b.addEventListener("click", function () { goFrom(b, i + 1, "[data-slide-next]"); }); });
-    dots.forEach(function (d) { d.addEventListener("click", function () { var n = +d.getAttribute("data-slide-to"); goFrom(d, n, '[data-slide-to="' + n + '"]'); }); });
-    pauseBtns.forEach(function (b) { b.addEventListener("click", function () { setPaused(!paused); }); });
-    s.addEventListener("mouseenter", function () { hover = true; schedule(); });
-    s.addEventListener("mouseleave", function () { hover = false; schedule(); });
-    s.addEventListener("focusin", function () { hover = true; schedule(); });
-    s.addEventListener("focusout", function (e) { if (!s.contains(e.relatedTarget)) { hover = false; schedule(); } });
+    dots.forEach(function (d) {
+      d.addEventListener("click", function () {
+        var n = +d.getAttribute("data-slide-to"), hadFocus = document.activeElement === d;
+        go(n); schedule();
+        // O foco passa para o traço equivalente no slide que entrou
+        if (hadFocus) { var t = $('[data-slide-to="' + n + '"]', slides[i]); if (t) t.focus(); }
+      });
+    });
+    s.addEventListener("focusin", function () { focused = true; schedule(); });
+    s.addEventListener("focusout", function (e) { if (!s.contains(e.relatedTarget)) { focused = false; schedule(); } });
     go(0);
-    setPaused(paused);
+    schedule();
   });
 
   /* ---------- Formulários (validação acessível + LGPD) ---------- */

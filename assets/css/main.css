@@ -611,6 +611,41 @@ html:not(.js) .hero-nav { display: none; }
 .hub-section .field-dark select:focus-visible { border-color: var(--glow); }
 .hub-section .finder .btn { min-height: 52px; padding-inline: 22px; border-radius: var(--r-md); }
 
+/* Dropdown no padrão do site (montado por main.js sobre o <select>, que fica oculto) */
+.hub-section .finder { position: relative; z-index: 5; }
+/* Deixa a lista aberta passar do fim da seção sem ser cortada (o corte lateral continua) */
+.hub-section { overflow: visible; overflow-x: clip; z-index: 2; }
+.field-dark.has-dd select { display: none; }
+.field-dark.has-dd label { z-index: 1; pointer-events: none; }
+.dd-btn {
+  position: relative; width: 100%; height: 52px; padding: 18px 40px 0 16px; text-align: left;
+  border-radius: var(--r-md); border: 1px solid transparent; background: rgba(255,255,255,.06);
+  color: var(--white); font-family: var(--f-head); font-size: var(--t-sm); cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background .2s, border-color .2s;
+}
+.dd-btn::after {
+  content: ""; position: absolute; right: 14px; top: 50%; width: 16px; height: 16px; margin-top: -8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234FC3C3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat center / contain;
+  transition: transform .3s var(--ease);
+}
+.dd-btn:hover { background: rgba(255,255,255,.09); border-color: var(--line-deep); }
+.dd-btn:focus-visible, .field-dark.is-open .dd-btn { outline: none; border-color: var(--glow); }
+.field-dark.is-open .dd-btn::after { transform: rotate(180deg); }
+.dd-list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 20; margin: 0; padding: 6px; list-style: none;
+  max-height: 280px; overflow-y: auto; background: var(--white); border: 1px solid var(--line-2); border-radius: var(--r-md);
+  box-shadow: 0 24px 48px -20px rgba(2,26,29,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s linear .2s;
+}
+.field-dark.is-open .dd-list { opacity: 1; visibility: visible; transform: none; transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s; }
+.dd-list li { position: relative; padding: 9px 14px 9px 36px; border-radius: 8px; font-size: var(--t-sm); color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+.dd-list li.is-active { background: var(--mist); color: var(--ink); }
+.dd-list li[aria-selected="true"] { background: var(--tint); color: var(--globo); font-family: var(--f-head); font-weight: 500; }
+.dd-list li[aria-selected="true"]::before {
+  content: ""; position: absolute; left: 12px; top: 50%; width: 16px; height: 16px; margin-top: -8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300626D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
 .type-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .pill {
   display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: var(--r-pill);

@@ -417,6 +417,72 @@
     });
   });
 
+  /* Dropdown no padrão do site (Rede de cuidado da home). O <select> original continua no
+     formulário (oculto) e recebe o valor; em telas de toque fica a lista nativa do aparelho. */
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) $$("select[data-dropdown]").forEach(function (sel) {
+    var field = sel.parentNode, opts = Array.prototype.slice.call(sel.options), active = sel.selectedIndex, typed = "", typedT;
+    var btn = document.createElement("button"), list = document.createElement("ul"), lbl = $("label[for='" + sel.id + "']", field);
+    btn.type = "button"; btn.className = "dd-btn"; btn.id = sel.id + "-dd";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", sel.id + "-list");
+    list.className = "dd-list"; list.id = sel.id + "-list"; list.setAttribute("role", "listbox"); list.tabIndex = -1;
+    if (lbl) { lbl.id = lbl.id || sel.id + "-lbl"; lbl.htmlFor = btn.id; list.setAttribute("aria-labelledby", lbl.id); btn.setAttribute("aria-labelledby", lbl.id + " " + btn.id); }
+    opts.forEach(function (o, k) {
+      var li = document.createElement("li");
+      li.id = sel.id + "-opt-" + k; li.setAttribute("role", "option"); li.textContent = o.text;
+      li.addEventListener("mousedown", function (e) { e.preventDefault(); });
+      li.addEventListener("click", function () { choose(k); close(); btn.focus(); });
+      li.addEventListener("mousemove", function () { setActive(k); });
+      list.appendChild(li);
+    });
+    var items = $$("li", list);
+    function render() {
+      btn.textContent = opts[sel.selectedIndex].text;
+      items.forEach(function (li, k) { li.setAttribute("aria-selected", k === sel.selectedIndex ? "true" : "false"); });
+    }
+    function setActive(k) {
+      active = Math.max(0, Math.min(items.length - 1, k));
+      items.forEach(function (li, j) { li.classList.toggle("is-active", j === active); });
+      btn.setAttribute("aria-activedescendant", items[active].id);
+      items[active].scrollIntoView({ block: "nearest" });
+    }
+    function choose(k) {
+      if (sel.selectedIndex !== k) { sel.selectedIndex = k; sel.dispatchEvent(new Event("change", { bubbles: true })); }
+      render();
+    }
+    function isOpen() { return field.classList.contains("is-open"); }
+    function open() {
+      $$(".field-dark.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
+      field.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); setActive(sel.selectedIndex);
+    }
+    function close() { field.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant"); }
+    btn.addEventListener("click", function () { isOpen() ? close() : open(); });
+    btn.addEventListener("keydown", function (e) {
+      var k = e.key;
+      if (!isOpen()) {
+        if (k === "ArrowDown" || k === "ArrowUp" || k === "Enter" || k === " ") { e.preventDefault(); open(); }
+        return;
+      }
+      if (k === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
+      else if (k === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+      else if (k === "Home") { e.preventDefault(); setActive(0); }
+      else if (k === "End") { e.preventDefault(); setActive(items.length - 1); }
+      else if (k === "Enter" || k === " ") { e.preventDefault(); choose(active); close(); }
+      else if (k === "Escape") { e.preventDefault(); close(); }
+      else if (k === "Tab") { close(); }
+      else if (k.length === 1) {
+        // Digitar letras leva à primeira opção que começa com elas
+        clearTimeout(typedT); typed += norm(k); typedT = setTimeout(function () { typed = ""; }, 600);
+        for (var j = 0; j < opts.length; j++) if (norm(opts[j].text).indexOf(typed) === 0) { setActive(j); break; }
+      }
+    });
+    document.addEventListener("click", function (e) { if (isOpen() && !field.contains(e.target)) close(); });
+    sel.addEventListener("change", render);
+    sel.tabIndex = -1; sel.setAttribute("aria-hidden", "true");
+    field.classList.add("has-dd");
+    field.appendChild(btn); field.appendChild(list);
+    render();
+  });
+
   /* Busca na rede (home e página da rede) */
   $$("form[data-rede]").forEach(function (f) {
     f.addEventListener("submit", function (e) {

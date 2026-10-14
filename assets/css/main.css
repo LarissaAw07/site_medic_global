@@ -375,7 +375,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- HERO (home) ---------- */
 .hero { position: relative; padding-top: calc(var(--header-h) + 40px); overflow: hidden; }
-@media (min-width: 1100px) { .hero { padding-top: calc(var(--header-h) + 64px); } }
+@media (min-width: 1100px) { .hero { padding-top: calc(var(--header-h) + 32px); } }
 .hero .grid { align-items: end; row-gap: 40px; }
 .hero-copy { padding-bottom: 8px; position: relative; z-index: 2; }
 .hero-copy h1 { margin-bottom: 28px; }
@@ -425,18 +425,16 @@ ul, ol { margin: 0; padding: 0; }
 @media (min-width: 1100px) {
   /* Mesma altura de moldura em todos os slides; chapéu alinhado ao topo da imagem */
   .hero-slide .grid { align-content: stretch; align-items: stretch; }
-  .hero-media .frame { height: 100%; min-height: min(78vh, 820px); }
+  /* Altura do banner cabe na tela abaixo do menu, para a imagem aparecer inteira */
+  .hero-media .frame { height: 100%; min-height: min(calc(100svh - var(--header-h) - 88px), 640px); }
   .hero-copy { display: flex; flex-direction: column; }
+  /* Texto um pouco mais compacto para não esticar a moldura além da tela */
+  .hero-copy h1, .hero-title { font-size: clamp(2.75rem, 1.2rem + 3vw, 4.25rem); margin-bottom: 20px; }
+  .hero-copy .lead { margin-bottom: 28px; }
+  .hero-foot { margin-top: 32px; padding-top: 20px; }
 }
 .hero-title { font-family: var(--f-display); font-size: var(--t-h1); letter-spacing: -.035em; margin-bottom: 28px; }
 .hero-title em { font-style: normal; color: var(--medic); }
-.hero-ans {
-  display: block; margin-bottom: 20px;
-  font-family: var(--f-head); font-size: .72rem; font-weight: 500; letter-spacing: .16em; color: var(--ink-3);
-}
-@media (min-width: 1100px) {
-  .hero-ans { position: absolute; left: calc(var(--gutter) / 2 - .5em); top: 0; margin: 0; writing-mode: vertical-rl; transform: rotate(180deg); }
-}
 
 /* Slide 2 · Telemedicina */
 .hero-slide--tele .hero-copy { display: flex; flex-direction: column; }
@@ -545,16 +543,16 @@ html:not(.js) .hero-nav { display: none; }
 .need strong { font-family: var(--f-head); font-weight: 500; font-size: 1.125rem; line-height: 1.3; display: block; letter-spacing: -.01em; }
 .need small { display: block; color: var(--ink-3); font-size: var(--t-xs); margin-top: 4px; transition: color .4s var(--ease); }
 /* Seta sempre visível, no mesmo padrão da caixa do ícone */
-.need .arrow { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--white); color: var(--globo); transition: background .3s, color .3s; }
-.need .arrow svg { width: 20px; height: 20px; transform: rotate(-45deg); transition: transform .4s var(--ease); }
+.need .arrow { width: 44px; height: 44px; display: grid; place-items: center; color: var(--globo); transition: color .3s; }
+.need .arrow svg { width: 24px; height: 24px; transform: rotate(-45deg); transition: transform .4s var(--ease); }
 .need:hover .arrow svg, .need:focus-visible .arrow svg { transform: rotate(-45deg) translateX(3px); }
 @media (min-width: 1100px) {
-  .need .arrow { position: absolute; right: 24px; top: 24px; }
+  .need .arrow { position: absolute; right: 16px; top: 24px; }
 }
 .need:hover, .need:focus-visible { background: var(--globo); color: var(--white); }
 .need:hover small, .need:focus-visible small { color: rgba(255,255,255,.75); }
 .need:hover .need-ico, .need:focus-visible .need-ico { background: rgba(255,255,255,.14); color: var(--white); }
-.need:hover .arrow, .need:focus-visible .arrow { background: rgba(255,255,255,.14); color: var(--white); }
+.need:hover .arrow, .need:focus-visible .arrow { color: var(--glow); }
 
 /* ---------- Rede de cuidado (hub orbital) ---------- */
 .hub-section { overflow: hidden; }
@@ -603,8 +601,10 @@ html:not(.js) .hero-nav { display: none; }
 .finder .btn { min-height: 64px; border-radius: 14px; }
 
 /* Rede de cuidado (home): seletores compactos, com seta, e faixa de cidades encostada no fim da seção */
-.hub-section { padding-bottom: clamp(40px, 2rem + 2vw, 72px); }
-.hub-section .marquee { margin-top: var(--s-7); }
+/* Seções "Como podemos ajudar?" e "Rede de cuidado" mais próximas; faixa de cidades quase colada ao fim */
+.ajuda-section { padding-bottom: max(56px, calc(var(--section) - 80px)); }
+.hub-section { padding-top: max(56px, calc(var(--section) - 80px)); padding-bottom: 12px; }
+.hub-section .marquee { margin-top: var(--s-6); }
 .hub-section .finder { padding: 6px; gap: 6px; border-radius: var(--r-lg); }
 .hub-section .field-dark label { left: 16px; top: 8px; font-size: .62rem; }
 .hub-section .field-dark select {

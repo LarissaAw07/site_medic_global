@@ -26,6 +26,7 @@
   --ink-3: #5E7174;
   --mist: #F4F7F7;
   --mist-2: #E9EFEF;
+  --tint: #E3F0F1;         /* azul-claro dos blocos de necessidade */
   --line: rgba(0, 98, 109, .14);
   --line-2: rgba(11, 27, 29, .08);
   --deep: #021A1D;         /* fundo escuro editorial */
@@ -210,8 +211,7 @@ ul, ol { margin: 0; padding: 0; }
 }
 .utility { display: none; }
 @media (min-width: 1100px) {
-  .utility { display: block; border-bottom: 1px solid var(--line-2); font-size: var(--t-xs); }
-  .site-header.is-scrolled .utility { display: none; }
+  .utility { display: block; background: var(--mist); border-bottom: 1px solid var(--line-2); font-size: var(--t-xs); }
 }
 .utility .wrap { display: flex; align-items: center; justify-content: space-between; height: 40px; }
 .utility nav { display: flex; gap: 28px; }
@@ -293,11 +293,7 @@ ul, ol { margin: 0; padding: 0; }
 .menu-toggle[aria-expanded="true"] .l2 { transform: translateY(-4px) rotate(-45deg); }
 
 /* Header transparente sobre heros escuros */
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .nav-trigger,
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .utility a,
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .utility-label { color: var(--white); }
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .utility { border-color: var(--line-deep); }
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .utility svg { color: var(--glow); }
+.site-header.on-dark:not(.is-scrolled):not(.is-open) .nav-trigger { color: var(--white); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .nav-trigger:hover { background: rgba(255,255,255,.1); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .brand .wordmark { fill: var(--white); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .btn--benef { --b-fg: var(--white); --b-bd: rgba(255,255,255,.3); }
@@ -435,32 +431,33 @@ ul, ol { margin: 0; padding: 0; }
 .intent-suggest a:hover, .intent-suggest a.is-active { background: var(--mist); }
 .intent-suggest a span { color: var(--medic); font-family: var(--f-head); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
 
-.needs { margin-top: var(--s-8); border-top: 1px solid var(--line-2); }
+.needs { margin-top: var(--s-8); display: grid; gap: 12px; }
 .need {
   display: grid; grid-template-columns: 44px 1fr 28px; align-items: center; gap: 16px;
-  padding: 22px 4px; border-bottom: 1px solid var(--line-2); position: relative;
-  transition: padding .4s var(--ease), background .4s var(--ease);
+  padding: 20px; border-radius: var(--r-lg); position: relative;
+  background: var(--tint); color: var(--ink);
+  transition: padding .4s var(--ease), background .4s var(--ease), color .4s var(--ease);
 }
 @media (min-width: 720px) {
-  .needs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; }
+  .needs { grid-template-columns: 1fr 1fr; gap: 16px; }
 }
 @media (min-width: 1100px) {
-  .needs { grid-template-columns: repeat(4, 1fr); column-gap: 0; border-top: 0; }
-  .need { grid-template-columns: 1fr; align-content: space-between; gap: 48px; min-height: 230px; padding: 28px; border: 0; border-left: 1px solid var(--line-2); border-top: 1px solid var(--line-2); }
-  .need:nth-child(4n+1) { border-left: 0; }
-  .need:nth-child(n+5) { border-bottom: 1px solid var(--line-2); }
+  .needs { grid-template-columns: repeat(4, 1fr); }
+  .need { grid-template-columns: 1fr; align-content: space-between; gap: 48px; min-height: 230px; padding: 28px; }
 }
-.need-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--mist); color: var(--globo); transition: background .3s, color .3s; }
+.need-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--white); color: var(--globo); transition: background .3s, color .3s; }
 .need-ico svg { width: 22px; height: 22px; }
 .need strong { font-family: var(--f-head); font-weight: 500; font-size: 1.125rem; line-height: 1.3; display: block; letter-spacing: -.01em; }
-.need small { display: block; color: var(--ink-3); font-size: var(--t-xs); margin-top: 4px; }
-.need .arrow { width: 28px; height: 28px; color: var(--medic); transition: transform .4s var(--ease); }
+.need small { display: block; color: var(--ink-3); font-size: var(--t-xs); margin-top: 4px; transition: color .4s var(--ease); }
+.need .arrow { width: 28px; height: 28px; color: var(--globo); transition: transform .4s var(--ease), color .4s var(--ease); }
 @media (min-width: 1100px) {
   .need .arrow { position: absolute; right: 28px; top: 32px; opacity: 0; transform: translate(-6px, 6px) rotate(-45deg); }
   .need:hover .arrow, .need:focus-visible .arrow { opacity: 1; transform: rotate(-45deg); }
 }
-.need:hover { background: var(--mist); }
-.need:hover .need-ico { background: var(--globo); color: var(--white); }
+.need:hover, .need:focus-visible { background: var(--globo); color: var(--white); }
+.need:hover small, .need:focus-visible small { color: rgba(255,255,255,.75); }
+.need:hover .need-ico, .need:focus-visible .need-ico { background: rgba(255,255,255,.14); color: var(--white); }
+.need:hover .arrow, .need:focus-visible .arrow { color: var(--glow); }
 
 /* ---------- Rede de cuidado (hub orbital) ---------- */
 .hub-section { overflow: hidden; }

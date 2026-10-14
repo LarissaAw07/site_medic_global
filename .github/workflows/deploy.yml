@@ -1,0 +1,47 @@
+name: Deploy para a VPS
+
+# Dispara a cada push no main (e permite rodar manualmente pela aba Actions)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-producao
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Gerar o site estático
+        run: node build.js
+
+      - name: Montar a pasta de publicação (dist/)
+        run: |
+          mkdir -p dist
+          cp -r *.html assets sitemap.xml robots.txt dist/
+          # mapa de migração é interno (noindex) — não publicar
+          rm -f dist/mapa-de-migracao.html
+
+      - name: Configurar a chave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "${{ secrets.VPS_PORT || '22' }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Enviar arquivos para a VPS (rsync)
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/id_deploy -p ${{ secrets.VPS_PORT || '22' }}" \
+            dist/ \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"

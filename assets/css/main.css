@@ -1583,3 +1583,6 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .marquee--sm .marquee-item::before {
   width: 4px; height: 4px; margin: 0 18px; background: var(--glow); opacity: .9;
 }
+/* Cidades ainda mais claras: branco puro e peso médio */
+.deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #fff; font-weight: 500; }
+.hub-section .marquee--sm { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }

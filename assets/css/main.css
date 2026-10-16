@@ -1222,3 +1222,24 @@ html:not(.js) .hero-nav { display: none; }
 .wipe-handle button { display: flex; align-items: center; justify-content: center; gap: 0; }
 .wipe-handle button svg { width: 18px; height: 18px; }
 .wipe-after .wipe-word, .wipe-before .wipe-word { white-space: nowrap; }
+
+/* Serviços (home): cards separados em azul-escuro; no hover, azul-claro com texto escuro */
+.serv-section { padding-bottom: max(56px, calc(var(--section) - 80px)); }
+.indexed--cards { gap: 12px; border-top: 0; }
+.indexed--cards a, .indexed--cards a.is-focal {
+  padding: 32px 28px 36px; min-height: 0; border: 0; border-radius: var(--r-lg);
+  background: var(--globo); color: var(--white); transition: background .4s var(--ease), color .4s var(--ease);
+}
+@media (min-width: 720px) { .indexed--cards { gap: 16px; } }
+@media (min-width: 1100px) {
+  .indexed--cards a, .indexed--cards a.is-focal { padding: 36px 32px 40px; min-height: 296px; }
+  .indexed--cards a:nth-child(3n+1) { padding-left: 32px; }
+}
+.indexed--cards a h3, .indexed--cards a .go { color: var(--white); transition: color .4s var(--ease); }
+.indexed--cards a p { color: rgba(255,255,255,.75); transition: color .4s var(--ease); }
+.indexed--cards a .num { color: var(--glow); transition: color .4s var(--ease); }
+.indexed--cards a:hover, .indexed--cards a:focus-visible { background: var(--tint); color: var(--ink); }
+.indexed--cards a:hover h3, .indexed--cards a:focus-visible h3 { color: var(--ink); }
+.indexed--cards a:hover p, .indexed--cards a:focus-visible p { color: var(--ink-2); }
+.indexed--cards a:hover .num, .indexed--cards a:hover .go,
+.indexed--cards a:focus-visible .num, .indexed--cards a:focus-visible .go { color: var(--globo); }

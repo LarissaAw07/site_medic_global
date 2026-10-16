@@ -35,7 +35,7 @@
     var d = cities[name];
     var icon = L.divIcon({ className: "", html: '<span class="mg-pin' + (d.hq ? " hq" : "") + '"></span>', iconSize: [22, 22], iconAnchor: [11, 11] });
     var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>Sede MedicGLOBAL · R. Alcebíades Wohlers, 02</small>" : "") +
-      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">Buscar atendimento nesta cidade →</a>';
+      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">Buscar atendimento nesta cidade</a>';
     markers[name] = L.marker(d.c, { icon: icon, title: name, keyboard: true }).addTo(map).bindPopup(popup);
     markers[name].on("click", function () { select(name); });
   });

@@ -1544,3 +1544,6 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .faq-cols { display: grid; gap: 0 48px; align-items: start; }
 @media (min-width: 900px) { .faq-cols { grid-template-columns: 1fr 1fr; } }
 .faq-col .faq-item .ans { padding-right: 16px; }
+
+/* Título de página no mesmo tamanho dos banners internos (ex.: Sou beneficiário) */
+.title-page { font-size: clamp(2.25rem, 1rem + 2.3vw, 3.25rem); }

@@ -6,18 +6,33 @@
   "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Trabalhe conosco", "trabalhe-conosco.html"]]
 }@-->
 
-<section class="page-hero page-hero--media" aria-labelledby="t">
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-6 stack">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Trabalhe conosco</span>
-        <h1 id="t" class="balance">Faça parte da MedicGLOBAL.</h1>
+        <h1 id="t" class="balance">Faça parte da <em>MedicGLOBAL.</em></h1>
         <p class="lead">Deixe seu contato e participe dos nossos processos de seleção. Construa com a gente uma forma mais simples de cuidar das pessoas.</p>
-        <div class="btn-row"><a class="btn" href="#curriculo">Enviar currículo</a></div>
+        <div class="btn-row">
+          <a class="btn" href="#curriculo">Enviar currículo</a>
+          <a class="btn btn--ghost" href="medicglobal.html">Conheça a MedicGLOBAL</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>+40 anos</b> de história</span>
+          <span><b>5 hospitais</b> na área de atuação</span>
+          <span><b>ANS nº {{L.ans}}</b></span>
+        </div>
       </div>
-      <div class="c-7-13"><div class="img-round page-hero-img--bleed" style="aspect-ratio:16/11">{{pic:old_escritorio|Equipe trabalhando junta em um escritório|1600|(min-width:1100px) 55vw, 100vw|eager}}</div></div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_escritorio|Equipe trabalhando junta em um escritório|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:briefcase}}</i><span>Processos seletivos<small>envie seu currículo</small></span></span>
+          <span class="chip"><i>{{i:users}}</i><span>Equipe MedicGLOBAL<small>saúde integrada na região</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

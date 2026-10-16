@@ -6,18 +6,33 @@
   "crumbs": [["Planos", "planos.html"]]
 }@-->
 
-<section class="page-hero page-hero--media" aria-labelledby="t">
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-7">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Planos EMED GLOBAL BLUE</span>
-        <h1 id="t" class="balance">Um plano de saúde pensado para a sua realidade.</h1>
+        <h1 id="t" class="balance">Um plano de saúde pensado para a <em>sua realidade.</em></h1>
         <p class="lead">Quatro produtos com abrangências diferentes — do municipal, em Extrema/MG, ao regional, de Bragança Paulista/SP a Pouso Alegre/MG. Compare e escolha com calma.</p>
-        <div class="btn-row mt-7"><a class="btn" href="#comparar" data-track="acesso_planos">Comparar planos</a><a class="btn btn--ghost" href="#contato" data-track="click_quero_ser_cliente">Solicitar contato</a></div>
+        <div class="btn-row">
+          <a class="btn" href="#comparar" data-track="acesso_planos">Comparar planos</a>
+          <a class="btn btn--ghost" href="#contato" data-track="click_quero_ser_cliente">Solicitar contato</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>4 planos</b> EMED GLOBAL BLUE</span>
+          <span><b>Do municipal ao regional</b> em abrangência</span>
+          <span><b>ANS nº {{L.ans}}</b></span>
+        </div>
       </div>
-      <div class="c-8-13"><div class="img-arch">{{pic:old_familia|Família sorrindo reunida em casa|900|(min-width:1100px) 35vw, 100vw|eager}}</div></div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_familia|Família sorrindo reunida em casa|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:layers}}</i><span>4 planos<small>EMED GLOBAL BLUE 100 a 400</small></span></span>
+          <span class="chip"><i>{{i:pin}}</i><span>Abrangência regional<small>Bragança Paulista → Pouso Alegre</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -26,37 +41,11 @@
   <div class="wrap"><a href="#comparar">Planos</a><a href="#abrangencia">Abrangência</a><a href="#rede">Rede</a><a href="#duvidas">Dúvidas</a><a href="#contato">Solicitar proposta</a></div>
 </nav>
 
-<section class="section mist" id="comparar" aria-labelledby="comp-t" data-filter data-filter-items="#comparar .plan" data-filter-mode="dim">
+<section class="section mist" id="comparar" aria-labelledby="comp-t">
   <div class="wrap">
     <div class="grid mb-7">
       <div class="c-1-7"><span class="eyebrow">Compare</span><h2 id="comp-t" class="balance">Qual plano atende onde você vive e circula?</h2></div>
-      <div class="c-8-13" style="align-self:end"><p class="lead">Selecione a sua região: destacamos os planos cuja abrangência informada inclui essa cidade.</p></div>
-    </div>
-    <div class="filters mb-7">
-      <fieldset>
-        <legend>Por região</legend>
-        <div class="type-pills">
-          <button class="pill" type="button" data-filter-group="regiao" data-value="all" aria-pressed="true">Todas</button>
-          <button class="pill" type="button" data-filter-group="regiao" data-value="extrema" aria-pressed="false">Extrema/MG</button>
-          <button class="pill" type="button" data-filter-group="regiao" data-value="cambui" aria-pressed="false">Cambuí/MG</button>
-          <button class="pill" type="button" data-filter-group="regiao" data-value="braganca" aria-pressed="false">Bragança Paulista/SP</button>
-          <button class="pill" type="button" data-filter-group="regiao" data-value="pousoalegre" aria-pressed="false">Pouso Alegre/MG</button>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Por perfil</legend>
-        <div class="type-pills" data-pill-target="perfil">
-          <button class="pill" type="button" data-value="Para mim e minha família" aria-pressed="false">Para mim e minha família</button>
-          <button class="pill" type="button" data-value="Para minha empresa" aria-pressed="false">Para minha empresa</button>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Por tipo de contratação</legend>
-        <div class="type-pills" data-pill-target="contratacao">
-          <button class="pill" type="button" data-value="Coletivo empresarial" aria-pressed="false">Coletivo empresarial</button>
-                    <button class="pill" type="button" data-value="Ainda não sei" aria-pressed="false">Ainda não sei</button>
-        </div>
-      </fieldset>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Compare a abrangência de cada plano e veja qual inclui as cidades onde você vive e circula.</p></div>
     </div>
     <div class="plans">
       {{> plan-cards}}

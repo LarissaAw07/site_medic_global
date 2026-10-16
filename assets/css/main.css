@@ -882,11 +882,16 @@ html:not(.js) .hero-nav { display: none; }
 .deep .crumbs [aria-current] { color: var(--white); }
 
 /* Sub navegação por âncoras */
-.subnav { position: sticky; top: 72px; z-index: 50; background: rgba(255,255,255,.9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-2); }
+.subnav { position: sticky; top: var(--header-h); z-index: 50; background: rgba(255,255,255,.9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-2); }
 .subnav .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
 .subnav .wrap::-webkit-scrollbar { display: none; }
-.subnav a { flex-shrink: 0; padding: 16px 14px; font-family: var(--f-head); font-size: .875rem; color: var(--ink-3); border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
-.subnav a:hover, .subnav a.is-active { color: var(--globo); border-bottom-color: var(--medic); }
+/* Links sublinhados para ficarem claramente clicáveis; o ativo/hover ganha cor e sublinhado mais forte */
+.subnav a {
+  flex-shrink: 0; padding: 16px 14px; font-family: var(--f-head); font-size: .875rem; color: var(--ink-2);
+  text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: rgba(11,27,29,.35); text-underline-offset: 6px;
+  transition: color .2s, text-decoration-color .2s;
+}
+.subnav a:hover, .subnav a.is-active { color: var(--globo); text-decoration-color: var(--medic); text-decoration-thickness: 2px; }
 
 /* ---------- Passos (how it works) ---------- */
 .steps { display: grid; gap: 40px; position: relative; counter-reset: step; }
@@ -1390,3 +1395,8 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Área do Beneficiário: a tela do celular ocupa o aparelho inteiro, sem a moldura escura em volta */
 .phone { padding: 0; background: none; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
 .phone-screen { border-radius: 44px; }
+
+/* Banners das páginas internas no molde do hero da home */
+.hero--page .crumbs { margin-bottom: 32px; }
+@media (min-width: 1100px) { .hero--page .grid { align-items: stretch; } }
+@media (max-width: 1099px) { .hero--page .hero-chips { bottom: 16px; } }

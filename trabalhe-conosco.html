@@ -180,7 +180,8 @@
 </div>
 
 <main id="conteudo" tabindex="-1">
-<section class="page-hero page-hero--media" aria-labelledby="t">
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
   <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
   <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
   <circle cx="400" cy="400" r="300" opacity=".35"/>
@@ -192,13 +193,27 @@
   <div class="wrap">
     <nav aria-label="Você está em"><ol class="crumbs"><li><a href="index.html">Início</a></li><li><a href="medicglobal.html">MedicGLOBAL</a></li><li><span aria-current="page">Trabalhe conosco</span></li></ol></nav>
     <div class="grid">
-      <div class="c-1-6 stack">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Trabalhe conosco</span>
-        <h1 id="t" class="balance">Faça parte da MedicGLOBAL.</h1>
+        <h1 id="t" class="balance">Faça parte da <em>MedicGLOBAL.</em></h1>
         <p class="lead">Deixe seu contato e participe dos nossos processos de seleção. Construa com a gente uma forma mais simples de cuidar das pessoas.</p>
-        <div class="btn-row"><a class="btn" href="#curriculo">Enviar currículo</a></div>
+        <div class="btn-row">
+          <a class="btn" href="#curriculo">Enviar currículo</a>
+          <a class="btn btn--ghost" href="medicglobal.html">Conheça a MedicGLOBAL</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>+40 anos</b> de história</span>
+          <span><b>5 hospitais</b> na área de atuação</span>
+          <span><b>ANS nº 41186-8</b></span>
+        </div>
       </div>
-      <div class="c-7-13"><div class="img-round page-hero-img--bleed" style="aspect-ratio:16/11"><img src="assets/img/provisorio/escritorio.jpg" alt="Equipe trabalhando junta em um escritório" loading="eager" fetchpriority="high" decoding="async"></div></div>
+      <div class="hero-media c-7-13">
+        <div class="frame"><img src="assets/img/provisorio/escritorio.jpg" alt="Equipe trabalhando junta em um escritório" loading="eager" fetchpriority="high" decoding="async"></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></i><span>Processos seletivos<small>envie seu currículo</small></span></span>
+          <span class="chip"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1.2-3.5 3.7-5.5 6.5-5.5s5.3 2 6.5 5.5"/><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.7.8 2.9 2.5 3.5 5.2"/></svg></i><span>Equipe MedicGLOBAL<small>saúde integrada na região</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

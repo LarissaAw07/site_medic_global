@@ -3,23 +3,37 @@
   "description": "Entenda o que é, como funciona e como acessar a telemedicina MedicGLOBAL. Atendimento a distância para beneficiários, conforme as condições do plano.",
   "active": "servicos",
   "og": "phonedoc",
-  "headerDark": true,
   "crumbs": [["Serviços", "servicos.html"], ["Telemedicina", "telemedicina.html"]],
   "jsonld": [{"@context":"https://schema.org","@type":"Service","name":"Telemedicina MedicGLOBAL","serviceType":"Telemedicina","provider":{"@type":"Organization","name":"MedicGLOBAL"},"areaServed":"BR","url":"https://medicglobal.com.br/telemedicina/"}]
 }@-->
 
-<section class="page-hero deep page-hero--media" aria-labelledby="t" style="padding-bottom:0;overflow:hidden">
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
-    <div class="grid" style="align-items:end">
-      <div class="c-1-6" style="padding-bottom:clamp(48px,5vw,120px)">
+    <div class="grid">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Telemedicina</span>
-        <h1 id="t" class="balance">Precisa falar com um profissional de saúde?</h1>
+        <h1 id="t" class="balance">Precisa falar com um <em>profissional de saúde?</em></h1>
         <p class="lead">Com a telemedicina, você é atendido a distância, de onde estiver, conforme as condições do seu plano.</p>
-        <div class="btn-row mt-7"><a class="btn btn--light" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Acessar telemedicina {{i:external}}</a><a class="btn btn--ghost-light" href="#como-funciona">Como funciona</a></div>
+        <div class="btn-row">
+          <a class="btn" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Acessar telemedicina {{i:external}}</a>
+          <a class="btn btn--ghost" href="#como-funciona">Como funciona</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>5 minutos</b> entre a solicitação e a consulta</span>
+          <span><b>Sem custo extra</b> na consulta</span>
+          <span><b>ANS nº {{L.ans}}</b></span>
+        </div>
       </div>
-      <div class="c-7-13"><div class="img-round page-hero-img--bleed" style="aspect-ratio:5/4;border-radius:var(--r-lg) var(--r-lg) 0 0">{{pic:old_medica_sorrindo|Médica sorridente atendendo uma pessoa|1600|(min-width:1100px) 55vw, 100vw|eager}}</div></div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_medica_sorrindo|Médica sorridente atendendo uma pessoa|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:video}}</i><span>Consulta on-line<small>de onde você estiver</small></span></span>
+          <span class="chip"><i>{{i:clock}}</i><span>5 minutos<small>da solicitação à consulta</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

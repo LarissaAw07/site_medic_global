@@ -29,8 +29,8 @@
   --tint: #E3F0F1;         /* azul-claro dos blocos de necessidade */
   --line: rgba(0, 98, 109, .14);
   --line-2: rgba(11, 27, 29, .08);
-  --deep: #021A1D;         /* fundo escuro editorial */
-  --deep-2: #062A2E;
+  --deep: #034F56;         /* fundo escuro editorial */
+  --deep-2: #02454B;
   --glow: #4FC3C3;         /* tint do Azul Medic para leitura sobre fundo escuro */
   --on-deep: rgba(255,255,255,.92);
   --on-deep-2: rgba(255,255,255,.64);
@@ -450,7 +450,7 @@ ul, ol { margin: 0; padding: 0; }
 .hero-title em { font-style: normal; color: var(--medic); }
 
 /* Slide 3 · Área de cobertura (mapa ilustrado na mesma moldura do slide 1) */
-.hero-media .frame--map { background: var(--deep); color: var(--glow); }
+.hero-media .frame--map { background: #021A1D; color: #4FC3C3; } /* mapa do banner 3 mantém o tom original */
 .frame--map > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hm-border { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 2 7; opacity: .35; }
 .hm-state { font-family: var(--f-head); font-size: 13px; letter-spacing: .3em; fill: currentColor; opacity: .45; }
@@ -1209,8 +1209,8 @@ html:not(.js) .hero-nav { display: none; }
 @media (min-width: 1100px) and (max-width: 1239px) {
   .btn--benef .benef-label { display: none; }
 }
-.hub-node i { background: #072327; }
-.hub-node:hover i { background: #0a3237; }
+.hub-node i { background: rgba(255,255,255,.1); }
+.hub-node:hover i { background: rgba(255,255,255,.18); }
 @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1100px) { .plans { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .plan .badge { align-self: flex-start; }

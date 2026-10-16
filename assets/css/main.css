@@ -814,7 +814,7 @@ html:not(.js) .hero-nav { display: none; }
 .mosaic-grid span { border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); display: grid; place-items: center; color: rgba(255,255,255,.5); transition: background .6s, color .6s, border-color .6s; }
 .mosaic-grid span.has svg { width: 26px; height: 26px; }
 .mosaic-grid span.lit { background: rgba(79,195,195,.12); border-color: rgba(79,195,195,.35); color: var(--glow); }
-.mosaic-content { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; gap: 24px; padding-block: clamp(120px, 10rem + 6vw, 260px); }
+.mosaic-content { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; gap: 24px; padding-block: clamp(64px, 3rem + 4vw, 136px); }
 .mosaic-content h2 { max-width: 24ch; }
 .mosaic-content .btn-row { justify-content: center; }
 
@@ -1370,3 +1370,8 @@ html.a11y-libras-open .a11y-panel { top: auto; bottom: 24px; transform: none; ma
 
 /* Área do Beneficiário (home): título em até duas linhas na coluna estreita */
 .eco-title { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.625rem); }
+
+/* Artes com texto (ex.: comunicados do site antigo): exibidas inteiras, sobre a mesma cor de fundo da arte */
+.img--art { background: #F3FBFD !important; }
+.img--art img { object-fit: contain !important; }
+.post-feature:hover .img--art img, .card-post:hover .img--art img { transform: none; }

@@ -756,7 +756,11 @@ html:not(.js) .hero-nav { display: none; }
 .phone-list { margin: auto 14px 16px; border-radius: 12px; background: var(--mist); padding: 12px; font-size: .58rem; color: var(--ink-2); }
 .phone-list b { font-family: var(--f-head); font-weight: 500; color: var(--ink); display: block; font-size: .68rem; }
 .float-tag { position: absolute; z-index: 3; }
-.float-tag .chip { background: rgba(255,255,255,.95); }
+/* Balões flutuantes no mesmo padrão dos do hero (fundo translúcido, desfoque e flutuação) */
+@media (prefers-reduced-motion: no-preference) {
+  .float-tag .chip { animation: float 7s ease-in-out infinite; }
+  .float-tag + .float-tag .chip { animation-delay: -3.5s; }
+}
 
 .eco-list { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line-deep); }
 .eco-list a { display: flex; align-items: center; gap: 12px; padding: 18px 8px 18px 0; border-bottom: 1px solid var(--line-deep); font-family: var(--f-head); font-size: .95rem; color: var(--on-deep); transition: color .2s, padding .3s var(--ease); }
@@ -832,11 +836,22 @@ html:not(.js) .hero-nav { display: none; }
 @media (min-width: 1100px) { .footer-cols { grid-template-columns: repeat(6, 1fr); } }
 .footer-cols h3 { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--white); font-weight: 500; margin-bottom: 18px; font-family: var(--f-head); }
 .footer-cols ul { list-style: none; display: grid; gap: 10px; }
-.footer-legal { display: grid; gap: 24px; padding-block: 72px 48px; border-top: 1px solid var(--line-deep); font-size: var(--t-xs); }
-@media (min-width: 1100px) { .footer-legal { grid-template-columns: auto 1fr auto; align-items: center; gap: 48px; } }
-.ans-box { display: inline-flex; align-items: stretch; border: 1px solid rgba(255,255,255,.5); border-radius: 4px; overflow: hidden; font-family: var(--f-head); color: var(--white); }
-.ans-box b { padding: 8px 10px; background: var(--white); color: var(--deep); font-weight: 600; letter-spacing: .04em; display: grid; place-items: center; font-size: .8rem; }
-.ans-box span { padding: 8px 12px; font-size: .78rem; display: grid; place-items: center; }
+/* Rodapé legal: selo ANS + dados à esquerda, links à direita; copyright e crédito numa linha própria */
+.footer-legal { display: grid; gap: 24px; padding-block: 48px 32px; border-top: 1px solid var(--line-deep); font-size: var(--t-xs); }
+@media (min-width: 1100px) {
+  .footer-legal { grid-template-columns: 1fr auto; column-gap: 48px; row-gap: 28px; align-items: center; }
+  .footer-legal .legal-links { justify-content: flex-end; max-width: 560px; }
+  .footer-legal .footer-credit { grid-column: 1 / -1; }
+}
+.footer-legal-main { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.footer-legal-info p + p { margin-top: 4px; }
+.footer-legal .footer-credit { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; border-top: 1px solid var(--line-deep); }
+
+/* Selo de registro ANS no padrão da agência: caixa preta, fio branco interno, texto branco em negrito */
+.ans-seal { display: inline-block; flex-shrink: 0; padding: 3px; background: #000; line-height: 1; }
+.ans-seal span { display: block; padding: 6px 10px 5px; border: 1.5px solid #fff; color: #fff; font: 700 13px/1 Arial, Helvetica, sans-serif; letter-spacing: .01em; white-space: nowrap; }
+.site-footer .ans-seal { box-shadow: 0 0 0 1px rgba(255,255,255,.18); }
+.site-footer a.ans-seal:hover span { color: #fff; }
 .legal-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
 .socials { display: flex; gap: 8px; }
 .socials a { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-deep); display: grid; place-items: center; }
@@ -1345,11 +1360,13 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 html.a11y-libras-open .a11y-tab { top: auto; bottom: 24px; transform: none; }
 html.a11y-libras-open .a11y-panel { top: auto; bottom: 24px; transform: none; max-height: calc(100vh - 48px); }
 
-/* Rodapé: crédito de desenvolvimento ao lado do copyright */
-.footer-credit { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+/* Rodapé: crédito de desenvolvimento */
 .footer-credit a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Faixa de cidades da Rede de cuidado: itens menores e movimento mais lento e discreto */
 .marquee--sm .marquee-item { padding: 8px 16px; font-size: .85rem; gap: 8px; }
 .marquee--sm .marquee-item::before { width: 5px; height: 5px; }
 @media (prefers-reduced-motion: no-preference) { .marquee--sm .marquee-track { animation-duration: 80s; } }
+
+/* Área do Beneficiário (home): título em até duas linhas na coluna estreita */
+.eco-title { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.625rem); }

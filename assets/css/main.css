@@ -1346,3 +1346,8 @@ html.a11y-libras-open .a11y-panel { top: auto; bottom: 24px; transform: none; ma
 /* Rodapé: crédito de desenvolvimento ao lado do copyright */
 .footer-credit { display: flex; flex-wrap: wrap; gap: 4px 24px; }
 .footer-credit a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Faixa de cidades da Rede de cuidado: itens menores e movimento mais lento e discreto */
+.marquee--sm .marquee-item { padding: 8px 16px; font-size: .85rem; gap: 8px; }
+.marquee--sm .marquee-item::before { width: 5px; height: 5px; }
+@media (prefers-reduced-motion: no-preference) { .marquee--sm .marquee-track { animation-duration: 80s; } }

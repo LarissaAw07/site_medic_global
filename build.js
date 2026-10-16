@@ -17,6 +17,8 @@ function pic(spec) {
   const [key, alt = "", w = "1400", sizes = "100vw", eager] = spec.split("|");
   const id = site.photos[key];
   if (!id) throw new Error("Foto desconhecida: " + key);
+  // Fotos locais (ex.: provisórias do site antigo em assets/img/provisorio/): arquivo único, sem srcset
+  if (id.startsWith("assets/")) return `<img src="${id}" alt="${alt}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
   const max = parseInt(w, 10);
   const widths = [480, 800, 1200, 1600, 2000].filter((x) => x <= max);
   if (!widths.includes(max)) widths.push(max);

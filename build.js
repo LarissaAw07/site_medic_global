@@ -26,6 +26,16 @@ function pic(spec) {
   return `<img src="${u(Math.min(max, 1200))}" srcset="${widths.map((x) => `${u(x)} ${x}w`).join(", ")}" sizes="${sizes}" alt="${alt}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 }
 
+// Versão nos endereços de CSS/JS locais (?v=hash do conteúdo): o servidor manda o navegador guardar esses
+// arquivos por anos, então sem isso a versão nova do estilo/script não chegaria a quem já visitou o site.
+const _ver = {};
+function bust(html) {
+  return html.replace(/(href|src)="(assets\/(?:css|js)\/[\w.-]+\.(?:css|js))"/g, (_, attr, file) => {
+    if (!_ver[file]) _ver[file] = require("crypto").createHash("md5").update(fs.readFileSync(path.join(ROOT, file))).digest("hex").slice(0, 8);
+    return `${attr}="${file}?v=${_ver[file]}"`;
+  });
+}
+
 function render(tpl, ctx) {
   let out = tpl;
   for (let i = 0; i < 4; i++) {
@@ -110,7 +120,7 @@ for (const file of files) {
     year: String(new Date().getFullYear()),
     robots: meta.noindex ? "noindex, nofollow" : "index, follow",
   };
-  const html = render(partial("layout"), Object.assign({}, ctx, { content: body }));
+  const html = bust(render(partial("layout"), Object.assign({}, ctx, { content: body })));
   fs.writeFileSync(path.join(ROOT, file), html);
   if (!meta.noindex) sitemap.push(url);
   console.log("✓", file);

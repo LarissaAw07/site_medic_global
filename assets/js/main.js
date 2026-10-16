@@ -447,7 +447,7 @@
     }
     function isOpen() { return field.classList.contains("is-open"); }
     function open() {
-      $(".has-dd.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
+      $$(".has-dd.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
       field.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); setActive(sel.selectedIndex);
     }
     function close() { field.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant"); }

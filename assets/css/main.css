@@ -1464,3 +1464,8 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .search-big .f.has-dd select, .field.has-dd select { display: none; }
 .search-big .f.has-dd label { z-index: 1; pointer-events: none; }
 .search-big { position: relative; z-index: 5; }
+.has-dd.is-open .dd-list { opacity: 1; visibility: visible; transform: none; transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s; }
+.has-dd.is-open .dd-btn::after { transform: rotate(180deg); }
+.search-big .dd-btn.is-empty { color: var(--ink); }
+/* Banner com busca (Rede credenciada): deixa a lista aberta passar do fim do banner */
+.page-hero:has(.search-big) { overflow: visible; overflow-x: clip; z-index: 3; }

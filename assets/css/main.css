@@ -163,7 +163,7 @@ ul, ol { margin: 0; padding: 0; }
 .prose h2 { font-size: var(--t-h3); margin: 2em 0 .6em; }
 .prose h3 { font-size: var(--t-h4); margin: 1.8em 0 .5em; }
 .prose li + li { margin-top: .4em; }
-.prose a { color: var(--globo); text-decoration: underline; text-underline-offset: 3px; }
+.prose a { color: var(--globo); }
 .tnum { font-variant-numeric: tabular-nums; }
 
 /* ---------- Botões ---------- */
@@ -455,7 +455,6 @@ ul, ol { margin: 0; padding: 0; }
 .hero-logo .wordmark { fill: var(--white); }
 .hero-logo span { font-family: var(--f-head); font-weight: 600; font-size: .7rem; letter-spacing: .3em; color: var(--glow); padding-left: 10px; border-left: 1px solid var(--line-deep); }
 @media (min-width: 1100px) { .hero-logo { top: 32px; right: calc(var(--bleed) + 8px); } .hero-logo svg { height: 42px; } }
-.hero-slide--area .lead a { color: var(--globo); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Navegação do carrossel: traços claros e discretos, centralizados na base da imagem */
 .hero-nav {
@@ -998,7 +997,7 @@ html:not(.js) .hero-nav { display: none; }
 .field .error.is-visible { display: block; }
 .check { display: flex; gap: 12px; align-items: flex-start; font-size: var(--t-sm); color: var(--ink-2); }
 .check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--globo); flex-shrink: 0; }
-.check a { color: var(--globo); text-decoration: underline; }
+.check a { color: var(--globo); }
 
 .doc-list { display: grid; gap: 0; border-top: 1px solid var(--line-2); }
 .doc {
@@ -1023,7 +1022,7 @@ html:not(.js) .hero-nav { display: none; }
 .faq-item summary::after { content: ""; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: no-repeat center/12px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 1v10M1 6h10' stroke='%23008C8C' stroke-width='1.5'/%3E%3C/svg%3E"); transition: transform .3s var(--ease); }
 .faq-item[open] summary::after { transform: rotate(45deg); }
 .faq-item .ans { padding: 0 56px 28px 0; color: var(--ink-2); max-width: 44rem; font-weight: 300; }
-.faq-item .ans a { color: var(--globo); text-decoration: underline; }
+.faq-item .ans a { color: var(--globo); }
 .faq-empty { padding: 32px 0; color: var(--ink-3); }
 
 /* ---------- Atendimento ---------- */
@@ -1169,7 +1168,7 @@ html:not(.js) .hero-nav { display: none; }
 .cookie.is-visible { display: grid; }
 .cookie strong { font-family: var(--f-head); font-weight: 500; font-size: 1.05rem; }
 .cookie p { color: var(--ink-3); }
-.cookie a { color: var(--globo); text-decoration: underline; }
+.cookie a { color: var(--globo); }
 .cookie .btn-row .btn { flex: 1; min-height: 46px; }
 
 /* Utilitários */
@@ -1369,7 +1368,7 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 @media print { .a11y, .a11y-guide-bar { display: none !important; } }
 
 /* Rodapé: crédito de desenvolvimento */
-.footer-credit a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+.footer-credit a { color: var(--white); }
 
 /* Faixa de cidades da Rede de cuidado: itens menores e movimento mais lento e discreto */
 .marquee--sm .marquee-item { padding: 8px 16px; font-size: .85rem; gap: 8px; }

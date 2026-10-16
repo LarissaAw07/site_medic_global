@@ -411,9 +411,10 @@
     });
   });
 
-  /* Dropdown no padrão do site (Rede de cuidado da home). O <select> original continua no
+  /* Dropdown no padrão do site (todos os formulários). O <select> original continua no
      formulário (oculto) e recebe o valor; em telas de toque fica a lista nativa do aparelho. */
-  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) $$("select[data-dropdown]").forEach(function (sel) {
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) $$("select[data-dropdown], .field select, .search-big .f select").forEach(function (sel) {
+    if (sel.multiple || sel.size > 1) return;
     var field = sel.parentNode, opts = Array.prototype.slice.call(sel.options), active = sel.selectedIndex, typed = "", typedT;
     var btn = document.createElement("button"), list = document.createElement("ul"), lbl = $("label[for='" + sel.id + "']", field);
     btn.type = "button"; btn.className = "dd-btn"; btn.id = sel.id + "-dd";
@@ -431,6 +432,7 @@
     var items = $$("li", list);
     function render() {
       btn.textContent = opts[sel.selectedIndex].text;
+      btn.classList.toggle("is-empty", !sel.value);
       items.forEach(function (li, k) { li.setAttribute("aria-selected", k === sel.selectedIndex ? "true" : "false"); });
     }
     function setActive(k) {
@@ -445,7 +447,7 @@
     }
     function isOpen() { return field.classList.contains("is-open"); }
     function open() {
-      $$(".field-dark.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
+      $(".has-dd.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
       field.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); setActive(sel.selectedIndex);
     }
     function close() { field.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant"); }
@@ -471,9 +473,15 @@
     });
     document.addEventListener("click", function (e) { if (isOpen() && !field.contains(e.target)) close(); });
     sel.addEventListener("change", render);
+    // A validação dos formulários marca/foca o <select>: repassamos isso para o botão visível
+    new MutationObserver(function () { var v = sel.getAttribute("aria-invalid"); if (v) btn.setAttribute("aria-invalid", v); else btn.removeAttribute("aria-invalid"); }).observe(sel, { attributes: true, attributeFilter: ["aria-invalid"] });
+    if (sel.getAttribute("aria-describedby")) btn.setAttribute("aria-describedby", sel.getAttribute("aria-describedby"));
+    sel.focus = function () { btn.focus(); };
+    if (sel.form) sel.form.addEventListener("reset", function () { setTimeout(render, 0); });
     sel.tabIndex = -1; sel.setAttribute("aria-hidden", "true");
     field.classList.add("has-dd");
-    field.appendChild(btn); field.appendChild(list);
+    // Botão e lista entram logo depois do <select> (antes da mensagem de erro, se houver)
+    field.insertBefore(list, sel.nextSibling); field.insertBefore(btn, list);
     render();
   });
 

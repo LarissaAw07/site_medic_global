@@ -1520,3 +1520,11 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 @media (min-width: 720px) { .store-badge { --h: 54px; } }
 .store-badge--google { width: calc(var(--h) * 564 / 168); }
 .store-badge img { max-width: none; }
+
+/* Home: títulos dos slides 2 e 3 no mesmo tamanho do slide 1, e textos um pouco mais para o centro (imagens intactas) */
+@media (min-width: 1100px) {
+  .hero-copy .hero-title { font-size: clamp(2.5rem, 1rem + 2.6vw, 3.75rem); }
+  .hero:not(.hero--page) .hero-copy { padding-left: clamp(0px, 4vw - 24px, 48px); }
+}
+/* Rodapé: "Grupo Awtech" sempre no azul da marca */
+.footer-credit a, .footer-credit a:hover { color: var(--glow); }

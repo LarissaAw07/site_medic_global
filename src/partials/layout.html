@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/main.css">
+<script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 {{extraHead}}
 {{jsonld}}
 <!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
@@ -244,7 +245,65 @@
   <div class="btn-row"><button class="btn btn--ghost btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
 </div>
 
+<!-- Central de acessibilidade (assets/js/a11y.js). Ajustes ficam salvos neste navegador. -->
+<div class="a11y" id="a11y">
+  <div class="a11y-tab" role="group" aria-label="Acessibilidade">
+    <button class="a11y-fab" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Abrir recursos de acessibilidade">{{i:a11y}}</button>
+    <button class="a11y-fab a11y-fab--libras" type="button" data-a11y-libras aria-label="Tradução para Libras (VLibras)">{{i:hands}}</button>
+  </div>
+  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+    <div class="a11y-head">
+      <h2 id="a11y-title" tabindex="-1">{{i:a11y}} Acessibilidade</h2>
+      <button class="a11y-close" type="button" data-a11y-close aria-label="Fechar recursos de acessibilidade">{{i:close}}</button>
+    </div>
+    <div class="a11y-body">
+      <h3 class="a11y-label">Libras e leitura</h3>
+      <div class="a11y-grid">
+        <button type="button" class="is-wide" data-a11y-libras>{{i:hands}}<span>Tradução para Libras<small>VLibras · Governo Federal</small></span></button>
+        <button type="button" data-a11y-read aria-pressed="false">{{i:volume}}<span>Ouvir a página</span></button>
+        <button type="button" data-a11y-toggle="guide" aria-pressed="false">{{i:guide}}<span>Guia de leitura</span></button>
+      </div>
+      <div class="a11y-reading" data-a11y-reading hidden>
+        <span>Lendo em voz alta…</span>
+        <button type="button" data-a11y-read-pause aria-label="Pausar leitura">{{i:pause}}</button>
+        <button type="button" data-a11y-read-stop aria-label="Parar leitura">{{i:stop}}</button>
+      </div>
+      <p class="a11y-note">Para ouvir só um trecho, selecione o texto antes de tocar em “Ouvir a página”.</p>
+
+      <h3 class="a11y-label" id="a11y-size-l">Controle de fonte</h3>
+      <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+        <button type="button" data-a11y-size="-1" aria-label="Diminuir texto">{{i:text-minus}}</button>
+        <span>Tamanho do texto <output id="a11y-size-out">100%</output></span>
+        <button type="button" data-a11y-size="1" aria-label="Aumentar texto">{{i:text-plus}}</button>
+      </div>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="font" aria-pressed="false">{{i:font}}<span>Fonte legível</span></button>
+        <button type="button" data-a11y-toggle="spacing" aria-pressed="false">{{i:spacing}}<span>Espaçar texto</span></button>
+      </div>
+
+      <h3 class="a11y-label">Navegação</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="links" aria-pressed="false">{{i:link-mark}}<span>Destacar links</span></button>
+        <button type="button" data-a11y-toggle="headings" aria-pressed="false">{{i:layers}}<span>Destacar títulos</span></button>
+        <button type="button" data-a11y-toggle="noimg" aria-pressed="false">{{i:eye}}<span>Esconder imagens</span></button>
+        <button type="button" data-a11y-toggle="motion" aria-pressed="false">{{i:motion}}<span>Pausar animações</span></button>
+      </div>
+
+      <h3 class="a11y-label">Controle de cor</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="contrast" aria-pressed="false">{{i:contrast}}<span>Alto contraste</span></button>
+        <button type="button" data-a11y-toggle="gray" aria-pressed="false">{{i:grayscale}}<span>Escala de cinza</span></button>
+      </div>
+    </div>
+    <div class="a11y-foot">
+      <button class="a11y-reset" type="button" data-a11y-reset>{{i:reset}} Restaurar padrão</button>
+    </div>
+    <p class="sr-only" id="a11y-status" aria-live="polite"></p>
+  </section>
+</div>
+<div class="a11y-guide-bar" aria-hidden="true"></div>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/a11y.js" defer></script>
 {{extraScripts}}
 </body>
 </html>

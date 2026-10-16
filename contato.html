@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/main.css">
+<script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"MedicGLOBAL","alternateName":["Medic Global","Medic Global Saúde","Extremamedic"],"url":"https://medicglobal.com.br/","logo":"https://medicglobal.com.br/assets/img/brand/logo-medicglobal.svg","address":{"@type":"PostalAddress","streetAddress":"R. Alcebíades Wohlers, 02","addressLocality":"Extrema","addressRegion":"MG","postalCode":"37640-000","addressCountry":"BR"},"contactPoint":[{"@type":"ContactPoint","telephone":"+55-35-3435-4442","contactType":"customer service","areaServed":"BR","availableLanguage":"Portuguese"}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://medicglobal.com.br/"},{"@type":"ListItem","position":2,"name":"Atendimento","item":"https://medicglobal.com.br/atendimento/"},{"@type":"ListItem","position":3,"name":"Contato","item":"https://medicglobal.com.br/contato/"}]}]</script>
 <!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
@@ -312,7 +313,65 @@
   <div class="btn-row"><button class="btn btn--ghost btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
 </div>
 
+<!-- Central de acessibilidade (assets/js/a11y.js). Ajustes ficam salvos neste navegador. -->
+<div class="a11y" id="a11y">
+  <div class="a11y-tab" role="group" aria-label="Acessibilidade">
+    <button class="a11y-fab" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Abrir recursos de acessibilidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="2"/><path d="M4 8.5c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2"/><path d="M12 9.7V14m0 0-3.5 7.5M12 14l3.5 7.5"/></svg></button>
+    <button class="a11y-fab a11y-fab--libras" type="button" data-a11y-libras aria-label="Tradução para Libras (VLibras)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M10 9.5V4a1.5 1.5 0 0 1 3 0v6"/><path d="M13 9.5V5a1.5 1.5 0 0 1 3 0v6"/><path d="M16 10.5V8a1.5 1.5 0 0 1 3 0v5.5a7 7 0 0 1-7 7h-.5a6.5 6.5 0 0 1-5.4-2.9L3.5 13.8a1.5 1.5 0 0 1 2.3-1.9L7 13.5"/></svg></button>
+  </div>
+  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+    <div class="a11y-head">
+      <h2 id="a11y-title" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="2"/><path d="M4 8.5c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2"/><path d="M12 9.7V14m0 0-3.5 7.5M12 14l3.5 7.5"/></svg> Acessibilidade</h2>
+      <button class="a11y-close" type="button" data-a11y-close aria-label="Fechar recursos de acessibilidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="a11y-body">
+      <h3 class="a11y-label">Libras e leitura</h3>
+      <div class="a11y-grid">
+        <button type="button" class="is-wide" data-a11y-libras><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M10 9.5V4a1.5 1.5 0 0 1 3 0v6"/><path d="M13 9.5V5a1.5 1.5 0 0 1 3 0v6"/><path d="M16 10.5V8a1.5 1.5 0 0 1 3 0v5.5a7 7 0 0 1-7 7h-.5a6.5 6.5 0 0 1-5.4-2.9L3.5 13.8a1.5 1.5 0 0 1 2.3-1.9L7 13.5"/></svg><span>Tradução para Libras<small>VLibras · Governo Federal</small></span></button>
+        <button type="button" data-a11y-read aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><span>Ouvir a página</span></button>
+        <button type="button" data-a11y-toggle="guide" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="10" width="18" height="4" rx="1"/><path d="M3 5.5h18M3 18.5h18" opacity=".45"/></svg><span>Guia de leitura</span></button>
+      </div>
+      <div class="a11y-reading" data-a11y-reading hidden>
+        <span>Lendo em voz alta…</span>
+        <button type="button" data-a11y-read-pause aria-label="Pausar leitura"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6v12M15 6v12"/></svg></button>
+        <button type="button" data-a11y-read-stop aria-label="Parar leitura"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/></svg></button>
+      </div>
+      <p class="a11y-note">Para ouvir só um trecho, selecione o texto antes de tocar em “Ouvir a página”.</p>
+
+      <h3 class="a11y-label" id="a11y-size-l">Controle de fonte</h3>
+      <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+        <button type="button" data-a11y-size="-1" aria-label="Diminuir texto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 19 8 6l5 13M4.8 15h6.4"/><path d="M15 11h6"/></svg></button>
+        <span>Tamanho do texto <output id="a11y-size-out">100%</output></span>
+        <button type="button" data-a11y-size="1" aria-label="Aumentar texto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 19 8 6l5 13M4.8 15h6.4"/><path d="M18 8v6M15 11h6"/></svg></button>
+      </div>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="font" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 18 7.5 6 12 18M4.6 14h5.8"/><circle cx="17.5" cy="15" r="3"/><path d="M20.5 12v6"/></svg><span>Fonte legível</span></button>
+        <button type="button" data-a11y-toggle="spacing" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 4.5v15M2.5 6 4 4.5 5.5 6M2.5 18 4 19.5 5.5 18"/></svg><span>Espaçar texto</span></button>
+      </div>
+
+      <h3 class="a11y-label">Navegação</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="links" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg><span>Destacar links</span></button>
+        <button type="button" data-a11y-toggle="headings" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg><span>Destacar títulos</span></button>
+        <button type="button" data-a11y-toggle="noimg" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Esconder imagens</span></button>
+        <button type="button" data-a11y-toggle="motion" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></svg><span>Pausar animações</span></button>
+      </div>
+
+      <h3 class="a11y-label">Controle de cor</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="contrast" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span>Alto contraste</span></button>
+        <button type="button" data-a11y-toggle="gray" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M12 7.5h7.6M12 12h9M12 16.5h7.6"/></svg><span>Escala de cinza</span></button>
+      </div>
+    </div>
+    <div class="a11y-foot">
+      <button class="a11y-reset" type="button" data-a11y-reset><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg> Restaurar padrão</button>
+    </div>
+    <p class="sr-only" id="a11y-status" aria-live="polite"></p>
+  </section>
+</div>
+<div class="a11y-guide-bar" aria-hidden="true"></div>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/a11y.js" defer></script>
 
 </body>
 </html>

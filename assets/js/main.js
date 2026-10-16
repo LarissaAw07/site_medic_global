@@ -370,7 +370,8 @@
     }
     function schedule() {
       clearTimeout(timer);
-      if (!reduce && !focused) timer = setTimeout(function () { go(i + 1); schedule(); }, 8000);
+      // Não gira com movimento reduzido nem com "Pausar animações" ligado na central de acessibilidade
+      if (!reduce && !focused && !doc.classList.contains("a11y-motion")) timer = setTimeout(function () { go(i + 1); schedule(); }, 8000);
     }
     dots.forEach(function (d) {
       d.addEventListener("click", function () {
@@ -380,6 +381,7 @@
         if (hadFocus) { var t = $('[data-slide-to="' + n + '"]', slides[i]); if (t) t.focus(); }
       });
     });
+    document.addEventListener("a11y:change", schedule);
     s.addEventListener("focusin", function () { focused = true; schedule(); });
     s.addEventListener("focusout", function (e) { if (!s.contains(e.relatedTarget)) { focused = false; schedule(); } });
     go(0);

@@ -1547,3 +1547,39 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 
 /* Título de página no mesmo tamanho dos banners internos (ex.: Sou beneficiário) */
 .title-page { font-size: clamp(2.25rem, 1rem + 2.3vw, 3.25rem); }
+
+/* Serviços · Aplicativo: cartão com texto, recursos e selos à esquerda; celular em painel escuro à direita */
+.app-card { display: grid; gap: 32px; padding: 24px; border-radius: var(--r-lg); background: var(--mist); border: 1px solid var(--line-2); margin-block: 24px; }
+@media (min-width: 1100px) { .app-card { grid-template-columns: 7fr 5fr; gap: 56px; padding: 56px 0 56px 56px; align-items: center; } }
+.app-card-copy { display: grid; gap: 20px; align-content: center; }
+.app-card-copy .eyebrow { margin-bottom: 0; }
+.app-features { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 720px) { .app-features { grid-template-columns: 1fr 1fr; gap: 16px 24px; } }
+.app-features li { display: flex; gap: 12px; align-items: flex-start; font-size: var(--t-sm); color: var(--ink-3); line-height: 1.45; }
+.app-features i { flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--white); color: var(--globo); border: 1px solid var(--line-2); }
+.app-features i svg { width: 20px; height: 20px; }
+.app-features b { display: block; font-family: var(--f-head); font-weight: 500; color: var(--ink); font-size: .95rem; }
+.store-badges--start { justify-content: flex-start; margin-top: 0; }
+.app-card-media { position: relative; overflow: hidden; display: grid; place-items: center; min-height: 520px; padding: 32px 0; border-radius: var(--r-lg); }
+@media (min-width: 1100px) { .app-card-media { border-radius: var(--r-lg) 0 0 var(--r-lg); min-height: 600px; } }
+.app-card-media .orbits { inset: -10%; width: 120%; height: 120%; color: var(--glow); opacity: .35; }
+.app-card .store-badge:hover { box-shadow: 0 10px 24px -12px rgba(2,26,29,.45); }
+
+/* Beneficiário: Carteirinha / Plano / Exames em cartões no padrão do site, com botão na base */
+.info-cards { display: grid; gap: 16px; }
+@media (min-width: 900px) { .info-cards { grid-template-columns: repeat(3, 1fr); } }
+.info-cards > div { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; border-radius: var(--r-lg); background: var(--mist); border: 1px solid var(--line-2); transition: background .4s var(--ease), border-color .4s var(--ease); }
+.info-cards > div:hover { background: var(--tint); border-color: rgba(0,140,140,.25); }
+.info-cards .num { font-family: var(--f-head); font-size: .8rem; letter-spacing: .1em; color: var(--medic); }
+.info-cards h3 { font-size: var(--t-h4); }
+.info-cards .btn { margin-top: auto; }
+.info-cards p { margin-bottom: 28px; }
+
+/* Faixa de cidades (Rede de cuidado): texto claro, sem contorno, separadas por um ponto */
+.marquee--sm .marquee-track { gap: 0; padding-right: 0; }
+.deep .marquee--sm .marquee-item, .marquee--sm .marquee-item {
+  border: 0; border-radius: 0; padding: 4px 0; gap: 0; color: var(--on-deep); font-size: .82rem; letter-spacing: .04em;
+}
+.marquee--sm .marquee-item::before {
+  width: 4px; height: 4px; margin: 0 18px; background: var(--glow); opacity: .9;
+}

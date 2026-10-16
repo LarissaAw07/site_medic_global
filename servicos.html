@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=5982609a">
+<link rel="stylesheet" href="assets/css/main.css?v=f07d245e">
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"MedicGLOBAL","alternateName":["Medic Global","Medic Global Saúde","Extremamedic"],"url":"https://medicglobal.com.br/","logo":"https://medicglobal.com.br/assets/img/brand/logo-medicglobal.svg","address":{"@type":"PostalAddress","streetAddress":"R. Alcebíades Wohlers, 02","addressLocality":"Extrema","addressRegion":"MG","postalCode":"37640-000","addressCountry":"BR"},"contactPoint":[{"@type":"ContactPoint","telephone":"+55-35-3435-4442","contactType":"customer service","areaServed":"BR","availableLanguage":"Portuguese"}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://medicglobal.com.br/"},{"@type":"ListItem","position":2,"name":"Serviços","item":"https://medicglobal.com.br/servicos/"}]}]</script>
@@ -284,15 +284,28 @@
       </div>
     </article>
 
-    <article class="detail" id="aplicativo">
-      <div><span class="eyebrow">Aplicativo</span><h2 class="balance">Seu plano no bolso</h2></div>
-      <div class="split" style="gap:40px">
-        <div class="stack">
-          <p class="lead">Acesse a rede credenciada e as informações do seu plano pelo aplicativo: salve favoritos, fale com prestadores e veja a localização do atendimento.</p>
-          <div class="btn-row"><a class="btn" href="https://play.google.com/store/apps/details?id=com.extremamedic" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg> Google Play</a><a class="btn btn--ghost" href="https://apps.apple.com/br/app/medic-global/id1531494461" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg> App Store</a></div>
-          <p class="xs muted">Nas lojas, o aplicativo ainda pode aparecer com o nome anterior, Extremamedic.</p>
-        </div>
-        <div class="deep" style="border-radius:var(--r-lg);padding:32px 0;display:grid;place-items:center"><div class="phone" aria-hidden="true">
+    <article class="app-card" id="aplicativo">
+      <div class="app-card-copy">
+        <span class="eyebrow">Aplicativo</span>
+        <h2 class="balance">Seu plano no bolso</h2>
+        <p class="lead">Acesse a rede credenciada e as informações do seu plano pelo aplicativo: salve favoritos, fale com prestadores e veja a localização do atendimento.</p>
+        <ul class="app-features">
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></i><span><b>Rede credenciada</b>Busque profissionais, clínicas e hospitais</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></i><span><b>Favoritos</b>Salve os prestadores que você mais usa</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></i><span><b>Contato com prestadores</b>Ligue ou envie mensagem direto do app</span></li>
+            <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></svg></i><span><b>Como chegar</b>Veja a localização e trace a rota</span></li>
+        </ul>
+        <div class="store-badges store-badges--start"><a class="store-badge store-badge--google" href="https://play.google.com/store/apps/details?id=com.extremamedic" target="_blank" rel="noopener" data-track="download_app_android"><img src="assets/img/lojas/google-play.png" alt="Disponível no Google Play" width="646" height="250"><span class="sr-only"> (abre em nova aba)</span></a><a class="store-badge store-badge--apple" href="https://apps.apple.com/br/app/medic-global/id1531494461" target="_blank" rel="noopener" data-track="download_app_ios"><img src="assets/img/lojas/app-store.svg" alt="Baixar na App Store" width="120" height="40"><span class="sr-only"> (abre em nova aba)</span></a></div>
+        <p class="xs muted">Nas lojas, o aplicativo ainda pode aparecer com o nome anterior, Extremamedic.</p>
+      </div>
+      <div class="app-card-media deep"><svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
+  <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
+  <circle cx="400" cy="400" r="300" opacity=".35"/>
+  <g class="spin-rev" opacity=".5"><ellipse cx="400" cy="400" rx="300" ry="120" transform="rotate(-24 400 400)"/><circle cx="674" cy="278" r="5" fill="currentColor" class="orbit-dot"/></g>
+  <ellipse cx="400" cy="400" rx="120" ry="300" opacity=".25"/>
+  <g class="spin-slow" opacity=".4"><ellipse cx="400" cy="400" rx="300" ry="200" transform="rotate(38 400 400)"/><circle cx="160" cy="250" r="3.5" fill="currentColor" class="orbit-dot"/></g>
+</svg>
+<div class="phone" aria-hidden="true">
   <div class="phone-screen">
     <div class="phone-top"><small>Olá,</small><strong>Beneficiário MedicGLOBAL</strong></div>
     <div class="phone-card"><span>Carteirinha</span><b>EMED GLOBAL BLUE</b><span>Plano ativo · ANS nº 41186-8</span></div>
@@ -308,7 +321,6 @@
   </div>
 </div>
 </div>
-      </div>
     </article>
 
     <article class="detail" id="atendimento">

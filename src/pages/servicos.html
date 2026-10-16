@@ -102,16 +102,21 @@
       </div>
     </article>
 
-    <article class="detail" id="aplicativo">
-      <div><span class="eyebrow">Aplicativo</span><h2 class="balance">Seu plano no bolso</h2></div>
-      <div class="split" style="gap:40px">
-        <div class="stack">
-          <p class="lead">Acesse a rede credenciada e as informações do seu plano pelo aplicativo: salve favoritos, fale com prestadores e veja a localização do atendimento.</p>
-          <div class="btn-row"><a class="btn" href="{{L.links.play}}" target="_blank" rel="noopener">{{i:smartphone}} Google Play</a><a class="btn btn--ghost" href="{{L.links.appstore}}" target="_blank" rel="noopener">{{i:smartphone}} App Store</a></div>
-          <p class="xs muted">Nas lojas, o aplicativo ainda pode aparecer com o nome anterior, Extremamedic.</p>
-        </div>
-        <div class="deep" style="border-radius:var(--r-lg);padding:32px 0;display:grid;place-items:center">{{> phone}}</div>
+    <article class="app-card" id="aplicativo">
+      <div class="app-card-copy">
+        <span class="eyebrow">Aplicativo</span>
+        <h2 class="balance">Seu plano no bolso</h2>
+        <p class="lead">Acesse a rede credenciada e as informações do seu plano pelo aplicativo: salve favoritos, fale com prestadores e veja a localização do atendimento.</p>
+        <ul class="app-features">
+            <li><i>{{i:pin}}</i><span><b>Rede credenciada</b>Busque profissionais, clínicas e hospitais</span></li>
+            <li><i>{{i:star}}</i><span><b>Favoritos</b>Salve os prestadores que você mais usa</span></li>
+            <li><i>{{i:phone}}</i><span><b>Contato com prestadores</b>Ligue ou envie mensagem direto do app</span></li>
+            <li><i>{{i:route}}</i><span><b>Como chegar</b>Veja a localização e trace a rota</span></li>
+        </ul>
+        <div class="store-badges store-badges--start"><a class="store-badge store-badge--google" href="{{L.links.play}}" target="_blank" rel="noopener" data-track="download_app_android"><img src="assets/img/lojas/google-play.png" alt="Disponível no Google Play" width="646" height="250"><span class="sr-only"> (abre em nova aba)</span></a><a class="store-badge store-badge--apple" href="{{L.links.appstore}}" target="_blank" rel="noopener" data-track="download_app_ios"><img src="assets/img/lojas/app-store.svg" alt="Baixar na App Store" width="120" height="40"><span class="sr-only"> (abre em nova aba)</span></a></div>
+        <p class="xs muted">Nas lojas, o aplicativo ainda pode aparecer com o nome anterior, Extremamedic.</p>
       </div>
+      <div class="app-card-media deep">{{> orbits}}{{> phone}}</div>
     </article>
 
     <article class="detail" id="atendimento">

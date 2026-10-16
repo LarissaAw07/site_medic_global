@@ -1471,3 +1471,41 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .search-big .dd-btn.is-empty { color: var(--ink); }
 /* Banner com busca (Rede credenciada): deixa a lista aberta passar do fim do banner */
 .page-hero:has(.search-big) { overflow: visible; overflow-x: clip; z-index: 3; }
+
+/* Rodapé: links das páginas ficam no azul da marca ao passar o cursor (tom claro, legível sobre o fundo escuro) */
+.site-footer nav a:hover, .site-footer nav a:focus-visible, .footer-legal .legal-links a:hover, .footer-legal .legal-links button:hover { color: var(--glow); }
+.footer-legal .legal-links a, .footer-legal .legal-links button { transition: color .25s var(--ease); }
+
+/* "Como podemos ajudar?": azul-escuro por padrão e azul-claro no hover */
+.need { background: var(--globo); color: var(--white); }
+.need small { color: rgba(255,255,255,.75); }
+.need .need-ico { background: rgba(255,255,255,.14); color: var(--white); }
+.need .arrow { color: var(--glow); }
+.need:hover, .need:focus-visible { background: var(--tint); color: var(--ink); }
+.need:hover small, .need:focus-visible small { color: var(--ink-3); }
+.need:hover .need-ico, .need:focus-visible .need-ico { background: var(--white); color: var(--globo); }
+.need:hover .arrow, .need:focus-visible .arrow { color: var(--globo); }
+
+/* Rede de cuidado: filtros soltos na seção, sem o bloco de fundo */
+.hub-section .finder { padding: 0; gap: 10px; background: none; border: 0; border-radius: 0; }
+.hub-section .field-dark select, .hub-section .dd-btn { background-color: rgba(255,255,255,.07); border-color: var(--line-deep); }
+
+/* Faixas rotativas: volta contínua — a distância percorrida (-50%) passa a incluir o espaço entre o último e o primeiro item */
+.marquee-track { padding-right: 12px; }
+/* Cidades da Rede de cuidado menores */
+.marquee--sm .marquee-track { gap: 8px; padding-right: 8px; }
+.marquee--sm .marquee-item { padding: 6px 12px; font-size: .75rem; letter-spacing: .02em; gap: 6px; }
+.marquee--sm .marquee-item::before { width: 4px; height: 4px; }
+.hub-section .dd-btn.is-empty, .field-dark .dd-btn.is-empty { color: var(--white); }
+
+/* Selos oficiais das lojas (parallax "Depois da contratação") — mesma altura visível nos dois */
+.store-badges { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 16px; margin-top: 8px; }
+.store-badge { --h: 48px; display: block; height: var(--h); border-radius: 8px; overflow: hidden; transition: transform .25s var(--ease), box-shadow .25s; }
+.store-badge img { display: block; height: 100%; width: auto; }
+/* O PNG do Google tem margem transparente embutida (badge ocupa 168 de 250px de altura) */
+.store-badge--google img { height: calc(var(--h) * 250 / 168); margin: calc(var(--h) * -41 / 168) calc(var(--h) * -41 / 168); }
+.store-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rgba(0,0,0,.6); }
+.store-badge:focus-visible { outline: 3px solid var(--glow); outline-offset: 3px; }
+@media (min-width: 720px) { .store-badge { --h: 54px; } }
+.store-badge--google { width: calc(var(--h) * 564 / 168); }
+.store-badge img { max-width: none; }

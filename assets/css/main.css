@@ -1528,3 +1528,9 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 }
 /* Rodapé: "Grupo Awtech" sempre no azul da marca */
 .footer-credit a, .footer-credit a:hover { color: var(--glow); }
+
+/* Banners: bloco de textos (chapéu, título, descrição, botões) centralizado na altura da imagem */
+@media (min-width: 1100px) {
+  .hero-slide .hero-copy, .hero--page .hero-copy { justify-content: center; padding-bottom: 0; }
+}
+@media (min-width: 1100px) { .hero--page .hero-copy { padding-left: clamp(0px, 4vw - 24px, 48px); } }

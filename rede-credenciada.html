@@ -180,7 +180,8 @@
 </div>
 
 <main id="conteudo" tabindex="-1">
-<section class="page-hero mist" aria-labelledby="t" style="padding-bottom:0">
+<!-- Banner no mesmo molde do hero da home; a busca da rede fica logo abaixo -->
+<section class="hero hero--page hero--search" aria-labelledby="t">
   <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
   <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
   <circle cx="400" cy="400" r="300" opacity=".35"/>
@@ -192,13 +193,24 @@
   <div class="wrap">
     <nav aria-label="Você está em"><ol class="crumbs"><li><a href="index.html">Início</a></li><li><span aria-current="page">Rede de cuidado</span></li></ol></nav>
     <div class="grid">
-      <div class="c-1-8">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Rede credenciada</span>
-        <h1 id="t" class="balance">Encontre atendimento perto de você</h1>
+        <h1 id="t" class="balance">Encontre atendimento <em>perto de você</em></h1>
         <p class="lead">Profissionais, clínicas, hospitais e laboratórios da rede MedicGLOBAL. Busque pelo que você precisa e veja onde fica.</p>
+        <div class="btn-row">
+          <a class="btn" href="#buscar" data-track="busca_rede">Buscar atendimento</a>
+          <a class="btn btn--ghost" href="#mapa">Ver área de atuação</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame"><img src="assets/img/provisorio/renascentista-recepcao.jpg" alt="Recepção do Hospital Renascentista, da rede credenciada" loading="eager" fetchpriority="high" decoding="async"></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 21V8l8-5 8 5v13"/><path d="M10 21v-5h4v5"/><path d="M12 8v5M9.5 10.5h5"/><path d="M2 21h20"/></svg></i><span>Hospitais e clínicas<small>na área de atuação</small></span></span>
+          <span class="chip"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 21h12M8 18h8"/><path d="M12 18a5 5 0 0 0 5-5"/><path d="m9 4 4 2-3 6-4-2z"/><path d="m11 3 1-1.5"/><path d="M10 15h3"/></svg></i><span>Laboratórios<small>exames com parceiros</small></span></span>
+        </div>
       </div>
     </div>
-    <form class="search-big mt-8" id="buscar" data-rede data-external="https://extremamedic.com/rede_credenciada.php" role="search" style="position:relative;z-index:2;transform:translateY(50%)">
+    <form class="search-big mt-8" id="buscar" data-rede data-external="https://extremamedic.com/rede_credenciada.php" role="search">
       <div class="f"><label for="r-q">Profissional, especialidade ou local</label><input id="r-q" name="q" placeholder="Ex.: cardiologia" autocomplete="off"></div>
       <div class="f"><label for="r-tipo">Tipo</label><select id="r-tipo" name="tipo"><option value="profissional">Profissional</option><option value="especialidade">Especialidade</option><option value="clinica">Clínica</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratório</option></select></div>
       <div class="f"><label for="r-cidade">Cidade</label><select id="r-cidade" name="cidade"><option value="">Todas as cidades</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>

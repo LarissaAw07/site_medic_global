@@ -1534,3 +1534,7 @@ html.a11y-guide .a11y-guide-bar { display: block; }
   .hero-slide .hero-copy, .hero--page .hero-copy { justify-content: center; padding-bottom: 0; }
 }
 @media (min-width: 1100px) { .hero--page .hero-copy { padding-left: clamp(0px, 4vw - 24px, 48px); } }
+
+/* Rede credenciada: busca logo abaixo do banner, com a lista aberta sem ser cortada */
+.hero--search { overflow: visible; overflow-x: clip; z-index: 3; padding-bottom: 8px; }
+.hero--search .search-big { margin-top: 40px; }

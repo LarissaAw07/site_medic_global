@@ -8,18 +8,30 @@
   "extraScripts": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" defer></script><script src=\"assets/js/rede.js\" defer></script>"
 }@-->
 
-<section class="page-hero mist" aria-labelledby="t" style="padding-bottom:0">
+<!-- Banner no mesmo molde do hero da home; a busca da rede fica logo abaixo -->
+<section class="hero hero--page hero--search" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-8">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Rede credenciada</span>
-        <h1 id="t" class="balance">Encontre atendimento perto de você</h1>
+        <h1 id="t" class="balance">Encontre atendimento <em>perto de você</em></h1>
         <p class="lead">Profissionais, clínicas, hospitais e laboratórios da rede MedicGLOBAL. Busque pelo que você precisa e veja onde fica.</p>
+        <div class="btn-row">
+          <a class="btn" href="#buscar" data-track="busca_rede">Buscar atendimento</a>
+          <a class="btn btn--ghost" href="#mapa">Ver área de atuação</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_renascentista|Recepção do Hospital Renascentista, da rede credenciada|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:hospital}}</i><span>Hospitais e clínicas<small>na área de atuação</small></span></span>
+          <span class="chip"><i>{{i:microscope}}</i><span>Laboratórios<small>exames com parceiros</small></span></span>
+        </div>
       </div>
     </div>
-    <form class="search-big mt-8" id="buscar" data-rede data-external="{{L.links.rede}}" role="search" style="position:relative;z-index:2;transform:translateY(50%)">
+    <form class="search-big mt-8" id="buscar" data-rede data-external="{{L.links.rede}}" role="search">
       <div class="f"><label for="r-q">Profissional, especialidade ou local</label><input id="r-q" name="q" placeholder="Ex.: cardiologia" autocomplete="off"></div>
       <div class="f"><label for="r-tipo">Tipo</label><select id="r-tipo" name="tipo"><option value="profissional">Profissional</option><option value="especialidade">Especialidade</option><option value="clinica">Clínica</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratório</option></select></div>
       <div class="f"><label for="r-cidade">Cidade</label><select id="r-cidade" name="cidade"><option value="">Todas as cidades</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>

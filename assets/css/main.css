@@ -402,8 +402,13 @@ ul, ol { margin: 0; padding: 0; }
 }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
 .hero-media .frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(2,26,29,.35)); }
-.hero .orbits { width: 135%; left: -30%; top: calc(var(--header-h) + 16px); opacity: .5; }
-@media (min-width: 1100px) { .hero .orbits { width: 980px; left: 38%; top: calc(var(--header-h) + 24px); } }
+.hero .orbits { width: 135%; left: -30%; top: -12%; opacity: .5; }
+/* Desktop: globo maior, contornando a imagem por trás, e inteiro (sem corte).
+   O hero só corta na horizontal, para o círculo poder fechar um pouco abaixo da base. */
+@media (min-width: 1100px) {
+  .hero { overflow: visible; overflow-x: clip; }
+  .hero .orbits { top: calc(var(--header-h) + 8px); height: calc(100% - var(--header-h) + 140px); width: auto; aspect-ratio: 1; left: 37%; }
+}
 .chip {
   display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border-radius: var(--r-pill);
   background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);

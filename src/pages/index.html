@@ -39,26 +39,29 @@
   </div>
   </div>
 
-  <!-- Slide 2 · Telemedicina -->
+  <!-- Slide 2 · Telemedicina (mesmo molde do slide 1) -->
   <div class="hero-slide hero-slide--tele" role="group" aria-roledescription="slide" aria-label="2 de 3">
     <div class="wrap">
       <div class="grid">
         <div class="hero-copy c-1-6">
           <span class="eyebrow">Telemedicina MedicGLOBAL</span>
-          <h2 class="hero-title balance">Sim, nós temos <em>TELEMEDICINA</em></h2>
+          <h2 class="hero-title balance">Sim, nós temos <em>TELEMEDICINA.</em></h2>
+          <p class="lead">Consultas de onde você estiver e sem custo extra, conforme as condições do seu plano.</p>
           <div class="btn-row">
             <a class="btn" href="telemedicina.html" data-track="click_telemedicina">Acessar telemedicina</a>
+            <a class="btn btn--ghost" href="telemedicina.html#como-funciona">Como funciona</a>
           </div>
-          <div class="hero-stat">
-            <b>5 minutos</b>
-            <span>entre a solicitação e a consulta</span>
+          <div class="hero-foot">
+            <span><b>5 minutos</b> entre a solicitação e a consulta</span>
+            <span><b>Sem custo extra</b> na consulta</span>
+            <span><b>ANS nº {{L.ans}}</b></span>
           </div>
         </div>
         <div class="hero-media c-7-13">
           <div class="frame">{{pic:phonedoc|Profissional de saúde atendendo pelo celular|1800|(min-width: 1100px) 60vw, 100vw}}</div>
-          <div class="hero-box">
-            <i>{{i:video}}</i>
-            <span>Consultas de onde você estiver e sem custo extra</span>
+          <div class="hero-chips" aria-hidden="true">
+            <span class="chip"><i>{{i:video}}</i><span>Consulta on-line<small>de onde você estiver</small></span></span>
+            <span class="chip"><i>{{i:clock}}</i><span>5 minutos<small>da solicitação à consulta</small></span></span>
           </div>
           {{> hero-nav}}
         </div>
@@ -66,15 +69,23 @@
     </div>
   </div>
 
-  <!-- Slide 3 · Área de cobertura -->
+  <!-- Slide 3 · Área de cobertura (mesmo molde do slide 1) -->
   <div class="hero-slide hero-slide--area" role="group" aria-roledescription="slide" aria-label="3 de 3">
     <div class="wrap">
       <div class="grid">
         <div class="hero-copy c-1-6">
           <span class="eyebrow">Rede de cuidado · ABRAMGE</span>
-          <h2 class="hero-title balance">Área de <em>Cobertura</em></h2>
+          <h2 class="hero-title balance">Área de <em>Cobertura.</em></h2>
           <p class="lead">Atendimento em trânsito em todo território nacional pelo sistema <a href="servicos.html#abramge">ABRAMGE</a>.</p>
-          <a class="hero-info" href="tel:08007227511" data-track="click_telefone">{{i:phone}} <span>Informações: <b>0800.722.7511</b></span></a>
+          <div class="btn-row">
+            <a class="btn" href="rede-credenciada.html#mapa" data-track="click_rede">Ver área de atuação</a>
+            <a class="btn btn--ghost" href="tel:08007227511" data-track="click_telefone">{{i:phone}} 0800.722.7511</a>
+          </div>
+          <div class="hero-foot">
+            <span><b>Informações</b> 0800.722.7511</span>
+            <span><b>Em trânsito</b> em todo o Brasil</span>
+            <span><b>ANS nº {{L.ans}}</b></span>
+          </div>
         </div>
         <div class="hero-media c-7-13">
           <div class="frame frame--map">
@@ -84,15 +95,19 @@
               </defs>
               <rect x="-400" y="-400" width="1440" height="1360" fill="url(#hm-dots)"/>
               <path class="hm-border" d="M-200 560 C40 470 140 430 170 360 S330 340 400 270 S500 210 840 40"/>
-              <text class="hm-state" x="300" y="500">SÃO PAULO</text>
-              <text class="hm-state" x="400" y="110">MINAS GERAIS</text>
-              <path class="hm-route" d="M190 400 C260 370 300 320 330 280 S400 210 450 180"/>
-              <g class="hm-pin" transform="translate(190 400)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
-              <g class="hm-pin" transform="translate(450 180)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
-              <text class="hm-label" x="214" y="438">Bragança Paulista - SP</text>
-              <text class="hm-label" x="450" y="140" text-anchor="middle">Pouso Alegre - MG</text>
+              <text class="hm-state" x="380" y="520">SÃO PAULO</text>
+              <text class="hm-state" x="120" y="110">MINAS GERAIS</text>
+              <path class="hm-route" d="M300 330 C360 300 400 260 430 230 S450 190 480 160"/>
+              <g class="hm-pin" transform="translate(300 330)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
+              <g class="hm-pin" transform="translate(480 160)"><circle r="26" class="hm-halo"/><circle r="9"/></g>
+              <text class="hm-label" x="324" y="372">Bragança Paulista - SP</text>
+              <text class="hm-label" x="505" y="118" text-anchor="end">Pouso Alegre - MG</text>
             </svg>
             <div class="hero-logo" aria-hidden="true">{{> logo}}<span>SAÚDE</span></div>
+          </div>
+          <div class="hero-chips" aria-hidden="true">
+            <span class="chip"><i>{{i:route}}</i><span>Atendimento em trânsito<small>em todo o território nacional</small></span></span>
+            <span class="chip"><i>{{i:shield}}</i><span>Sistema ABRAMGE<small>urgência e emergência</small></span></span>
           </div>
           {{> hero-nav}}
         </div>

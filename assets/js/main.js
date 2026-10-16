@@ -352,6 +352,42 @@
     $$("[data-carousel-next]", c).forEach(function (b) { b.addEventListener("click", function () { go(i + 1); }); });
   });
 
+  /* Carrossel do hero (home): troca a cada 8s, inclusive com o cursor sobre o banner.
+     Os traços ficam sobre a imagem de cada slide (uma cópia por slide, todas sincronizadas).
+     Só pausa enquanto o foco do teclado está dentro do banner, para não trocar o conteúdo durante a leitura. */
+  $$("[data-hero-slider]").forEach(function (s) {
+    var slides = $$(".hero-slide", s), dots = $$("[data-slide-to]", s);
+    var i = 0, timer = null, focused = false;
+    function go(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (el, k) {
+        var on = k === i;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-hidden", on ? "false" : "true");
+        if ("inert" in el) el.inert = !on;
+      });
+      dots.forEach(function (d) { if (+d.getAttribute("data-slide-to") === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    }
+    function schedule() {
+      clearTimeout(timer);
+      // Não gira com movimento reduzido nem com "Pausar animações" ligado na central de acessibilidade
+      if (!reduce && !focused && !doc.classList.contains("a11y-motion")) timer = setTimeout(function () { go(i + 1); schedule(); }, 8000);
+    }
+    dots.forEach(function (d) {
+      d.addEventListener("click", function () {
+        var n = +d.getAttribute("data-slide-to"), hadFocus = document.activeElement === d;
+        go(n); schedule();
+        // O foco passa para o traço equivalente no slide que entrou
+        if (hadFocus) { var t = $('[data-slide-to="' + n + '"]', slides[i]); if (t) t.focus(); }
+      });
+    });
+    document.addEventListener("a11y:change", schedule);
+    s.addEventListener("focusin", function () { focused = true; schedule(); });
+    s.addEventListener("focusout", function (e) { if (!s.contains(e.relatedTarget)) { focused = false; schedule(); } });
+    go(0);
+    schedule();
+  });
+
   /* ---------- Formulários (validação acessível + LGPD) ---------- */
   $$("form[data-validate]").forEach(function (f) {
     f.setAttribute("novalidate", "");
@@ -373,6 +409,80 @@
       if (okBox) { okBox.classList.add("is-visible"); okBox.focus(); }
       f.reset();
     });
+  });
+
+  /* Dropdown no padrão do site (todos os formulários). O <select> original continua no
+     formulário (oculto) e recebe o valor; em telas de toque fica a lista nativa do aparelho. */
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) $$("select[data-dropdown], .field select, .search-big .f select").forEach(function (sel) {
+    if (sel.multiple || sel.size > 1) return;
+    var field = sel.parentNode, opts = Array.prototype.slice.call(sel.options), active = sel.selectedIndex, typed = "", typedT;
+    var btn = document.createElement("button"), list = document.createElement("ul"), lbl = $("label[for='" + sel.id + "']", field);
+    btn.type = "button"; btn.className = "dd-btn"; btn.id = sel.id + "-dd";
+    btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", sel.id + "-list");
+    list.className = "dd-list"; list.id = sel.id + "-list"; list.setAttribute("role", "listbox"); list.tabIndex = -1;
+    if (lbl) { lbl.id = lbl.id || sel.id + "-lbl"; lbl.htmlFor = btn.id; list.setAttribute("aria-labelledby", lbl.id); btn.setAttribute("aria-labelledby", lbl.id + " " + btn.id); }
+    opts.forEach(function (o, k) {
+      var li = document.createElement("li");
+      li.id = sel.id + "-opt-" + k; li.setAttribute("role", "option"); li.textContent = o.text;
+      li.addEventListener("mousedown", function (e) { e.preventDefault(); });
+      li.addEventListener("click", function () { choose(k); close(); btn.focus(); });
+      li.addEventListener("mousemove", function () { setActive(k); });
+      list.appendChild(li);
+    });
+    var items = $$("li", list);
+    function render() {
+      btn.textContent = opts[sel.selectedIndex].text;
+      btn.classList.toggle("is-empty", !sel.value);
+      items.forEach(function (li, k) { li.setAttribute("aria-selected", k === sel.selectedIndex ? "true" : "false"); });
+    }
+    function setActive(k) {
+      active = Math.max(0, Math.min(items.length - 1, k));
+      items.forEach(function (li, j) { li.classList.toggle("is-active", j === active); });
+      btn.setAttribute("aria-activedescendant", items[active].id);
+      items[active].scrollIntoView({ block: "nearest" });
+    }
+    function choose(k) {
+      if (sel.selectedIndex !== k) { sel.selectedIndex = k; sel.dispatchEvent(new Event("change", { bubbles: true })); }
+      render();
+    }
+    function isOpen() { return field.classList.contains("is-open"); }
+    function open() {
+      $$(".has-dd.is-open").forEach(function (f) { if (f !== field) f.classList.remove("is-open"); });
+      field.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); setActive(sel.selectedIndex);
+    }
+    function close() { field.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); btn.removeAttribute("aria-activedescendant"); }
+    btn.addEventListener("click", function () { isOpen() ? close() : open(); });
+    btn.addEventListener("keydown", function (e) {
+      var k = e.key;
+      if (!isOpen()) {
+        if (k === "ArrowDown" || k === "ArrowUp" || k === "Enter" || k === " ") { e.preventDefault(); open(); }
+        return;
+      }
+      if (k === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
+      else if (k === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+      else if (k === "Home") { e.preventDefault(); setActive(0); }
+      else if (k === "End") { e.preventDefault(); setActive(items.length - 1); }
+      else if (k === "Enter" || k === " ") { e.preventDefault(); choose(active); close(); }
+      else if (k === "Escape") { e.preventDefault(); close(); }
+      else if (k === "Tab") { close(); }
+      else if (k.length === 1) {
+        // Digitar letras leva à primeira opção que começa com elas
+        clearTimeout(typedT); typed += norm(k); typedT = setTimeout(function () { typed = ""; }, 600);
+        for (var j = 0; j < opts.length; j++) if (norm(opts[j].text).indexOf(typed) === 0) { setActive(j); break; }
+      }
+    });
+    document.addEventListener("click", function (e) { if (isOpen() && !field.contains(e.target)) close(); });
+    sel.addEventListener("change", render);
+    // A validação dos formulários marca/foca o <select>: repassamos isso para o botão visível
+    new MutationObserver(function () { var v = sel.getAttribute("aria-invalid"); if (v) btn.setAttribute("aria-invalid", v); else btn.removeAttribute("aria-invalid"); }).observe(sel, { attributes: true, attributeFilter: ["aria-invalid"] });
+    if (sel.getAttribute("aria-describedby")) btn.setAttribute("aria-describedby", sel.getAttribute("aria-describedby"));
+    sel.focus = function () { btn.focus(); };
+    if (sel.form) sel.form.addEventListener("reset", function () { setTimeout(render, 0); });
+    sel.tabIndex = -1; sel.setAttribute("aria-hidden", "true");
+    field.classList.add("has-dd");
+    // Botão e lista entram logo depois do <select> (antes da mensagem de erro, se houver)
+    field.insertBefore(list, sel.nextSibling); field.insertBefore(btn, list);
+    render();
   });
 
   /* Busca na rede (home e página da rede) */

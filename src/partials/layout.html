@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/main.css">
+<script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 {{extraHead}}
 {{jsonld}}
 <!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
@@ -58,7 +59,6 @@
       <li><button class="nav-trigger{{act:conteudos}}" aria-expanded="false" aria-controls="mega-conteudos">Conteúdos {{i:chevron-down}}</button></li>
     </ul>
     <div class="bar-actions">
-      <button class="icon-btn" type="button" data-open-search aria-label="Buscar no site (Ctrl+K)">{{i:search}}</button>
       <a class="btn btn--benef btn--sm" href="beneficiario.html" data-track="click_area_beneficiario" aria-label="Área do Beneficiário">{{i:user}} <span class="benef-label">Área do Beneficiário</span></a>
       <a class="btn btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
       <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">{{i:menu}}</button>
@@ -79,7 +79,7 @@
         <a href="atendimento.html">Atendimento</a>
         <a href="servicos.html#urgencia">Urgência e emergência</a>
       </div>
-      <a class="mega-feature" href="telemedicina.html">{{pic:phonedoc|Profissional de saúde usando o celular|600|300px}}<strong>Precisa falar com um profissional de saúde?</strong><span>Telemedicina conforme as condições do seu plano →</span></a>
+      <a class="mega-feature" href="telemedicina.html">{{pic:old_medica_paciente|Médica conversando com uma paciente|600|300px}}<strong>Precisa falar com um profissional de saúde?</strong><span>Telemedicina conforme as condições do seu plano</span></a>
     </div>
   </div>
   <div class="mega" id="mega-planos">
@@ -93,7 +93,7 @@
         <a href="planos.html#duvidas">Dúvidas frequentes</a>
         <a href="documentos.html#reajuste">Reajustes (RN 565)</a>
       </div>
-      <a class="mega-feature" href="planos.html#comparar">{{pic:beach|Família reunida ao pôr do sol|600|300px}}<strong>Compare abrangências lado a lado</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre →</span></a>
+      <a class="mega-feature" href="planos.html#comparar">{{pic:old_familia|Família sorrindo reunida em casa|600|300px}}<strong>Compare abrangências lado a lado</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre</span></a>
     </div>
   </div>
   <div class="mega" id="mega-rede">
@@ -109,7 +109,7 @@
         <a href="{{L.links.guia}}" target="_blank" rel="noopener">Guia médico ↗</a>
         <a href="servicos.html#abramge">Atendimento em trânsito</a>
       </div>
-      <a class="mega-feature" href="rede-credenciada.html#mapa">{{pic:corridor|Corredor de hospital iluminado|600|300px}}<strong>Mapa da área de atuação</strong><span>Veja as cidades da rede MedicGLOBAL →</span></a>
+      <a class="mega-feature" href="rede-credenciada.html#mapa">{{pic:old_santa_casa|Fachada de hospital da rede credenciada|600|300px}}<strong>Mapa da área de atuação</strong><span>Veja as cidades da rede MedicGLOBAL</span></a>
     </div>
   </div>
   <div class="mega" id="mega-servicos">
@@ -123,7 +123,7 @@
         <a href="servicos.html#aplicativo">Aplicativo</a>
         <a href="atendimento.html">Atendimento</a>
       </div>
-      <a class="mega-feature" href="servicos.html#aplicativo">{{pic:laptop|Mãos digitando em notebook com estetoscópio ao lado|600|300px}}<strong>Seu plano no celular</strong><span>Rede, favoritos e contato com prestadores →</span></a>
+      <a class="mega-feature" href="servicos.html#aplicativo">{{pic:old_atendimento|Área de atendimento com guichês|600|300px}}<strong>Seu plano no celular</strong><span>Rede, favoritos e contato com prestadores</span></a>
     </div>
   </div>
   <div class="mega" id="mega-mg">
@@ -137,7 +137,7 @@
         <a href="trabalhe-conosco.html">Trabalhe conosco</a>
         <a href="contato.html">Onde estamos</a>
       </div>
-      <a class="mega-feature" href="medicglobal.html">{{pic:hands|Mãos entrelaçadas em gesto de cuidado|600|300px}}<strong>Mesma essência. Nova experiência.</strong><span>Conheça a nossa trajetória →</span></a>
+      <a class="mega-feature" href="medicglobal.html">{{pic:old_hsl_fachada|Fachada do Hospital e Maternidade São Lucas|600|300px}}<strong>Mesma essência. Nova experiência.</strong><span>Conheça a nossa trajetória</span></a>
     </div>
   </div>
   <div class="mega" id="mega-conteudos">
@@ -151,7 +151,7 @@
         <a href="conteudos.html#cat=beneficiario">Informativos ao beneficiário</a>
         <a href="conteudos.html">Todos os conteúdos</a>
       </div>
-      <a class="mega-feature" href="conteudos.html">{{pic:food|Prato com alimentos frescos e coloridos|600|300px}}<strong>Portal de conteúdo</strong><span>Busque por tema ou categoria →</span></a>
+      <a class="mega-feature" href="conteudos.html">{{pic:old_coracao|Mãos sobre o peito, em referência à saúde do coração|600|300px}}<strong>Portal de conteúdo</strong><span>Busque por tema ou categoria</span></a>
     </div>
   </div>
 </header>
@@ -193,7 +193,7 @@
       <div class="footer-contact">
         <a href="{{L.phones.central.tel}}"><small>Central e Ouvidoria</small><strong>{{L.phones.central.label}}</strong></a>
         <a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener"><small>WhatsApp Autorizações</small><strong>{{L.wa.autorizacoes.label}}</strong></a>
-        <a href="atendimento.html"><small>Todos os canais</small><strong>Central de atendimento →</strong></a>
+        <a href="atendimento.html"><small>Todos os canais</small><strong>Central de atendimento</strong></a>
       </div>
     </div>
     <div class="footer-mid">
@@ -208,13 +208,15 @@
       </nav>
     </div>
     <div class="footer-legal">
-      <a class="ans-box" href="{{L.links.ans}}" target="_blank" rel="noopener" aria-label="Agência Nacional de Saúde Suplementar — registro ANS nº {{L.ans}}"><b>ANS</b><span>nº {{L.ans}}</span></a>
-      <div class="stack" style="--s-5:8px">
-        <p>{{L.legal.razao}} · {{L.legal.cnpj}} · {{L.address.full}}</p>
-        <p>Disque ANS: 0800 701 9656 · <a href="{{L.links.ans}}" target="_blank" rel="noopener">www.gov.br/ans</a></p>
-        <div class="legal-links"><a href="privacidade.html">Política de Privacidade</a><a href="privacidade.html#cookies">Cookies</a><button type="button" data-cookie-prefs style="background:none;border:0;padding:0;color:inherit;text-decoration:underline;font-size:inherit">Preferências de cookies</button><a href="privacidade.html#termos">Termos de Uso</a><a href="privacidade.html#lgpd">LGPD · Canal de privacidade</a><a href="documentos.html">Informações regulatórias</a></div>
+      <div class="footer-legal-main">
+        <a class="ans-seal" href="{{L.links.ans}}" target="_blank" rel="noopener" aria-label="Agência Nacional de Saúde Suplementar — registro ANS nº {{L.ans}} (abre em nova aba)"><span>ANS - nº {{L.ans}}</span></a>
+        <div class="footer-legal-info">
+          <p>{{L.legal.razao}} · {{L.legal.cnpj}} · {{L.address.full}}</p>
+          <p>Disque ANS: 0800 701 9656 · <a href="{{L.links.ans}}" target="_blank" rel="noopener">www.gov.br/ans</a></p>
+        </div>
       </div>
-      <p>© <span data-year>{{year}}</span> MedicGLOBAL</p>
+      <div class="legal-links"><a href="privacidade.html">Política de Privacidade</a><a href="privacidade.html#cookies">Cookies</a><button type="button" data-cookie-prefs style="background:none;border:0;padding:0;color:inherit;text-decoration:underline;font-size:inherit">Preferências de cookies</button><a href="privacidade.html#termos">Termos de Uso</a><a href="privacidade.html#lgpd">LGPD · Canal de privacidade</a><a href="documentos.html">Informações regulatórias</a></div>
+      <div class="footer-credit"><p>© <span data-year>{{year}}</span> MedicGLOBAL</p><p>Desenvolvido por <a href="https://awtech.so/" target="_blank" rel="noopener">Grupo Awtech<span class="sr-only"> (abre em nova aba)</span></a></p></div>
     </div>
   </div>
 </footer>
@@ -245,7 +247,65 @@
   <div class="btn-row"><button class="btn btn--ghost btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
 </div>
 
+<!-- Central de acessibilidade (assets/js/a11y.js). Ajustes ficam salvos neste navegador. -->
+<div class="a11y" id="a11y">
+  <div class="a11y-tab" role="group" aria-label="Acessibilidade">
+    <button class="a11y-fab" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Abrir recursos de acessibilidade">{{i:a11y}}</button>
+    <button class="a11y-fab a11y-fab--libras" type="button" data-a11y-libras aria-label="Tradução para Libras (VLibras)">{{i:hands}}</button>
+  </div>
+  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+    <div class="a11y-head">
+      <h2 id="a11y-title" tabindex="-1">{{i:a11y}} Acessibilidade</h2>
+      <button class="a11y-close" type="button" data-a11y-close aria-label="Fechar recursos de acessibilidade">{{i:close}}</button>
+    </div>
+    <div class="a11y-body">
+      <h3 class="a11y-label">Libras e leitura</h3>
+      <div class="a11y-grid">
+        <button type="button" class="is-wide" data-a11y-libras>{{i:hands}}<span>Tradução para Libras<small>VLibras · Governo Federal</small></span></button>
+        <button type="button" data-a11y-read aria-pressed="false">{{i:volume}}<span>Ouvir a página</span></button>
+        <button type="button" data-a11y-toggle="guide" aria-pressed="false">{{i:guide}}<span>Guia de leitura</span></button>
+      </div>
+      <div class="a11y-reading" data-a11y-reading hidden>
+        <span>Lendo em voz alta…</span>
+        <button type="button" data-a11y-read-pause aria-label="Pausar leitura">{{i:pause}}</button>
+        <button type="button" data-a11y-read-stop aria-label="Parar leitura">{{i:stop}}</button>
+      </div>
+      <p class="a11y-note">Para ouvir só um trecho, selecione o texto antes de tocar em “Ouvir a página”.</p>
+
+      <h3 class="a11y-label" id="a11y-size-l">Controle de fonte</h3>
+      <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+        <button type="button" data-a11y-size="-1" aria-label="Diminuir texto">{{i:text-minus}}</button>
+        <span>Tamanho do texto <output id="a11y-size-out">100%</output></span>
+        <button type="button" data-a11y-size="1" aria-label="Aumentar texto">{{i:text-plus}}</button>
+      </div>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="font" aria-pressed="false">{{i:font}}<span>Fonte legível</span></button>
+        <button type="button" data-a11y-toggle="spacing" aria-pressed="false">{{i:spacing}}<span>Espaçar texto</span></button>
+      </div>
+
+      <h3 class="a11y-label">Navegação</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="links" aria-pressed="false">{{i:link-mark}}<span>Destacar links</span></button>
+        <button type="button" data-a11y-toggle="headings" aria-pressed="false">{{i:layers}}<span>Destacar títulos</span></button>
+        <button type="button" data-a11y-toggle="noimg" aria-pressed="false">{{i:eye}}<span>Esconder imagens</span></button>
+        <button type="button" data-a11y-toggle="motion" aria-pressed="false">{{i:motion}}<span>Pausar animações</span></button>
+      </div>
+
+      <h3 class="a11y-label">Controle de cor</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="contrast" aria-pressed="false">{{i:contrast}}<span>Alto contraste</span></button>
+        <button type="button" data-a11y-toggle="gray" aria-pressed="false">{{i:grayscale}}<span>Escala de cinza</span></button>
+      </div>
+    </div>
+    <div class="a11y-foot">
+      <button class="a11y-reset" type="button" data-a11y-reset>{{i:reset}} Restaurar padrão</button>
+    </div>
+    <p class="sr-only" id="a11y-status" aria-live="polite"></p>
+  </section>
+</div>
+<div class="a11y-guide-bar" aria-hidden="true"></div>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/a11y.js" defer></script>
 {{extraScripts}}
 </body>
 </html>

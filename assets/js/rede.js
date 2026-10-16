@@ -1,4 +1,4 @@
-/* Mapa funcional da área de atuação — Leaflet + OpenStreetMap/CARTO.
+/* Mapa funcional da área de atuação — Leaflet + mapa base Esri (dados OpenStreetMap).
    Ponto de integração: quando houver API da rede credenciada, os prestadores
    podem ser plotados aqui como marcadores (L.marker) a partir da busca. */
 (function () {
@@ -12,9 +12,12 @@
     "Pouso Alegre/MG": { c: [-22.2300, -45.9364] }
   };
   var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true }).setView([-22.62, -46.2], 9);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  // Esri Light Gray Canvas: visual claro, sem chave e sem exigir Referer (os tiles do OSM bloqueiam acesso via file:// e sites sem política de uso)
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+    maxZoom: 16,
+    attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
   }).addTo(map);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", { maxZoom: 16 }).addTo(map);
   var line = [cities["Bragança Paulista/SP"].c, cities["Extrema/MG"].c, cities["Cambuí/MG"].c, cities["Pouso Alegre/MG"].c];
   L.polyline(line, { color: "#008C8C", weight: 2, dashArray: "4 8", opacity: .8 }).addTo(map);
   var markers = {};
@@ -32,7 +35,7 @@
     var d = cities[name];
     var icon = L.divIcon({ className: "", html: '<span class="mg-pin' + (d.hq ? " hq" : "") + '"></span>', iconSize: [22, 22], iconAnchor: [11, 11] });
     var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>Sede MedicGLOBAL · R. Alcebíades Wohlers, 02</small>" : "") +
-      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">Buscar atendimento nesta cidade →</a>';
+      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">Buscar atendimento nesta cidade</a>';
     markers[name] = L.marker(d.c, { icon: icon, title: name, keyboard: true }).addTo(map).bindPopup(popup);
     markers[name].on("click", function () { select(name); });
   });

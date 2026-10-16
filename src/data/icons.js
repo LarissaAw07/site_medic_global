@@ -56,5 +56,21 @@ module.exports = {
   scale: '<path d="M12 3v18M5 21h14M4 7h16"/><path d="m4 7-3 7a3 3 0 0 0 6 0zM20 7l-3 7a3 3 0 0 0 6 0z"/>',
   baby: '<circle cx="12" cy="8" r="4"/><path d="M10 7.5h.01M14 7.5h.01M10.5 10a2 2 0 0 0 3 0"/><path d="M6 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/>',
   bed: '<path d="M3 7v12M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11" r="2"/>',
-  upload: '<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 20h16"/>'
+  upload: '<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 20h16"/>',
+  /* Central de acessibilidade */
+  "a11y": '<circle cx="12" cy="4.5" r="2"/><path d="M4 8.5c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2"/><path d="M12 9.7V14m0 0-3.5 7.5M12 14l3.5 7.5"/>',
+  "hands": '<path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M10 9.5V4a1.5 1.5 0 0 1 3 0v6"/><path d="M13 9.5V5a1.5 1.5 0 0 1 3 0v6"/><path d="M16 10.5V8a1.5 1.5 0 0 1 3 0v5.5a7 7 0 0 1-7 7h-.5a6.5 6.5 0 0 1-5.4-2.9L3.5 13.8a1.5 1.5 0 0 1 2.3-1.9L7 13.5"/>',
+  "text-plus": '<path d="M3 19 8 6l5 13M4.8 15h6.4"/><path d="M18 8v6M15 11h6"/>',
+  "text-minus": '<path d="M3 19 8 6l5 13M4.8 15h6.4"/><path d="M15 11h6"/>',
+  "contrast": '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>',
+  "grayscale": '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M12 7.5h7.6M12 12h9M12 16.5h7.6"/>',
+  "link-mark": '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
+  "spacing": '<path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 4.5v15M2.5 6 4 4.5 5.5 6M2.5 18 4 19.5 5.5 18"/>',
+  "font": '<path d="M3 18 7.5 6 12 18M4.6 14h5.8"/><circle cx="17.5" cy="15" r="3"/><path d="M20.5 12v6"/>',
+  "guide": '<rect x="3" y="10" width="18" height="4" rx="1"/><path d="M3 5.5h18M3 18.5h18" opacity=".45"/>',
+  "volume": '<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
+  "motion": '<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',
+  "reset": '<path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/>',
+  "stop": '<rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/>',
+  "pause": '<path d="M9 6v12M15 6v12"/>',
 };

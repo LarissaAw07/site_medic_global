@@ -1243,3 +1243,7 @@ html:not(.js) .hero-nav { display: none; }
 .indexed--cards a:hover p, .indexed--cards a:focus-visible p { color: var(--ink-2); }
 .indexed--cards a:hover .num, .indexed--cards a:hover .go,
 .indexed--cards a:focus-visible .num, .indexed--cards a:focus-visible .go { color: var(--globo); }
+
+/* Planos (home): botão azul-escuro que clareia no hover; seção mais próxima das vizinhas */
+.btn--soft-hover:hover { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: var(--globo); }
+.planos-section { padding-block: max(56px, calc(var(--section) - 80px)); }

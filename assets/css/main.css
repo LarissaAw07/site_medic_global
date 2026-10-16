@@ -1586,3 +1586,5 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Cidades ainda mais claras: branco puro e peso médio */
 .deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #fff; font-weight: 500; }
 .hub-section .marquee--sm { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+/* Cidades em cinza-claro */
+.deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #C9D3D4; }

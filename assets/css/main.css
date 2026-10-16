@@ -814,7 +814,7 @@ html:not(.js) .hero-nav { display: none; }
 .mosaic-grid span { border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); display: grid; place-items: center; color: rgba(255,255,255,.5); transition: background .6s, color .6s, border-color .6s; }
 .mosaic-grid span.has svg { width: 26px; height: 26px; }
 .mosaic-grid span.lit { background: rgba(79,195,195,.12); border-color: rgba(79,195,195,.35); color: var(--glow); }
-.mosaic-content { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; gap: 24px; padding-block: clamp(64px, 3rem + 4vw, 136px); }
+.mosaic-content { position: relative; z-index: 2; text-align: center; display: grid; justify-items: center; gap: 24px; padding-block: clamp(64px, 3rem + 4vw, 136px) clamp(104px, 4.5rem + 5vw, 184px); }
 .mosaic-content h2 { max-width: 24ch; }
 .mosaic-content .btn-row { justify-content: center; }
 
@@ -1237,29 +1237,31 @@ html:not(.js) .hero-nav { display: none; }
    Central de acessibilidade (assets/js/a11y.js)
    Medidas do painel em px para ele não crescer junto com o "tamanho do texto".
    ========================================================================== */
+/* Aba fixa no meio da lateral direita. Ao abrir o painel (ou o VLibras) ela desliza para o canto inferior
+   só com transform, e volta exatamente ao centro ao fechar — sem mudar top/bottom, para não haver salto. */
+.a11y { --a11y-tab-h: 80px; }
 .a11y-tab {
   position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 2147483000;
-  display: grid; gap: 2px; padding: 4px; border-radius: 14px 0 0 14px;
-  background: var(--globo); box-shadow: 0 12px 30px -10px rgba(2,26,29,.45);
+  display: grid; gap: 2px; padding: 3px; border-radius: 12px 0 0 12px;
+  background: var(--globo); box-shadow: 0 10px 26px -10px rgba(2,26,29,.45);
+  transition: transform .35s var(--ease);
 }
+.a11y.is-open .a11y-tab, html.a11y-libras-open .a11y-tab { transform: translateY(calc(50vh - 100% - 16px)); }
+@media (prefers-reduced-motion: reduce) { .a11y-tab { transition: none; } }
 .a11y-fab {
-  width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; display: grid; place-items: center;
+  width: 36px; height: 36px; padding: 0; border: 0; border-radius: 9px; display: grid; place-items: center;
   background: transparent; color: var(--white); cursor: pointer; transition: background .2s;
 }
 .a11y-fab:hover, .a11y.is-open .a11y-fab:first-child { background: rgba(255,255,255,.16); }
-.a11y-fab svg { width: 24px; height: 24px; }
-.a11y-fab:focus-visible { outline: 2px solid var(--white); outline-offset: -4px; }
-@media (max-width: 719px) {
-  .a11y-tab { padding: 3px; top: auto; bottom: 96px; transform: none; }
-  .a11y-fab { width: 40px; height: 40px; }
-  .a11y-fab svg { width: 22px; height: 22px; }
-}
+.a11y-fab svg { width: 20px; height: 20px; }
+.a11y-fab:focus-visible { outline: 2px solid var(--white); outline-offset: -3px; }
 /* O VLibras é aberto pelos botões da central; o botão próprio dele ficaria no mesmo lugar */
 #vlibras-access-wrapper { display: none !important; }
 
+/* Painel acima da aba (que fica no canto inferior enquanto ele está aberto) */
 .a11y-panel {
-  position: fixed; right: 64px; top: 50%; transform: translateY(-50%); z-index: 2147483001;
-  width: 356px; max-height: min(660px, calc(100vh - 32px)); display: flex; flex-direction: column;
+  position: fixed; right: 12px; bottom: calc(16px + var(--a11y-tab-h) + 12px); z-index: 2147483001;
+  width: 356px; max-height: min(660px, calc(100vh - var(--a11y-tab-h) - 44px)); display: flex; flex-direction: column;
   background: var(--white); color: var(--ink); border: 1px solid var(--line-2); border-radius: 20px;
   box-shadow: 0 30px 80px -24px rgba(2,26,29,.5); font-family: var(--f-head); font-size: 14px; line-height: 1.35;
 }
@@ -1267,7 +1269,7 @@ html:not(.js) .hero-nav { display: none; }
 @media (prefers-reduced-motion: no-preference) { .a11y-panel { animation: a11y-in .2s var(--ease); } }
 @keyframes a11y-in { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 719px) {
-  .a11y-panel { left: 8px; right: 8px; top: auto; bottom: 8px; transform: none; width: auto; max-height: 78vh; }
+  .a11y-panel { left: 8px; right: 8px; width: auto; }
 }
 .a11y-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 14px 12px 20px; border-bottom: 1px solid var(--line-2); }
 .a11y-head h2 { display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; color: var(--globo); }
@@ -1357,8 +1359,6 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .a11y-speaking { background: #FFF3A3 !important; color: var(--ink) !important; outline: 2px solid #E0B400; outline-offset: 2px; border-radius: 4px; }
 
 @media print { .a11y, .a11y-guide-bar { display: none !important; } }
-html.a11y-libras-open .a11y-tab { top: auto; bottom: 24px; transform: none; }
-html.a11y-libras-open .a11y-panel { top: auto; bottom: 24px; transform: none; max-height: calc(100vh - 48px); }
 
 /* Rodapé: crédito de desenvolvimento */
 .footer-credit a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
@@ -1375,3 +1375,18 @@ html.a11y-libras-open .a11y-panel { top: auto; bottom: 24px; transform: none; ma
 .img--art { background: #F3FBFD !important; }
 .img--art img { object-fit: contain !important; }
 .post-feature:hover .img--art img, .card-post:hover .img--art img { transform: none; }
+
+/* Botão azul-claro que escurece no hover (ex.: "Conheça a MedicGLOBAL") */
+.btn--tint { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: var(--tint); }
+.btn--tint:hover { --b-bg: var(--globo); --b-fg: var(--white); --b-bd: var(--globo); }
+
+/* Parallax "Depois da contratação": os quadros esmaecem no fim da seção, sem corte seco, e emendam no rodapé */
+.mosaic-grid {
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 62%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+
+/* Área do Beneficiário: a tela do celular ocupa o aparelho inteiro, sem a moldura escura em volta */
+.phone { padding: 0; background: none; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
+.phone-screen { border-radius: 44px; }

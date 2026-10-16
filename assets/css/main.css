@@ -725,6 +725,8 @@ html:not(.js) .hero-nav { display: none; }
 .matrix thead th { font-family: var(--f-head); font-weight: 500; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); background: var(--mist); position: sticky; top: 0; }
 .matrix tbody th { font-weight: 400; color: var(--ink); font-family: var(--f-body); }
 .matrix td { text-align: center; }
+/* Nomes dos planos centralizados sobre as colunas (a 1ª coluna, de cidades, segue à esquerda) */
+.matrix thead th + th { text-align: center; }
 .matrix tbody tr:last-child > * { border-bottom: 0; }
 .cell { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; }
 .cell.yes { background: rgba(0,140,140,.14); color: var(--globo); }

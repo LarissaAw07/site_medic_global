@@ -5,11 +5,28 @@
   "crumbs": [["Privacidade e LGPD", "privacidade.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t" style="padding-bottom:40px">
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
   <div class="wrap">
     {{crumbs}}
-    <span class="eyebrow">LGPD</span>
-    <h1 id="t" class="balance">Privacidade e proteção de dados</h1>
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">LGPD</span>
+        <h1 id="t" class="balance">Privacidade e proteção de dados</h1>
+        <p class="lead">Saiba como a MedicGLOBAL coleta, utiliza e protege os seus dados pessoais neste site, em conformidade com a Lei Geral de Proteção de Dados (LGPD).</p>
+        <div class="btn-row">
+          <a class="btn" href="#politica">Ler a política</a>
+          <a class="btn btn--ghost" href="#lgpd">Seus direitos</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:lock}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:shield}}</i><span>LGPD<small>Lei nº 13.709/2018</small></span></span>
+          <span class="chip"><i>{{i:user}}</i><span>Seus direitos<small>acesso, correção e revogação</small></span></span>
+        </div>
+      </div>
+    </div>
     <div class="notice mt-7 measure">{{i:info}}<span><strong>Documento-modelo.</strong> Este texto estrutura a política para o novo site e deve ser revisado e aprovado pelo jurídico e pelo encarregado de dados (DPO) da MedicGLOBAL antes da publicação.</span></div>
   </div>
 </section>

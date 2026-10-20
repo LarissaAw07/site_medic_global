@@ -6,18 +6,22 @@
   "crumbs": [["Para você", "beneficiario.html"], ["Área do Beneficiário", "beneficiario.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
-    <div class="grid" style="align-items:center">
-      <div class="c-1-7">
+    <div class="grid">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Sou beneficiário</span>
         <h1 id="t" class="balance">Tudo o que você precisa, em um só lugar</h1>
-        <p class="lead">Acesse seus dados, autorizações e benefícios. E, se precisar de algo rápido, use os atalhos abaixo.</p>
+        <p class="lead">Acesse seus dados, autorizações e benefícios em um ambiente seguro. E, se precisar de algo rápido, use os atalhos para boleto, rede credenciada, telemedicina e autorizações.</p>
+        <div class="btn-row">
+          <a class="btn" href="#boleto" data-track="emitir_boleto">Emitir segunda via</a>
+          <a class="btn btn--ghost" href="rede-credenciada.html" data-track="click_rede">Rede credenciada</a>
+        </div>
       </div>
-      <div class="c-8-13">
-        <div class="place-card" style="gap:20px">
+      <div class="hero-media c-7-13">
+        <div class="place-card hero-card" style="gap:20px">
           <span class="eyebrow">Área do Beneficiário</span>
           <h2 style="font-size:var(--t-h3)">Entre com sua matrícula e senha</h2>
           <p class="small" style="color:var(--on-deep-2)">O acesso acontece no ambiente seguro do sistema de beneficiários, em uma nova aba.</p>

@@ -6,13 +6,27 @@
   "crumbs": [["Conteúdos", "conteudos.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-7"><span class="eyebrow">Portal de conteúdo</span><h1 id="t" class="balance">Informação que cuida</h1></div>
-      <div class="c-8-13" style="align-self:end"><p class="lead">Saúde, notícias, comunicados e informativos para você entender melhor o seu plano e cuidar de quem importa.</p></div>
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Portal de conteúdo</span>
+        <h1 id="t" class="balance">Informação que cuida</h1>
+        <p class="lead">Saúde, notícias, comunicados e informativos para você entender melhor o seu plano e cuidar de quem importa — em linguagem clara e organizados por tema.</p>
+        <div class="btn-row">
+          <a class="btn" href="#todos">Ver todos os conteúdos</a>
+          <a class="btn btn--ghost" href="conteudos.html#cat=comunicados">Comunicados</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:sparkle}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:heart}}</i><span>Saúde<small>dicas e prevenção</small></span></span>
+          <span class="chip"><i>{{i:doc}}</i><span>Comunicados<small>reajustes e informativos</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

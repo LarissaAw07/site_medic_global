@@ -6,10 +6,28 @@
   "crumbs": [["Atendimento", "atendimento.html"], ["Contato", "contato.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t" style="padding-bottom:48px">
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
   <div class="wrap">
     {{crumbs}}
-    <div class="grid"><div class="c-1-8"><span class="eyebrow">Contato</span><h1 id="t" class="balance">Fale com a MedicGLOBAL</h1></div></div>
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Contato</span>
+        <h1 id="t" class="balance">Fale com a MedicGLOBAL</h1>
+        <p class="lead">Tire suas dúvidas, envie sua mensagem ou visite a nossa sede em Extrema/MG. Escolha o canal mais conveniente e a nossa equipe dará o retorno.</p>
+        <div class="btn-row">
+          <a class="btn" href="#f-t">Enviar mensagem</a>
+          <a class="btn btn--ghost" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:mail}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:pin}}</i><span>Sede em Extrema/MG<small>atendimento e comercial</small></span></span>
+          <span class="chip"><i>{{i:whatsapp}}</i><span>WhatsApp<small>canal direto com a equipe</small></span></span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

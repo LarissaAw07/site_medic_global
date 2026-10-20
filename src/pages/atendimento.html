@@ -7,14 +7,22 @@
   "jsonld": [{"@context":"https://schema.org","@type":"ContactPage","name":"Central de atendimento MedicGLOBAL","url":"https://medicglobal.com.br/atendimento/"}]
 }@-->
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-7"><span class="eyebrow">Central de atendimento</span><h1 id="t" class="balance">Estamos aqui para ajudar</h1><p class="lead">Escolha quem você é e veja apenas os canais que fazem sentido para a sua necessidade.</p></div>
-      <div class="c-8-13" style="align-self:end">
-        <a class="place-card" href="{{L.phones.central.tel}}" style="padding:28px;gap:8px" data-track="click_telefone"><span class="eyebrow" style="margin:0">Central e ouvidoria</span><span style="font-family:var(--f-head);font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem);color:#fff;letter-spacing:-.02em">{{L.phones.central.label}}</span><span class="small" style="color:var(--on-deep-2)">{{L.phones.ouvidoriaHours}}</span></a>
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Central de atendimento</span>
+        <h1 id="t" class="balance">Estamos aqui para ajudar</h1>
+        <p class="lead">Escolha quem você é e veja apenas os canais que fazem sentido para a sua necessidade: telefone, WhatsApp, ouvidoria e respostas rápidas para as dúvidas mais comuns.</p>
+        <div class="btn-row">
+          <a class="btn" href="#canais">Ver canais de atendimento</a>
+          <a class="btn btn--ghost" href="#ouvidoria">Falar com a ouvidoria</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art frame--card">{{> mosaic}}<div class="art-card"><a class="place-card" href="{{L.phones.central.tel}}" style="padding:28px;gap:8px" data-track="click_telefone"><span class="eyebrow" style="margin:0">Central e ouvidoria</span><span style="font-family:var(--f-head);font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem);color:#fff;letter-spacing:-.02em">{{L.phones.central.label}}</span><span class="small" style="color:var(--on-deep-2)">{{L.phones.ouvidoriaHours}}</span></a></div></div>
       </div>
     </div>
   </div>

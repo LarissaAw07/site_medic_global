@@ -6,16 +6,27 @@
   "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Nossa história", "medicglobal.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-9">
+      <div class="hero-copy c-1-6">
         <span class="eyebrow">Nossa história</span>
         <h1 id="t" class="balance">Mesma essência. Nova experiência</h1>
+        <p class="lead">Há mais de 40 anos cuidando da saúde das pessoas, a Extremamedic evoluiu para MedicGLOBAL. A razão social e o registro na ANS continuam os mesmos — o que mudou foi a forma de cuidar.</p>
+        <div class="btn-row">
+          <a class="btn" href="#linha-do-tempo">Conhecer nossa história</a>
+          <a class="btn btn--ghost" href="#estrutura">Nossa estrutura</a>
+        </div>
       </div>
-      <div class="c-2-7 mt-7"><p class="lead">Há mais de 40 anos cuidando da saúde das pessoas, a Extremamedic evoluiu para MedicGLOBAL. A razão social e o registro na ANS continuam os mesmos — o que mudou foi a forma de cuidar.</p></div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:heart}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:clock}}</i><span>+40 anos<small>de história</small></span></span>
+          <span class="chip"><i>{{i:sparkle}}</i><span>Nova marca<small>Extremamedic agora é MedicGLOBAL</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

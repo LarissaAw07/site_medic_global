@@ -35,13 +35,27 @@
 .detail h2 { font-size: var(--t-h3); }
 </style>
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-8"><span class="eyebrow">Serviços</span><h1 id="t" class="balance">Serviços que simplificam o cuidado</h1></div>
-      <div class="c-8-13" style="align-self:end"><p class="lead">Do atendimento a distância às autorizações, tudo o que você usa com mais frequência — explicado de forma direta.</p></div>
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Serviços</span>
+        <h1 id="t" class="balance">Serviços que simplificam o cuidado</h1>
+        <p class="lead">Do atendimento a distância às autorizações, urgência em viagem e aplicativo: tudo o que você usa com mais frequência no seu plano, explicado de forma direta.</p>
+        <div class="btn-row">
+          <a class="btn" href="telemedicina.html" data-track="click_telemedicina">Acessar telemedicina</a>
+          <a class="btn btn--ghost" href="#autorizacoes">Solicitar autorização</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:layers}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:video}}</i><span>Telemedicina<small>atendimento a distância</small></span></span>
+          <span class="chip"><i>{{i:file-check}}</i><span>Autorizações<small>WhatsApp dedicado</small></span></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

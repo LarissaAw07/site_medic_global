@@ -6,13 +6,27 @@
   "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Documentos", "documentos.html"]]
 }@-->
 
-<section class="page-hero" aria-labelledby="t">
+<section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
     <div class="grid">
-      <div class="c-1-8"><span class="eyebrow">Central documental</span><h1 id="t" class="balance">Informações regulatórias, claras e organizadas</h1></div>
-      <div class="c-8-13" style="align-self:end"><p class="lead">Registro na ANS, indicadores de qualidade, guias TISS, manuais e reajustes — com fonte, categoria e data de atualização.</p></div>
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Central documental</span>
+        <h1 id="t" class="balance">Informações regulatórias, claras e organizadas</h1>
+        <p class="lead">Registro na ANS, indicadores de qualidade, guias TISS, manuais e reajustes — com fonte, categoria e data de atualização.</p>
+        <div class="btn-row">
+          <a class="btn" href="#doc-list">Consultar documentos</a>
+          <a class="btn btn--ghost" href="#reajuste">Reajustes</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:doc}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:shield}}</i><span>ANS nº {{L.ans}}<small>operadora registrada</small></span></span>
+          <span class="chip"><i>{{i:file-check}}</i><span>Guias e manuais<small>TISS, reajustes e indicadores</small></span></span>
+        </div>
+      </div>
     </div>
     <div class="flex-between mt-8" style="align-items:center;padding:20px 24px;border:1px solid var(--line-2);border-radius:var(--r-lg)">
       <div style="display:flex;gap:16px;align-items:center"><span class="ans-seal" role="img" aria-label="Registro ANS nº {{L.ans}}"><span>ANS - nº {{L.ans}}</span></span><span class="small muted">Operadora registrada na Agência Nacional de Saúde Suplementar</span></div>

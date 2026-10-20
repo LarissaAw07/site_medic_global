@@ -1609,3 +1609,53 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .deep .btn--store-alt { --b-bg: transparent; --b-fg: var(--white); --b-bd: rgba(255,255,255,.3); }
 .deep .btn--store-alt:hover { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }
 @media (max-width: 479px) { .store-row .btn--store { flex: 1 1 100%; } }
+
+/* ===== Padrão único dos banners principais (Home como referência) =====
+   Mesma tipografia e espaçamentos de chapéu, título, descrição e botões nos banners com e sem imagem. */
+:is(.page-hero, .hero--page) { padding-top: calc(var(--header-h) + 40px); }
+:is(.page-hero, .hero--page) .crumbs { margin-bottom: 32px; }
+:is(.hero, .page-hero) .eyebrow { margin-bottom: 16px; }
+:is(.page-hero, .hero--page) h1 { font-size: clamp(2.5rem, 1rem + 2.6vw, 3.75rem); margin-bottom: 20px; }
+.page-hero h1 { max-width: 24ch; }
+.page-hero .lead { margin-top: 0; }
+:is(.page-hero, .hero--page) .lead + .btn-row { margin-top: 0; }
+.hero--page .hero-copy .lead { margin-bottom: 28px; }
+@media (min-width: 1100px) {
+  :is(.page-hero, .hero--page) { padding-top: calc(var(--header-h) + 32px); }
+  :is(.page-hero, .hero--page) .crumbs { margin-bottom: 24px; }
+  :is(.page-hero, .hero--page) h1, .hero--page .hero-copy h1 { font-size: clamp(2.5rem, 1rem + 2.6vw, 3.75rem); }
+  :is(.page-hero, .hero--page) .lead { font-size: var(--t-md); }
+  .hero--page .hero-copy .lead { margin-bottom: 24px; }
+  /* Banners com imagem: texto e imagem dentro da margem principal do site */
+  .hero--page .hero-copy { padding-left: 0; }
+  .hero--page .hero-media { margin-right: 0; }
+  .hero--page .hero-media .frame { border-radius: 24px 24px 24px 220px; }
+}
+@media (min-width: 1100px) and (max-height: 760px) {
+  :is(.page-hero, .hero--page) h1, .hero--page .hero-copy h1 { font-size: clamp(2.5rem, 1rem + 2.6vw, 3.75rem); margin-bottom: 14px; }
+}
+
+/* Banners sem foto no mesmo molde dos banners com imagem: moldura com efeito da identidade (mosaico + órbitas) */
+.hero--art { padding-bottom: clamp(40px, 2rem + 3vw, 88px); }
+.hero-media .frame--art { display: grid; place-items: center; padding: 24px; aspect-ratio: auto; min-height: 340px; color: var(--glow);
+  background: radial-gradient(120% 90% at 75% 15%, var(--medic) 0%, var(--globo) 38%, var(--deep) 70%, #021A1D 100%); }
+@media (min-width: 720px) { .frame--art { min-height: 440px; } }
+/* Mesma proporção das molduras com foto no celular e no tablet (as que trazem cartão crescem com o conteúdo) */
+@media (max-width: 1099px) { .frame--art:not(.frame--card) { aspect-ratio: 4 / 4.6; min-height: 0; } }
+@media (min-width: 720px) and (max-width: 1099px) { .frame--art:not(.frame--card) { aspect-ratio: 16 / 12; } }
+@media (min-width: 1100px) { .hero--art .hero-media .frame--art { height: auto; min-height: min(calc(100svh - var(--header-h) - 96px), 640px); padding: 48px; } }
+.frame--art .mosaic-grid { opacity: .75; -webkit-mask-image: radial-gradient(ellipse at center, transparent 18%, #000 75%); mask-image: radial-gradient(ellipse at center, transparent 18%, #000 75%); }
+.frame--art::after { background: linear-gradient(180deg, transparent 60%, rgba(2,26,29,.3)); }
+.art-emblem { position: relative; z-index: 2; width: clamp(112px, 9rem + 3vw, 184px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: var(--glow);
+  background: rgba(255,255,255,.07); border: 1px solid rgba(79,195,195,.4); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 18px rgba(79,195,195,.07), 0 0 0 40px rgba(79,195,195,.035), 0 30px 60px -20px rgba(0,0,0,.5); }
+.art-emblem svg { width: 42%; height: 42%; }
+.art-card { position: relative; z-index: 2; width: min(100%, 460px); }
+/* Banner com cartão próprio (Beneficiário): o cartão ocupa o espaço da imagem, sem moldura de fundo */
+.hero-card { position: relative; z-index: 2; }
+@media (min-width: 1100px) { .hero-media:has(> .hero-card) { display: flex; align-items: center; } .hero-card { width: 100%; } }
+.frame--art .place-card { background: rgba(2,26,29,.72); border: 1px solid var(--line-deep); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 30px 60px -24px rgba(0,0,0,.55); }
+@media (max-width: 1099px) {
+  .hero-media .frame--art:not(.frame--card) { min-height: 380px; place-items: start center; padding-top: 48px; }
+  .hero-media .frame--card { padding: 16px; }
+}

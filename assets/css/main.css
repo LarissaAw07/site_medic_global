@@ -924,6 +924,12 @@ html:not(.js) .hero-nav { display: none; }
 .steps.is-in .step:nth-child(3) .dot { transition-delay: .5s; } .steps.is-in .step:nth-child(4) .dot { transition-delay: 1s; } .steps.is-in .step:nth-child(5) .dot { transition-delay: 1.5s; }
 .step h3 { font-size: 1.25rem; margin-bottom: 10px; }
 .step p { color: var(--ink-3); font-size: var(--t-sm); max-width: 30ch; }
+/* Passos sobre fundo escuro: círculos em Azul Medic claro e textos em branco */
+.deep .steps-line { background: var(--line-deep); }
+.deep .steps-line span { background: var(--glow); }
+.deep .step .dot { background: transparent; border-color: var(--line-deep); color: var(--glow); }
+.deep .steps.is-in .step .dot { background: var(--glow); border-color: var(--glow); color: var(--deep); }
+.deep .step p { color: var(--on-deep); }
 
 /* ---------- Timeline (história) ---------- */
 .timeline { position: relative; display: grid; gap: 0; }

@@ -1592,8 +1592,8 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Para você · Boleto: blocos no padrão do site, com botões no lugar dos links do texto */
 .feature-list--actions { gap: 0; grid-auto-rows: 1fr; }
 @media (min-width: 720px) { .feature-list--actions { gap: 0; } }
-.feature-list--actions > div { flex-direction: column; align-items: center; gap: 14px; padding: 28px 20px; text-align: center; }
-.feature-list--actions > div > div { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.feature-list--actions > div { gap: 16px; padding: 28px 24px; }
+.feature-list--actions > div > div { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
 .feature-list--actions h3 { margin-bottom: 6px; }
 .feature-list--actions p { max-width: 26ch; }
 .feature-list--actions p { margin-bottom: 16px; }

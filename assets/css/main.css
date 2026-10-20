@@ -1589,17 +1589,9 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Cidades em cinza-claro */
 .deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #C9D3D4; }
 
-/* Para você · Boleto: quatro blocos em cards proporcionais, com botões no lugar dos links do texto */
-.feature-list--cards { gap: 16px; }
-@media (min-width: 720px) { .feature-list--cards { gap: 20px; } }
-.feature-list--cards > div { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px; border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--line-2); }
-.feature-list--cards > div > div { display: flex; flex-direction: column; align-items: flex-start; flex: 1; width: 100%; }
-.feature-list--cards .ico { width: 56px; height: 56px; border-radius: 14px; background: var(--tint); border-color: var(--tint); }
-.feature-list--cards .ico svg { width: 26px; height: 26px; }
-.feature-list--cards h3 { font-size: var(--t-h4); margin-bottom: 8px; }
-.feature-list--cards p { font-size: var(--t-md); }
-.feature-list--cards p { margin-bottom: 20px; }
-.feature-list--cards .btn { margin-top: auto; }
+/* Para você · Boleto: blocos no padrão do site, com botões no lugar dos links do texto */
+.feature-list--actions > div > div { display: flex; flex-direction: column; align-items: flex-start; }
+.feature-list--actions .btn { margin-top: 14px; }
 
 /* Botões das lojas (Google Play / App Store): mesmo modelo em todo o site; cores seguem a seção */
 .store-row { margin-top: 8px; }

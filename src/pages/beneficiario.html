@@ -49,11 +49,11 @@
         <p class="lead">Em caso de perda ou não recebimento do boleto, emita a segunda via pelo sistema de boletos da MedicGLOBAL.</p>
         <div class="btn-row"><a class="btn" href="{{L.links.boleto}}" target="_blank" rel="noopener" data-track="emitir_boleto">Emitir boleto {{i:external}}</a><a class="btn btn--ghost" href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Financeiro</a></div>
       </div>
-      <div class="feature-list">
+      <div class="feature-list feature-list--cards">
         <div><span class="ico">{{i:receipt}}</span><div><h3>Segunda via</h3><p>Para boletos perdidos ou não recebidos.</p></div></div>
-        <div><span class="ico">{{i:chat}}</span><div><h3>Dúvidas financeiras</h3><p>WhatsApp do financeiro: {{L.wa.financeiro.label}}.</p></div></div>
-        <div><span class="ico">{{i:doc}}</span><div><h3>Reajustes</h3><p>Percentuais publicados na <a class="accent" href="documentos.html#reajuste">central de documentos</a>.</p></div></div>
-        <div><span class="ico">{{i:briefcase}}</span><div><h3>Empresa cliente</h3><p>Acesse o <a class="accent" href="{{L.links.empresa}}" target="_blank" rel="noopener">portal da empresa</a>.</p></div></div>
+        <div><span class="ico">{{i:chat}}</span><div><h3>Dúvidas financeiras</h3><p>WhatsApp do financeiro: {{L.wa.financeiro.label}}.</p><a class="btn btn--sm" href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Falar no WhatsApp</a></div></div>
+        <div><span class="ico">{{i:doc}}</span><div><h3>Reajustes</h3><p>Percentuais publicados na central de documentos.</p><a class="btn btn--sm btn--ghost" href="documentos.html#reajuste">Central de documentos</a></div></div>
+        <div><span class="ico">{{i:briefcase}}</span><div><h3>Empresa cliente</h3><p>Acesse o portal da empresa.</p><a class="btn btn--sm btn--tint" href="{{L.links.empresa}}" target="_blank" rel="noopener">Portal da empresa</a></div></div>
       </div>
     </div>
   </div>
@@ -62,8 +62,8 @@
 <section class="section" aria-label="Carteirinha, plano e exames">
   <div class="wrap">
     <div class="info-cards">
-      <div id="carteirinha"><span class="num">01 · Carteirinha</span><h3 class="mt-5">Sua identificação na rede</h3><p class="mt-4 muted small">Consulte os dados da carteirinha na Área do Beneficiário ou no aplicativo e apresente no atendimento.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Acessar carteirinha {{i:external}}</a></div>
-      <div id="plano"><span class="num">02 · Informações do plano</span><h3 class="mt-5">Abrangência e cobertura do seu contrato</h3><p class="mt-4 muted small">Confira as condições do seu produto antes de agendar e mantenha seus dados atualizados.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Ver meu plano {{i:external}}</a></div>
+      <div id="carteirinha"><span class="num">01 · Carteirinha</span><h3 class="mt-5">Sua identificação na rede</h3><p class="mt-4 muted small">Consulte os dados da carteirinha na Área do Beneficiário ou no aplicativo e apresente no atendimento.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Acessar carteirinha</a></div>
+      <div id="plano"><span class="num">02 · Informações do plano</span><h3 class="mt-5">Abrangência e cobertura do seu contrato</h3><p class="mt-4 muted small">Confira as condições do seu produto antes de agendar e mantenha seus dados atualizados.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Ver meu plano</a></div>
       <div id="exames"><span class="num">03 · Exames</span><h3 class="mt-5">Autorizações e acompanhamento</h3><p class="mt-4 muted small">Acompanhe autorizações na Área do Beneficiário. Os resultados de exames são disponibilizados pelo prestador que realizou o atendimento.</p><a class="btn" href="servicos.html#autorizacoes">Ver autorizações</a></div>
     </div>
   </div>
@@ -76,7 +76,7 @@
         <span class="eyebrow">Aplicativo MedicGLOBAL</span>
         <h2 id="app-t" class="balance">A rede credenciada no seu bolso</h2>
         <p class="lead">Encontre prestadores, salve favoritos, entre em contato e veja como chegar ao local do atendimento.</p>
-        <div class="btn-row"><a class="btn btn--light" href="{{L.links.play}}" target="_blank" rel="noopener">Google Play</a><a class="btn btn--ghost-light" href="{{L.links.appstore}}" target="_blank" rel="noopener">App Store</a></div>
+        <div class="btn-row store-row">{{> store-buttons}}</div>
       </div>
       <div class="phone-stage">{{> orbits}}{{> phone}}<div class="float-tag" style="left:2%;top:18%" aria-hidden="true"><span class="chip"><i>{{i:star}}</i><span>Favoritos<small>seus prestadores salvos</small></span></span></div><div class="float-tag" style="right:0;bottom:20%" aria-hidden="true"><span class="chip"><i>{{i:route}}</i><span>Como chegar<small>localização do atendimento</small></span></span></div></div>
     </div>

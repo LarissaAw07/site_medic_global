@@ -6,6 +6,23 @@
   "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Nossa história", "medicglobal.html"]]
 }@-->
 
+<style>
+/* Antes/Agora mais compacto */
+.wipe { aspect-ratio: 21/8; }
+@media (max-width: 719px) { .wipe { aspect-ratio: 1/1; } }
+/* números com a tipografia dos títulos; blocos das pontas destacados do fundo */
+.stat .stat-big { font-weight: 500; letter-spacing: -.03em; }
+.stat:nth-child(1), .stat:nth-child(4) { background: var(--white); box-shadow: 0 1px 0 var(--line-2), 0 24px 48px -32px rgba(2,26,29,.28); }
+.stat:nth-child(1) .badge, .stat:nth-child(4) .badge { background: var(--tint); }
+/* Nossa estrutura: cada descrição em uma linha */
+@media (min-width: 1100px) {
+  #estrutura .feature-list { grid-template-columns: 1fr; gap: 22px; }
+  #estrutura .feature-list p { white-space: nowrap; }
+}
+/* Nossa atuação: tags em faixa abaixo do cabeçalho */
+.atuacao-tags { display: grid; gap: 12px; }
+</style>
+
 <section class="hero hero--page hero--art" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
@@ -100,18 +117,17 @@
 
 <section class="section" id="atuacao" aria-labelledby="at-t">
   <div class="wrap">
-    <div class="split split--57">
-      <div class="stack">
-        <span class="eyebrow">Nossa atuação</span>
-        <h2 id="at-t" class="balance">Do Sul de Minas à região de Bragança Paulista</h2>
+    <div class="grid mb-8">
+      <div class="c-1-7"><span class="eyebrow">Nossa atuação</span><h2 id="at-t" class="balance">Do Sul de Minas à região de Bragança Paulista</h2></div>
+      <div class="c-8-13 stack" style="align-self:end">
         <p class="lead">Com sede em Extrema/MG, a MedicGLOBAL atua entre Bragança Paulista/SP e Pouso Alegre/MG — e oferece atendimento de urgência e emergência em trânsito em todo o território nacional pelo Sistema ABRAMGE.</p>
         <a class="link" href="rede-credenciada.html#mapa">Ver o mapa da área de atuação</a>
       </div>
-      <div class="marquee" aria-hidden="true" style="display:grid;gap:12px">
-        <div class="marquee-track"><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span></div>
-        <div class="marquee marquee--rev"><div class="marquee-track"><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span></div></div>
-      </div>
     </div>
+  </div>
+  <div class="atuacao-tags" aria-hidden="true">
+    <div class="marquee"><div class="marquee-track"><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Sul de Minas</span></div></div>
+    <div class="marquee marquee--rev"><div class="marquee-track"><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Ambulatorial</span><span class="marquee-item">Hospitalar</span><span class="marquee-item">Obstetrícia</span><span class="marquee-item">Telemedicina</span><span class="marquee-item">ABRAMGE</span></div></div>
   </div>
 </section>
 

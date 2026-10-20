@@ -204,10 +204,96 @@
 @media (min-width: 1100px) {
   .t-a { grid-column: span 7; grid-row: span 2; } .t-b { grid-column: span 5; } .t-c { grid-column: span 5; }
   .t-d { grid-column: span 4; } .t-e { grid-column: span 4; } .t-f { grid-column: span 4; }
+  /* conjunto compacto para caber inteiro na tela em zoom 100% */
+  .bento { grid-auto-rows: auto; gap: 14px; }
+  .tile { min-height: 0; padding: 20px 28px; gap: 6px; }
+  .tile h3 { max-width: 24ch; }
+  .tile p { max-width: 46ch; }
+  .tile .go { padding-top: 4px; }
+  .tile .ico { width: 36px; height: 36px; border-radius: 11px; margin-bottom: 2px; }
+  .tile .ico svg { width: 18px; height: 18px; }
 }
-.detail { display: grid; gap: 40px; padding-block: 72px; border-top: 1px solid var(--line-2); }
-@media (min-width: 1100px) { .detail { grid-template-columns: 4fr 1fr 7fr; } .detail > :last-child { grid-column: 3; } }
-.detail h2 { font-size: var(--t-h3); }
+/* ---------- Seções a partir de Autorizações: cada uma com composição própria ---------- */
+.svc-pair { display: grid; gap: 20px; }
+@media (min-width: 1100px) { .svc-pair { grid-template-columns: 1fr 1fr; } .svc-pair--prog { grid-template-columns: 5fr 7fr; } }
+.svc-panel { position: relative; overflow: hidden; border-radius: var(--r-lg); background: var(--mist); padding: clamp(32px, 1.5rem + 3vw, 64px); display: flex; flex-direction: column; gap: 24px; }
+.svc-panel > :not(.svc-curl) { position: relative; z-index: 1; }
+.svc-panel h2 { font-size: var(--t-h2); line-height: 1.08; max-width: 18ch; }
+.svc-panel .eyebrow { margin-bottom: -8px; }
+.svc-panel .notice { background: var(--white); margin-top: auto; max-width: 30rem; }
+.svc-curl { position: absolute; pointer-events: none; color: var(--medic); fill: none; stroke: currentColor; stroke-linecap: round; }
+.svc-photo { position: relative; overflow: hidden; border-radius: var(--r-lg); min-height: 340px; background: var(--mist-2); }
+.svc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.14); will-change: transform; }
+.svc-photo .svc-line { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #fff; stroke-width: 6; stroke-linecap: round; opacity: .9; z-index: 1; }
+.svc-badge { position: absolute; left: 20px; bottom: 20px; z-index: 2; display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px 12px 12px; border-radius: var(--r-pill, 999px); background: rgba(255,255,255,.92); backdrop-filter: blur(8px); font-family: var(--f-head); font-size: var(--t-sm); color: var(--ink); box-shadow: 0 20px 40px -20px rgba(2,26,29,.45); }
+.svc-badge i { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--globo); color: #fff; }
+.svc-badge svg { width: 18px; height: 18px; }
+.svc-badge small { display: block; color: var(--ink-3); font-size: var(--t-xs); font-family: var(--f-body); }
+
+/* Autorizações */
+.svc-auth { padding-bottom: 20px; }
+.svc-auth .svc-curl { width: 300px; right: -90px; bottom: -120px; stroke-width: 22; opacity: .9; }
+.svc-auth .svc-panel .notice { max-width: calc(100% - 140px); }
+@media (min-width: 1100px) { .svc-auth .svc-photo { min-height: 600px; } }
+
+/* Programas de saúde */
+.svc-stack { display: grid; gap: 20px; grid-template-rows: 1fr auto; }
+.svc-stack .svc-photo { min-height: 300px; background: var(--globo); }
+.svc-note { border-radius: var(--r-lg); background: var(--deep); color: var(--on-deep); padding: 32px; display: flex; gap: 20px; align-items: center; }
+.svc-note i { flex-shrink: 0; width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: rgba(255,255,255,.08); color: var(--glow); }
+.svc-note i svg { width: 26px; height: 26px; }
+.svc-note p { font-family: var(--f-head); font-size: var(--t-h4); line-height: 1.25; color: #fff; }
+.svc-note p span { color: var(--glow); }
+.svc-prog .svc-panel { background: var(--tint); justify-content: center; }
+.svc-prog .svc-panel h2 { max-width: 16ch; }
+.svc-prog .svc-curl { width: 200px; right: -30px; bottom: -40px; stroke-width: 22; color: var(--globo); opacity: .85; }
+@media (min-width: 1100px) { .svc-prog .svc-panel { padding-right: 170px; } }
+
+/* ABRAMGE: imagem em largura total com parallax */
+.svc-abramge { position: relative; overflow: hidden; color: var(--on-deep); background: var(--deep); padding-block: clamp(96px, 4rem + 6vw, 168px); text-align: center; }
+.svc-abramge .svc-bg { position: absolute; inset: 0; overflow: hidden; }
+.svc-abramge .svc-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.3); will-change: transform; filter: saturate(.6) blur(3px); }
+.svc-abramge .svc-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(3,79,86,.86), rgba(2,40,44,.96) 75%); }
+.svc-abramge .orbits { width: min(1100px, 140vw); aspect-ratio: 1; left: 50%; top: 50%; color: var(--glow); opacity: .22; transform: translate3d(-50%, calc(-50% + var(--py, 0px)), 0); will-change: transform; z-index: 1; }
+.svc-abramge .wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.svc-abramge .eyebrow { color: var(--glow); gap: 14px; }
+.svc-abramge .eyebrow::before, .svc-abramge .eyebrow::after { content: ""; width: 40px; height: 1px; background: var(--glow); }
+.svc-abramge h2 { color: #fff; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem); line-height: 1.05; letter-spacing: -.035em; max-width: 16ch; }
+.svc-abramge h2 em { font-style: normal; font-weight: 600; color: var(--glow); }
+.svc-abramge .lead { color: rgba(255,255,255,.78); max-width: 44rem; }
+.svc-pill { margin-top: 16px; display: inline-flex; align-items: center; gap: 14px; padding: 18px 36px; border-radius: 999px; border: 1px solid rgba(79,195,195,.45); background: rgba(255,255,255,.05); backdrop-filter: blur(6px); color: #fff; font-family: var(--f-head); font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; transition: background .3s, border-color .3s; }
+.svc-pill:hover { background: rgba(79,195,195,.16); border-color: var(--glow); }
+
+/* Urgência e emergência: passos numerados */
+.svc-urg-head { display: grid; gap: 24px; align-items: end; margin-bottom: 48px; }
+@media (min-width: 1100px) { .svc-urg-head { grid-template-columns: 7fr 5fr; } }
+.svc-urg-head h2 { font-size: var(--t-h2); line-height: 1.08; max-width: 18ch; }
+.svc-urg-head .sos { justify-self: start; display: flex; align-items: center; gap: 18px; }
+@media (min-width: 1100px) { .svc-urg-head .sos { justify-self: end; } }
+.svc-urg-head .sos b { font-family: var(--f-display); font-size: clamp(3.5rem, 2rem + 4vw, 6rem); line-height: .9; font-weight: 600; color: var(--globo); letter-spacing: -.04em; }
+.svc-urg-head .sos span { font-size: var(--t-sm); color: var(--ink-3); max-width: 14ch; line-height: 1.4; }
+.svc-steps { list-style: none; display: grid; gap: 16px; }
+@media (min-width: 760px) { .svc-steps { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .svc-steps { grid-template-columns: repeat(4, 1fr); } }
+.svc-steps li { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 28px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--white); color: var(--ink-2); font-size: var(--t-sm); line-height: 1.55; transition: transform .5s var(--ease), border-color .3s; }
+.svc-steps li:hover { transform: translateY(-3px); border-color: var(--medic); }
+.svc-steps li::before { counter-increment: svc; content: "0" counter(svc); font-family: var(--f-display); font-size: 2.25rem; line-height: 1; color: var(--medic); letter-spacing: -.03em; }
+.svc-steps { counter-reset: svc; }
+.svc-steps strong { display: block; font-family: var(--f-head); font-weight: 500; font-size: 1.0625rem; color: var(--ink); margin-bottom: 4px; }
+.svc-steps li:first-child { background: var(--globo); border-color: var(--globo); color: rgba(255,255,255,.84); }
+.svc-steps li:first-child::before { color: var(--glow); }
+.svc-steps li:first-child strong { color: #fff; }
+
+/* Atendimento: faixa azul em linha única */
+.svc-cta { position: relative; overflow: hidden; background: var(--globo); color: #fff; padding-block: clamp(56px, 2rem + 3vw, 88px); }
+.svc-cta .orbits { width: min(820px, 120vw); aspect-ratio: 1; right: -12%; top: 50%; color: var(--glow); opacity: .3; transform: translate3d(0, calc(-50% + var(--py, 0px)), 0); will-change: transform; }
+.svc-cta .wrap { position: relative; z-index: 1; display: grid; gap: 24px; align-items: center; }
+@media (min-width: 1100px) { .svc-cta .wrap { grid-template-columns: 4fr 5fr auto; gap: 48px; } }
+.svc-cta .eyebrow { color: var(--glow); } .svc-cta .eyebrow::before { background: var(--glow); }
+.svc-cta h2 { color: #fff; font-size: var(--t-h3); }
+.svc-cta .lead { color: rgba(255,255,255,.84); margin: 0; }
+.svc-cta .btn { --b-bg: var(--white); --b-fg: var(--globo); --b-bd: var(--white); }
+.svc-cta .btn:hover { --b-bg: var(--glow); --b-fg: var(--deep); --b-bd: var(--glow); }
 </style>
 
 <section class="hero hero--page hero--art" aria-labelledby="t">
@@ -377,49 +463,76 @@
   </div>
 </section>
 
-<section class="section section--flush-top" aria-label="Detalhes dos serviços">
+<section class="section section--flush-top svc-auth" id="autorizacoes" aria-labelledby="t-auth">
+  <div class="wrap svc-pair">
+    <div class="svc-panel reveal">
+      <span class="eyebrow">Autorizações</span>
+      <h2 id="t-auth" class="balance">Seu exame ou procedimento precisa de autorização?</h2>
+      <p class="lead">Envie a sua solicitação pelo WhatsApp de autorizações da MedicGLOBAL. Tenha em mãos o pedido do profissional e os dados do beneficiário.</p>
+      <div class="btn-row"><a class="btn" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9a4.5 4.5 0 0 1-2.3-2.3l.9-1-1-2z"/></svg> Solicitar autorização</a><a class="btn btn--ghost" href="tel:+5535988459074">(35) 9 8845-9074</a></div>
+      <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>É prestador? Utilize o <a class="accent" href="http://187.60.158.90:8080/AUTORIZADORWEB/Account/Login" target="_blank" rel="noopener">Autorizador Web TISS 3.0</a> e as <a class="accent" href="documentos.html#tiss">guias TISS</a>.</span></div>
+      <svg class="svc-curl" viewBox="0 0 300 300" aria-hidden="true" focusable="false"><path d="M20 320C30 200 130 170 150 230s-70 70-60-20 120-120 140-30-50 110-10 10 90-120 120-150"/></svg>
+    </div>
+    <div class="svc-photo reveal reveal-d1">
+      <img src="assets/img/provisorio/medica-sorrindo.jpg" alt="Médica sorrindo durante atendimento a pacientes" loading="lazy" decoding="async">
+      <svg class="svc-line" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path d="M-20 560C120 540 220 470 300 400c90-70 220-60 230 20 10 80-100 110-140 60-40-50 60-130 230-120"/></svg>
+      <span class="svc-badge" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9a4.5 4.5 0 0 1-2.3-2.3l.9-1-1-2z"/></svg></i><span>Autorizações<small>WhatsApp dedicado</small></span></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top svc-prog" id="programas" aria-labelledby="t-prog">
+  <div class="wrap svc-pair svc-pair--prog">
+    <div class="svc-stack">
+      <div class="svc-photo reveal"><img src="assets/img/provisorio/familia.jpg" alt="Família sorrindo junta em casa" loading="lazy" decoding="async"></div>
+      <div class="svc-note reveal reveal-d1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20s-8-4.7-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.3-8 11-8 11z"/></svg></i><p>Consultas <span>e</span> exames<br>com mais facilidade</p></div>
+    </div>
+    <div class="svc-panel reveal reveal-d1">
+      <span class="eyebrow">Programas de saúde</span>
+      <h2 id="t-prog" class="balance">Cuidado contínuo, com mais facilidade</h2>
+      <p class="lead">Os programas de saúde da MedicGLOBAL facilitam o agendamento de consultas e exames.</p>
+      <p class="muted">Para saber quais programas estão disponíveis para o seu plano e como participar, fale com a central de atendimento.</p>
+      <div class="btn-row"><a class="btn btn--ghost" href="atendimento.html">Falar com a MedicGLOBAL</a></div>
+      <svg class="svc-curl" viewBox="0 0 300 300" aria-hidden="true" focusable="false"><path d="M150 320c0-60-110-90-110-170 0-50 60-70 90-30 30-40 90-20 90 30 0 70-80 90-70 130s120 20 180-30"/></svg>
+    </div>
+  </div>
+</section>
+
+<section class="svc-abramge" id="abramge" aria-labelledby="t-abramge">
+  <div class="svc-bg"><img src="assets/img/provisorio/renascentista-recepcao.jpg" alt="Recepção do Hospital Renascentista" loading="lazy" decoding="async"></div>
+  <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
+  <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
+  <circle cx="400" cy="400" r="300" opacity=".35"/>
+  <g class="spin-rev" opacity=".5"><ellipse cx="400" cy="400" rx="300" ry="120" transform="rotate(-24 400 400)"/><circle cx="674" cy="278" r="5" fill="currentColor" class="orbit-dot"/></g>
+  <ellipse cx="400" cy="400" rx="120" ry="300" opacity=".25"/>
+  <g class="spin-slow" opacity=".4"><ellipse cx="400" cy="400" rx="300" ry="200" transform="rotate(38 400 400)"/><circle cx="160" cy="250" r="3.5" fill="currentColor" class="orbit-dot"/></g>
+</svg>
+
   <div class="wrap">
-    <article class="detail" id="autorizacoes">
-      <div><span class="eyebrow">Autorizações</span><h2 class="balance">Seu exame ou procedimento precisa de autorização?</h2></div>
-      <div class="stack">
-        <p class="lead">Envie a sua solicitação pelo WhatsApp de autorizações da MedicGLOBAL. Tenha em mãos o pedido do profissional e os dados do beneficiário.</p>
-        <div class="btn-row"><a class="btn" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9a4.5 4.5 0 0 1-2.3-2.3l.9-1-1-2z"/></svg> Solicitar autorização</a><a class="btn btn--ghost" href="tel:+5535988459074">(35) 9 8845-9074</a></div>
-        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg><span>É prestador? Utilize o <a class="accent" href="http://187.60.158.90:8080/AUTORIZADORWEB/Account/Login" target="_blank" rel="noopener">Autorizador Web TISS 3.0</a> e as <a class="accent" href="documentos.html#tiss">guias TISS</a>.</span></div>
-      </div>
-    </article>
+    <span class="eyebrow reveal">ABRAMGE</span>
+    <h2 id="t-abramge" class="balance reveal reveal-d1">Atendimento em trânsito <em>pelo Brasil</em></h2>
+    <p class="lead reveal reveal-d2">Fora da área de atuação, você conta com atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional, conforme as condições do seu contrato.</p>
+    <a class="svc-pill reveal reveal-d2" href="https://abramge.com.br/" target="_blank" rel="noopener">Fale com a ABRAMGE</a>
+  </div>
+</section>
 
-    <article class="detail" id="programas">
-      <div><span class="eyebrow">Programas de saúde</span><h2 class="balance">Cuidado contínuo, com mais facilidade</h2></div>
-      <div class="stack">
-        <p class="lead">Os programas de saúde da MedicGLOBAL facilitam o agendamento de consultas e exames.</p>
-        <p class="muted">Para saber quais programas estão disponíveis para o seu plano e como participar, fale com a central de atendimento.</p>
-        <div class="btn-row"><a class="btn btn--ghost" href="atendimento.html">Falar com a MedicGLOBAL</a></div>
-      </div>
-    </article>
+<section class="section svc-urg" id="urgencia" aria-labelledby="t-urg">
+  <div class="wrap">
+    <div class="svc-urg-head">
+      <div class="reveal"><span class="eyebrow">Urgência e emergência</span><h2 id="t-urg" class="balance">Em uma situação urgente, saiba o que fazer</h2></div>
+      <div class="sos reveal reveal-d1" aria-hidden="true"><b>192</b><span>SAMU, em caso de risco imediato à vida</span></div>
+    </div>
+    <ul class="svc-steps">
+      <li class="reveal"><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
+      <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</span></li>
+      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo <a class="accent" href="#abramge">Sistema ABRAMGE</a>.</span></li>
+      <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações <a class="accent" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener">(35) 9 8845-9074</a>.</span></li>
+    </ul>
+  </div>
+</section>
 
-    <article class="detail" id="abramge">
-      <div><span class="eyebrow">ABRAMGE</span><h2 class="balance">Atendimento em trânsito pelo Brasil</h2></div>
-      <div class="split" style="gap:40px">
-        <div class="stack">
-          <p class="lead">Fora da área de atuação, você conta com atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional, conforme as condições do seu contrato.</p>
-          <a class="link" href="https://abramge.com.br/" target="_blank" rel="noopener">Fale com a ABRAMGE <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>
-        </div>
-        <div class="img-round" style="aspect-ratio:4/3"><img src="assets/img/provisorio/renascentista-recepcao.jpg" alt="Recepção do Hospital Renascentista" loading="lazy" decoding="async"></div>
-      </div>
-    </article>
-
-    <article class="detail" id="urgencia">
-      <div><span class="eyebrow">Urgência e emergência</span><h2 class="balance">Em uma situação urgente, saiba o que fazer</h2></div>
-      <div class="stack">
-        <ul class="checklist">
-          <li><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
-          <li><span><strong>Na área de atuação:</strong> consulte os hospitais da <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</span></li>
-          <li><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo <a class="accent" href="#abramge">Sistema ABRAMGE</a>.</span></li>
-          <li><span><strong>Autorização urgente:</strong> WhatsApp de autorizações <a class="accent" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener">(35) 9 8845-9074</a>.</span></li>
-        </ul>
-      </div>
-    </article>
-
+<section class="section section--flush-top" aria-label="Aplicativo">
+  <div class="wrap">
     <article class="app-card" id="aplicativo">
       <div class="app-card-copy">
         <span class="eyebrow">Aplicativo</span>
@@ -459,13 +572,53 @@
 </div>
 </div>
     </article>
-
-    <article class="detail" id="atendimento">
-      <div><span class="eyebrow">Atendimento</span><h2 class="balance">Ainda com dúvidas?</h2></div>
-      <div class="stack"><p class="lead">A central reúne telefones, WhatsApp e ouvidoria, separados pelo que você precisa.</p><a class="btn" href="atendimento.html">Ir para a central de atendimento</a></div>
-    </article>
   </div>
 </section>
+
+<section class="svc-cta" id="atendimento" aria-labelledby="t-atend">
+  <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
+  <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
+  <circle cx="400" cy="400" r="300" opacity=".35"/>
+  <g class="spin-rev" opacity=".5"><ellipse cx="400" cy="400" rx="300" ry="120" transform="rotate(-24 400 400)"/><circle cx="674" cy="278" r="5" fill="currentColor" class="orbit-dot"/></g>
+  <ellipse cx="400" cy="400" rx="120" ry="300" opacity=".25"/>
+  <g class="spin-slow" opacity=".4"><ellipse cx="400" cy="400" rx="300" ry="200" transform="rotate(38 400 400)"/><circle cx="160" cy="250" r="3.5" fill="currentColor" class="orbit-dot"/></g>
+</svg>
+
+  <div class="wrap">
+    <div><span class="eyebrow">Atendimento</span><h2 id="t-atend" class="balance">Ainda com dúvidas?</h2></div>
+    <p class="lead">A central reúne telefones, WhatsApp e ouvidoria, separados pelo que você precisa.</p>
+    <a class="btn" href="atendimento.html">Ir para a central de atendimento</a>
+  </div>
+</section>
+
+<script>
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  /* parallax: [elemento, velocidade, limite (fração da altura do bloco)] */
+  var items = [];
+  function add(sel, speed, limit) {
+    [].forEach.call(document.querySelectorAll(sel), function (el) { items.push({ el: el, box: el.parentElement, speed: speed, limit: limit }); });
+  }
+  add(".svc-photo img", .08, .06);
+  add(".svc-abramge .svc-bg img", .22, .12);
+  add(".svc-abramge > .orbits, .svc-cta > .orbits", -.2, 0);
+  var tick = false;
+  function upd() {
+    tick = false;
+    var vh = window.innerHeight;
+    items.forEach(function (it) {
+      var r = it.box.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      var py = (r.top + r.height / 2 - vh / 2) * it.speed;
+      if (it.limit) py = Math.max(-r.height * it.limit, Math.min(r.height * it.limit, py));
+      it.el.style.setProperty("--py", py.toFixed(1) + "px");
+    });
+  }
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  window.addEventListener("resize", upd);
+  upd();
+})();
+</script>
 
 </main>
 

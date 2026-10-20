@@ -1545,9 +1545,6 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 @media (min-width: 900px) { .faq-cols { grid-template-columns: 1fr 1fr; } }
 .faq-col .faq-item .ans { padding-right: 16px; }
 
-/* Título de página no mesmo tamanho dos banners internos (ex.: Sou beneficiário) */
-.title-page { font-size: clamp(2.25rem, 1rem + 2.3vw, 3.25rem); }
-
 /* Serviços · Aplicativo: cartão com texto, recursos e selos à esquerda; celular em painel escuro à direita */
 .app-card { display: grid; gap: 32px; padding: 24px; border-radius: var(--r-lg); background: var(--mist); border: 1px solid var(--line-2); margin-block: 24px; }
 @media (min-width: 1100px) { .app-card { grid-template-columns: 7fr 5fr; gap: 56px; padding: 56px 0 56px 56px; align-items: center; } }

@@ -164,6 +164,8 @@ ul, ol { margin: 0; padding: 0; }
 .prose h3 { font-size: var(--t-h4); margin: 1.8em 0 .5em; }
 .prose li + li { margin-top: .4em; }
 .prose a { color: var(--globo); }
+.prose a.btn { color: var(--b-fg); }
+.prose .btn-row { margin-top: 24px; margin-bottom: 24px; }
 .tnum { font-variant-numeric: tabular-nums; }
 
 /* ---------- Botões ---------- */

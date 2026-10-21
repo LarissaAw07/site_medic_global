@@ -1068,7 +1068,7 @@ html:not(.js) .hero-nav { display: none; }
 .support .who { font-size: .7rem; font-family: var(--f-head); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 
 /* Local (contato) */
-.place { display: grid; gap: 16px; max-width: 1100px; margin-inline: auto; }
+.place { display: grid; gap: 16px; }
 @media (min-width: 1100px) { .place { grid-template-columns: 5fr 7fr; gap: 20px; } }
 .place-card { background: var(--deep); color: var(--on-deep); border-radius: var(--r-lg); padding: 32px; display: flex; flex-direction: column; gap: 28px; }
 @media (min-width: 1100px) { .place-card { padding: 48px; } }

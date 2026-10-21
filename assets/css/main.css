@@ -1068,16 +1068,21 @@ html:not(.js) .hero-nav { display: none; }
 .support .who { font-size: .7rem; font-family: var(--f-head); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 
 /* Local (contato) */
-.place { display: grid; gap: 16px; }
-@media (min-width: 1100px) { .place { grid-template-columns: 5fr 7fr; gap: 24px; } }
+.place { display: grid; gap: 16px; max-width: 1100px; margin-inline: auto; }
+@media (min-width: 1100px) { .place { grid-template-columns: 5fr 7fr; gap: 20px; } }
 .place-card { background: var(--deep); color: var(--on-deep); border-radius: var(--r-lg); padding: 32px; display: flex; flex-direction: column; gap: 28px; }
 @media (min-width: 1100px) { .place-card { padding: 48px; } }
+.place-card .eyebrow svg { width: 16px; height: 16px; flex-shrink: 0; }
 .place-card h2 { color: var(--white); font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem); }
+/* Contato (Onde estamos): card e mapa mais compactos */
+.place > .place-card { padding: 28px; gap: 20px; }
+@media (min-width: 1100px) { .place > .place-card { padding: 36px; } }
+.place > .place-card h2 { font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem); }
 .place-card dl { margin: 0; display: grid; gap: 0; }
 .place-card dl div { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-deep); font-size: var(--t-sm); }
 .place-card dt { color: var(--on-deep-2); }
 .place-card dd { margin: 0; color: var(--white); text-align: right; font-family: var(--f-head); font-weight: 500; }
-.place-media { border-radius: var(--r-lg); overflow: hidden; position: relative; min-height: 420px; background: var(--deep-2); }
+.place-media { border-radius: var(--r-lg); overflow: hidden; position: relative; min-height: 320px; background: var(--deep-2); }
 .place-media iframe, .place-media img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
 .place-ctrl { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; justify-content: space-between; align-items: center; padding: 8px 8px 8px 20px; border-radius: var(--r-pill); background: rgba(2,26,29,.7); backdrop-filter: blur(12px); color: var(--white); font-family: var(--f-head); font-size: .85rem; z-index: 2; }
 .place-ctrl .btns { display: flex; gap: 6px; }

@@ -350,36 +350,6 @@
   </div>
 </section>
 
-<section class="section mist" id="todos" aria-labelledby="todos-t" data-filter data-filter-items="#todos .card-post" data-filter-empty="#posts-none">
-  <div class="wrap">
-    <div class="flex-between mb-7">
-      <h2 id="todos-t" style="font-size:var(--t-h3)">Todos os conteúdos</h2>
-      <div class="field" style="min-width:min(100%,340px)"><label class="sr-only" for="post-q">Buscar conteúdos</label><input id="post-q" type="search" data-filter-search placeholder="Buscar conteúdos"></div>
-    </div>
-    <div class="type-pills mb-8" role="group" aria-label="Categorias">
-      <button class="pill" type="button" data-filter-group="cat" data-value="all" aria-pressed="true">Todos</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="saude" aria-pressed="false">Saúde</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="noticias" aria-pressed="false">Notícias</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Comunicados</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="hospitais" aria-pressed="false">Hospitais</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="beneficiario" aria-pressed="false">Beneficiário</button>
-      <button class="pill" type="button" data-filter-group="cat" data-value="institucional" aria-pressed="false">Institucional</button>
-    </div>
-    <div class="card-grid">
-      <a class="card-post" data-cat="comunicados beneficiario" href="artigo-reajuste-2020.html"><div class="img img--art"><img src="assets/img/provisorio/comunicado.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Comunicados</span><span>08/06/2024</span></div><h3>Recomposição do reajuste dos planos de saúde 2020</h3><p>A decisão da ANS sobre reajustes entre setembro e dezembro de 2020.</p></a>
-      <a class="card-post" data-cat="comunicados beneficiario" href="documentos.html#reajuste"><div class="img"><img src="assets/img/provisorio/atendimento.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Comunicados</span><span>RN 565</span></div><h3>Reajuste do agrupamento de contratos 2026/2027</h3><p>Percentual de 8,70% para o período de 01/05/2026 a 30/04/2027, aplicado ao agrupamento de contratos com até 30 vidas.</p></a>
-      <a class="card-post" data-cat="noticias institucional" href="medicglobal.html"><div class="img"><img src="assets/img/provisorio/hsl-recepcao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Notícias</span><span>Institucional</span></div><h3>Agora a Extremamedic é MedicGLOBAL</h3><p>Mesma razão social, mesmo registro na ANS e uma nova forma de cuidar.</p></a>
-      <a class="card-post" data-cat="beneficiario" href="telemedicina.html"><div class="img"><img src="assets/img/provisorio/medica-sorrindo.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Guia rápido</span></div><h3>Telemedicina: como acessar</h3><p>Passo a passo para ser atendido a distância, conforme as condições do seu plano.</p></a>
-      <a class="card-post" data-cat="beneficiario" href="servicos.html#aplicativo"><div class="img"><img src="assets/img/provisorio/medica-paciente.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Aplicativo</span></div><h3>A rede credenciada no seu celular</h3><p>Favoritos, contato com prestadores e localização do atendimento.</p></a>
-      <a class="card-post" data-cat="beneficiario" href="servicos.html#abramge"><div class="img"><img src="assets/img/provisorio/familia.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Viagem</span></div><h3>Vai viajar? Conheça o atendimento em trânsito</h3><p>Urgência e emergência pelo Sistema ABRAMGE, em todo o território nacional.</p></a>
-      <article class="card-post" data-cat="saude"><div class="img"><img src="assets/img/provisorio/coracao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Saúde</span><span class="review-flag">Em atualização</span></div><h3>Sintomas de doenças do coração</h3><p>Conteúdo em revisão pela equipe de saúde da MedicGLOBAL.</p></article>
-      <article class="card-post" data-cat="saude"><div class="img"><img src="assets/img/provisorio/depressao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Saúde</span><span class="review-flag">Em atualização</span></div><h3>Depressão</h3><p>Conteúdo em revisão pela equipe de saúde da MedicGLOBAL.</p></article>
-      <article class="card-post" data-cat="hospitais"><div class="img"><img src="assets/img/provisorio/santa-casa.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Hospitais</span><span class="review-flag">Em atualização</span></div><h3>Hospital Santa Casa de Bragança</h3><p>Conteúdo em revisão. Consulte a <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</p></article>
-    </div>
-    <p id="posts-none" class="muted mt-7" hidden>Nenhum conteúdo encontrado para essa busca.</p>
-  </div>
-</section>
-
 <style>
 /* Novidades: faixa em parallax (gradiente Azul Medic → azul profundo, foto e órbitas em velocidades diferentes) */
 .nl-band { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r-lg); background: var(--deep); color: var(--on-deep); padding: clamp(24px, 1rem + 1.2vw, 36px) clamp(24px, 1rem + 2.5vw, 56px); }
@@ -409,7 +379,7 @@
 .nl-band .form-ok { margin-top: 16px; background: rgba(255,255,255,.1); color: #fff; }
 </style>
 
-<section class="section" aria-labelledby="nl-t">
+<section class="section section--flush-top" aria-labelledby="nl-t">
   <div class="wrap">
     <div class="nl-band">
       <div class="nl-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1200&q=72" srcset="https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=480&q=72 480w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=800&q=72 800w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1200&q=72 1200w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1600&q=72 1600w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
@@ -461,6 +431,36 @@
   upd();
 })();
 </script>
+
+<section class="section mist" id="todos" aria-labelledby="todos-t" data-filter data-filter-items="#todos .card-post" data-filter-empty="#posts-none">
+  <div class="wrap">
+    <div class="flex-between mb-7">
+      <h2 id="todos-t" style="font-size:var(--t-h3)">Todos os conteúdos</h2>
+      <div class="field" style="min-width:min(100%,340px)"><label class="sr-only" for="post-q">Buscar conteúdos</label><input id="post-q" type="search" data-filter-search placeholder="Buscar conteúdos"></div>
+    </div>
+    <div class="type-pills mb-8" role="group" aria-label="Categorias">
+      <button class="pill" type="button" data-filter-group="cat" data-value="all" aria-pressed="true">Todos</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="saude" aria-pressed="false">Saúde</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="noticias" aria-pressed="false">Notícias</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Comunicados</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="hospitais" aria-pressed="false">Hospitais</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="beneficiario" aria-pressed="false">Beneficiário</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="institucional" aria-pressed="false">Institucional</button>
+    </div>
+    <div class="card-grid">
+      <a class="card-post" data-cat="comunicados beneficiario" href="artigo-reajuste-2020.html"><div class="img img--art"><img src="assets/img/provisorio/comunicado.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Comunicados</span><span>08/06/2024</span></div><h3>Recomposição do reajuste dos planos de saúde 2020</h3><p>A decisão da ANS sobre reajustes entre setembro e dezembro de 2020.</p></a>
+      <a class="card-post" data-cat="comunicados beneficiario" href="documentos.html#reajuste"><div class="img"><img src="assets/img/provisorio/atendimento.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Comunicados</span><span>RN 565</span></div><h3>Reajuste do agrupamento de contratos 2026/2027</h3><p>Percentual de 8,70% para o período de 01/05/2026 a 30/04/2027, aplicado ao agrupamento de contratos com até 30 vidas.</p></a>
+      <a class="card-post" data-cat="noticias institucional" href="medicglobal.html"><div class="img"><img src="assets/img/provisorio/hsl-recepcao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Notícias</span><span>Institucional</span></div><h3>Agora a Extremamedic é MedicGLOBAL</h3><p>Mesma razão social, mesmo registro na ANS e uma nova forma de cuidar.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="telemedicina.html"><div class="img"><img src="assets/img/provisorio/medica-sorrindo.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Guia rápido</span></div><h3>Telemedicina: como acessar</h3><p>Passo a passo para ser atendido a distância, conforme as condições do seu plano.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="servicos.html#aplicativo"><div class="img"><img src="assets/img/provisorio/medica-paciente.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Aplicativo</span></div><h3>A rede credenciada no seu celular</h3><p>Favoritos, contato com prestadores e localização do atendimento.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="servicos.html#abramge"><div class="img"><img src="assets/img/provisorio/familia.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Beneficiário</span><span>Viagem</span></div><h3>Vai viajar? Conheça o atendimento em trânsito</h3><p>Urgência e emergência pelo Sistema ABRAMGE, em todo o território nacional.</p></a>
+      <article class="card-post" data-cat="saude"><div class="img"><img src="assets/img/provisorio/coracao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Saúde</span><span class="review-flag">Em atualização</span></div><h3>Sintomas de doenças do coração</h3><p>Conteúdo em revisão pela equipe de saúde da MedicGLOBAL.</p></article>
+      <article class="card-post" data-cat="saude"><div class="img"><img src="assets/img/provisorio/depressao.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Saúde</span><span class="review-flag">Em atualização</span></div><h3>Depressão</h3><p>Conteúdo em revisão pela equipe de saúde da MedicGLOBAL.</p></article>
+      <article class="card-post" data-cat="hospitais"><div class="img"><img src="assets/img/provisorio/santa-casa.jpg" alt="" loading="lazy" decoding="async"></div><div class="post-meta"><span class="cat">Hospitais</span><span class="review-flag">Em atualização</span></div><h3>Hospital Santa Casa de Bragança</h3><p>Conteúdo em revisão. Consulte a <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</p></article>
+    </div>
+    <p id="posts-none" class="muted mt-7" hidden>Nenhum conteúdo encontrado para essa busca.</p>
+  </div>
+</section>
 
 </main>
 

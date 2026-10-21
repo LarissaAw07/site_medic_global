@@ -1616,6 +1616,8 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .hub-section .marquee--sm { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
 /* Cidades em cinza-claro */
 .deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #C9D3D4; }
+/* Rede de cuidado: cidades discretas, no estilo do rótulo "MedicGLOBAL" do diagrama (caixa-alta, fina, espaçada) */
+.hub-section .marquee--sm .marquee-item { font-family: var(--f-head); font-weight: 300; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #E3E9EA; }
 
 /* Para você · Boleto: blocos no padrão do site, com botões no lugar dos links do texto */
 .feature-list--actions { gap: 0; grid-auto-rows: 1fr; }

@@ -380,24 +380,87 @@
   </div>
 </section>
 
+<style>
+/* Novidades: faixa em parallax (gradiente Azul Medic → azul profundo, foto e órbitas em velocidades diferentes) */
+.nl-band { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r-lg); background: var(--deep); color: var(--on-deep); padding: clamp(40px, 1.5rem + 3vw, 72px) clamp(24px, 1rem + 3vw, 64px); }
+.nl-bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.nl-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.3); will-change: transform; filter: saturate(.5); }
+.nl-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(0,140,140,.94) 0%, rgba(3,79,86,.95) 45%, rgba(2,32,36,.97) 100%); }
+.nl-band > .orbits { z-index: -1; width: min(760px, 120vw); aspect-ratio: 1; right: -12%; top: 50%; color: var(--glow); opacity: .2; transform: translate3d(0, calc(-50% + var(--py, 0px)), 0); will-change: transform; }
+.nl-inner { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 1100px) { .nl-inner { grid-template-columns: 5fr 7fr; gap: 56px; } }
+.nl-copy .eyebrow { color: var(--glow); margin-bottom: 14px; }
+.nl-copy .eyebrow::before { background: var(--glow); }
+.nl-copy h2 { color: #fff; font-size: var(--t-h3); max-width: 20ch; }
+.nl-fields { display: grid; gap: 12px; }
+@media (min-width: 720px) { .nl-fields { grid-template-columns: 1fr 1fr auto; align-items: start; } }
+.nl-field { display: grid; gap: 6px; }
+.nl-field label { font-family: var(--f-head); font-size: .7rem; line-height: 1.4; letter-spacing: .12em; text-transform: uppercase; color: var(--on-deep-2); }
+.nl-field input { width: 100%; height: 52px; padding: 0 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; font: 400 var(--t-sm)/1.4 var(--f-body); transition: border-color .2s, background .2s; }
+.nl-field input:hover { border-color: rgba(255,255,255,.32); }
+.nl-field input:focus { outline: none; border-color: var(--glow); background: rgba(255,255,255,.12); box-shadow: 0 0 0 4px rgba(79,195,195,.18); }
+.nl-field input[aria-invalid="true"] { border-color: #FFB4A8; }
+.nl-band .error { color: #FFC9BF; }
+.nl-fields .btn { height: 52px; align-self: end; }
+@media (min-width: 720px) { .nl-fields .btn { margin-top: calc(.7rem * 1.4 + 6px); } }
+.nl-band .check { margin-top: 18px; color: var(--on-deep-2); }
+.nl-band .check a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.nl-band .check input[type="checkbox"] { accent-color: var(--glow); }
+.nl-band .form-ok { margin-top: 16px; background: rgba(255,255,255,.1); color: #fff; }
+</style>
+
 <section class="section" aria-labelledby="nl-t">
   <div class="wrap">
-    <div class="grid" style="align-items:center">
-      <div class="c-1-6"><span class="eyebrow">Novidades</span><h2 id="nl-t" style="font-size:var(--t-h3)" class="balance">Receba comunicados e conteúdos da MedicGLOBAL</h2></div>
-      <div class="c-7-13">
-        <form class="form-panel" data-validate="newsletter" action="#" method="post" style="padding:24px">
-          <div class="form-grid">
-            <div class="field"><label for="n-nome">Nome</label><input id="n-nome" name="nome" autocomplete="given-name" required aria-describedby="n-nome-err"><span class="error" id="n-nome-err">Informe o seu nome.</span></div>
-            <div class="field"><label for="n-mail">E-mail</label><input id="n-mail" type="email" name="email" autocomplete="email" required aria-describedby="n-mail-err"><span class="error" id="n-mail-err">Informe um e-mail válido.</span></div>
-            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="n-ok-err"><span>Li e concordo com a <a href="privacidade.html">Política de Privacidade</a> e aceito receber comunicações por e-mail. Posso cancelar quando quiser.</span></label><span class="error" id="n-ok-err">É necessário concordar para se cadastrar.</span></div>
+    <div class="nl-band">
+      <div class="nl-bg" aria-hidden="true"><img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1200&q=72" srcset="https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=480&q=72 480w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=800&q=72 800w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1200&q=72 1200w, https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1600&q=72 1600w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
+      <svg class="orbits" viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false">
+  <g class="spin-slow" opacity=".55"><circle cx="400" cy="400" r="380" stroke-dasharray="2 8"/><circle cx="780" cy="400" r="4" fill="currentColor" class="orbit-dot"/></g>
+  <circle cx="400" cy="400" r="300" opacity=".35"/>
+  <g class="spin-rev" opacity=".5"><ellipse cx="400" cy="400" rx="300" ry="120" transform="rotate(-24 400 400)"/><circle cx="674" cy="278" r="5" fill="currentColor" class="orbit-dot"/></g>
+  <ellipse cx="400" cy="400" rx="120" ry="300" opacity=".25"/>
+  <g class="spin-slow" opacity=".4"><ellipse cx="400" cy="400" rx="300" ry="200" transform="rotate(38 400 400)"/><circle cx="160" cy="250" r="3.5" fill="currentColor" class="orbit-dot"/></g>
+</svg>
+
+      <div class="nl-inner">
+        <div class="nl-copy reveal"><span class="eyebrow">Novidades</span><h2 id="nl-t" class="balance">Receba comunicados e conteúdos da MedicGLOBAL</h2></div>
+        <form class="nl-form reveal reveal-d1" data-validate="newsletter" action="#" method="post">
+          <div class="nl-fields">
+            <div class="nl-field"><label for="n-nome">Nome</label><input id="n-nome" name="nome" autocomplete="given-name" required aria-describedby="n-nome-err"><span class="error" id="n-nome-err">Informe o seu nome.</span></div>
+            <div class="nl-field"><label for="n-mail">E-mail</label><input id="n-mail" type="email" name="email" autocomplete="email" required aria-describedby="n-mail-err"><span class="error" id="n-mail-err">Informe um e-mail válido.</span></div>
+            <button class="btn btn--light" type="submit">Cadastrar</button>
           </div>
-          <div class="btn-row"><button class="btn" type="submit">Cadastrar</button></div>
+          <label class="check"><input type="checkbox" required aria-describedby="n-ok-err"><span>Li e concordo com a <a href="privacidade.html">Política de Privacidade</a> e aceito receber comunicações por e-mail. Posso cancelar quando quiser.</span></label><span class="error" id="n-ok-err">É necessário concordar para se cadastrar.</span>
           <p class="form-ok" tabindex="-1" role="status">Cadastro realizado. Obrigado!</p>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  /* parallax da faixa Novidades: [elemento, velocidade, limite (fração da altura da faixa)] */
+  var band = document.querySelector(".nl-band");
+  if (!band) return;
+  var items = [[band.querySelector(".nl-bg img"), .2, .12], [band.querySelector(":scope > .orbits"), -.25, 0]];
+  var tick = false;
+  function upd() {
+    tick = false;
+    var vh = window.innerHeight, r = band.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) return;
+    items.forEach(function (it) {
+      if (!it[0]) return;
+      var py = (r.top + r.height / 2 - vh / 2) * it[1];
+      if (it[2]) py = Math.max(-r.height * it[2], Math.min(r.height * it[2], py));
+      it[0].style.setProperty("--py", py.toFixed(1) + "px");
+    });
+  }
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  window.addEventListener("resize", upd);
+  upd();
+})();
+</script>
 
 </main>
 

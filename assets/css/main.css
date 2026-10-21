@@ -1256,6 +1256,24 @@ html:not(.js) .hero-nav { display: none; }
 .indexed--cards a:hover p, .indexed--cards a:focus-visible p { color: var(--ink-2); }
 .indexed--cards a:hover .num, .indexed--cards a:hover .go,
 .indexed--cards a:focus-visible .num, .indexed--cards a:focus-visible .go { color: var(--globo); }
+/* Mesmo padrão em blocos sem link (ex.: valores em Trabalhe conosco) */
+.indexed--cards > div {
+  padding: 32px 28px 36px; border: 0; border-radius: var(--r-lg);
+  background: var(--globo); color: var(--white); transition: background .4s var(--ease), color .4s var(--ease);
+}
+@media (min-width: 1100px) {
+  .indexed--cards > div, .indexed--cards > div:nth-child(3n+1) { padding: 36px 32px 40px; border-left: 0; }
+}
+.indexed--cards > div h3 { color: var(--white); transition: color .4s var(--ease); }
+.indexed--cards > div p { color: rgba(255,255,255,.75); transition: color .4s var(--ease); }
+.indexed--cards > div .num { color: var(--glow); transition: color .4s var(--ease); }
+.indexed--cards > div:hover { background: var(--tint); color: var(--ink); }
+.indexed--cards > div:hover h3 { color: var(--ink); }
+.indexed--cards > div:hover p { color: var(--ink-2); }
+.indexed--cards > div:hover .num { color: var(--globo); }
+
+/* Etapas com 3 passos (Trabalhe conosco): mesmo padrão do "Como funciona", em 3 colunas */
+@media (min-width: 1100px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } }
 
 /* Planos (home): botão azul-escuro que clareia no hover; seção mais próxima das vizinhas */
 .btn--soft-hover:hover { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: var(--globo); }

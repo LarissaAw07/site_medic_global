@@ -389,6 +389,35 @@
   });
 
   /* ---------- Formulários (validação acessível + LGPD) ---------- */
+  function errFor(field) {
+    var ids = field.getAttribute("aria-describedby");
+    return ids ? document.getElementById(ids.split(" ").filter(function (id) { return /-err$/.test(id); })[0]) : null;
+  }
+  // Anexo com data-max-bytes: só PDF e dentro do limite; devolve a mensagem do problema ("" se estiver ok)
+  function fileProblem(field) {
+    var file = field.files && field.files[0];
+    if (!file) return "";
+    if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== "application/pdf")) return "Formato não aceito: envie o currículo em PDF.";
+    if (file.size > +field.getAttribute("data-max-bytes")) return "O arquivo tem " + (file.size / 1073741824).toFixed(2).replace(".", ",") + " GB e ultrapassa o limite de 1 GB.";
+    return "";
+  }
+  function checkFile(field) {
+    var err = errFor(field), problem = fileProblem(field);
+    if (err) {
+      if (!err.hasAttribute("data-default")) err.setAttribute("data-default", err.textContent);
+      err.textContent = problem || err.getAttribute("data-default");
+    }
+    return !problem;
+  }
+  $$("input[type=file][data-max-bytes]").forEach(function (field) {
+    field.addEventListener("change", function () {
+      var valid = checkFile(field);
+      field.setAttribute("aria-invalid", String(!valid));
+      var err = errFor(field);
+      if (err) err.classList.toggle("is-visible", !valid);
+    });
+  });
+
   $$("form[data-validate]").forEach(function (f) {
     f.setAttribute("novalidate", "");
     f.addEventListener("submit", function (e) {
@@ -396,8 +425,9 @@
       var ok = true, first;
       $$("[required]", f).forEach(function (field) {
         var valid = field.type === "checkbox" ? field.checked : field.checkValidity() && field.value.trim() !== "";
+        if (field.hasAttribute("data-max-bytes")) valid = checkFile(field) && valid;
         field.setAttribute("aria-invalid", String(!valid));
-        var err = document.getElementById(field.getAttribute("aria-describedby") && field.getAttribute("aria-describedby").split(" ").filter(function (id) { return /-err$/.test(id); })[0]);
+        var err = errFor(field);
         if (err) err.classList.toggle("is-visible", !valid);
         if (!valid) { ok = false; first = first || field; }
       });

@@ -1001,6 +1001,7 @@ html:not(.js) .hero-nav { display: none; }
 
 /* ---------- Documentos ---------- */
 .doc-layout { display: grid; gap: 40px; }
+.doc-layout > *, .doc-side > * { min-width: 0; } /* a faixa de categorias rola de lado sem alargar a página no celular */
 @media (min-width: 1100px) { .doc-layout { grid-template-columns: 280px 1fr; gap: 64px; align-items: start; } }
 .doc-side { display: grid; gap: 24px; }
 @media (min-width: 1100px) { .doc-side { position: sticky; top: 140px; } }
@@ -1803,3 +1804,42 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
   .rj-year { grid-area: year; } .rj-pct { grid-area: pct; } .rj-info { grid-area: info; }
   .rj-row.is-current .rj-year, .rj-row.is-current .rj-pct { font-size: 1.5rem; }
 }
+
+/* Central de Documentos: busca e lista em cartões suaves (cantos arredondados, contornos leves, hover azul-claro) */
+.doc-side { padding: 24px; border-radius: var(--r-lg); background: var(--mist); }
+.doc-search-box { position: relative; }
+.doc-search-box svg { position: absolute; left: 18px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--medic); pointer-events: none; }
+.doc-search .doc-search-box input { padding-left: 46px; border-radius: var(--r-pill); border-color: transparent; background: var(--white); box-shadow: 0 1px 2px rgba(2,26,29,.05); }
+.doc-search .doc-search-box input:hover { border-color: rgba(0,140,140,.3); }
+.doc-cats { gap: 4px; }
+.doc-cats button { padding: 11px 14px; border-radius: var(--r-pill); border-color: transparent; background: transparent; transition: background .2s, color .2s; }
+.doc-cats button:hover { background: var(--white); border-color: transparent; color: var(--globo); }
+.doc-cats button span { min-width: 26px; padding: 2px 8px; border-radius: var(--r-pill); background: var(--white); text-align: center; font-variant-numeric: tabular-nums; }
+.doc-cats button:hover span { background: var(--tint); }
+.doc-cats button[aria-pressed="true"] { background: var(--globo); border-color: var(--globo); box-shadow: 0 10px 24px -14px rgba(0,98,109,.7); }
+.doc-cats button[aria-pressed="true"] span { background: rgba(255,255,255,.16); color: var(--white); }
+.doc-cats button:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
+@media (max-width: 1099px) { .doc-cats button { background: var(--white); } }
+.doc-list { gap: 12px; border-top: 0; }
+.doc { padding: 20px; border: 1px solid var(--line-2); border-radius: var(--r-lg); background: var(--white); transition: border-color .25s, box-shadow .3s var(--ease), transform .3s var(--ease); }
+@media (min-width: 720px) { .doc { padding: 22px 24px; } }
+.doc:hover { border-color: rgba(0,98,109,.2); box-shadow: 0 18px 40px -30px rgba(2,26,29,.35); }
+.doc-ico { border-radius: 14px; background: var(--tint); }
+
+/* Reajustes: mesma divisão e cores, em cartões arredondados em vez de uma tabela quadrada */
+.rj { display: grid; gap: 10px; background: none; border: 0; border-radius: 0; overflow: visible; }
+.rj-head { background: none; border: 0; padding-block: 0 2px; }
+.rj > .rj-list { display: grid; gap: 10px; }
+.rj > .rj-list > .rj-row { border: 1px solid var(--line-2); border-radius: var(--r-lg); background: var(--white); }
+.rj > .rj-list > .rj-row:not(.is-current):hover { background: var(--white); border-color: rgba(0,98,109,.2); box-shadow: 0 18px 40px -30px rgba(2,26,29,.35); }
+.rj > .rj-list > .rj-row.is-current { background: var(--deep); border-color: var(--deep); box-shadow: 0 24px 50px -30px rgba(2,26,29,.6); }
+.rj-older { border: 1px solid var(--line-2); border-radius: var(--r-lg); background: var(--white); overflow: hidden; }
+.rj-older > summary { background: var(--white); }
+.rj-older > summary:hover { background: rgba(227,240,241,.55); }
+.rj-older[open] > summary { background: rgba(227,240,241,.55); }
+.rj-older > .rj-list { padding: 8px; display: grid; gap: 2px; }
+.rj-older .rj-row { border-top: 0; border-radius: 14px; }
+.rj-older .rj-row + .rj-row { position: relative; }
+.rj-older .rj-row + .rj-row::before { content: ""; position: absolute; left: 20px; right: 20px; top: -1px; height: 1px; background: var(--line-2); }
+.rj-older .rj-row:hover { background: var(--mist); }
+.rj-older .rj-row:hover::before, .rj-older .rj-row:hover + .rj-row::before { opacity: 0; }

@@ -12,19 +12,21 @@
 .tile:hover { transform: translateY(-3px); }
 .tile h3 { font-size: var(--t-h4); max-width: 18ch; }
 .tile p { color: var(--ink-3); font-size: var(--t-sm); max-width: 34ch; }
-.tile .go { margin-top: auto; }
+.tile .go { margin-top: auto; align-self: flex-start; min-height: 38px; }
+/* o card inteiro é o link: o botão reage ao hover/toque/foco do card, no padrão de fundo escuro */
+@media (hover: hover) { .tile:hover .btn--light { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); } }
+.tile:is(:active, :focus-visible) .btn--light { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); }
 .tile--img { color: #fff; justify-content: flex-end; }
 .tile--img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
 .tile--img::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,26,29,.05) 30%, rgba(2,26,29,.82)); z-index: 1; }
 .tile--img > *:not(img) { position: relative; z-index: 2; }
-.tile--img h3, .tile--img .link { color: #fff; }
+.tile--img h3 { color: #fff; }
 .tile--img p { color: rgba(255,255,255,.8); }
 .tile--img:hover img { transform: scale(1.04); }
 .tile--deep { background: var(--deep); color: var(--on-deep); }
-.tile--deep h3 { color: #fff; } .tile--deep p { color: var(--on-deep-2); } .tile--deep .link { color: var(--glow); }
-.tile--globo { background: var(--globo); color: #fff; } .tile--globo h3 { color: #fff; } .tile--globo p { color: rgba(255,255,255,.8); } .tile--globo .link { color: #fff; }
+.tile--deep h3 { color: #fff; } .tile--deep p { color: var(--on-deep-2); }
 .tile .ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--white); color: var(--globo); }
-.tile--deep .ico, .tile--globo .ico { background: rgba(255,255,255,.08); color: var(--glow); }
+.tile--deep .ico { background: rgba(255,255,255,.08); color: var(--glow); }
 .tile .ico svg { width: 22px; height: 22px; }
 @media (min-width: 1100px) {
   .t-a { grid-column: span 7; grid-row: span 2; } .t-b { grid-column: span 5; } .t-c { grid-column: span 5; }
@@ -117,8 +119,6 @@
 .svc-cta .eyebrow { color: var(--glow); } .svc-cta .eyebrow::before { background: var(--glow); }
 .svc-cta h2 { color: #fff; font-size: var(--t-h3); }
 .svc-cta .lead { color: rgba(255,255,255,.84); margin: 0; }
-.svc-cta .btn { --b-bg: var(--white); --b-fg: var(--globo); --b-bd: var(--white); }
-.svc-cta .btn:hover { --b-bg: var(--glow); --b-fg: var(--deep); --b-bd: var(--glow); }
 </style>
 
 <section class="hero hero--page hero--art" aria-labelledby="t">
@@ -149,12 +149,12 @@
 <section class="section section--flush-top" aria-label="Visão geral dos serviços">
   <div class="wrap">
     <div class="bento">
-      <a class="tile tile--img t-a reveal" href="telemedicina.html" data-track="click_telemedicina">{{pic:old_medica_paciente|Médica conversando com uma paciente|1400|(min-width:1100px) 58vw, 100vw}}<span class="eyebrow" style="color:#fff">Telemedicina</span><h3>Precisa falar com um profissional de saúde?</h3><p>Acesse a telemedicina de onde estiver, conforme as condições do seu plano.</p><span class="link">Acessar telemedicina</span></a>
-      <a class="tile tile--globo t-b reveal reveal-d1" href="#autorizacoes"><span class="ico">{{i:file-check}}</span><h3>Precisa de uma autorização?</h3><p>Solicite pelo WhatsApp dedicado às autorizações.</p><span class="link go">Solicitar autorização</span></a>
-      <a class="tile t-c reveal reveal-d2" href="#abramge"><span class="ico">{{i:route}}</span><h3>Vai viajar?</h3><p>Urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional.</p><span class="link go">Entender o atendimento</span></a>
-      <a class="tile t-d reveal" href="#programas"><span class="ico">{{i:heart}}</span><h3>Programas de saúde</h3><p>Mais facilidade para agendar consultas e exames.</p><span class="link go">Ver programas</span></a>
-      <a class="tile tile--deep t-e reveal reveal-d1" href="#aplicativo"><span class="ico">{{i:smartphone}}</span><h3>Aplicativo</h3><p>Rede credenciada, favoritos e contato com prestadores no celular.</p><span class="link go">Baixar o aplicativo</span></a>
-      <a class="tile t-f reveal reveal-d2" href="#urgencia"><span class="ico">{{i:siren}}</span><h3>Urgência e emergência</h3><p>Saiba onde buscar atendimento imediato.</p><span class="link go">Ver orientações</span></a>
+      <a class="tile tile--img t-a reveal" href="telemedicina.html" data-track="click_telemedicina">{{pic:old_medica_paciente|Médica conversando com uma paciente|1400|(min-width:1100px) 58vw, 100vw}}<span class="eyebrow" style="color:#fff">Telemedicina</span><h3>Precisa falar com um profissional de saúde?</h3><p>Acesse a telemedicina de onde estiver, conforme as condições do seu plano.</p><span class="btn btn--light btn--sm go">Acessar telemedicina</span></a>
+      <a class="tile tile--deep t-b reveal reveal-d1" href="#autorizacoes"><span class="ico">{{i:file-check}}</span><h3>Precisa de uma autorização?</h3><p>Solicite pelo WhatsApp dedicado às autorizações.</p><span class="btn btn--light btn--sm go">Solicitar autorização</span></a>
+      <a class="tile tile--deep t-c reveal reveal-d2" href="#abramge"><span class="ico">{{i:route}}</span><h3>Vai viajar?</h3><p>Urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional.</p><span class="btn btn--light btn--sm go">Entender o atendimento</span></a>
+      <a class="tile tile--deep t-d reveal" href="#programas"><span class="ico">{{i:heart}}</span><h3>Programas de saúde</h3><p>Mais facilidade para agendar consultas e exames.</p><span class="btn btn--light btn--sm go">Ver programas</span></a>
+      <a class="tile tile--deep t-e reveal reveal-d1" href="#aplicativo"><span class="ico">{{i:smartphone}}</span><h3>Aplicativo</h3><p>Rede credenciada, favoritos e contato com prestadores no celular.</p><span class="btn btn--light btn--sm go">Baixar o aplicativo</span></a>
+      <a class="tile tile--deep t-f reveal reveal-d2" href="#urgencia"><span class="ico">{{i:siren}}</span><h3>Urgência e emergência</h3><p>Saiba onde buscar atendimento imediato.</p><span class="btn btn--light btn--sm go">Ver orientações</span></a>
     </div>
   </div>
 </section>
@@ -188,7 +188,7 @@
       <h2 id="t-prog" class="balance">Cuidado contínuo, com mais facilidade</h2>
       <p class="lead">Os programas de saúde da MedicGLOBAL facilitam o agendamento de consultas e exames.</p>
       <p class="muted">Para saber quais programas estão disponíveis para o seu plano e como participar, fale com a central de atendimento.</p>
-      <div class="btn-row"><a class="btn btn--ghost" href="atendimento.html">Falar com a MedicGLOBAL</a></div>
+      <div class="btn-row"><a class="btn" href="atendimento.html">Falar com a MedicGLOBAL</a></div>
       <svg class="svc-curl" viewBox="0 0 300 300" aria-hidden="true" focusable="false"><path d="M150 320c0-60-110-90-110-170 0-50 60-70 90-30 30-40 90-20 90 30 0 70-80 90-70 130s120 20 180-30"/></svg>
     </div>
   </div>
@@ -246,7 +246,7 @@
   <div class="wrap">
     <div><span class="eyebrow">Atendimento</span><h2 id="t-atend" class="balance">Ainda com dúvidas?</h2></div>
     <p class="lead">A central reúne telefones, WhatsApp e ouvidoria, separados pelo que você precisa.</p>
-    <a class="btn" href="atendimento.html">Ir para a central de atendimento</a>
+    <a class="btn btn--light" href="atendimento.html">Ir para a central de atendimento</a>
   </div>
 </section>
 

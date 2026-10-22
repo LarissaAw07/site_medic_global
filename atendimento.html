@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=58ad8e15">
+<link rel="stylesheet" href="assets/css/main.css?v=09c0c394">
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"MedicGLOBAL","alternateName":["Medic Global","Medic Global Saúde","Extremamedic"],"url":"https://medicglobal.com.br/","logo":"https://medicglobal.com.br/assets/img/brand/logo-medicglobal.svg","address":{"@type":"PostalAddress","streetAddress":"R. Alcebíades Wohlers, 02","addressLocality":"Extrema","addressRegion":"MG","postalCode":"37640-000","addressCountry":"BR"},"contactPoint":[{"@type":"ContactPoint","telephone":"+55-35-3435-4442","contactType":"customer service","areaServed":"BR","availableLanguage":"Portuguese"}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://medicglobal.com.br/"},{"@type":"ListItem","position":2,"name":"Atendimento","item":"https://medicglobal.com.br/atendimento/"}]},{"@context":"https://schema.org","@type":"ContactPage","name":"Central de atendimento MedicGLOBAL","url":"https://medicglobal.com.br/atendimento/"}]</script>
@@ -61,7 +61,7 @@
     </ul>
     <div class="bar-actions">
       <a class="btn btn--benef btn--sm" href="beneficiario.html" data-track="click_area_beneficiario" aria-label="Área do Beneficiário"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg> <span class="benef-label">Área do Beneficiário</span></a>
-      <a class="btn btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
+      <a class="btn btn--ghost btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
       <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="l l1" d="M4 8h16"/><path class="l l2" d="M4 16h16"/></svg></button>
     </div>
   </div>
@@ -342,21 +342,20 @@
   </div>
 </section>
 
-<section class="section mist" aria-labelledby="faq-t" id="duvidas" data-filter data-filter-items="#duvidas .faq-item" data-filter-empty="#faq-none">
+<section class="section mist" aria-labelledby="faq-t" id="duvidas">
   <div class="wrap">
-    <div class="grid">
-      <div class="c-1-5">
-        <span class="eyebrow">Dúvidas frequentes</span><h2 id="faq-t" class="balance">Resolva rápido</h2>
-        <div class="faq-tools mt-7"><div class="field"><label for="fq">Buscar</label><input id="fq" type="search" data-filter-search placeholder="Ex.: boleto"></div></div>
-      </div>
-      <div class="c-6-13">
+    <span class="eyebrow">Dúvidas frequentes</span>
+    <h2 id="faq-t" class="balance">Resolva rápido</h2>
+    <div class="faq-cols mt-7">
+      <div class="faq-col">
         <details class="faq-item"><summary>Como emito a segunda via do boleto?</summary><div class="ans">Acesse o <a href="http://187.60.158.90:8080/boletoonline/" target="_blank" rel="noopener">sistema de boletos</a>. Em caso de dúvida, fale com o financeiro pelo WhatsApp (35) 9 9201-0023.</div></details>
         <details class="faq-item"><summary>Como solicito uma autorização?</summary><div class="ans">Envie a solicitação pelo WhatsApp de autorizações (35) 9 8845-9074, com o pedido do profissional e os dados do beneficiário.</div></details>
         <details class="faq-item"><summary>Como encontro um médico ou laboratório?</summary><div class="ans">Use a <a href="rede-credenciada.html">busca da rede credenciada</a> ou o aplicativo MedicGLOBAL.</div></details>
+      </div>
+      <div class="faq-col">
         <details class="faq-item"><summary>Como acesso a telemedicina?</summary><div class="ans">Veja o passo a passo na página de <a href="telemedicina.html">telemedicina</a>.</div></details>
         <details class="faq-item"><summary>Esqueci a senha da Área do Beneficiário.</summary><div class="ans">Use a opção <a href="https://extremamedic.com/cliente/recuperar_senha.php" target="_blank" rel="noopener">Esqueci minha senha</a>. Se for o seu primeiro acesso, faça o <a href="https://extremamedic.com/cliente/primeiro_acesso.php" target="_blank" rel="noopener">cadastro inicial</a>.</div></details>
         <details class="faq-item"><summary>Quando devo procurar a ouvidoria?</summary><div class="ans">Quando a sua solicitação não tiver sido resolvida pelos canais de atendimento. A ouvidoria atende em Dias úteis, de segunda a sexta-feira, das 7h30 às 17h30.</div></details>
-        <p class="faq-empty" id="faq-none" hidden>Não encontrou? Use um dos canais acima.</p>
       </div>
     </div>
   </div>
@@ -456,7 +455,7 @@
 <div class="cookie" role="region" aria-label="Aviso de cookies">
   <strong>Sua privacidade importa.</strong>
   <p>Usamos cookies essenciais para o site funcionar e, com a sua permissão, cookies de medição para melhorar a experiência. Saiba mais na <a href="privacidade.html#cookies">Política de Cookies</a>.</p>
-  <div class="btn-row"><button class="btn btn--ghost btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
+  <div class="btn-row"><button class="btn btn--sm" type="button" data-consent="essential">Somente essenciais</button><button class="btn btn--ghost btn--sm" type="button" data-consent="all">Aceitar todos</button></div>
 </div>
 
 <!-- Central de acessibilidade (assets/js/a11y.js). Ajustes ficam salvos neste navegador. -->

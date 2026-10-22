@@ -178,16 +178,23 @@ ul, ol { margin: 0; padding: 0; }
   transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
   white-space: nowrap;
 }
-.btn:hover { --b-bg: var(--medic); --b-bd: var(--medic); }
 .btn:active { transform: translateY(1px); }
 .btn svg { width: 18px; height: 18px; transition: transform .3s var(--ease); }
-.btn:hover svg { transform: translateX(3px); }
-.btn--ghost { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27,29,.22); }
-.btn--ghost:hover { --b-bg: var(--ink); --b-fg: var(--white); --b-bd: var(--ink); }
+/* Padrão de botões do site (exceto lojas de aplicativo, que têm estilo próprio):
+   fundo claro — botão único ou 1º do par: azul que clareia; 2º do par (.btn--ghost): branco que fica azul-claro.
+   fundo escuro (.btn--light): branco que fica transparente com contorno ciano.
+   O hover só vale para mouse; no toque e no foco do teclado o mesmo estado aparece em :active/:focus-visible. */
+.btn--ghost { --b-bg: var(--white); --b-fg: var(--globo); --b-bd: rgba(0,98,109,.28); }
 .btn--light { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }
-.btn--light:hover { --b-bg: var(--glow); --b-bd: var(--glow); --b-fg: var(--deep); }
-.btn--ghost-light { --b-bg: transparent; --b-fg: var(--white); --b-bd: rgba(255,255,255,.3); }
-.btn--ghost-light:hover { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }
+@media (hover: hover) {
+  .btn:not(.btn--store):hover { --b-bg: #007F87; --b-bd: #007F87; }
+  .btn:hover svg { transform: translateX(3px); }
+  .btn.btn--ghost:hover { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: rgba(0,98,109,.4); }
+  .btn.btn--light:hover { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); }
+}
+.btn:not(.btn--store):is(:active, :focus-visible) { --b-bg: #007F87; --b-bd: #007F87; }
+.btn.btn--ghost:is(:active, :focus-visible) { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: rgba(0,98,109,.4); }
+.btn.btn--light:is(:active, :focus-visible) { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); }
 .btn--sm { min-height: 42px; padding: 0 18px; font-size: .78rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
@@ -280,8 +287,6 @@ ul, ol { margin: 0; padding: 0; }
 .bar-actions .btn { display: none; }
 @media (min-width: 720px) { .bar-actions .btn--client { display: inline-flex; } }
 @media (min-width: 1100px) { .bar-actions .btn { display: inline-flex; } }
-.btn--benef { --b-bg: transparent; --b-fg: var(--globo); --b-bd: var(--line); }
-.btn--benef:hover { --b-bg: var(--mist); --b-fg: var(--globo); --b-bd: var(--globo); }
 .btn--benef svg { width: 17px; height: 17px; }
 .btn--benef:hover svg { transform: none; }
 
@@ -305,7 +310,10 @@ ul, ol { margin: 0; padding: 0; }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .nav-trigger { color: var(--white); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .nav-trigger:hover { background: rgba(255,255,255,.1); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .brand .wordmark { fill: var(--white); }
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .btn--benef { --b-fg: var(--white); --b-bd: rgba(255,255,255,.3); }
+/* sobre fundo escuro os dois botões do topo seguem o padrão branco → transparente com contorno ciano */
+.site-header.on-dark:not(.is-scrolled):not(.is-open) .bar-actions .btn { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }
+@media (hover: hover) { .site-header.on-dark:not(.is-scrolled):not(.is-open) .bar-actions .btn:hover { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); } }
+.site-header.on-dark:not(.is-scrolled):not(.is-open) .bar-actions .btn:is(:active, :focus-visible) { --b-bg: transparent; --b-fg: var(--white); --b-bd: var(--glow); }
 .site-header.on-dark:not(.is-scrolled):not(.is-open) .icon-btn { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: var(--white); }
 
 /* Drawer mobile */
@@ -1280,8 +1288,6 @@ html:not(.js) .hero-nav { display: none; }
 /* Etapas com 3 passos (Trabalhe conosco): mesmo padrão do "Como funciona", em 3 colunas */
 @media (min-width: 1100px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } }
 
-/* Planos (home): botão azul-escuro que clareia no hover; seção mais próxima das vizinhas */
-.btn--soft-hover:hover { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: var(--globo); }
 
 /* ==========================================================================
    Central de acessibilidade (assets/js/a11y.js)
@@ -1426,9 +1432,6 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .img--art img { object-fit: contain !important; }
 .post-feature:hover .img--art img, .card-post:hover .img--art img { transform: none; }
 
-/* Botão azul-claro que escurece no hover (ex.: "Conheça a MedicGLOBAL") */
-.btn--tint { --b-bg: var(--tint); --b-fg: var(--globo); --b-bd: var(--tint); }
-.btn--tint:hover { --b-bg: var(--globo); --b-fg: var(--white); --b-bd: var(--globo); }
 
 /* Parallax "Depois da contratação": os quadros esmaecem no fim da seção, sem corte seco, e emendam no rodapé */
 .mosaic-grid {
@@ -1635,6 +1638,7 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .btn--store { min-width: 196px; }
 .btn--store svg { width: 20px; height: 20px; }
 .btn--store:hover svg { transform: none; }
+.btn--store:hover { --b-bg: var(--medic); --b-bd: var(--medic); }
 .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27,29,.22); }
 .btn--store-alt:hover { --b-bg: var(--ink); --b-fg: var(--white); --b-bd: var(--ink); }
 .deep .btn--store { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }

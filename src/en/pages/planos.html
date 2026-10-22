@@ -1,0 +1,141 @@
+<!--@{
+  "title": "EMED GLOBAL BLUE health plans | MedicGLOBAL",
+  "description": "Explore and compare the EMED GLOBAL BLUE 200, 300 and 400 plans: coverage from Extrema/MG to Bragança Paulista/SP and Pouso Alegre/MG. Request a quote.",
+  "active": "planos",
+  "og": "old_familia",
+  "crumbs": [["Plans", "planos.html"]]
+}@-->
+
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">EMED GLOBAL BLUE plans</span>
+        <h1 id="t" class="balance">A health plan designed around <em>your life</em></h1>
+        <p class="lead">Three products with regional coverage, from Bragança Paulista/SP to Pouso Alegre/MG. Compare them and choose at your own pace.</p>
+        <div class="btn-row">
+          <a class="btn" href="#comparar" data-track="acesso_planos">Compare plans</a>
+          <a class="btn btn--ghost" href="#contato" data-track="click_quero_ser_cliente">Request a callback</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_familia|Smiling family gathered at home|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:layers}}</i><span>3 plans<small>EMED GLOBAL BLUE 200 to 400</small></span></span>
+          <span class="chip"><i>{{i:pin}}</i><span>Regional coverage<small>Bragança Paulista → Pouso Alegre</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="On this page">
+  <div class="wrap"><a href="#comparar">Plans</a><a href="#abrangencia">Coverage area</a><a href="#rede">Network</a><a href="#duvidas">FAQ</a><a href="#contato">Request a quote</a></div>
+</nav>
+
+<section class="section mist" id="comparar" aria-labelledby="comp-t">
+  <div class="wrap">
+    <div class="grid mb-7">
+      <div class="c-1-7"><span class="eyebrow">Compare</span><h2 id="comp-t" class="balance">Which plan covers where you live and travel?</h2></div>
+      <div class="c-8-13" style="align-self:end"><p class="lead">Compare the coverage area of each plan and see which one includes the cities where you live and travel.</p></div>
+    </div>
+    <div class="plans">
+      {{> plan-cards}}
+    </div>
+    <div class="notice mt-6">{{i:info}}<span>Your profile and contract type are sent to our sales team along with your request: the availability of each product for your profile is confirmed when we contact you. For coverage segment, waiting periods, copayment and pricing, please check the plan's terms and features.</span></div>
+  </div>
+</section>
+
+<section class="section" id="abrangencia" aria-labelledby="abr-t">
+  <div class="wrap">
+    <div class="grid mb-8">
+      <div class="c-1-6"><span class="eyebrow">Coverage area</span><h2 id="abr-t" class="balance">Where each plan provides care</h2></div>
+      <div class="c-7-13" style="align-self:end"><p class="lead">A quick overview of each product's geographic area, based on current information. The full list of municipalities is part of the contract.</p></div>
+    </div>
+    <div class="matrix-wrap reveal">
+      <table class="matrix">
+        <caption class="sr-only">Geographic coverage of the EMED GLOBAL BLUE plans</caption>
+        <thead><tr><th scope="col">City / reference</th><th scope="col">BLUE 200</th><th scope="col">BLUE 300</th><th scope="col">BLUE 400</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Extrema/MG</th><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Bragança Paulista/SP</th><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Cambuí/MG</th><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Pouso Alegre/MG</th><td><span class="cell no" role="img" aria-label="Not included">—</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td><td><span class="cell yes" role="img" aria-label="Included">{{i:check}}</span></td></tr>
+          <tr><th scope="row">Coverage type</th><td class="small">Regional</td><td class="small">Regional</td><td class="small">Regional</td></tr>
+          <tr><th scope="row">Room type</th><td class="small">Shared room</td><td class="small">Shared room</td><td class="small">Shared room</td></tr>
+          <tr><th scope="row">Urgent and emergency care while traveling (ABRAMGE)</th><td class="small muted" colspan="3">Check the plan's terms and features</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="xs muted mt-5 measure">Source: coverage information published by MedicGLOBAL for the EMED GLOBAL BLUE products. Whether intermediate cities are included depends on each product's official list of municipalities.</p>
+  </div>
+</section>
+
+<section class="section section--flush-top" id="rede" aria-labelledby="rede-t">
+  <div class="wrap">
+    <div class="split split--75">
+      <div class="img-round bleed-right" style="aspect-ratio:16/10">{{pic:old_hsl_fachada|Facade of Hospital e Maternidade São Lucas, part of the MedicGLOBAL network|1600|(min-width:1100px) 55vw, 100vw}}</div>
+      <div class="stack">
+        <span class="eyebrow">Care network</span>
+        <h2 id="rede-t" class="title-2l">Outpatient, <span>hospital and obstetric care</span></h2>
+        <p class="lead">Medical offices, clinics and five hospitals between Bragança Paulista/SP and Pouso Alegre/MG, with urgent and emergency care while traveling through the ABRAMGE System.</p>
+        <div class="btn-row"><a class="btn" href="rede-credenciada.html" data-track="click_rede">Find care</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="duvidas" aria-labelledby="faq-t">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 id="faq-t" class="balance">Before you sign up</h2>
+    <div class="faq-cols mt-7">
+      <div class="faq-col">
+        <details class="faq-item" data-topic="cobertura"><summary>What is the difference between the BLUE 200, 300 and 400 plans?</summary><div class="ans">The main stated difference is the geographic coverage: BLUE 200 is regional, from Bragança Paulista/SP to Cambuí/MG; BLUE 300 and BLUE 400 cover from Bragança Paulista/SP to Pouso Alegre/MG. The other features of each product are presented by our sales team.</div></details>
+        <details class="faq-item" data-topic="cobertura"><summary>Do the plans include hospital coverage with obstetrics?</summary><div class="ans">MedicGLOBAL offers products with outpatient care and hospital care with obstetrics, in accordance with the List of Procedures (Rol) of the ANS (Brazil's National Supplementary Health Agency). The coverage segment of each product is confirmed in the quote and in the contract.</div></details>
+        <details class="faq-item" data-topic="cobertura"><summary>What if I need care outside my region?</summary><div class="ans">Urgent and emergency care while traveling is available through the ABRAMGE System, according to the terms of your contract. <a href="servicos.html#abramge">Learn how it works</a>.</div></details>
+      </div>
+      <div class="faq-col">
+        <details class="faq-item" data-topic="contratacao"><summary>How do waiting periods work?</summary><div class="ans">Waiting periods follow ANS regulations and are set out in each product's contract. Check the plan's terms and features with our team.</div></details>
+        <details class="faq-item" data-topic="contratacao"><summary>How do I sign up?</summary><div class="ans">Fill out the form below or contact our sales team on WhatsApp at <a href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">{{L.wa.comercial.label}}</a>. Our team will get in touch to understand your profile and present the available options.</div></details>
+        <details class="faq-item" data-topic="contratacao"><summary>Where can I check the rate adjustments applied?</summary><div class="ans">The rate adjustment percentages for the contract pool (RN 565) are published in the <a href="documentos.html#reajuste">document center</a>.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contato" aria-labelledby="ct-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Request a quote</span>
+        <h2 id="ct-t" class="balance">Want to find out which option makes sense for you?</h2>
+        <p class="lead">Leave your details and our sales team will contact you. We only ask for what we need to get back to you.</p>
+        <ul class="checklist small">
+          <li>No questions about your health on this form.</li>
+          <li>Your data is used only to respond to your request.</li>
+          <li>Prefer to talk now? <a class="accent" href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">Sales on WhatsApp</a></li>
+        </ul>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="proposta_planos" action="#" method="post">
+          <div class="form-grid">
+            <div class="field full"><label for="f-nome">Full name</label><input id="f-nome" name="nome" autocomplete="name" required aria-describedby="f-nome-err"><span class="error" id="f-nome-err">Please enter your name.</span></div>
+            <div class="field"><label for="f-tel">WhatsApp or phone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-tel-err" placeholder="(35) 9 0000-0000"><span class="error" id="f-tel-err">Please enter a contact phone number.</span></div>
+            <div class="field"><label for="f-mail">Email <span class="muted">(optional)</span></label><input id="f-mail" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-cidade">City</label><input id="f-cidade" name="cidade" autocomplete="address-level2" required aria-describedby="f-cidade-err"><span class="error" id="f-cidade-err">Please enter your city.</span></div>
+            <div class="field"><label for="plano">Plan of interest</label><select id="plano" name="plano"><option value="">Not sure yet</option><option>BLUE 200</option><option>BLUE 300</option><option>BLUE 400</option></select></div>
+            <div class="field"><label for="perfil">Profile</label><select id="perfil" name="perfil"><option value="">Select</option><option>For me and my family</option><option>For my company</option></select></div>
+            <div class="field"><label for="contratacao">Contract type</label><select id="contratacao" name="contratacao"><option value="">Select</option><option>Corporate group plan</option><option>Other type</option><option>Not sure yet</option></select></div>
+            <div class="full"><label class="check"><input type="checkbox" name="consentimento" required aria-describedby="f-ok-err"><span>I authorize MedicGLOBAL to use this information to contact me about my request, in accordance with the <a href="privacidade.html">Privacy Policy</a>.</span></label><span class="error" id="f-ok-err">You must authorize us to contact you.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Request a callback</button></div>
+          <p class="form-ok" tabindex="-1" role="status">We have received your request. The MedicGLOBAL sales team will contact you shortly.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

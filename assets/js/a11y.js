@@ -8,6 +8,9 @@
   var root = document.getElementById("a11y");
   if (!root) return;
   var $ = function (s, c) { return (c || document).querySelector(s); };
+  // Idioma da página: T("português", "English"). Em inglês não há VLibras (ele traduz português para Libras).
+  var EN = /^en/i.test(doc.lang);
+  var T = function (pt, en) { return EN ? en : pt; };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
   var panel = $("#a11y-panel"), fab = $(".a11y-fab", root), title = $("#a11y-title");
@@ -36,7 +39,7 @@
 
   function apply() {
     if (state.size) doc.setAttribute("data-a11y-size", state.size); else doc.removeAttribute("data-a11y-size");
-    sizeOut.textContent = String(SIZES[state.size]).replace(".", ",") + "%";
+    sizeOut.textContent = T(String(SIZES[state.size]).replace(".", ","), String(SIZES[state.size])) + "%";
     $("[data-a11y-size='-1']", root).disabled = state.size <= MIN;
     $("[data-a11y-size='1']", root).disabled = state.size >= MAX;
     toggles.forEach(function (b) {
@@ -71,21 +74,21 @@
       var k = b.getAttribute("data-a11y-toggle"), i = state.on.indexOf(k);
       if (i > -1) state.on.splice(i, 1); else state.on.push(k);
       save(); apply();
-      say(b.textContent.trim() + (i > -1 ? " desativado" : " ativado"));
+      say(b.textContent.trim() + (i > -1 ? T(" desativado", " off") : T(" ativado", " on")));
     });
   });
   $$("[data-a11y-size]", root).forEach(function (b) {
     b.addEventListener("click", function () {
       state.size = Math.max(MIN, Math.min(MAX, state.size + +b.getAttribute("data-a11y-size")));
       save(); apply();
-      say("Tamanho do texto " + sizeOut.textContent);
+      say(T("Tamanho do texto ", "Text size ") + sizeOut.textContent);
     });
   });
   $("[data-a11y-reset]", root).addEventListener("click", function () {
     stopReading();
     state = { size: 0, on: [], libras: false };
     save(); apply();
-    say("Configurações de acessibilidade restauradas");
+    say(T("Configurações de acessibilidade restauradas", "Accessibility settings restored"));
   });
 
   /* ---------- Guia de leitura: faixa que acompanha o cursor (ou o elemento com foco) ---------- */
@@ -96,13 +99,14 @@
     var r = e.target.getBoundingClientRect(); moveGuide(r.top + r.height / 2);
   });
 
-  /* ---------- Leitura em voz alta (Web Speech API, voz em português) ---------- */
+  /* ---------- Leitura em voz alta (Web Speech API, voz no idioma da página) ---------- */
   var synth = window.speechSynthesis, readBtn = $("[data-a11y-read]", root), readBar = $("[data-a11y-reading]", root);
   var pauseBtn = $("[data-a11y-read-pause]", root), queue = [], current = null, reading = false;
   function voice() {
     var vs = synth.getVoices();
-    for (var i = 0; i < vs.length; i++) if (/^pt(-|_)BR/i.test(vs[i].lang)) return vs[i];
-    for (i = 0; i < vs.length; i++) if (/^pt/i.test(vs[i].lang)) return vs[i];
+    var best = EN ? /^en(-|_)US/i : /^pt(-|_)BR/i, any = EN ? /^en/i : /^pt/i;
+    for (var i = 0; i < vs.length; i++) if (best.test(vs[i].lang)) return vs[i];
+    for (i = 0; i < vs.length; i++) if (any.test(vs[i].lang)) return vs[i];
     return null;
   }
   function visible(el) {
@@ -144,15 +148,15 @@
     reading = on;
     readBtn.setAttribute("aria-pressed", on ? "true" : "false");
     readBar.hidden = !on;
-    pauseBtn.setAttribute("aria-label", "Pausar leitura"); pauseBtn.classList.remove("is-paused");
+    pauseBtn.setAttribute("aria-label", T("Pausar leitura", "Pause reading")); pauseBtn.classList.remove("is-paused");
     if (!on) mark(null);
   }
   function next() {
     if (!reading) return;
     current = queue.shift();
-    if (!current) { setReading(false); say("Leitura concluída"); return; }
+    if (!current) { setReading(false); say(T("Leitura concluída", "Finished reading")); return; }
     var u = new SpeechSynthesisUtterance(current.text), v = voice();
-    u.lang = v ? v.lang : "pt-BR"; if (v) u.voice = v; u.rate = 1;
+    u.lang = v ? v.lang : T("pt-BR", "en-US"); if (v) u.voice = v; u.rate = 1;
     u.onend = next;
     u.onerror = function (e) { if (e.error !== "interrupted" && e.error !== "canceled") next(); };
     if (current.el) mark(current.el);
@@ -160,7 +164,7 @@
   }
   function startReading() {
     queue = collect();
-    if (!queue.length) { say("Não há texto para ler nesta página"); return; }
+    if (!queue.length) { say(T("Não há texto para ler nesta página", "There is no text to read on this page")); return; }
     synth.cancel(); setReading(true); next();
   }
   function stopReading() {
@@ -169,15 +173,15 @@
   }
   if (!synth || !window.SpeechSynthesisUtterance) {
     readBtn.disabled = true;
-    readBtn.title = "Leitura em voz alta indisponível neste navegador";
+    readBtn.title = T("Leitura em voz alta indisponível neste navegador", "Read aloud is not available in this browser");
   } else {
     readBtn.addEventListener("click", function () {
-      if (reading) { stopReading(); say("Leitura interrompida"); } else startReading();
+      if (reading) { stopReading(); say(T("Leitura interrompida", "Reading stopped")); } else startReading();
     });
-    $("[data-a11y-read-stop]", root).addEventListener("click", function () { stopReading(); say("Leitura interrompida"); readBtn.focus(); });
+    $("[data-a11y-read-stop]", root).addEventListener("click", function () { stopReading(); say(T("Leitura interrompida", "Reading stopped")); readBtn.focus(); });
     pauseBtn.addEventListener("click", function () {
-      if (synth.paused) { synth.resume(); pauseBtn.setAttribute("aria-label", "Pausar leitura"); pauseBtn.classList.remove("is-paused"); }
-      else { synth.pause(); pauseBtn.setAttribute("aria-label", "Continuar leitura"); pauseBtn.classList.add("is-paused"); }
+      if (synth.paused) { synth.resume(); pauseBtn.setAttribute("aria-label", T("Pausar leitura", "Pause reading")); pauseBtn.classList.remove("is-paused"); }
+      else { synth.pause(); pauseBtn.setAttribute("aria-label", T("Continuar leitura", "Resume reading")); pauseBtn.classList.add("is-paused"); }
     });
     window.addEventListener("pagehide", function () { synth.cancel(); });
   }
@@ -221,8 +225,23 @@
       sync();
     })();
   }
-  // Se a pessoa já usou o VLibras, ele é carregado nas próximas páginas e se reabre sozinho
-  if (state.libras) loadVLibras(watchVLibras);
+  // Se a pessoa já usou o VLibras, ele é carregado nas próximas páginas (em português) e se reabre sozinho
+  if (state.libras && !EN) loadVLibras(watchVLibras);
+
+  /* ---------- ASL (versão em inglês) ----------
+     Não há tradutor automático gratuito de ASL equivalente ao VLibras. O botão abre um aviso honesto com os
+     canais por escrito, sem simular tradução. Para oferecer ASL de fato, contratar um serviço (ex.: plugin com
+     avatar em ASL ou vídeos em ASL gravados por intérpretes) e ligá-lo aqui. */
+  var aslBox = $("[data-a11y-asl-info]", root);
+  $$("[data-a11y-asl]", root).forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!aslBox) return;
+      if (!isOpen()) open();
+      aslBox.hidden = false;
+      $$("[data-a11y-asl]", root).forEach(function (x) { x.setAttribute("aria-expanded", "true"); });
+      aslBox.focus();
+    });
+  });
 
   apply();
 })();

@@ -1,0 +1,153 @@
+<!--@{
+  "title": "Our story | From Extremamedic to MedicGLOBAL | MedicGLOBAL",
+  "description": "More than 40 years caring for people's health. Learn how Extremamedic became MedicGLOBAL, explore our facilities and our service area between Bragança Paulista/SP and Pouso Alegre/MG.",
+  "active": "institucional",
+  "og": "old_hsl_fachada",
+  "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Our story", "medicglobal.html"]]
+}@-->
+
+<style>
+/* Antes/Agora mais compacto */
+.wipe { aspect-ratio: 21/8; }
+@media (max-width: 719px) { .wipe { aspect-ratio: 1/1; } }
+/* números com a tipografia dos títulos; blocos das pontas destacados do fundo */
+.stat .stat-big { font-weight: 500; letter-spacing: -.03em; }
+.stat:nth-child(1), .stat:nth-child(4) { background: var(--white); box-shadow: 0 1px 0 var(--line-2), 0 24px 48px -32px rgba(2,26,29,.28); }
+.stat:nth-child(1) .badge, .stat:nth-child(4) .badge { background: var(--tint); }
+/* Nossa estrutura: cada descrição em uma linha */
+@media (min-width: 1100px) {
+  #estrutura .feature-list { grid-template-columns: 1fr; gap: 22px; }
+  #estrutura .feature-list p { white-space: nowrap; }
+}
+/* Nossa atuação: tags em faixa abaixo do cabeçalho */
+.atuacao-tags { display: grid; gap: 12px; }
+</style>
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Our story</span>
+        <h1 id="t" class="balance">Same essence. A new experience</h1>
+        <p class="lead">Caring for people's health for more than 40 years, Extremamedic has evolved into MedicGLOBAL. Our legal name and our registration with the ANS (Brazil's National Supplementary Health Agency) remain the same — what has changed is the way we care.</p>
+        <div class="btn-row">
+          <a class="btn" href="#linha-do-tempo">Discover our story</a>
+          <a class="btn btn--ghost" href="#estrutura">Our facilities</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:heart}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:clock}}</i><span>40+ years<small>of history</small></span></span>
+          <span class="chip"><i>{{i:sparkle}}</i><span>New brand<small>Extremamedic is now MedicGLOBAL</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Extremamedic and MedicGLOBAL">
+  <div class="wrap wrap--wide">
+    <div class="wipe reveal">
+      <div class="wipe-pane wipe-before"><span class="tag">Before</span><div><div class="wipe-word">Extremamedic</div><p>A journey built on caring for families across the region.</p></div></div>
+      <div class="wipe-pane wipe-after"><span class="tag">Now</span><div><div class="wipe-word">Medic<span class="accent">GLOBAL</span></div><p>The same tradition, with new products, a wider service area and digital services.</p></div></div>
+      <div class="wipe-handle" aria-hidden="true"><button type="button" tabindex="-1">{{i:chevron-left}}{{i:chevron-right}}</button></div>
+      <label class="sr-only" for="wipe-r">Compare Extremamedic and MedicGLOBAL</label>
+      <input id="wipe-r" type="range" min="0" max="100" value="50">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="linha-do-tempo" aria-labelledby="tl-t">
+  <div class="wrap">
+    <div class="grid mb-9"><div><span class="eyebrow">Timeline</span><h2 id="tl-t">More than 40 years of history,<br> caring for people's health</h2></div></div>
+    <div class="timeline">
+      <span class="timeline-progress" aria-hidden="true"></span>
+      <div class="t-item"><span class="t-when">1981</span><h3>Hospital São Lucas is founded</h3><p>Our history of caring for people's health in the region begins.</p></div>
+      <div class="t-item"><span class="t-when">1984</span><h3>Extremamedic is founded</h3><p>Offering outpatient health plans to the market.</p></div>
+      <div class="t-item"><span class="t-when">2015</span><h3>12,000 members</h3><p>Extremamedic reaches the milestone of 12,000 members under its management.</p></div>
+      <div class="t-item"><span class="t-when">2017</span><h3>Partnership with SERPRAM</h3><p>Extremamedic partners with SERPRAM and begins offering hospital plans to the market.</p></div>
+      <div class="t-item"><span class="t-when">2018</span><h3>Hospital São Lucas expanded</h3><p>Expansion and modernization of Hospital São Lucas.</p></div>
+      <div class="t-item"><span class="t-when">2021</span><h3>Sale of SERPRAM</h3><p>SERPRAM is sold to GNDI.</p></div>
+      <div class="t-item"><span class="t-when">2021</span><h3>New departments at Hospital São Lucas</h3><p>Diagnostic Imaging, Hemodynamics and Ophthalmology departments are opened.</p></div>
+      <div class="t-item"><span class="t-when">2022</span><h3>End of the partnership</h3><p>The partnership between Extremamedic and SERPRAM comes to an end.</p></div>
+      <div class="t-item"><span class="t-when">2024</span><h3>Back to our roots</h3><p>Extremamedic launches new hospital plans on the market.</p></div>
+      <div class="t-item"><span class="t-when">2024</span><h3>MedicGLOBAL is born</h3><p>A new name, with plans whose coverage area extends to Pouso Alegre/MG — keeping the same legal name and the same ANS registration (No. {{L.ans}}).</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" aria-label="MedicGLOBAL in numbers">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat reveal"><span class="badge">Track record</span><div><div class="stat-big tnum"><span data-count="40" data-prefix="+">+40</span></div><p class="mt-4">years of history caring for people's health</p></div></div>
+      <div class="stat reveal reveal-d1"><span class="badge">Facilities</span><div><div class="stat-big tnum"><span data-count="5">5</span></div><p class="mt-4">hospitals between Bragança Paulista/SP and Pouso Alegre/MG</p></div></div>
+      <div class="stat reveal reveal-d2"><span class="badge">Products</span><div><div class="stat-big tnum"><span data-count="4">4</span></div><p class="mt-4">EMED GLOBAL BLUE plans</p></div></div>
+      <div class="stat reveal reveal-d3"><span class="badge">Regulation</span><div><div class="stat-big tnum" style="font-size:clamp(2rem,1.6rem + 1.4vw,2.75rem)">{{L.ans}}</div><p class="mt-4">registration with the National Supplementary Health Agency (ANS)</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" id="estrutura" aria-labelledby="es-t" style="overflow:hidden">
+  <div class="wrap">
+    <div class="grid" style="align-items:center">
+      <div class="c-1-7 stack">
+        <span class="eyebrow">Our facilities</span>
+        <h2 id="es-t" class="balance">A care network ready to be there for you</h2>
+        <p class="lead">Medical offices, clinics, laboratories and five hospitals within our service area, with experienced professionals prepared for outpatient, hospital and obstetric care.</p>
+        <div class="feature-list mt-7">
+          <div><span class="ico">{{i:hospital}}</span><div><h3>Hospitals</h3><p>Five hospitals between Bragança Paulista/SP and Pouso Alegre/MG.</p></div></div>
+          <div><span class="ico">{{i:clinic}}</span><div><h3>Clinics</h3><p>Outpatient care and appointments.</p></div></div>
+          <div><span class="ico">{{i:microscope}}</span><div><h3>Laboratories</h3><p>Tests at partner laboratories.</p></div></div>
+          <div><span class="ico">{{i:stethoscope}}</span><div><h3>Professionals and specialties</h3><p>Search by professional or specialty.</p></div></div>
+        </div>
+        <div class="btn-row mt-6"><a class="btn btn--light" href="rede-credenciada.html" data-track="click_rede">Explore the network</a></div>
+      </div>
+      <div class="c-8-13">
+        <div class="vmarquee" aria-hidden="true">
+          <div class="vcol">{{pic:old_quarto||600|25vw}}{{pic:old_hemodinamica||600|25vw}}{{pic:old_consultorio||600|25vw}}{{pic:old_quarto||600|25vw}}{{pic:old_hemodinamica||600|25vw}}{{pic:old_consultorio||600|25vw}}</div>
+          <div class="vcol">{{pic:old_hsl_recepcao||600|25vw}}{{pic:old_renascentista||600|25vw}}{{pic:old_atendimento||600|25vw}}{{pic:old_hsl_recepcao||600|25vw}}{{pic:old_renascentista||600|25vw}}{{pic:old_atendimento||600|25vw}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="atuacao" aria-labelledby="at-t">
+  <div class="wrap">
+    <div class="grid mb-8">
+      <div class="c-1-7"><span class="eyebrow">Where we operate</span><h2 id="at-t" class="balance">From southern Minas Gerais to the Bragança Paulista region</h2></div>
+      <div class="c-8-13 stack" style="align-self:end">
+        <p class="lead">Headquartered in Extrema/MG, MedicGLOBAL operates between Bragança Paulista/SP and Pouso Alegre/MG — and offers urgent and emergency care while traveling anywhere in Brazil through the ABRAMGE System.</p>
+        <a class="link" href="rede-credenciada.html#mapa">View the service area map</a>
+      </div>
+    </div>
+  </div>
+  <div class="atuacao-tags" aria-hidden="true">
+    <div class="marquee"><div class="marquee-track"><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Southern Minas Gerais</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Southern Minas Gerais</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Southern Minas Gerais</span><span class="marquee-item">Extrema/MG</span><span class="marquee-item">Cambuí/MG</span><span class="marquee-item">Pouso Alegre/MG</span><span class="marquee-item">Bragança Paulista/SP</span><span class="marquee-item">Southern Minas Gerais</span></div></div>
+    <div class="marquee marquee--rev"><div class="marquee-track"><span class="marquee-item">Outpatient</span><span class="marquee-item">Hospital</span><span class="marquee-item">Obstetrics</span><span class="marquee-item">Telemedicine</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Outpatient</span><span class="marquee-item">Hospital</span><span class="marquee-item">Obstetrics</span><span class="marquee-item">Telemedicine</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Outpatient</span><span class="marquee-item">Hospital</span><span class="marquee-item">Obstetrics</span><span class="marquee-item">Telemedicine</span><span class="marquee-item">ABRAMGE</span><span class="marquee-item">Outpatient</span><span class="marquee-item">Hospital</span><span class="marquee-item">Obstetrics</span><span class="marquee-item">Telemedicine</span><span class="marquee-item">ABRAMGE</span></div></div>
+  </div>
+</section>
+
+<section class="section mist" id="responsabilidade" aria-labelledby="rs-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-6"><span class="eyebrow">Accountability</span><h2 id="rs-t" class="balance">Regulatory transparency and care for your data</h2></div>
+      <div class="c-7-13 stack">
+        <p class="lead">We are a health plan operator registered with the ANS. Information such as IDSS, rate adjustments, TISS forms and mandatory documents is gathered in an open document center.</p>
+        <div class="btn-row"><a class="btn" href="documentos.html">Document center</a><a class="btn btn--ghost" href="privacidade.html">Privacy and LGPD</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="tc-t">
+  <div class="wrap">
+    <div class="glass-feature">
+      {{pic:old_escritorio|Team working together in an office|2000|100vw}}
+      <div class="inner"><div><span class="eyebrow" style="color:#fff">Careers</span><h2 id="tc-t">Join MedicGLOBAL</h2><div class="btn-row mt-7"><a class="btn btn--light" href="trabalhe-conosco.html">Send your résumé</a></div></div></div>
+    </div>
+  </div>
+</section>

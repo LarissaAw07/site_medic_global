@@ -126,5 +126,15 @@
     "old_escritorio": "assets/img/provisorio/escritorio.jpg",
     "old_profissional": "assets/img/provisorio/profissional.jpg",
     "old_comunicado": "assets/img/provisorio/comunicado.jpg"
+  },
+  "en": {
+    "_nota": "Textos em inglês que substituem os de cima nas páginas em /en/ (mesmo caminho de chave).",
+    "legal": {
+      "razao": "Legal name to be confirmed",
+      "cnpj": "CNPJ (company tax ID) to be confirmed"
+    },
+    "phones": {
+      "ouvidoriaHours": "Business days, Monday to Friday, 7:30 a.m. to 5:30 p.m."
+    }
   }
 }

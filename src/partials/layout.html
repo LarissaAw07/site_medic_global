@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="{{htmlLang}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,9 +7,11 @@
 <meta name="description" content="{{description}}">
 <meta name="robots" content="{{robots}}">
 <link rel="canonical" href="{{canonical}}">
+{{alternates}}
 <meta name="theme-color" content="#00626D">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="pt_BR">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:locale:alternate" content="{{ogLocaleAlt}}">
 <meta property="og:site_name" content="MedicGLOBAL">
 <meta property="og:title" content="{{title}}">
 <meta property="og:description" content="{{description}}">
@@ -23,6 +25,7 @@
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/main.css">
+{{langRedirect}}
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 {{extraHead}}
 {{jsonld}}
@@ -61,6 +64,7 @@
     <div class="bar-actions">
       <a class="btn btn--benef btn--sm" href="beneficiario.html" data-track="click_area_beneficiario" aria-label="Área do Beneficiário">{{i:user}} <span class="benef-label">Área do Beneficiário</span></a>
       <a class="btn btn--ghost btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
+      {{> lang-switch}}
       <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">{{i:menu}}</button>
     </div>
   </div>
@@ -160,6 +164,10 @@
     <details><summary>MedicGLOBAL</summary><ul><li><a href="medicglobal.html">Nossa história</a></li><li><a href="medicglobal.html#estrutura">Nossa estrutura</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li><li><a href="contato.html">Contato</a></li></ul></details>
     <details><summary>Conteúdos</summary><ul><li><a href="conteudos.html">Todos os conteúdos</a></li><li><a href="conteudos.html#cat=comunicados">Comunicados</a></li><li><a href="conteudos.html#cat=saude">Saúde</a></li></ul></details>
     <details><summary>Documentos</summary><ul><li><a href="documentos.html">Central documental</a></li><li><a href="documentos.html#ans">ANS e IDSS</a></li><li><a href="documentos.html#tiss">TISS e guias</a></li></ul></details>
+    <div class="drawer-lang" role="group" aria-label="Idioma">
+      <a href="{{hrefPt}}" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt" aria-current="true">{{> flag-br}} Português</a>
+      <a href="{{hrefEn}}" hreflang="en" lang="en" data-set-lang="en">{{> flag-us}} English</a>
+    </div>
     <div class="drawer-cta">
       <a class="btn" href="planos.html#contato" data-track="click_quero_ser_cliente">Quero ser cliente</a>
       <button class="btn btn--ghost" type="button" data-open-search>{{i:search}} Buscar no site</button>

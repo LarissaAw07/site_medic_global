@@ -34,7 +34,36 @@
       }
     ],
     "fonteTitulo": "Mamografia digital passa a ter cobertura sem restrição de idade ou gênero",
-    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/mamografia-digital-passa-a-ter-cobertura-sem-restricao-de-idade-ou-genero"
+    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/mamografia-digital-passa-a-ter-cobertura-sem-restricao-de-idade-ou-genero",
+    "en": {
+      "titulo": "Digital mammography is now covered with no age or gender restriction",
+      "resumo": "Since October 1, health plans cover digital mammography when ordered by a physician, with no age or gender limit.",
+      "alt": "Physician talking with patients during an appointment",
+      "intro": "ANS (Brazil's National Supplementary Health Agency) has expanded the mandatory coverage of digital mammography under health plans. The change took effect on October 1, 2026.",
+      "tema": "List of Procedures (Rol)",
+      "migalha": "Digital mammography",
+      "secoes": [
+        {
+          "h": "What changed",
+          "p": [
+            "Previously, mandatory coverage of digital mammography was guaranteed for women aged 40 to 69. With the update approved by ANS on September 3, health plans now cover the exam with no age or gender restriction, whenever it is ordered by a physician.",
+            "ANS removed the utilization guideline that limited access. As a result, the decision to perform the exam now depends on the clinical assessment of each case."
+          ]
+        },
+        {
+          "h": "What the exam is covered for",
+          "p": [
+            "Coverage applies to breast cancer screening, diagnosis and treatment follow-up."
+          ]
+        },
+        {
+          "h": "Another coverage now in effect",
+          "p": [
+            "On the same date, health plans also became required to cover the hormonal IUD/IUS for patients with endometriosis."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "balanco-de-beneficiarios-agosto-2026",
@@ -71,7 +100,36 @@
       }
     ],
     "fonteTitulo": "ANS apresenta balanço de beneficiários de agosto",
-    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/ans-apresenta-balanco-de-beneficiarios-de-agosto"
+    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/ans-apresenta-balanco-de-beneficiarios-de-agosto",
+    "en": {
+      "titulo": "Medical health plans surpass 53 million members in August",
+      "resumo": "An ANS report shows the number of medical and dental plan enrollments and the movement of new enrollments and cancellations.",
+      "alt": "Team working in an office with a laptop and a tablet",
+      "intro": "ANS (Brazil's National Supplementary Health Agency) released its health plan membership report for August 2026, with the total number of enrollments and the movement of new enrollments and cancellations over the past 12 months.",
+      "tema": "Industry data",
+      "migalha": "Membership report",
+      "secoes": [
+        {
+          "h": "August figures",
+          "p": [
+            "In August 2026, medical health plans recorded 53,164,516 members. Dental-only plans totaled 37,311,529.",
+            "In that month alone, medical plans had 1,237,646 new enrollments and 1,175,486 cancellations, which corresponds to a turnover rate of 2.21%."
+          ]
+        },
+        {
+          "h": "12-month movement",
+          "p": [
+            "Over the past 12 months, medical plans had 16,117,456 new enrollments and 15,434,267 cancellations, with a turnover rate of 29.41%."
+          ]
+        },
+        {
+          "h": "How to read these data",
+          "p": [
+            "The figures refer to contractual enrollments, not to individuals, since the same member may have more than one plan. ANS also notes that the data may be revised retroactively, due to the monthly revisions submitted by health plan operators."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "cobertura-tratamento-calculo-biliar",
@@ -108,7 +166,36 @@
       }
     ],
     "fonteTitulo": "Tratamento para cálculo biliar será coberto pelos planos de saúde",
-    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/tratamento-para-calculo-biliar-sera-coberto-pelos-planos-de-saude"
+    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/tratamento-para-calculo-biliar-sera-coberto-pelos-planos-de-saude",
+    "en": {
+      "titulo": "Treatment for complex gallstones added to the mandatory coverage list (Rol)",
+      "resumo": "Cholangioscopy with lithotripsy will be covered by health plans starting November 3, in cases defined by ANS.",
+      "alt": "Hospital inpatient room",
+      "intro": "On October 2, the Collegiate Board of Directors of ANS (Brazil's National Supplementary Health Agency) approved the inclusion of a new procedure for the treatment of complex gallstones in the ANS List of Health Procedures and Events (Rol).",
+      "tema": "List of Procedures (Rol)",
+      "migalha": "Gallstones",
+      "secoes": [
+        {
+          "h": "Which procedure was added",
+          "p": [
+            "The procedure is cholangioscopy with laser or electrohydraulic lithotripsy, used to treat complex gallstones. Coverage applies to patients for whom treatment by endoscopic retrograde cholangiopancreatography (ERCP) has failed."
+          ]
+        },
+        {
+          "h": "When it takes effect",
+          "p": [
+            "Coverage becomes mandatory starting November 3, 2026."
+          ]
+        },
+        {
+          "h": "How it was reviewed",
+          "p": [
+            "The technology was assessed at Cosaúde's 53rd and 55th technical meetings, in July and September, and went through Public Consultation No. 175 and Public Hearing No. 68, both held in August.",
+            "The List of Health Procedures and Events (Rol) is the list of mandatory coverage for health plans and includes all diseases in the World Health Organization's International Classification of Diseases (ICD)."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "disque-ans-horario-integral",
@@ -137,7 +224,29 @@
       }
     ],
     "fonteTitulo": "Disque ANS retoma funcionamento em horário integral",
-    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/disque-ans-retoma-funcionamento-em-horario-integral"
+    "fonteUrl": "https://www.gov.br/ans/pt-br/assuntos/noticias-1/periodo-eleitoral/disque-ans-retoma-funcionamento-em-horario-integral",
+    "en": {
+      "titulo": "Disque ANS phone line returns to full operating hours",
+      "resumo": "The ANS phone line has resumed service Monday through Friday, 8 a.m. to 8 p.m. See also the other channels available.",
+      "intro": "Disque ANS, the phone line of ANS (Brazil's National Supplementary Health Agency), resumed full operating hours on Monday, September 21, 2026.",
+      "tema": "Member services",
+      "migalha": "Disque ANS",
+      "secoes": [
+        {
+          "h": "Service hours",
+          "p": [
+            "Phone service is available Monday through Friday, 8 a.m. to 8 p.m., except on national holidays.",
+            "According to ANS, the restrictions on hours and call volume had been adopted due to budget constraints and end as the newly contracted company begins providing the service."
+          ]
+        },
+        {
+          "h": "Other ANS channels",
+          "p": [
+            "In addition to the phone line, members can use the Fale Conosco (Contact Us) online form on the ANS website, or in-person service by appointment at the ANS regional offices (Núcleos da ANS) in the country's five regions."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "circuito-de-cuidado-da-mulher",
@@ -174,7 +283,36 @@
       }
     ],
     "fonteTitulo": "Ministério da Saúde, estados e municípios promovem Circuito de Cuidado da Mulher neste sábado",
-    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-estados-e-municipios-promovem-circuito-de-cuidado-da-mulher-neste-sabado"
+    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-estados-e-municipios-promovem-circuito-de-cuidado-da-mulher-neste-sabado",
+    "en": {
+      "titulo": "Circuito de Cuidado da Mulher (Women's Care Circuit) offers exams and care nationwide",
+      "resumo": "The first edition of the initiative brought together appointments, screening tests, vaccines and contraceptive methods in several locations.",
+      "alt": "Physician seeing a patient in a hospital hallway",
+      "intro": "On October 17, the Brazilian Ministry of Health, in partnership with states and municipalities, held the first edition of the Circuito de Cuidado da Mulher (Women's Care Circuit), with activities in several locations across the country.",
+      "tema": "Prevention",
+      "migalha": "Women's care",
+      "secoes": [
+        {
+          "h": "What was offered",
+          "p": [
+            "The initiative brought together care, exams, contraceptive methods, vaccines and discussion groups. Services included the HPV DNA test, mammography when indicated, and IUD and subdermal implant insertion.",
+            "Some locations received the Carretas de Saúde da Mulher (Women's Health mobile units), offering mammography, ultrasound and colposcopy, with the goal of reducing waiting lists in the municipalities."
+          ]
+        },
+        {
+          "h": "Dignidade Menstrual (Menstrual Dignity)",
+          "p": [
+            "The Dignidade Menstrual (Menstrual Dignity) Program was also part of the initiative: eligible women could receive authorization to obtain free sanitary pads."
+          ]
+        },
+        {
+          "h": "Guidance for professionals",
+          "p": [
+            "To support health managers, Joint Technical Note No. 360/2026 was published. The Papo de Mulher series, with three thematic booklets, was made available to health professionals."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "dia-nacional-da-vacinacao-2026",
@@ -209,7 +347,35 @@
       }
     ],
     "fonteTitulo": "Ministério da Saúde apoia estados e municípios para ampliar a proteção da população",
-    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-apoia-estados-e-municipios-para-ampliar-a-protecao-da-populacao"
+    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-apoia-estados-e-municipios-para-ampliar-a-protecao-da-populacao",
+    "en": {
+      "titulo": "National Vaccination Day reinforces protection against more than 20 diseases",
+      "resumo": "More than 222 million doses have been distributed in 2026. See the coverage data and the MMR vaccine schedule.",
+      "intro": "Ahead of National Vaccination Day, observed on October 17, the Brazilian Ministry of Health highlighted its support for states and municipalities to expand protection for the population.",
+      "tema": "Vaccination",
+      "migalha": "Vaccination",
+      "secoes": [
+        {
+          "h": "Doses and coverage",
+          "p": [
+            "In 2026, the Ministry of Health has already distributed more than 222 million doses. The SUS (Brazil's public health system) offers free vaccines against more than 20 diseases.",
+            "In 2025, coverage of the first dose of the MMR vaccine reached 93.10%. WHO and UNICEF data released in July show that the number of children without the first dose of the pentavalent vaccine fell from 360,000 to 50,000 between 2023 and 2025, a reduction of about 90%."
+          ]
+        },
+        {
+          "h": "Measles",
+          "p": [
+            "In 2024, Brazil regained its measles-free certification, which it had lost in 2019, a year with more than 20,000 cases. In 2026, 61 imported or import-related cases were recorded."
+          ]
+        },
+        {
+          "h": "When to vaccinate",
+          "p": [
+            "The MMR vaccine is given at 12 months (first dose) and at 15 months (second dose). Not having a vaccination card does not prevent vaccines from being given."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "hospital-inteligente-e-utis-conectadas",
@@ -246,7 +412,36 @@
       }
     ],
     "fonteTitulo": "Ministério da Saúde assina contrato de gestão do Hospital Inteligente e da Rede de UTIs conectadas",
-    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-assina-contrato-de-gestao-do-hospital-inteligente-e-da-rede-de-utis-conectadas"
+    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-assina-contrato-de-gestao-do-hospital-inteligente-e-da-rede-de-utis-conectadas",
+    "en": {
+      "titulo": "Management contract signed for the Hospital Inteligente (Smart Hospital) and connected ICU network",
+      "resumo": "The project includes about 800 beds in São Paulo and a connected ICU network that will reach 280 beds in 14 hospitals.",
+      "alt": "Hospital procedure room with imaging equipment",
+      "intro": "On October 20, the Brazilian Ministry of Health signed the management contract for the Hospital Inteligente (Smart Hospital) and the Connected ICU Network with the Instituto Tecnológico de Medicina Inteligente do Brasil (ITMI).",
+      "tema": "Digital health",
+      "migalha": "Smart Hospital",
+      "secoes": [
+        {
+          "h": "The Smart Hospital",
+          "p": [
+            "Located in São Paulo, the Smart Hospital will have about 800 beds — 250 emergency, 350 ICU and 200 ward beds — and 25 operating rooms. Operations are scheduled to begin in the second quarter of 2029.",
+            "One of the goals is to reduce the average length of stay in the emergency department from 17 to 4 hours within four years of operation."
+          ]
+        },
+        {
+          "h": "Connected ICUs",
+          "p": [
+            "The Connected ICU Network starts with 60 beds in 6 hospitals, spread across the country's five regions, and is expected to reach 280 beds in 14 hospitals."
+          ]
+        },
+        {
+          "h": "Funding and targets",
+          "p": [
+            "Funding includes a US$320 million loan from the New Development Bank (NDB). The management contract sets out 78 indicators, with payments tied to meeting targets."
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "novos-medicamentos-oncologicos-no-sus",
@@ -283,6 +478,35 @@
       }
     ],
     "fonteTitulo": "Ministério da Saúde inicia oferta no SUS de nove medicamentos oncológicos de alta tecnologia em todas as regiões do país",
-    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-inicia-oferta-no-sus-de-nove-medicamentos-oncologicos-de-alta-tecnologia-em-todas-as-regioes-do-pais"
+    "fonteUrl": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/outubro/ministerio-da-saude-inicia-oferta-no-sus-de-nove-medicamentos-oncologicos-de-alta-tecnologia-em-todas-as-regioes-do-pais",
+    "en": {
+      "titulo": "Brazil's SUS begins offering nine new cancer drugs",
+      "resumo": "The drugs cover 13 indications and are expected to benefit more than 116,000 people. Colorectal cancer screening gains 400,000 tests.",
+      "alt": "Doctor's office waiting room",
+      "intro": "The Brazilian Ministry of Health has begun offering nine high-technology cancer drugs through the SUS (Brazil's public health system) in every region of the country.",
+      "tema": "Oncology",
+      "migalha": "Cancer drugs",
+      "secoes": [
+        {
+          "h": "The new drugs",
+          "p": [
+            "The nine drugs cover 13 indications and are expected to benefit more than 116,000 people. In total, 23 drugs are planned by the end of the year, a 35% expansion.",
+            "The rollout begins at 20 treatment centers, with an annual procurement impact of R$155.4 million. Considering all the measures announced, the annual impact is R$4 billion."
+          ]
+        },
+        {
+          "h": "Colorectal cancer screening",
+          "p": [
+            "Starting in November, 400,000 FIT tests will be distributed for colorectal cancer screening in people aged 50 to 75 without symptoms. According to the Ministry, the test is up to 92% accurate."
+          ]
+        },
+        {
+          "h": "Thyroid cancer",
+          "p": [
+            "Funding for radioiodine therapy, used to treat thyroid cancer, rises from R$5.2 million to R$18 million per year, an increase of 246%."
+          ]
+        }
+      ]
+    }
   }
 ]

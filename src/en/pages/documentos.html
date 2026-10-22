@@ -1,0 +1,218 @@
+<!--@{
+  "title": "Documents and regulatory information | ANS, IDSS, TISS and rate adjustments | MedicGLOBAL",
+  "description": "MedicGLOBAL document center: ANS registration no. 41186-8, IDSS, Quality Factor, TISS forms, CID-10 Health Statement, provider directory and RN 565 rate adjustments.",
+  "active": "institucional",
+  "og": "old_escritorio",
+  "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Documents", "documentos.html"]]
+}@-->
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Document center</span>
+        <h1 id="t" class="balance">Regulatory information, clear and organized</h1>
+        <p class="lead">ANS registration, quality indicators, TISS forms, manuals and rate adjustments — with source, category and last-updated date.</p>
+        <div class="btn-row">
+          <a class="btn" href="#doc-list">Browse documents</a>
+          <a class="btn btn--ghost" href="#reajuste">Rate adjustments</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:doc}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:shield}}</i><span>ANS no. {{L.ans}}<small>registered health plan operator</small></span></span>
+          <span class="chip"><i>{{i:file-check}}</i><span>Forms and manuals<small>TISS, rate adjustments and indicators</small></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="flex-between mt-8" style="align-items:center;padding:20px 24px;border:1px solid var(--line-2);border-radius:var(--r-lg)">
+      <div style="display:flex;gap:16px;align-items:center"><span class="ans-seal" role="img" aria-label="ANS registration no. {{L.ans}}"><span>ANS - no. {{L.ans}}</span></span><span class="small muted">Health plan operator registered with the ANS (Brazil's National Supplementary Health Agency)</span></div>
+      <span class="small">Disque ANS (ANS hotline) <strong>0800 701 9656</strong> · <a class="accent" href="{{L.links.ans}}" target="_blank" rel="noopener">gov.br/ans</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Documents" data-filter data-filter-items="#doc-list .doc" data-filter-empty="#doc-none">
+  <div class="wrap">
+    <div class="doc-layout">
+      <aside class="doc-side">
+        <div class="field doc-search"><label for="doc-q">Search documents</label><div class="doc-search-box">{{i:search}}<input id="doc-q" type="search" data-filter-search placeholder="E.g.: consultation form"></div></div>
+        <div>
+          <p class="filter-label">Categories</p>
+          <div class="doc-cats" role="group" aria-label="Document categories">
+            <button type="button" data-filter-group="cat" data-value="all" aria-pressed="true">All <span data-count-for="all" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="ans" data-anchor="ans" aria-pressed="false">ANS and IDSS <span data-count-for="ans" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="tiss" data-anchor="tiss" aria-pressed="false">TISS and forms <span data-count-for="tiss" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="manuais" aria-pressed="false">Manuals <span data-count-for="manuais" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="reajustes" aria-pressed="false">Rate adjustments <span data-count-for="reajustes" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Notices <span data-count-for="comunicados" data-count-group="cat"></span></button>
+            <button type="button" data-filter-group="cat" data-value="legais" aria-pressed="false">Legal information <span data-count-for="legais" data-count-group="cat"></span></button>
+          </div>
+        </div>
+        <p class="xs muted">Are you a provider? The TISS documents and the Autorizador Web are in the “TISS and forms” category.</p>
+      </aside>
+
+      <div>
+        <p class="small muted mb-6"><span data-filter-count></span> documents</p>
+        <span id="ans"></span><span id="tiss"></span>
+        <div class="doc-list" id="doc-list">
+          <article class="doc" data-cat="ans"><span class="doc-ico">ANS</span><div><h3>Operator registration with the ANS</h3><p>MedicGLOBAL — ANS registration no. {{L.ans}}. The corporate name and registration were kept after the brand change.</p><div class="meta"><b>ANS</b><span>Corporate information</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.ans}}" target="_blank" rel="noopener">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">IDSS</span><div><h3>IDSS — Supplementary Health Performance Index</h3><p>Part of the ANS Health Plan Operator Qualification Program, it assesses operators' performance every year using indicators grouped into four dimensions. History from 2018 to 2025.</p><div class="meta"><b>ANS · IDSS</b><span>Updated: IDSS 2025 (base year 2024)</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.idss}}" target="_blank" rel="noopener">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">PQO</span><div><h3>Health Plan Operator Qualification Program</h3><p>Official ANS information on the qualification and assessment of health plan operators.</p><div class="meta"><b>ANS</b><span>Source: gov.br/ans</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.qualificacaoAns}}" target="_blank" rel="noopener">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="ans"><span class="doc-ico">FQ</span><div><h3>Quality Factor</h3><p>ANS registration and information on the Quality Factor applied to providers.</p><div class="meta"><b>ANS</b><span>Source: ANS</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.fatorQualidade}}" target="_blank" rel="noopener">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Consultation Form (TISS)</h3><p>Consultation form template in the TISS standard.</p><div class="meta"><b>TISS · Forms</b><span>Updated: Jan 20, 2025</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.guiaConsulta}}" target="_blank" rel="noopener" data-doc="Guia de Consulta">{{i:eye}} View</a><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaConsulta}}" download data-doc="Guia de Consulta">{{i:download}} Download</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Hospitalization Form (TISS)</h3><p>Hospitalization request form template in the TISS standard.</p><div class="meta"><b>TISS · Forms</b><span>Updated: Jan 20, 2025</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.guiaInternacao}}" target="_blank" rel="noopener" data-doc="Guia de Internação">{{i:eye}} View</a><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaInternacao}}" download data-doc="Guia de Internação">{{i:download}} Download</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>Professional Services Form (TISS)</h3><p>Professional services form template in the TISS standard.</p><div class="meta"><b>TISS · Forms</b><span>Updated: Jan 20, 2025</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.guiaServico}}" target="_blank" rel="noopener" data-doc="Guia de Serviço Profissional">{{i:eye}} View</a><a class="btn btn--ghost btn--sm" href="{{L.docs.guiaServico}}" download data-doc="Guia de Serviço Profissional">{{i:download}} Download</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">PDF</span><div><h3>SP/SADT Form (TISS)</h3><p>Professional Services / Diagnostic and Therapeutic Support Services form.</p><div class="meta"><b>TISS · Forms</b><span class="review-flag">Document being updated</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="atendimento.html#prestador">Request from customer service</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">WEB</span><div><h3>Autorizador Web — TISS 3.0</h3><p>System for providers to request and track authorizations.</p><div class="meta"><b>TISS · Provider</b><span>Restricted access</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Access</a></div></article>
+          <article class="doc" data-cat="tiss"><span class="doc-ico">CID</span><div><h3>Health Statement — CID-10</h3><p>Health statement system using the CID-10 classification.</p><div class="meta"><b>CID-10</b><span>Restricted access</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.cid10}}" target="_blank" rel="noopener">{{i:lock}} Access</a></div></article>
+          <article class="doc" data-cat="manuais"><span class="doc-ico">WEB</span><div><h3>Provider directory and services directory</h3><p>Search providers by directory type, state and city.</p><div class="meta"><b>Manuals</b><span>Continuously updated</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">RN</span><div><h3>Rate adjustment — contract pool (RN 565)</h3><p>Percentages applied to the pool of group contracts with up to 30 lives (members), from 2013 to 2026.</p><div class="meta"><b>Rate adjustments</b><span>Updated: 2026/2027 period</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="#reajuste">{{i:eye}} View table</a><a class="btn btn--ghost btn--sm" href="{{L.links.rn565}}" target="_blank" rel="noopener">{{i:external}} Details</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Companies for the RN 309 rate adjustment — 2013</h3><p>List of contracts in the pool for the 2013 rate adjustment.</p><div class="meta"><b>Rate adjustments</b><span>Reference year: 2013</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.rn309_2013}}" target="_blank" rel="noopener" data-doc="RN309 2013">{{i:eye}} View</a><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2013}}" download data-doc="RN309 2013">{{i:download}} Download</a></div></article>
+          <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Companies for the RN 309 rate adjustment — 2014</h3><p>List of contracts in the pool for the 2014 rate adjustment.</p><div class="meta"><b>Rate adjustments</b><span>Reference year: 2014</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.rn309_2014}}" target="_blank" rel="noopener" data-doc="RN309 2014">{{i:eye}} View</a><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2014}}" download data-doc="RN309 2014">{{i:download}} Download</a></div></article>
+          <article class="doc" data-cat="comunicados"><span class="doc-ico">NOTE</span><div><h3>Notice — 2020 rate adjustment recovery</h3><p>Suspension of rate adjustments from September to December 2020, as determined by the ANS.</p><div class="meta"><b>Notices</b><span>Published on Jun 8, 2024</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="artigo-reajuste-2020.html">{{i:eye}} View</a></div></article>
+          <article class="doc" data-cat="legais"><span class="doc-ico">LGPD</span><div><h3>Privacy Policy, Cookies and Terms of Use</h3><p>How we process personal data, our use of cookies and our privacy channel.</p><div class="meta"><b>Legal information</b><span class="review-flag">Pending legal review</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="privacidade.html">{{i:eye}} View</a></div></article>
+        </div>
+        <p id="doc-none" class="muted mt-6" hidden>No documents found. <a class="link" href="atendimento.html">Contact MedicGLOBAL</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="reajuste" aria-labelledby="rj-t">
+  <div class="wrap">
+    <div class="grid mb-7">
+      <div class="c-1-6"><span class="eyebrow">Rate adjustments · RN 565</span><h2 id="rj-t" class="balance" style="font-size:var(--t-h3)">Pool of contracts with up to 30 lives (members)</h2></div>
+      <div class="c-7-13" style="align-self:end"><p class="muted">Percentages published by application period. For the list of contracts in each year, see the <a class="accent" href="{{L.links.rn565}}" target="_blank" rel="noopener">contract pool details</a>.</p></div>
+    </div>
+    <div class="rj">
+      <div class="rj-head" aria-hidden="true"><span>Year</span><span>Application period</span><span>Percentage</span></div>
+      <ol class="rj-list" aria-label="Rate adjustments by year">
+        <li class="rj-row is-current">
+          <span class="rj-year">2026</span>
+          <div class="rj-info">
+            <span class="rj-cat">Contract pool · up to 30 lives<span class="rj-badge">Current</span></span>
+            <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2026 – Apr 30, 2027</span>
+          </div>
+          <span class="rj-pct"><span class="sr-only">Percentage: </span>8.70%</span>
+        </li>
+        <li class="rj-row">
+          <span class="rj-year">2025</span>
+          <div class="rj-info">
+            <span class="rj-cat">Contract pool · up to 30 lives</span>
+            <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2025 – Apr 30, 2026</span>
+          </div>
+          <span class="rj-pct"><span class="sr-only">Percentage: </span>6.55%</span>
+        </li>
+        <li class="rj-row">
+          <span class="rj-year">2024</span>
+          <div class="rj-info">
+            <span class="rj-cat">Contract pool · up to 30 lives</span>
+            <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2024 – Apr 30, 2025</span>
+          </div>
+          <span class="rj-pct"><span class="sr-only">Percentage: </span>11.98%</span>
+        </li>
+        <li class="rj-row">
+          <span class="rj-year">2023</span>
+          <div class="rj-info">
+            <span class="rj-cat">Contract pool · up to 30 lives</span>
+            <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2023 – Apr 30, 2024</span>
+          </div>
+          <span class="rj-pct"><span class="sr-only">Percentage: </span>9.00%</span>
+        </li>
+      </ol>
+      <details class="rj-older">
+        <summary><span class="rj-older-title">{{i:layers}} Previous years <small>2013 to 2022 · 10 years</small></span><span class="rj-chev">{{i:chevron-down}}</span></summary>
+        <ol class="rj-list" aria-label="Rate adjustments from 2013 to 2022">
+          <li class="rj-row">
+            <span class="rj-year">2022</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2022 – Apr 30, 2023</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>10.00%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2021</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2021 – Apr 30, 2022</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>5.00%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2020</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2020 – Apr 30, 2021</span>
+              <span class="rj-docs"><a class="rj-doc" href="artigo-reajuste-2020.html">{{i:doc}} Notice — 2020 rate adjustment recovery</a></span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>7.35%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2019</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2019 – Apr 30, 2020</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>9.40%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2018</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2018 – Apr 30, 2019</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>22.22%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2017</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2017 – Apr 30, 2018</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>17.96%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2016</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2016 – Apr 30, 2017</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span><span class="review-flag">Not reported</span></span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2015</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2015 – Apr 30, 2016</span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>20.97%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2014</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2014 – Apr 30, 2015</span>
+              <span class="rj-docs"><a class="rj-doc" href="{{L.docs.rn309_2014}}" target="_blank" rel="noopener" data-doc="RN309 2014">{{i:download}} Companies in the pool (RN 309) — PDF</a></span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>13.24%</span>
+          </li>
+          <li class="rj-row">
+            <span class="rj-year">2013</span>
+            <div class="rj-info">
+              <span class="rj-cat">Contract pool · up to 30 lives</span>
+              <span class="rj-period">{{i:calendar}}<span class="sr-only">Application period: </span>May 1, 2013 – Apr 30, 2014</span>
+              <span class="rj-docs"><a class="rj-doc" href="{{L.docs.rn309_2013}}" target="_blank" rel="noopener" data-doc="RN309 2013">{{i:download}} Companies in the pool (RN 309) — PDF</a></span>
+            </div>
+            <span class="rj-pct"><span class="sr-only">Percentage: </span>11.33%</span>
+          </li>
+        </ol>
+      </details>
+    </div>
+    <p class="xs muted mt-5">Source: MedicGLOBAL contract pool publication (RN 565/RN 309).</p>
+  </div>
+</section>

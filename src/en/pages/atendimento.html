@@ -1,0 +1,101 @@
+<!--@{
+  "title": "Customer service | Phone, WhatsApp and Ombudsman | MedicGLOBAL",
+  "description": "MedicGLOBAL customer service channels for members, companies, providers, sales, billing, authorizations and the Ombudsman. Phone (35) 3435-4442.",
+  "active": "voce",
+  "og": "old_atendimento",
+  "crumbs": [["Customer service", "atendimento.html"]],
+  "jsonld": [{"@context":"https://schema.org","@type":"ContactPage","name":"MedicGLOBAL Customer Service","url":"https://medicglobal.com.br/atendimento/"}]
+}@-->
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Customer service</span>
+        <h1 id="t" class="balance">We're here to help</h1>
+        <p class="lead">Tell us who you are and see only the channels that fit your needs: phone, WhatsApp, the Ombudsman and quick answers to the most common questions.</p>
+        <div class="btn-row">
+          <a class="btn" href="#canais">See customer service channels</a>
+          <a class="btn btn--ghost" href="#ouvidoria">Contact the Ombudsman</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art frame--card">{{> mosaic}}<div class="art-card"><a class="place-card" href="{{L.phones.central.tel}}" style="padding:28px;gap:8px" data-track="click_telefone"><span class="eyebrow" style="margin:0">Customer service and Ombudsman</span><span style="font-family:var(--f-head);font-size:clamp(1.8rem,1.4rem + 1.6vw,2.6rem);color:#fff;letter-spacing:-.02em">{{L.phones.central.label}}</span><span class="small" style="color:var(--on-deep-2)">{{L.phones.ouvidoriaHours}}</span></a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Channels by audience" data-filter data-filter-items="#canais .support">
+  <div class="wrap">
+    <div class="audience mb-7" role="group" aria-label="Who are you?">
+      <button class="pill" type="button" data-filter-group="who" data-value="all" aria-pressed="true">All channels</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="beneficiario" data-anchor="beneficiario" aria-pressed="false">Member</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="empresa" data-anchor="empresa" aria-pressed="false">Company</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="prestador" data-anchor="prestador" aria-pressed="false">Provider</button>
+      <button class="pill" type="button" data-filter-group="who" data-value="futuro" data-anchor="comercial" aria-pressed="false">Become a member</button>
+    </div>
+    <div class="support-grid" id="canais">
+      <article class="support" data-who="beneficiario" id="beneficiario"><span class="ico">{{i:user}}</span><span class="who">Member</span><h3>Customer service</h3><p>Questions about your plan, the provider network and services.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></li><li><a href="beneficiario.html">{{i:user}} Member Area</a></li></ul></article>
+      <article class="support" data-who="beneficiario prestador" id="autorizacoes-canal"><span class="ico">{{i:file-check}}</span><span class="who">Member · Provider</span><h3>Authorizations</h3><p>Authorization requests for tests and procedures.</p><ul><li><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.autorizacoes.label}}</a></li><li><a href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Web Authorizer (providers)</a></li></ul></article>
+      <article class="support" data-who="beneficiario empresa"><span class="ico">{{i:receipt}}</span><span class="who">Member · Company</span><h3>Billing</h3><p>Payment slips (boletos), payments and billing matters.</p><ul><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.financeiro.label}}</a></li><li><a href="{{L.links.boleto}}" target="_blank" rel="noopener">{{i:receipt}} Duplicate payment slip</a></li></ul></article>
+      <article class="support" data-who="futuro empresa" id="comercial"><span class="ico">{{i:user-plus}}</span><span class="who">Become a member · Company</span><h3>Sales</h3><p>Plans, quotes and enrollment for you, your family or your company.</p><ul><li><a href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.comercial.label}}</a></li><li><a href="planos.html#contato">{{i:mail}} Request a quote</a></li></ul></article>
+      <article class="support" data-who="prestador" id="prestador"><span class="ico">{{i:briefcase}}</span><span class="who">Provider</span><h3>Claims billing</h3><p>Billing, TISS forms and operational information.</p><ul><li><a href="{{L.wa.faturamento.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.faturamento.label}}</a></li><li><a href="documentos.html#tiss">{{i:doc}} Forms and TISS</a></li></ul></article>
+      <article class="support" data-who="empresa" id="empresa"><span class="ico">{{i:building}}</span><span class="who">Client company</span><h3>Company portal</h3><p>Exclusive access for client companies.</p><ul><li><a href="{{L.links.empresa}}" target="_blank" rel="noopener">{{i:lock}} Access portal</a></li><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Billing</a></li></ul></article>
+      <article class="support" data-who="beneficiario empresa prestador futuro"><span class="ico">{{i:chat}}</span><span class="who">Everyone</span><h3>Ombudsman</h3><p>If your issue was not resolved through our customer service channels, file a complaint.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="mailto:{{L.mail.ouvidoria}}">{{i:mail}} {{L.mail.ouvidoria}}</a></li><li><a href="#ouvidoria">{{i:doc}} Form</a></li></ul></article>
+      <article class="support" data-who="beneficiario futuro"><span class="ico">{{i:pin}}</span><span class="who">In person</span><h3>Where we are</h3><p>{{L.address.full}}</p><ul><li><a href="contato.html">{{i:pin}} See map and hours</a></li></ul></article>
+      <article class="support" data-who="colaborador"><span class="ico">{{i:users}}</span><span class="who">Employee</span><h3>Internal access</h3><p>Webmail for MedicGLOBAL employees.</p><ul><li><a href="{{L.links.webmail}}" target="_blank" rel="noopener">{{i:lock}} Webmail</a></li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" aria-labelledby="faq-t" id="duvidas">
+  <div class="wrap">
+    <span class="eyebrow">Frequently asked questions</span>
+    <h2 id="faq-t" class="balance">Quick answers</h2>
+    <div class="faq-cols mt-7">
+      <div class="faq-col">
+        <details class="faq-item"><summary>How do I get a duplicate payment slip?</summary><div class="ans">Go to the <a href="{{L.links.boleto}}" target="_blank" rel="noopener">payment slip system</a>. If you have questions, contact billing on WhatsApp at {{L.wa.financeiro.label}}.</div></details>
+        <details class="faq-item"><summary>How do I request an authorization?</summary><div class="ans">Send your request through the authorizations WhatsApp line {{L.wa.autorizacoes.label}}, including the health professional's order and the member's details.</div></details>
+        <details class="faq-item"><summary>How do I find a doctor or laboratory?</summary><div class="ans">Use the <a href="rede-credenciada.html">provider network search</a> or the MedicGLOBAL app.</div></details>
+      </div>
+      <div class="faq-col">
+        <details class="faq-item"><summary>How do I access telemedicine?</summary><div class="ans">See the step-by-step guide on the <a href="telemedicina.html">telemedicine</a> page.</div></details>
+        <details class="faq-item"><summary>I forgot my Member Area password.</summary><div class="ans">Use the <a href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Forgot my password</a> option. If this is your first access, complete the <a href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">initial registration</a>.</div></details>
+        <details class="faq-item"><summary>When should I contact the Ombudsman?</summary><div class="ans">When your request has not been resolved through our customer service channels. The Ombudsman is available {{L.phones.ouvidoriaHours}}.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ouvidoria" aria-labelledby="ov-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Ombudsman</span>
+        <h2 id="ov-t" class="balance">Your voice is heard</h2>
+        <p class="lead">A member service channel available on business days, Monday through Friday, from 7:30 a.m. to 5:30 p.m.</p>
+        <ul class="checklist small"><li>{{L.phones.central.label}}</li><li>{{L.mail.ouvidoria}}</li><li>Provide your protocol number, if you already have one.</li></ul>
+        <p class="xs muted">You can also file complaints with ANS (Brazil's National Supplementary Health Agency): Disque ANS 0800 701 9656.</p>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="ouvidoria" action="#" method="post">
+          <div class="form-grid">
+            <div class="field full"><label for="o-nome">Full name</label><input id="o-nome" name="nome" autocomplete="name" required aria-describedby="o-nome-err"><span class="error" id="o-nome-err">Please enter your name.</span></div>
+            <div class="field"><label for="o-tel">WhatsApp</label><input id="o-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="o-tel-err"><span class="error" id="o-tel-err">Please enter a phone number.</span></div>
+            <div class="field"><label for="o-mail">Email</label><input id="o-mail" name="email" type="email" autocomplete="email" required aria-describedby="o-mail-err"><span class="error" id="o-mail-err">Please enter a valid email address.</span></div>
+            <div class="field"><label for="o-perfil">Profile</label><select id="o-perfil" name="perfil"><option>Member</option><option>Client company</option><option>Service provider</option><option>Visitor</option></select></div>
+            <div class="field"><label for="o-prot">Previous protocol number <span class="muted">(optional)</span></label><input id="o-prot" name="protocolo"></div>
+            <div class="field full"><label for="o-assunto">Subject</label><select id="o-assunto" name="assunto" required aria-describedby="o-assunto-err"><option value="">Select</option><option>Complaint</option><option>Request</option><option>Question</option><option>Compliment</option><option>Suggestion</option></select><span class="error" id="o-assunto-err">Please select a subject.</span></div>
+            <div class="field full"><label for="o-msg">Message</label><textarea id="o-msg" name="mensagem" required aria-describedby="o-msg-hint o-msg-err"></textarea><span class="hint" id="o-msg-hint">To protect your privacy, do not include details about diagnoses or tests beyond what is necessary.</span><span class="error" id="o-msg-err">Please write your message.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="o-ok-err"><span>I authorize the use of this data to handle my request, in accordance with the <a href="privacidade.html">Privacy Policy</a>.</span></label><span class="error" id="o-ok-err">Your authorization is required.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Submit</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Submission received. The Ombudsman will get back to you using the contact details provided.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

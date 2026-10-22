@@ -1,0 +1,120 @@
+<!--@{
+  "title": "Provider network | Find doctors, clinics, hospitals and laboratories | MedicGLOBAL",
+  "description": "Search for professionals, specialties, clinics, hospitals and laboratories in the MedicGLOBAL network in Extrema, Cambuí, Pouso Alegre, Bragança Paulista and the surrounding region.",
+  "active": "rede",
+  "og": "old_santa_casa",
+  "crumbs": [["Care network", "rede-credenciada.html"]],
+  "extraHead": "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css\">",
+  "extraScripts": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" defer></script><script src=\"assets/js/rede.js\" defer></script>"
+}@-->
+
+<!-- Banner no mesmo molde do hero da home; a busca da rede fica logo abaixo -->
+<section class="hero hero--page hero--search" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Provider network</span>
+        <h1 id="t" class="balance">Find care <em>near you</em></h1>
+        <p class="lead">Professionals, clinics, hospitals and laboratories in the MedicGLOBAL network. Search for what you need and see where it is.</p>
+        <div class="btn-row">
+          <a class="btn" href="#buscar" data-track="busca_rede">Search for care</a>
+          <a class="btn btn--ghost" href="#mapa">View coverage area</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_renascentista|Reception at Hospital Renascentista, part of the provider network|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:hospital}}</i><span>Hospitals and clinics<small>in the coverage area</small></span></span>
+          <span class="chip"><i>{{i:microscope}}</i><span>Laboratories<small>tests with partners</small></span></span>
+        </div>
+      </div>
+    </div>
+    <form class="search-big mt-8" id="buscar" data-rede data-external="{{L.links.rede}}" role="search">
+      <div class="f"><label for="r-q">Professional, specialty or location</label><input id="r-q" name="q" placeholder="E.g.: cardiology" autocomplete="off"></div>
+      <div class="f"><label for="r-tipo">Type</label><select id="r-tipo" name="tipo"><option value="profissional">Professional</option><option value="especialidade">Specialty</option><option value="clinica">Clinic</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratory</option></select></div>
+      <div class="f"><label for="r-cidade">City</label><select id="r-cidade" name="cidade"><option value="">All cities</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>
+      <button class="btn" type="submit">Search the network {{i:search}}</button>
+    </form>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(120px,8rem + 2vw,180px)" aria-labelledby="tipo-t">
+  <div class="wrap">
+    <div class="flex-between mb-6">
+      <h2 id="tipo-t" class="h4" style="font-size:var(--t-h4)">Type of care</h2>
+      <p class="small muted">The search opens the official provider network system in a new tab.</p>
+    </div>
+    <div class="type-pills" data-pill-target="r-atendimento">
+      <button class="pill" type="button" data-value="consulta" aria-pressed="false">{{i:stethoscope}} Appointment</button>
+      <button class="pill" type="button" data-value="exame" aria-pressed="false">{{i:flask}} Tests</button>
+      <button class="pill" type="button" data-value="internacao" aria-pressed="false">{{i:bed}} Hospitalization</button>
+      <button class="pill" type="button" data-value="maternidade" aria-pressed="false">{{i:baby}} Obstetrics</button>
+      <button class="pill" type="button" data-value="urgencia" aria-pressed="false">{{i:siren}} Urgent and emergency care</button>
+    </div>
+    <input type="hidden" id="r-atendimento" name="atendimento" form="buscar">
+
+    <div class="map-shell mt-8" id="mapa">
+      <aside class="map-side" aria-labelledby="map-t">
+        <div><span class="eyebrow">Coverage area</span><h2 id="map-t" style="font-size:var(--t-h3)">From the Bragança Paulista region to southern Minas Gerais</h2></div>
+        <p class="small muted">Select a city to center the map and filter your search.</p>
+        <ul class="city-list" id="city-list">
+          <li><button type="button" data-city="Extrema/MG">Extrema/MG <span>HQ</span></button></li>
+          <li><button type="button" data-city="Bragança Paulista/SP">Bragança Paulista/SP <span>SP</span></button></li>
+          <li><button type="button" data-city="Cambuí/MG">Cambuí/MG <span>MG</span></button></li>
+          <li><button type="button" data-city="Pouso Alegre/MG">Pouso Alegre/MG <span>MG</span></button></li>
+        </ul>
+        <div class="notice">{{i:route}}<span>Outside the coverage area, urgent and emergency care while traveling is available through the <a class="accent" href="servicos.html#abramge">ABRAMGE System</a>, according to your contract.</span></div>
+      </aside>
+      <div id="map" role="region" aria-label="Map of the MedicGLOBAL coverage area"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" id="especialidades" aria-labelledby="esp-t" data-filter data-filter-items="#especialidades .esp" data-filter-empty="#esp-none">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Search by specialty</span>
+        <h2 id="esp-t" class="balance">Which specialty are you looking for?</h2>
+        <p class="lead">Some of the specialties available in the network search. The complete, up-to-date list is in the provider directory.</p>
+        <div class="field-dark"><label for="esp-q">Filter specialties</label><input id="esp-q" type="search" data-filter-search placeholder=" "></div>
+        <div class="btn-row"><a class="btn btn--light" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory {{i:external}}</a></div>
+      </div>
+      <div class="c-6-13">
+        <div class="type-pills" style="gap:10px">
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Acupuncture</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Allergology</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Anesthesiology</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Angiology</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Art therapy</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Oral and maxillofacial surgery</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Surgical oncology</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Cardiology</a>
+          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Immunology</a>
+        </div>
+        <p id="esp-none" class="mt-6 muted" hidden>Not on the list? Search the <a class="link" href="{{L.links.guia}}" target="_blank" rel="noopener">complete provider directory</a>.</p>
+        <hr class="rule mt-8" style="background:var(--line-deep)">
+        <div class="feature-list mt-8">
+          <div><span class="ico">{{i:doc}}</span><div><h3>Provider directory</h3><p>Search by directory type (physicians or services), state and city.</p></div></div>
+          <div><span class="ico">{{i:smartphone}}</span><div><h3>In the app</h3><p>Save favorites, contact the provider and see their location.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="av-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5"><span class="eyebrow">Before you book</span><h2 id="av-t" class="balance" style="font-size:var(--t-h3)">Check your plan’s coverage area and coverage</h2></div>
+      <div class="c-6-12 prose">
+        <p>The services of the professionals and providers listed in the network are available to regulated plans (those issued after Law No. 9,656/98), subject to the coverage area and contractual coverage of each plan type.</p>
+        <p>If you are a member, check your contract’s coverage area in the Member Area or contact customer service.</p>
+        <div class="btn-row"><a class="btn" href="beneficiario.html" data-track="click_area_beneficiario">Member Area</a><a class="btn btn--ghost" href="atendimento.html">Customer service</a></div>
+        <p class="small muted">The provider network is subject to change. Always check the latest version before receiving care.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,158 @@
+<!--@{
+  "title": "Content | Health, news and notices | MedicGLOBAL",
+  "description": "MedicGLOBAL content hub: health, news, notices, hospitals and updates for members.",
+  "active": "conteudos",
+  "og": "old_coracao",
+  "crumbs": [["Content", "conteudos.html"]]
+}@-->
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Content hub</span>
+        <h1 id="t" class="balance">Information that cares</h1>
+        <p class="lead">Health, news, notices and updates to help you better understand your plan and take care of the people who matter — in clear language and organized by topic.</p>
+        <div class="btn-row">
+          <a class="btn" href="#todos">See all content</a>
+          <a class="btn btn--ghost" href="conteudos.html#cat=comunicados">Notices</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:sparkle}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:heart}}</i><span>Health<small>tips and prevention</small></span></span>
+          <span class="chip"><i>{{i:doc}}</i><span>Notices<small>rate adjustments and updates</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Featured">
+  <div class="wrap">
+    <a class="post-feature reveal" href="artigo-reajuste-2020.html" style="grid-template-columns:1fr">
+      <div class="split split--75" style="gap:48px">
+        <div class="img img--art" style="aspect-ratio:16/9">{{pic:old_comunicado|MedicGLOBAL notice artwork with the text Urgent notice|1600|(min-width:1100px) 58vw, 100vw}}</div>
+        <div class="stack">
+          <div class="post-meta"><span class="cat">Notices</span><span>ANS · Rate adjustments</span></div>
+          <h2 style="font-size:var(--t-h3)" class="balance">Recovery of the 2020 health plan rate adjustment</h2>
+          <p class="muted">In 2020, ANS (Brazil's National Supplementary Health Agency) temporarily suspended the application of rate adjustments. Learn about the decision and what it meant for contracts.</p>
+          <span class="link">Read notice</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+/* Novidades: faixa em parallax (gradiente Azul Medic → azul profundo, foto e órbitas em velocidades diferentes) */
+/* A faixa fica sobre a divisória entre o destaque (branco) e "Todos os conteúdos" (mist): metade em cada fundo */
+.nl-section { --nl-pb: clamp(24px, 1rem + 1.5vw, 48px); position: relative; z-index: 1; overflow: hidden; margin-top: calc(var(--section) * -.2); padding-bottom: var(--nl-pb); }
+.nl-section > .wrap { position: relative; }
+.nl-section > .wrap::before { content: ""; position: absolute; z-index: -1; top: 50%; bottom: calc(-1 * var(--nl-pb)); left: 50%; width: 100vw; margin-left: -50vw; background: var(--mist); }
+.nl-band { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r-lg); background: var(--deep); color: var(--on-deep); padding: clamp(24px, 1rem + 1.2vw, 36px) clamp(24px, 1rem + 2.5vw, 56px); }
+.nl-bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.nl-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.3); will-change: transform; filter: saturate(.5); }
+.nl-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(0,140,140,.94) 0%, rgba(3,79,86,.95) 45%, rgba(2,32,36,.97) 100%); }
+.nl-band > .orbits { z-index: -1; width: min(760px, 120vw); aspect-ratio: 1; right: -12%; top: 50%; color: var(--glow); opacity: .2; transform: translate3d(0, calc(-50% + var(--py, 0px)), 0); will-change: transform; }
+.nl-inner { display: grid; gap: 20px; align-items: center; }
+@media (min-width: 1100px) { .nl-inner { grid-template-columns: 5fr 7fr; gap: 48px; } }
+.nl-copy .eyebrow { color: var(--glow); margin-bottom: 8px; }
+.nl-copy .eyebrow::before { background: var(--glow); }
+.nl-copy h2 { color: #fff; font-size: clamp(1.25rem, 1.05rem + .6vw, 1.625rem); max-width: 26ch; }
+.nl-fields { display: grid; gap: 12px; }
+@media (min-width: 720px) { .nl-fields { grid-template-columns: 1fr 1fr auto; align-items: start; } }
+.nl-field { display: grid; gap: 6px; position: relative; }
+.nl-field label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.nl-field input::placeholder { color: rgba(255,255,255,.6); opacity: 1; }
+.nl-field input { width: 100%; height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; font: 400 var(--t-sm)/1.4 var(--f-body); transition: border-color .2s, background .2s; }
+.nl-field input:hover { border-color: rgba(255,255,255,.32); }
+.nl-field input:focus { outline: none; border-color: var(--glow); background: rgba(255,255,255,.12); box-shadow: 0 0 0 4px rgba(79,195,195,.18); }
+.nl-field input[aria-invalid="true"] { border-color: #FFB4A8; }
+.nl-band .error { color: #FFC9BF; }
+.nl-fields .btn { height: 44px; }
+.nl-band .check { margin-top: 10px; color: var(--on-deep-2); font-size: var(--t-xs); }
+.nl-band .check a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.nl-band .check input[type="checkbox"] { accent-color: var(--glow); }
+.nl-band .form-ok { margin-top: 16px; background: rgba(255,255,255,.1); color: #fff; }
+</style>
+
+<section class="nl-section" aria-labelledby="nl-t">
+  <div class="wrap">
+    <div class="nl-band">
+      <div class="nl-bg" aria-hidden="true">{{pic:old_familia||1600|100vw}}</div>
+      {{> orbits}}
+      <div class="nl-inner">
+        <div class="nl-copy reveal"><span class="eyebrow">Updates</span><h2 id="nl-t" class="balance">Get MedicGLOBAL notices and content</h2></div>
+        <form class="nl-form reveal reveal-d1" data-validate="newsletter" action="#" method="post">
+          <div class="nl-fields">
+            <div class="nl-field"><label for="n-nome">Name</label><input id="n-nome" name="nome" placeholder="Your name" autocomplete="given-name" required aria-describedby="n-nome-err"><span class="error" id="n-nome-err">Please enter your name.</span></div>
+            <div class="nl-field"><label for="n-mail">Email</label><input id="n-mail" type="email" name="email" placeholder="Your email" autocomplete="email" required aria-describedby="n-mail-err"><span class="error" id="n-mail-err">Please enter a valid email address.</span></div>
+            <button class="btn btn--light" type="submit">Sign up</button>
+          </div>
+          <label class="check"><input type="checkbox" required aria-describedby="n-ok-err"><span>I have read and agree to the <a href="privacidade.html">Privacy Policy</a> and agree to receive communications by email. I can unsubscribe at any time.</span></label><span class="error" id="n-ok-err">You must agree in order to sign up.</span>
+          <p class="form-ok" tabindex="-1" role="status">You're signed up. Thank you!</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  /* parallax da faixa Novidades: [elemento, velocidade, limite (fração da altura da faixa)] */
+  var band = document.querySelector(".nl-band");
+  if (!band) return;
+  var items = [[band.querySelector(".nl-bg img"), .2, .12], [band.querySelector(":scope > .orbits"), -.25, 0]];
+  var tick = false;
+  function upd() {
+    tick = false;
+    var vh = window.innerHeight, r = band.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) return;
+    items.forEach(function (it) {
+      if (!it[0]) return;
+      var py = (r.top + r.height / 2 - vh / 2) * it[1];
+      if (it[2]) py = Math.max(-r.height * it[2], Math.min(r.height * it[2], py));
+      it[0].style.setProperty("--py", py.toFixed(1) + "px");
+    });
+  }
+  window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  window.addEventListener("resize", upd);
+  upd();
+})();
+</script>
+
+<section class="section mist" id="todos" aria-labelledby="todos-t" data-filter data-filter-items="#todos .card-post" data-filter-empty="#posts-none">
+  <div class="wrap">
+    <div class="flex-between mb-7">
+      <h2 id="todos-t" style="font-size:var(--t-h3)">All content</h2>
+      <div class="field" style="min-width:min(100%,340px)"><label class="sr-only" for="post-q">Search content</label><input id="post-q" type="search" data-filter-search placeholder="Search content"></div>
+    </div>
+    <div class="type-pills mb-8" role="group" aria-label="Categories">
+      <button class="pill" type="button" data-filter-group="cat" data-value="all" aria-pressed="true">All</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="saude" aria-pressed="false">Health</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="noticias" aria-pressed="false">News</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Notices</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="hospitais" aria-pressed="false">Hospitals</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="beneficiario" aria-pressed="false">Members</button>
+      <button class="pill" type="button" data-filter-group="cat" data-value="institucional" aria-pressed="false">About us</button>
+    </div>
+    <div class="card-grid">
+      {{> noticias-cards}}
+      <a class="card-post" data-cat="comunicados beneficiario" href="artigo-reajuste-2020.html"><div class="img img--art">{{pic:old_comunicado||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Notices</span><span>Jun 8, 2024</span></div><h3>Recovery of the 2020 health plan rate adjustment</h3><p>The ANS decision on rate adjustments between September and December 2020.</p></a>
+      <a class="card-post" data-cat="comunicados beneficiario" href="documentos.html#reajuste"><div class="img">{{pic:old_atendimento||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Notices</span><span>RN 565</span></div><h3>2026/2027 contract pool rate adjustment</h3><p>A rate of 8.70% for the period May 1, 2026 – Apr 30, 2027, applied to the pool of contracts with up to 30 lives (members).</p></a>
+      <a class="card-post" data-cat="noticias institucional" href="medicglobal.html"><div class="img">{{pic:old_hsl_recepcao||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">News</span><span>About us</span></div><h3>Extremamedic is now MedicGLOBAL</h3><p>Same legal name, same ANS registration and a new way of caring.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="telemedicina.html"><div class="img">{{pic:old_medica_sorrindo||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Members</span><span>Quick guide</span></div><h3>Telemedicine: how to access it</h3><p>Step-by-step instructions for remote care, according to the terms of your plan.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="servicos.html#aplicativo"><div class="img">{{pic:old_medica_paciente||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Members</span><span>App</span></div><h3>The provider network on your phone</h3><p>Favorites, provider contact details and care locations.</p></a>
+      <a class="card-post" data-cat="beneficiario" href="servicos.html#abramge"><div class="img">{{pic:old_familia||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Members</span><span>Travel</span></div><h3>Traveling? Learn about care while traveling</h3><p>Urgent and emergency care through the ABRAMGE System, nationwide.</p></a>
+      <article class="card-post" data-cat="saude"><div class="img">{{pic:old_coracao||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Health</span><span class="review-flag">Being updated</span></div><h3>Symptoms of heart disease</h3><p>Content under review by the MedicGLOBAL health team.</p></article>
+      <article class="card-post" data-cat="saude"><div class="img">{{pic:old_depressao||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Health</span><span class="review-flag">Being updated</span></div><h3>Depression</h3><p>Content under review by the MedicGLOBAL health team.</p></article>
+      <article class="card-post" data-cat="hospitais"><div class="img">{{pic:old_santa_casa||800|(min-width:1100px) 30vw, 100vw}}</div><div class="post-meta"><span class="cat">Hospitals</span><span class="review-flag">Being updated</span></div><h3>Hospital Santa Casa de Bragança</h3><p>Content under review. See the <a class="accent" href="rede-credenciada.html?tipo=hospital">provider network</a>.</p></article>
+    </div>
+    <p id="posts-none" class="muted mt-7" hidden>No content found for this search.</p>
+  </div>
+</section>

@@ -1090,7 +1090,8 @@ html:not(.js) .hero-nav { display: none; }
 .place-card dl { margin: 0; display: grid; gap: 0; }
 .place-card dl div { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-deep); font-size: var(--t-sm); }
 .place-card dt { color: var(--on-deep-2); }
-.place-card dd { margin: 0; color: var(--white); text-align: right; font-family: var(--f-head); font-weight: 500; }
+.place-card dd { margin: 0; color: var(--white); text-align: right; font-family: var(--f-head); font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+.place-card dt { flex-shrink: 0; max-width: 45%; }
 .place-media { border-radius: var(--r-lg); overflow: hidden; position: relative; min-height: 320px; background: var(--deep-2); }
 .place-media iframe, .place-media img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
 .place-ctrl { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; justify-content: space-between; align-items: center; padding: 8px 8px 8px 20px; border-radius: var(--r-pill); background: rgba(2,26,29,.7); backdrop-filter: blur(12px); color: var(--white); font-family: var(--f-head); font-size: .85rem; z-index: 2; }
@@ -1228,9 +1229,10 @@ html:not(.js) .hero-nav { display: none; }
   .bar-actions .btn--sm { padding: 0 14px; font-size: .72rem; }
   .bar { gap: 12px; }
 }
-@media (min-width: 1100px) and (max-width: 1239px) {
+@media (min-width: 1100px) and (max-width: 1379px) {
   .btn--benef .benef-label { display: none; }
 }
+.bar-actions .btn svg, .lang-btn svg, .flag { flex-shrink: 0; }
 .hub-node i { background: rgba(255,255,255,.1); }
 .hub-node:hover i { background: rgba(255,255,255,.18); }
 @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -1843,3 +1845,46 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .rj-older .rj-row + .rj-row::before { content: ""; position: absolute; left: 20px; right: 20px; top: -1px; height: 1px; background: var(--line-2); }
 .rj-older .rj-row:hover { background: var(--mist); }
 .rj-older .rj-row:hover::before, .rj-older .rj-row:hover + .rj-row::before { opacity: 0; }
+
+/* Seletor de idioma (cabeçalho): bandeira + sigla, menu suspenso em cartão; no celular só a bandeira */
+.flag { display: block; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(11,27,29,.12); }
+.lang { position: relative; }
+.lang-btn { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding: 0 12px 0 10px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--white); color: var(--globo); font-family: var(--f-head); font-size: .74rem; font-weight: 500; letter-spacing: .06em; cursor: pointer; transition: background .2s, border-color .2s; }
+.lang-btn > svg:last-child { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { background: var(--tint); border-color: rgba(0,98,109,.3); }
+.lang-btn[aria-expanded="true"] > svg:last-child { transform: rotate(180deg); }
+.lang-btn:focus-visible, .lang-menu a:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
+.lang-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 60; min-width: 196px; margin: 0; padding: 6px; list-style: none; border-radius: 16px; background: var(--white); border: 1px solid var(--line-2); box-shadow: 0 24px 48px -20px rgba(2,26,29,.35); }
+.lang-menu a { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 11px; font-family: var(--f-head); font-size: .9rem; color: var(--ink); transition: background .2s, color .2s; }
+.lang-menu a .flag { width: 22px; height: 22px; }
+.lang-menu a > svg:last-child { width: 16px; height: 16px; margin-left: auto; color: var(--medic); opacity: 0; }
+.lang-menu a[aria-current="true"] { color: var(--globo); }
+.lang-menu a[aria-current="true"] > svg:last-child { opacity: 1; }
+.lang-menu a:hover { background: var(--mist); color: var(--globo); }
+/* a sigla do idioma fica só para leitores de tela (o rótulo do botão já diz o idioma); na tela, bandeira + seta */
+.lang-code { display: none; }
+.lang-btn { padding: 0 9px; gap: 4px; }
+.site-header.on-dark:not(.is-scrolled):not(.is-open) .lang-btn { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: var(--white); }
+/* Menu mobile: os dois idiomas lado a lado */
+.drawer-lang { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+.drawer-lang a { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; border-radius: var(--r-pill); border: 1px solid var(--line); font-family: var(--f-head); font-size: .9rem; color: var(--ink-2); }
+.drawer-lang a[aria-current="true"] { border-color: var(--globo); background: var(--tint); color: var(--globo); }
+/* Cabeçalho com o seletor de idioma: em telas médias o seletor fica só com a bandeira e os espaços encolhem */
+@media (min-width: 1100px) and (max-width: 1599px) {
+  .nav-main { margin-left: 12px; gap: 0; }
+  .nav-trigger { padding: 8px 10px; }
+  .bar { gap: 12px; }
+  .bar-actions { gap: 8px; }
+}
+.nav-main, .nav-trigger svg { flex-shrink: 0; }
+@media (min-width: 1100px) and (max-width: 1239px) {
+  .nav-main { margin-left: 4px; }
+  .nav-trigger { padding: 8px 7px; font-size: .84rem; gap: 4px; }
+  .bar-actions .btn--sm { padding: 0 12px; }
+}
+/* Aviso de ASL (versão em inglês): mesmo padrão dos cartões do painel */
+.a11y-asl { margin-top: 10px; padding: 14px 16px; border-radius: 14px; background: var(--tint); border: 1px solid rgba(0,98,109,.18); font-size: .82rem; line-height: 1.5; color: var(--ink-2); display: grid; gap: 8px; }
+.a11y-asl strong { color: var(--globo); }
+.a11y-asl a { color: var(--globo); text-decoration: underline; text-underline-offset: 2px; }
+.a11y-asl:focus { outline: none; }
+.a11y-asl:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }

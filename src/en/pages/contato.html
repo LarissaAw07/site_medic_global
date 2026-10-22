@@ -1,0 +1,93 @@
+<!--@{
+  "title": "Contact | Address, phone numbers and WhatsApp | MedicGLOBAL",
+  "description": "Contact MedicGLOBAL: R. Alcebíades Wohlers, 02, Extrema/MG. Phone (35) 3435-4442, WhatsApp by department and contact form.",
+  "active": "voce",
+  "og": "old_hsl_recepcao",
+  "crumbs": [["Customer service", "atendimento.html"], ["Contact", "contato.html"]]
+}@-->
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Contact</span>
+        <h1 id="t" class="balance">Contact MedicGLOBAL</h1>
+        <p class="lead">Get your questions answered, send us a message or visit our headquarters in Extrema/MG. Choose the most convenient channel and our team will get back to you.</p>
+        <div class="btn-row">
+          <a class="btn" href="#f-t">Send a message</a>
+          <a class="btn btn--ghost" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:mail}}</span></div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:pin}}</i><span>Headquarters in Extrema/MG<small>customer service and sales</small></span></span>
+          <span class="chip"><i>{{i:whatsapp}}</i><span>WhatsApp<small>a direct line to our team</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Where we are">
+  <div class="wrap">
+    <div class="place">
+      <div class="place-card">
+        <span class="eyebrow" style="margin:0">{{i:pin}} Headquarters</span>
+        <h2>Extrema, Minas Gerais</h2>
+        <p style="color:var(--on-deep-2)">MedicGLOBAL member services, sales and administrative offices.</p>
+        <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02<br>Extrema/MG · CEP 37640-000</p></div>
+        <dl>
+          <div><dt>Ombudsman</dt><dd>Mon–Fri · 7:30 a.m.–5:30 p.m.</dd></div>
+          <div><dt>Call center</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
+          <div><dt>Authorizations</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
+          <div><dt>Ombudsman e-mail</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
+        </dl>
+        <div class="btn-row"><a class="btn btn--light" href="{{L.address.maps}}" target="_blank" rel="noopener">{{i:route}} Directions</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+      </div>
+      <div class="place-media" data-carousel>
+        <iframe class="is-active" title="Map: R. Alcebíades Wohlers, 02 - Extrema/MG" src="{{L.address.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="opacity:1"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="f-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack">
+        <span class="eyebrow">Form</span>
+        <h2 id="f-t" class="balance">Choose a topic and send your message</h2>
+        <p class="lead">We route your message to the right department. For urgent authorization requests, please use WhatsApp.</p>
+        <a class="link" href="atendimento.html">See all channels by department</a>
+      </div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="contato" action="#" method="post">
+          <fieldset style="border:0;padding:0;margin:0"><legend class="field label" style="font-family:var(--f-head);font-weight:500;margin-bottom:12px">Department</legend>
+            <div class="topic-grid">
+              <input type="radio" name="setor" id="s1" value="Atendimento" checked><label for="s1">Customer service</label>
+              <input type="radio" name="setor" id="s2" value="Comercial"><label for="s2">Sales</label>
+              <input type="radio" name="setor" id="s3" value="Financeiro"><label for="s3">Finance</label>
+              <input type="radio" name="setor" id="s4" value="Faturamento"><label for="s4">Billing</label>
+              <input type="radio" name="setor" id="s5" value="Ouvidoria"><label for="s5">Ombudsman</label>
+              <input type="radio" name="setor" id="s6" value="Credenciamento"><label for="s6">Provider enrollment</label>
+            </div>
+          </fieldset>
+          <div class="form-grid">
+            <div class="field"><label for="c-nome">Name</label><input id="c-nome" name="nome" autocomplete="name" required aria-describedby="c-nome-err"><span class="error" id="c-nome-err">Please enter your name.</span></div>
+            <div class="field"><label for="c-tel">WhatsApp</label><input id="c-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="c-tel-err"><span class="error" id="c-tel-err">Please enter a phone number.</span></div>
+            <div class="field"><label for="c-mail">E-mail</label><input id="c-mail" name="email" type="email" autocomplete="email" required aria-describedby="c-mail-err"><span class="error" id="c-mail-err">Please enter a valid e-mail address.</span></div>
+            <div class="field"><label for="c-perfil">Profile</label><select id="c-perfil" name="perfil"><option>Visitor</option><option>Client</option><option>Corporate client</option><option>Service provider</option><option>Employee</option></select></div>
+            <div class="field full"><label for="c-assunto">Subject</label><select id="c-assunto" name="assunto" required aria-describedby="c-assunto-err"><option value="">Select</option><option>Purchase</option><option>Question</option><option>Compliment</option><option>Service provision</option><option>Complaint</option><option>Request</option><option>Provider enrollment</option></select><span class="error" id="c-assunto-err">Please select a subject.</span></div>
+            <div class="field full"><label for="c-msg">Message</label><textarea id="c-msg" name="mensagem" required aria-describedby="c-msg-hint c-msg-err"></textarea><span class="hint" id="c-msg-hint">Do not include health information in this form.</span><span class="error" id="c-msg-err">Please write your message.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="c-ok-err"><span>I authorize the use of this information to respond to my inquiry, in accordance with the <a href="privacidade.html">Privacy Policy</a>.</span></label><span class="error" id="c-ok-err">Your authorization is required.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">Send message</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Message sent. We’ll get back to you soon.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

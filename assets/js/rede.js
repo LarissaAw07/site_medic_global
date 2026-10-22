@@ -4,6 +4,7 @@
 (function () {
   "use strict";
   var el = document.getElementById("map");
+  var T = window.mgT || function (pt) { return pt; };
   if (!el || !window.L) return;
   var cities = {
     "Extrema/MG": { c: [-22.8547, -46.3178], hq: true },
@@ -34,8 +35,8 @@
   Object.keys(cities).forEach(function (name) {
     var d = cities[name];
     var icon = L.divIcon({ className: "", html: '<span class="mg-pin' + (d.hq ? " hq" : "") + '"></span>', iconSize: [22, 22], iconAnchor: [11, 11] });
-    var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>Sede MedicGLOBAL · R. Alcebíades Wohlers, 02</small>" : "") +
-      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">Buscar atendimento nesta cidade</a>';
+    var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>" + T("Sede MedicGLOBAL", "MedicGLOBAL headquarters") + " · R. Alcebíades Wohlers, 02</small>" : "") +
+      '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">' + T("Buscar atendimento nesta cidade", "Find care in this city") + "</a>";
     markers[name] = L.marker(d.c, { icon: icon, title: name, keyboard: true }).addTo(map).bindPopup(popup);
     markers[name].on("click", function () { select(name); });
   });

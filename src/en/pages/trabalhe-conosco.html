@@ -1,0 +1,83 @@
+<!--@{
+  "title": "Careers | Join MedicGLOBAL",
+  "description": "Join the MedicGLOBAL team. Submit your résumé to our talent pool and take part in our hiring processes.",
+  "active": "institucional",
+  "og": "old_escritorio",
+  "crumbs": [["MedicGLOBAL", "medicglobal.html"], ["Careers", "trabalhe-conosco.html"]]
+}@-->
+
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Careers</span>
+        <h1 id="t" class="balance">Join <em>MedicGLOBAL</em></h1>
+        <p class="lead">Leave your contact information and take part in our hiring processes. Help us build a simpler way to care for people.</p>
+        <div class="btn-row">
+          <a class="btn" href="#curriculo">Submit your résumé</a>
+          <a class="btn btn--ghost" href="medicglobal.html">Get to know MedicGLOBAL</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>40+ years</b> of history</span>
+          <span><b>5 hospitals</b> in the coverage area</span>
+          <span><b>ANS reg. No. {{L.ans}}</b></span>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_escritorio|Team working together in an office|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:briefcase}}</i><span>Hiring processes<small>submit your résumé</small></span></span>
+          <span class="chip"><i>{{i:users}}</i><span>MedicGLOBAL team<small>integrated health care in the region</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-labelledby="cult-t">
+  <div class="wrap">
+    <div class="grid mb-8"><div class="c-1-6"><span class="eyebrow">Culture</span><h2 id="cult-t" class="balance">A tradition of care, an eye on the future</h2></div><div class="c-7-13" style="align-self:end"><p class="lead">More than 40 years of caring for people’s health have taught us that closeness and dedication make a difference — and that we must innovate to keep providing good care.</p></div></div>
+    <div class="indexed indexed--cards">
+      <div><span class="num">01 · Value</span><h3 class="mt-5">Care</h3><p class="mt-4 muted small">Caring for every member and their family with dedication.</p></div>
+      <div><span class="num">02 · Value</span><h3 class="mt-5">Strength</h3><p class="mt-4 muted small">A track record built on trust, transparency and responsibility.</p></div>
+      <div><span class="num">03 · Value</span><h3 class="mt-5">Innovation</h3><p class="mt-4 muted small">Evolving products, services and experiences with people’s needs in mind.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" aria-labelledby="op-t">
+  <div class="wrap">
+    <div class="grid mb-8"><div class="c-1-7 stack"><span class="eyebrow">Opportunities</span><h2 id="op-t" class="balance">Our talent pool is always open</h2><p class="lead">When an opportunity that matches your profile comes up, our team will contact you about the next steps in the hiring process.</p></div></div>
+    <div class="steps steps--3">
+      <div class="steps-line" aria-hidden="true"><span></span></div>
+      <div class="step"><span class="dot">1</span><h3>Submit your résumé</h3><p>Fill out the form with your contact information.</p></div>
+      <div class="step"><span class="dot">2</span><h3>Talent pool</h3><p>Your profile stays available for upcoming hiring processes.</p></div>
+      <div class="step"><span class="dot">3</span><h3>Contact</h3><p>We’ll get back to you when a matching position opens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="curriculo" aria-labelledby="cv-t">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-1-5 stack"><span class="eyebrow">Résumé</span><h2 id="cv-t" class="balance">Submit your résumé</h2><p class="muted">PDF file, up to 1 GB. Your information will be used solely for recruitment and hiring purposes.</p></div>
+      <div class="c-6-13">
+        <form class="form-panel" data-validate="trabalhe_conosco" action="#" method="post" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="field full"><label for="t-nome">Full name</label><input id="t-nome" name="nome" autocomplete="name" required aria-describedby="t-nome-err"><span class="error" id="t-nome-err">Please enter your name.</span></div>
+            <div class="field"><label for="t-mail">E-mail</label><input id="t-mail" name="email" type="email" autocomplete="email" required aria-describedby="t-mail-err"><span class="error" id="t-mail-err">Please enter a valid e-mail address.</span></div>
+            <div class="field"><label for="t-tel">WhatsApp</label><input id="t-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="t-tel-err"><span class="error" id="t-tel-err">Please enter a phone number.</span></div>
+            <div class="field full"><label for="t-area">Area of interest <span class="muted">(optional)</span></label><input id="t-area" name="area" placeholder="E.g.: customer service, administration, health care"></div>
+            <div class="field full"><label for="t-cv">Résumé * (PDF, up to 1 GB)</label><input id="t-cv" name="curriculo" type="file" accept=".pdf,application/pdf" data-max-bytes="1073741824" required aria-describedby="t-cv-err"><span class="error" id="t-cv-err">Please attach your résumé.</span></div>
+            <div class="full"><label class="check"><input type="checkbox" required aria-describedby="t-ok-err"><span>I authorize the processing of my data for recruitment and hiring purposes, in accordance with the <a href="privacidade.html">Privacy Policy</a>.</span></label><span class="error" id="t-ok-err">Your authorization is required.</span></div>
+          </div>
+          <div class="btn-row"><button class="btn" type="submit">{{i:upload}} Submit résumé</button></div>
+          <p class="form-ok" tabindex="-1" role="status">Résumé received. Thank you for your interest in joining MedicGLOBAL!</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

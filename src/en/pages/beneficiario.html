@@ -1,0 +1,96 @@
+<!--@{
+  "title": "Member Area | Payment slip, member card, authorizations and network | MedicGLOBAL",
+  "description": "Access the MedicGLOBAL Member Area: duplicate payment slip (boleto), member card, authorizations, plan information, provider network and telemedicine.",
+  "active": "voce",
+  "og": "old_medica_paciente",
+  "crumbs": [["For you", "beneficiario.html"], ["Member Area", "beneficiario.html"]]
+}@-->
+
+<section class="hero hero--page hero--art" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">I'm a member</span>
+        <h1 id="t" class="balance">Everything you need, in one place</h1>
+        <p class="lead">Access your information, authorizations and benefits in a secure environment. And if you need something quickly, use the shortcuts for payment slips, the provider network, telemedicine and authorizations.</p>
+        <div class="btn-row">
+          <a class="btn" href="#boleto" data-track="emitir_boleto">Get a duplicate slip</a>
+          <a class="btn btn--ghost" href="rede-credenciada.html" data-track="click_rede">Provider network</a>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="place-card hero-card" style="gap:20px">
+          <span class="eyebrow">Member Area</span>
+          <h2 style="font-size:var(--t-h3)">Sign in with your member ID and password</h2>
+          <p class="small" style="color:var(--on-deep-2)">Sign-in takes place in the secure environment of the member system, in a new tab.</p>
+          <a class="btn btn--light" href="{{L.links.beneficiario}}" target="_blank" rel="noopener" data-track="click_area_beneficiario">{{i:lock}} Access the Member Area</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--flush-top" aria-label="Member shortcuts">
+  <div class="wrap">
+    <div class="needs" role="list" style="margin-top:clamp(24px, 1rem + 2.5vw, 56px)">
+      <a class="need" role="listitem" href="#boleto"><span class="need-ico">{{i:receipt}}</span><span><strong>Need a duplicate slip?</strong><small>Issue payment slip</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="rede-credenciada.html" data-track="click_rede"><span class="need-ico">{{i:pin}}</span><span><strong>Find care</strong><small>Provider network</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="telemedicina.html" data-track="click_telemedicina"><span class="need-ico">{{i:video}}</span><span><strong>Talk to a professional</strong><small>Telemedicine</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+      <a class="need" role="listitem" href="servicos.html#autorizacoes"><span class="need-ico">{{i:file-check}}</span><span><strong>I need an authorization</strong><small>Dedicated WhatsApp</small></span><span class="arrow">{{i:arrow-right}}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section mist" id="boleto" aria-labelledby="bol-t">
+  <div class="wrap">
+    <div class="split split--57">
+      <div class="stack">
+        <span class="eyebrow">Payment slip</span>
+        <h2 id="bol-t" class="balance">Need a duplicate slip?</h2>
+        <p class="lead">If your payment slip (boleto) is lost or never arrives, issue a duplicate through the MedicGLOBAL payment slip system.</p>
+        <div class="btn-row"><a class="btn" href="{{L.links.boleto}}" target="_blank" rel="noopener" data-track="emitir_boleto">Issue payment slip {{i:external}}</a><a class="btn btn--ghost" href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Billing</a></div>
+      </div>
+      <div class="feature-list feature-list--actions">
+        <div><span class="ico">{{i:receipt}}</span><div><h3>Duplicate slip</h3><p>For lost or undelivered payment slips.</p></div></div>
+        <div><span class="ico">{{i:chat}}</span><div><h3>Billing questions?</h3><p>Get in touch with us</p><a class="btn btn--sm" href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Billing WhatsApp</a></div></div>
+        <div><span class="ico">{{i:doc}}</span><div><h3>Rate adjustments</h3><p>Percentages published in the document center.</p><a class="btn btn--sm" href="documentos.html#reajuste">Document center</a></div></div>
+        <div><span class="ico">{{i:briefcase}}</span><div><h3>Corporate clients</h3><p>Access the company portal.</p><a class="btn btn--sm" href="{{L.links.empresa}}" target="_blank" rel="noopener">Company portal</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-label="Member card, plan and tests">
+  <div class="wrap">
+    <div class="info-cards">
+      <div id="carteirinha"><span class="num">01 · Member card</span><h3 class="mt-5">Your ID in the network</h3><p class="mt-4 muted small">View your member card details in the Member Area or in the app, and show it when you receive care.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">Access member card</a></div>
+      <div id="plano"><span class="num">02 · Plan information</span><h3 class="mt-5">Your contract’s coverage area and coverage</h3><p class="mt-4 muted small">Check your plan’s terms before booking and keep your information up to date.</p><a class="btn" href="{{L.links.beneficiario}}" target="_blank" rel="noopener">View my plan</a></div>
+      <div id="exames"><span class="num">03 · Tests</span><h3 class="mt-5">Authorizations and tracking</h3><p class="mt-4 muted small">Track authorizations in the Member Area. Test results are provided by the provider who performed the service.</p><a class="btn" href="servicos.html#autorizacoes">View authorizations</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" aria-labelledby="app-t" style="overflow:hidden">
+  <div class="wrap">
+    <div class="eco">
+      <div class="stack">
+        <span class="eyebrow">MedicGLOBAL app</span>
+        <h2 id="app-t" class="balance">The provider network in your pocket</h2>
+        <p class="lead">Find providers, save favorites, get in touch and see how to get to where you’ll receive care.</p>
+        <div class="btn-row store-row">{{> store-buttons}}</div>
+      </div>
+      <div class="phone-stage">{{> orbits}}{{> phone}}<div class="float-tag" style="left:2%;top:18%" aria-hidden="true"><span class="chip"><i>{{i:star}}</i><span>Favorites<small>your saved providers</small></span></span></div><div class="float-tag" style="right:0;bottom:20%" aria-hidden="true"><span class="chip"><i>{{i:route}}</i><span>Directions<small>location of care</small></span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="ajuda-t">
+  <div class="wrap">
+    <div class="flex-between">
+      <div><span class="eyebrow">Still need help?</span><h2 id="ajuda-t" style="font-size:var(--t-h3)">Customer service and Ombudsman for members</h2></div>
+      <div class="btn-row"><a class="btn" href="atendimento.html#beneficiario">Contact MedicGLOBAL</a><a class="btn btn--ghost" href="atendimento.html#ouvidoria">Ombudsman</a></div>
+    </div>
+  </div>
+</section>

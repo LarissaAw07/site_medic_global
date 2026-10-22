@@ -1,0 +1,102 @@
+<!--@{
+  "title": "Telemedicine | Talk to a health professional remotely | MedicGLOBAL",
+  "description": "Learn what MedicGLOBAL telemedicine is, how it works and how to access it. Remote care for members, according to the terms of their plan.",
+  "active": "servicos",
+  "og": "old_medica_sorrindo",
+  "crumbs": [["Services", "servicos.html"], ["Telemedicine", "telemedicina.html"]],
+  "jsonld": [{"@context":"https://schema.org","@type":"Service","name":"Telemedicina MedicGLOBAL","serviceType":"Telemedicina","provider":{"@type":"Organization","name":"MedicGLOBAL"},"areaServed":"BR","url":"https://medicglobal.com.br/telemedicina/"}]
+}@-->
+
+<!-- Banner no mesmo molde do hero da home (texto à esquerda, moldura à direita com dois balões) -->
+<section class="hero hero--page" aria-labelledby="t">
+  {{> orbits}}
+  <div class="wrap">
+    {{crumbs}}
+    <div class="grid">
+      <div class="hero-copy c-1-6">
+        <span class="eyebrow">Telemedicine</span>
+        <h1 id="t" class="balance">Need to talk to a <em>health professional?</em></h1>
+        <p class="lead">With telemedicine, you receive care remotely, wherever you are, according to the terms of your plan.</p>
+        <div class="btn-row">
+          <a class="btn" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Access telemedicine {{i:external}}</a>
+          <a class="btn btn--ghost" href="#como-funciona">How it works</a>
+        </div>
+        <div class="hero-foot">
+          <span><b>5 minutes</b> from request to appointment</span>
+          <span><b>No extra cost</b> for the appointment</span>
+          <span><b>ANS Reg. No. {{L.ans}}</b></span>
+        </div>
+      </div>
+      <div class="hero-media c-7-13">
+        <div class="frame">{{pic:old_medica_sorrindo|Smiling doctor seeing a patient|1600|(min-width: 1100px) 60vw, 100vw|eager}}</div>
+        <div class="hero-chips" aria-hidden="true">
+          <span class="chip"><i>{{i:video}}</i><span>Online appointment<small>wherever you are</small></span></span>
+          <span class="chip"><i>{{i:clock}}</i><span>5 minutes<small>from request to appointment</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="oque-t">
+  <div class="wrap">
+    <div class="split split--57">
+      <div class="stack">
+        <span class="eyebrow">What it is</span>
+        <h2 id="oque-t" class="balance">Health care without leaving home</h2>
+        <p class="lead">Telemedicine is care provided by a health professional through digital means. It is a convenient way to get guidance when in-person care is not immediately needed.</p>
+      </div>
+      <div class="feature-list">
+        <div><span class="ico">{{i:home}}</span><div><h3>Wherever you are</h3><p>On your computer or phone, with an internet connection.</p></div></div>
+        <div><span class="ico">{{i:shield}}</span><div><h3>Member access</h3><p>Sign in with your login details in a dedicated environment.</p></div></div>
+        <div><span class="ico">{{i:stethoscope}}</span><div><h3>Health professionals</h3><p>Assessment and guidance provided by a licensed professional.</p></div></div>
+        <div><span class="ico">{{i:layers}}</span><div><h3>According to your plan</h3><p>Access follows the contractual terms of your plan.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section deep" id="como-funciona" aria-labelledby="cf-t">
+  <div class="wrap">
+    <div class="grid mb-8"><div class="c-1-7"><span class="eyebrow">How it works</span><h2 id="cf-t" class="balance">Four steps to receive care</h2></div></div>
+    <div class="steps">
+      <div class="steps-line" aria-hidden="true"><span></span></div>
+      <div class="step"><span class="dot">1</span><h3>Access the platform</h3><p>Go to the MedicGLOBAL telemedicine environment on your computer or phone.</p></div>
+      <div class="step"><span class="dot">2</span><h3>Sign in</h3><p>Use your member login details.</p></div>
+      <div class="step"><span class="dot">3</span><h3>Follow the instructions</h3><p>The platform itself guides you until your appointment begins.</p></div>
+      <div class="step"><span class="dot">4</span><h3>Receive care</h3><p>Talk with the health professional and receive guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="quem-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow">Who can use it</span>
+        <h2 id="quem-t" class="balance">For MedicGLOBAL members</h2>
+        <p class="lead">Telemedicine is available to members, according to the terms and features of the plan purchased. If you have questions about your access, contact customer service.</p>
+        <div class="btn-row"><a class="btn" href="atendimento.html">Ask customer service</a></div>
+      </div>
+      <div class="glass-feature" style="min-height:420px">
+        {{pic:old_profissional|Smiling professional holding glasses|1000|(min-width:1100px) 45vw, 100vw}}
+        <div class="inner" style="grid-template-columns:1fr">
+          <div class="glass-card">
+            <span class="label">Important</span>
+            <p class="mt-4">Telemedicine does not replace urgent and emergency care. If a life is at risk, call <strong>192</strong> or go to the nearest emergency room.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="deep mosaic" aria-labelledby="entrar-t">
+  {{> mosaic}}
+  <div class="wrap mosaic-content">
+    <span class="eyebrow">How to sign in</span>
+    <h2 id="entrar-t" class="balance">Ready to receive care?</h2>
+    <p class="lead center">Access the platform and sign in with your member details.</p>
+    <div class="btn-row"><a class="btn btn--light" href="{{L.links.telemedicina}}" target="_blank" rel="noopener" data-track="click_telemedicina">Access telemedicine {{i:external}}</a><a class="btn btn--light" href="beneficiario.html">Member Area</a></div>
+  </div>
+</section>

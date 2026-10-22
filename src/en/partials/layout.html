@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="{{htmlLang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="robots" content="{{robots}}">
+<link rel="canonical" href="{{canonical}}">
+{{alternates}}
+<meta name="theme-color" content="#00626D">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:locale:alternate" content="{{ogLocaleAlt}}">
+<meta property="og:site_name" content="MedicGLOBAL">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{ogImage}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/brand/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/main.css">
+{{langRedirect}}
+<script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
+{{extraHead}}
+{{jsonld}}
+<!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
+     Substituir GTM-XXXXXXX pelo ID real. Eventos enviados ao dataLayer:
+     click_area_beneficiario, click_rede, click_telemedicina, click_whatsapp, click_telefone, click_quero_ser_cliente,
+     envio_formulario, download_documento, acesso_planos, busca_rede, busca_necessidade, busca_global, filtro -->
+</head>
+<body class="{{bodyClass}}">
+<a class="skip-link" href="#conteudo">Skip to content</a>
+
+<header class="site-header{{headerClass}}">
+  <div class="utility">
+    <div class="wrap">
+      <span class="utility-label">Quick access</span>
+      <nav aria-label="Quick access">
+        <a href="https://telemedicina.medicglobal.com.br/login" target="_blank" rel="noopener" data-track="click_telemedicina">{{i:video}} Telemedicine</a>
+        <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Provider network</a>
+        <a href="http://187.60.158.90:8080/boletoonline/" target="_blank" rel="noopener" data-track="emitir_boleto">{{i:receipt}} Payment slip</a>
+        <a href="https://api.whatsapp.com/send/?phone=5535988459074&amp;text=Desejo+solicitar+autoriza%C3%A7%C3%A3o&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener" data-track="click_whatsapp">{{i:file-check}} Authorizations</a>
+        <a href="atendimento.html">{{i:headset}} Customer service</a>
+        <a href="documentos.html">{{i:doc}} Documents</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap bar">
+    <a class="brand" href="index.html">{{> logo}}</a>
+    <ul class="nav-main" role="list">
+      <li><button class="nav-trigger{{act:voce}}" aria-expanded="false" aria-controls="mega-voce">For you {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:planos}}" aria-expanded="false" aria-controls="mega-planos">Plans {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:rede}}" aria-expanded="false" aria-controls="mega-rede">Care network {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:servicos}}" aria-expanded="false" aria-controls="mega-servicos">Services {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:institucional}}" aria-expanded="false" aria-controls="mega-mg">MedicGLOBAL {{i:chevron-down}}</button></li>
+      <li><button class="nav-trigger{{act:conteudos}}" aria-expanded="false" aria-controls="mega-conteudos">Content {{i:chevron-down}}</button></li>
+    </ul>
+    <div class="bar-actions">
+      <a class="btn btn--benef btn--sm" href="beneficiario.html" data-track="click_area_beneficiario" aria-label="Member Area">{{i:user}} <span class="benef-label">Member Area</span></a>
+      <a class="btn btn--ghost btn--sm btn--client" href="planos.html#contato" data-track="click_quero_ser_cliente">Become a member</a>
+      {{> lang-switch}}
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">{{i:menu}}</button>
+    </div>
+  </div>
+
+  <!-- Mega menus organizados por intenção -->
+  <div class="mega" id="mega-voce">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">For you</span><h3>What do you need to take care of today?</h3><p>Shortcuts to the most common needs of current members — and of those who want to join.</p></div>
+      <div class="mega-links">
+        <a href="beneficiario.html">I'm a member</a>
+        <a href="http://187.60.158.90:8080/boletoonline/" target="_blank" rel="noopener" data-track="emitir_boleto">Duplicate payment slip</a>
+        <a href="atendimento.html">Customer service</a>
+        <a href="servicos.html#urgencia">Urgent and emergency care</a>
+      </div>
+      <a class="mega-feature" href="telemedicina.html">{{pic:old_medica_paciente|Doctor talking with a patient|600|300px}}<strong>Need to talk to a healthcare professional?</strong><span>Telemedicine according to your plan's terms</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-planos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Plans</span><h3>A plan that fits your life</h3><p>Three EMED GLOBAL BLUE products with regional coverage, from Bragança Paulista/SP to Pouso Alegre/MG.</p></div>
+      <div class="mega-links">
+        <a href="planos.html">Our plans</a>
+        <a href="planos.html#comparar">Compare plans</a>
+        <a href="planos.html#abrangencia">Coverage area</a>
+        <a href="planos.html#contato">Request a quote</a>
+        <a href="planos.html#duvidas">FAQ</a>
+        <a href="documentos.html#reajuste">Rate adjustments (RN 565)</a>
+      </div>
+      <a class="mega-feature" href="planos.html#comparar">{{pic:old_familia|Smiling family together at home|600|300px}}<strong>Compare coverage areas side by side</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-rede">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Care network</span><h3>Find care near you</h3><p>Network professionals, clinics, hospitals and laboratories between Bragança Paulista/SP and Pouso Alegre/MG.</p></div>
+      <div class="mega-links">
+        <a href="rede-credenciada.html">Provider network</a>
+        <a href="rede-credenciada.html#buscar">Find a professional</a>
+        <a href="rede-credenciada.html#especialidades">Find a specialty</a>
+        <a href="{{L.links.guia}}" target="_blank" rel="noopener">Provider directory</a>
+        <a href="servicos.html#abramge">Care while traveling</a>
+      </div>
+      <a class="mega-feature" href="rede-credenciada.html#mapa">{{pic:old_santa_casa|Facade of a hospital in the provider network|600|300px}}<strong>Service area map</strong><span>See the cities in the MedicGLOBAL network</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-servicos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Services</span><h3>Services that make your care easier</h3><p>From scheduling to authorization, everything designed to be simple.</p></div>
+      <div class="mega-links">
+        <a href="telemedicina.html">Telemedicine</a>
+        <a href="https://api.whatsapp.com/send/?phone=5535988459074&amp;text=Desejo+solicitar+autoriza%C3%A7%C3%A3o&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener" data-track="click_whatsapp">Authorizations</a>
+        <a href="servicos.html#programas">Health programs</a>
+        <a href="servicos.html#abramge">ABRAMGE</a>
+        <a href="servicos.html#aplicativo">Mobile app</a>
+      </div>
+      <a class="mega-feature" href="servicos.html#aplicativo">{{pic:old_atendimento|Customer service area with service desks|600|300px}}<strong>Your plan on your phone</strong><span>Network, favorites and provider contacts</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-mg">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">MedicGLOBAL</span><h3>Over 40 years caring for people</h3><p>From Extremamedic to MedicGLOBAL: the same legal entity and the same ANS registration, with a new way of caring.</p></div>
+      <div class="mega-links">
+        <a href="medicglobal.html">Our story</a>
+        <a href="medicglobal.html#estrutura">Our facilities</a>
+        <a href="medicglobal.html#atuacao">Where we operate</a>
+        <a href="documentos.html">Regulatory information</a>
+        <a href="trabalhe-conosco.html">Careers</a>
+        <a href="contato.html">Find us</a>
+      </div>
+      <a class="mega-feature" href="medicglobal.html">{{pic:old_hsl_fachada|Facade of Hospital e Maternidade São Lucas|600|300px}}<strong>Same essence. New experience.</strong><span>Learn about our journey</span></a>
+    </div>
+  </div>
+  <div class="mega" id="mega-conteudos">
+    <div class="wrap">
+      <div class="mega-intro"><span class="eyebrow">Content</span><h3>Information for better care</h3><p>Health, news, notices and information about the network.</p></div>
+      <div class="mega-links">
+        <a href="conteudos.html#cat=comunicados">Notices</a>
+        <a href="conteudos.html#cat=noticias">News</a>
+        <a href="conteudos.html">All content</a>
+      </div>
+      <a class="mega-feature" href="conteudos.html">{{pic:old_coracao|Hands over the chest, a reference to heart health|600|300px}}<strong>Content hub</strong><span>Search by topic or category</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Menu mobile: prioriza as necessidades -->
+<div class="drawer" id="drawer" inert>
+  <nav aria-label="Main menu (mobile)">
+    <div class="drawer-quick">
+      <a href="beneficiario.html" data-track="click_area_beneficiario">Member Area {{i:user}}</a>
+      <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Provider network</a>
+      <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}} Telemedicine</a>
+      <a href="beneficiario.html#boleto">{{i:receipt}} Payment slip</a>
+      <a href="atendimento.html">{{i:headset}} Customer service</a>
+    </div>
+    <details><summary>Plans</summary><ul><li><a href="planos.html">Our plans</a></li><li><a href="planos.html#comparar">Compare plans</a></li><li><a href="planos.html#abrangencia">Coverage area</a></li><li><a href="planos.html#contato">Request a quote</a></li></ul></details>
+    <details><summary>Services</summary><ul><li><a href="servicos.html#autorizacoes">Authorizations</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li><li><a href="servicos.html#urgencia">Urgent and emergency care</a></li></ul></details>
+    <details><summary>MedicGLOBAL</summary><ul><li><a href="medicglobal.html">Our story</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li></ul></details>
+    <details><summary>Content</summary><ul><li><a href="conteudos.html">All content</a></li><li><a href="conteudos.html#cat=comunicados">Notices</a></li><li><a href="conteudos.html#cat=saude">Health</a></li></ul></details>
+    <details><summary>Documents</summary><ul><li><a href="documentos.html">Document center</a></li><li><a href="documentos.html#ans">ANS and IDSS</a></li><li><a href="documentos.html#tiss">TISS and forms</a></li></ul></details>
+    <div class="drawer-lang" role="group" aria-label="Language">
+      <a href="{{hrefPt}}" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt">{{> flag-br}} Português</a>
+      <a href="{{hrefEn}}" hreflang="en" lang="en" data-set-lang="en" aria-current="true">{{> flag-us}} English</a>
+    </div>
+    <div class="drawer-cta">
+      <a class="btn" href="planos.html#contato" data-track="click_quero_ser_cliente">Become a member</a>
+      <button class="btn btn--ghost" type="button" data-open-search>{{i:search}} Search the site</button>
+    </div>
+  </nav>
+</div>
+
+<main id="conteudo" tabindex="-1">
+{{content}}
+</main>
+
+<footer class="site-footer">
+  <svg class="footer-globe" viewBox="0 0 600 600" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="300" cy="300" r="299"/><circle cx="300" cy="300" r="220"/><ellipse cx="300" cy="300" rx="120" ry="299"/><ellipse cx="300" cy="300" rx="299" ry="110"/><path d="M1 300h598M300 1v598"/></svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="eyebrow">We're here to help</span>
+        <h2>Contact MedicGLOBAL</h2>
+      </div>
+      <div class="footer-contact">
+        <a href="{{L.phones.central.tel}}"><small>Customer service and Ombudsman</small><strong>{{L.phones.central.label}}</strong></a>
+        <a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener"><small>WhatsApp Authorizations</small><strong>{{L.wa.autorizacoes.label}}</strong></a>
+        <a href="atendimento.html"><small>All channels</small><strong>Customer service</strong></a>
+      </div>
+    </div>
+    <div class="footer-mid">
+      <div class="footer-word" aria-hidden="true">MedicGLOBAL</div>
+      <nav class="footer-cols" aria-label="Footer">
+      <div><h3>For you</h3><ul><li><a href="beneficiario.html">I'm a member</a></li><li><a href="planos.html">Become a member</a></li><li><a href="telemedicina.html">Telemedicine</a></li><li><a href="beneficiario.html#boleto">Payment slip</a></li><li><a href="servicos.html#autorizacoes">Authorizations</a></li></ul></div>
+      <div><h3>Plans</h3><ul><li><a href="planos.html">EMED GLOBAL BLUE</a></li><li><a href="planos.html#comparar">Compare plans</a></li><li><a href="planos.html#abrangencia">Coverage area</a></li><li><a href="planos.html#contato">Request a quote</a></li></ul></div>
+      <div><h3>Network and services</h3><ul><li><a href="rede-credenciada.html">Provider network</a></li><li><a href="{{L.links.guia}}" target="_blank" rel="noopener">Provider directory</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li></ul></div>
+      <div><h3>About us</h3><ul><li><a href="medicglobal.html">Our story</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="conteudos.html">Content</a></li><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li></ul></div>
+      <div><h3>Regulatory</h3><ul><li><a href="documentos.html#ans">ANS · IDSS</a></li><li><a href="documentos.html#ans">Quality Factor</a></li><li><a href="documentos.html#tiss">TISS · Forms</a></li><li><a href="documentos.html#reajuste">Rate adjustments</a></li><li><a href="documentos.html">Document center</a></li></ul></div>
+      <div><h3>Logins</h3><ul><li><a href="beneficiario.html">Member Area</a></li><li><a href="{{L.links.empresa}}" target="_blank" rel="noopener">Corporate clients</a></li><li><a href="{{L.links.autorizador}}" target="_blank" rel="noopener">Providers · TISS 3.0</a></li><li><a href="{{L.links.webmail}}" target="_blank" rel="noopener">Employees</a></li><li><a href="atendimento.html#ouvidoria">Ombudsman</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <div class="footer-legal-main">
+        <a class="ans-seal" href="{{L.links.ans}}" target="_blank" rel="noopener" aria-label="ANS, Brazil's National Supplementary Health Agency — ANS registration no. {{L.ans}} (opens in a new tab)"><span>ANS - nº {{L.ans}}</span></a>
+        <div class="footer-legal-info">
+          <p>{{L.legal.razao}} · {{L.legal.cnpj}} · {{L.address.full}}</p>
+          <p>ANS hotline (Disque ANS): 0800 701 9656 · <a href="{{L.links.ans}}" target="_blank" rel="noopener">www.gov.br/ans</a></p>
+        </div>
+      </div>
+      <div class="legal-links"><a href="privacidade.html">Privacy Policy</a><a href="privacidade.html#cookies">Cookies</a><button type="button" data-cookie-prefs style="background:none;border:0;padding:0;color:inherit;font-size:inherit;cursor:pointer">Cookie preferences</button><a href="privacidade.html#termos">Terms of Use</a><a href="privacidade.html#lgpd">LGPD · Privacy requests</a><a href="documentos.html">Regulatory information</a></div>
+      <div class="footer-credit"><p>© <span data-year>{{year}}</span> MedicGLOBAL</p><p>Developed by <a href="https://awtech.so/" target="_blank" rel="noopener">Grupo Awtech<span class="sr-only"> (opens in a new tab)</span></a></p></div>
+    </div>
+  </div>
+</footer>
+
+<nav class="dock" aria-label="Shortcuts">
+  <a href="beneficiario.html" data-track="click_area_beneficiario">{{i:user}}Members</a>
+  <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}}Network</a>
+  <a href="telemedicina.html" data-track="click_telemedicina">{{i:video}}Telemedicine</a>
+  <a href="atendimento.html">{{i:headset}}Support</a>
+</nav>
+
+<div class="search-overlay" role="dialog" aria-modal="true" aria-label="Search the site" inert>
+  <div class="search-panel">
+    <form role="search">
+      {{i:search}}
+      <label class="sr-only" for="global-search">What do you need?</label>
+      <input id="global-search" type="search" placeholder="What do you need? E.g.: payment slip, appointment, authorization" autocomplete="off">
+      <button class="icon-btn" type="button" onclick="document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}))" aria-label="Close search">{{i:close}}</button>
+    </form>
+    <div class="search-results" aria-live="polite"></div>
+    <p class="search-hint">Tip: press <kbd>Ctrl</kbd> + <kbd>K</kbd> on any page to search.</p>
+  </div>
+</div>
+
+<div class="cookie" role="region" aria-label="Cookie notice">
+  <strong>Your privacy matters.</strong>
+  <p>We use essential cookies to make the site work and, with your permission, analytics cookies to improve your experience. Learn more in our <a href="privacidade.html#cookies">Cookie Policy</a>.</p>
+  <div class="btn-row"><button class="btn btn--sm" type="button" data-consent="essential">Essential only</button><button class="btn btn--ghost btn--sm" type="button" data-consent="all">Accept all</button></div>
+</div>
+
+<!-- Central de acessibilidade (assets/js/a11y.js). Ajustes ficam salvos neste navegador. -->
+<div class="a11y" id="a11y">
+  <div class="a11y-tab" role="group" aria-label="Accessibility">
+    <button class="a11y-fab" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Open accessibility tools">{{i:a11y}}</button>
+    <button class="a11y-fab a11y-fab--libras" type="button" data-a11y-asl aria-expanded="false" aria-controls="a11y-asl-info" aria-label="American Sign Language (ASL)">{{i:hands}}</button>
+  </div>
+  <section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+    <div class="a11y-head">
+      <h2 id="a11y-title" tabindex="-1">{{i:a11y}} Accessibility</h2>
+      <button class="a11y-close" type="button" data-a11y-close aria-label="Close accessibility tools">{{i:close}}</button>
+    </div>
+    <div class="a11y-body">
+      <h3 class="a11y-label">Sign language and reading</h3>
+      <div class="a11y-grid">
+        <button type="button" class="is-wide" data-a11y-asl aria-expanded="false" aria-controls="a11y-asl-info">{{i:hands}}<span>American Sign Language (ASL)<small>Availability and written support</small></span></button>
+        <button type="button" data-a11y-read aria-pressed="false">{{i:volume}}<span>Read page aloud</span></button>
+        <button type="button" data-a11y-toggle="guide" aria-pressed="false">{{i:guide}}<span>Reading guide</span></button>
+      </div>
+      <div class="a11y-asl" id="a11y-asl-info" data-a11y-asl-info tabindex="-1" hidden>
+        <p><strong>Automatic ASL translation is not available on this site yet.</strong> The VLibras tool used on the Portuguese version translates Portuguese into Libras (Brazilian Sign Language) only, so it is not offered here.</p>
+        <p>If you are Deaf or hard of hearing, you can reach us in writing on <a href="{{L.wa.geral.url}}" target="_blank" rel="noopener">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a> or through the other <a href="atendimento.html">customer service channels</a>. Libras users can switch to <a href="{{hrefPt}}" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt">Português</a> to use VLibras.</p>
+      </div>
+      <div class="a11y-reading" data-a11y-reading hidden>
+        <span>Reading aloud…</span>
+        <button type="button" data-a11y-read-pause aria-label="Pause reading">{{i:pause}}</button>
+        <button type="button" data-a11y-read-stop aria-label="Stop reading">{{i:stop}}</button>
+      </div>
+      <p class="a11y-note">To hear just one passage, select the text before tapping “Read page aloud”.</p>
+
+      <h3 class="a11y-label" id="a11y-size-l">Text controls</h3>
+      <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+        <button type="button" data-a11y-size="-1" aria-label="Decrease text size">{{i:text-minus}}</button>
+        <span>Text size <output id="a11y-size-out">100%</output></span>
+        <button type="button" data-a11y-size="1" aria-label="Increase text size">{{i:text-plus}}</button>
+      </div>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="font" aria-pressed="false">{{i:font}}<span>Readable font</span></button>
+        <button type="button" data-a11y-toggle="spacing" aria-pressed="false">{{i:spacing}}<span>Text spacing</span></button>
+      </div>
+
+      <h3 class="a11y-label">Navigation</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="links" aria-pressed="false">{{i:link-mark}}<span>Highlight links</span></button>
+        <button type="button" data-a11y-toggle="headings" aria-pressed="false">{{i:layers}}<span>Highlight headings</span></button>
+        <button type="button" data-a11y-toggle="noimg" aria-pressed="false">{{i:eye}}<span>Hide images</span></button>
+        <button type="button" data-a11y-toggle="motion" aria-pressed="false">{{i:motion}}<span>Pause animations</span></button>
+      </div>
+
+      <h3 class="a11y-label">Color controls</h3>
+      <div class="a11y-grid">
+        <button type="button" data-a11y-toggle="contrast" aria-pressed="false">{{i:contrast}}<span>High contrast</span></button>
+        <button type="button" data-a11y-toggle="gray" aria-pressed="false">{{i:grayscale}}<span>Grayscale</span></button>
+      </div>
+    </div>
+    <div class="a11y-foot">
+      <button class="a11y-reset" type="button" data-a11y-reset>{{i:reset}} Reset to default</button>
+    </div>
+    <p class="sr-only" id="a11y-status" aria-live="polite"></p>
+  </section>
+</div>
+<div class="a11y-guide-bar" aria-hidden="true"></div>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/a11y.js" defer></script>
+{{extraScripts}}
+</body>
+</html>

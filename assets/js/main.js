@@ -8,6 +8,10 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  // Idioma da página (pt-BR na raiz, en em /en/): T("texto em português", "text in English")
+  var EN = /^en/i.test(doc.lang);
+  var T = function (pt, en) { return EN ? en : pt; };
+  window.mgT = T;
   var norm = function (s) { return (s || "").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
 
   /* ---------- Analytics (GA4 / GTM via dataLayer) ---------- */
@@ -89,13 +93,38 @@
     if (!toggle || !drawer) return;
     var willOpen = typeof force === "boolean" ? force : toggle.getAttribute("aria-expanded") !== "true";
     toggle.setAttribute("aria-expanded", String(willOpen));
-    toggle.setAttribute("aria-label", willOpen ? "Fechar menu" : "Abrir menu");
+    toggle.setAttribute("aria-label", willOpen ? T("Fechar menu", "Close menu") : T("Abrir menu", "Open menu"));
     drawer.classList.toggle("is-open", willOpen);
     header.classList.toggle("is-open", willOpen);
     document.body.style.overflow = willOpen ? "hidden" : "";
     if (willOpen) drawer.removeAttribute("inert"); else drawer.setAttribute("inert", "");
   }
   if (toggle) toggle.addEventListener("click", function () { toggleDrawer(); });
+
+  /* Seletor de idioma: abre o menu, guarda a escolha e mantém a seção atual (#âncora) na outra versão */
+  $$("[data-lang]").forEach(function (box) {
+    var btn = $(".lang-btn", box), menu = $(".lang-menu", box);
+    if (!btn || !menu) return;
+    function set(open) {
+      btn.setAttribute("aria-expanded", String(open));
+      menu.hidden = !open;
+      if (open) { var cur = $('[aria-current="true"]', menu) || $("a", menu); if (cur) cur.focus(); }
+    }
+    btn.addEventListener("click", function () { set(btn.getAttribute("aria-expanded") !== "true"); });
+    menu.addEventListener("keydown", function (e) {
+      var links = $$("a", menu), i = links.indexOf(document.activeElement);
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); links[(i + (e.key === "ArrowDown" ? 1 : links.length - 1)) % links.length].focus(); }
+      if (e.key === "Escape") { set(false); btn.focus(); }
+      if (e.key === "Tab") set(false);
+    });
+    document.addEventListener("click", function (e) { if (!box.contains(e.target)) set(false); });
+  });
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest("a[data-set-lang]");
+    if (!a) return;
+    try { localStorage.setItem("mg-lang", a.getAttribute("data-set-lang")); } catch (err) {}
+    if (location.hash && a.getAttribute("href").indexOf("#") < 0) { e.preventDefault(); location.href = a.getAttribute("href") + location.hash; }
+  });
 
   /* ---------- Navegação por necessidade: índice ---------- */
   var INDEX = [
@@ -121,6 +150,29 @@
     { t: "Trabalhe conosco", d: "Envie seu currículo", u: "trabalhe-conosco.html", k: "trabalhe conosco vaga emprego curriculo carreira", tag: "Institucional" },
     { t: "Privacidade e LGPD", d: "Política de privacidade, cookies e seus direitos", u: "privacidade.html", k: "privacidade lgpd dados cookies termos encarregado dpo", tag: "Legal" }
   ];
+  if (EN) INDEX = [
+    { t: "Member Area", d: "Member card, plan details, payment slips and services", u: "beneficiario.html", k: "member login sign in access area card app beneficiario", tag: "Members" },
+    { t: "Duplicate payment slip", d: "Issue your plan's payment slip (boleto)", u: "beneficiario.html#boleto", k: "boleto bill pay payment invoice monthly fee duplicate slip", tag: "Members" },
+    { t: "Find care", d: "Doctors, clinics, hospitals and laboratories", u: "rede-credenciada.html", k: "appointment doctor provider network hospital clinic laboratory lab test specialty directory near", tag: "Network" },
+    { t: "Telemedicine", d: "Talk to a healthcare professional remotely", u: "telemedicina.html", k: "telemedicine telehealth online video virtual consultation talk to a doctor", tag: "Service" },
+    { t: "Authorizations", d: "Check and request procedure authorizations", u: "servicos.html#autorizacoes", k: "authorization authorize prior approval exam test procedure surgery", tag: "Service" },
+    { t: "Our health plans", d: "EMED GLOBAL BLUE 200, 300 and 400", u: "planos.html", k: "plans health plan buy become a member price cost quote blue emed", tag: "Plans" },
+    { t: "Compare plans", d: "Coverage areas and features side by side", u: "planos.html#comparar", k: "compare comparison difference coverage area cities", tag: "Plans" },
+    { t: "Request a quote", d: "Talk to our sales team", u: "planos.html#contato", k: "quote proposal pricing sales company business", tag: "Plans" },
+    { t: "Urgent and emergency care", d: "Where to get immediate care", u: "servicos.html#urgencia", k: "urgent emergency er emergency room walk-in", tag: "Service" },
+    { t: "ABRAMGE — care while traveling", d: "Urgent care outside your region", u: "servicos.html#abramge", k: "abramge travel traveling out of town another state", tag: "Service" },
+    { t: "Health programs", d: "Follow-up care and prevention", u: "servicos.html#programas", k: "health programs prevention follow-up chronic pregnancy", tag: "Service" },
+    { t: "MedicGLOBAL app", d: "Network, favorites and provider contacts", u: "servicos.html#aplicativo", k: "app application mobile phone android ios download", tag: "Service" },
+    { t: "Customer service", d: "Phone numbers, WhatsApp and email by department", u: "atendimento.html", k: "customer service support phone whatsapp email contact help", tag: "Support" },
+    { t: "Ombudsman", d: "File a complaint at the second level", u: "atendimento.html#ouvidoria", k: "ombudsman complaint grievance feedback", tag: "Support" },
+    { t: "Contact and address", d: "Location, opening hours and map", u: "contato.html", k: "address location where headquarters map hours contact", tag: "Support" },
+    { t: "Our story", d: "From Extremamedic to MedicGLOBAL", u: "medicglobal.html", k: "history story extremamedic company about us who we are", tag: "About" },
+    { t: "Documents and regulatory information", d: "ANS, IDSS, TISS, forms and manuals", u: "documentos.html", k: "documents ans idss tiss quality factor cid form manual sp sadt regulatory rn", tag: "Documents" },
+    { t: "Providers — forms and TISS", d: "Operational information for providers", u: "documentos.html#tiss", k: "provider tiss forms billing accredited", tag: "Providers" },
+    { t: "Health content", d: "News, notices and articles", u: "conteudos.html", k: "news blog articles notices health content", tag: "Content" },
+    { t: "Careers", d: "Send us your résumé", u: "trabalhe-conosco.html", k: "careers jobs work with us vacancy resume cv", tag: "About" },
+    { t: "Privacy and LGPD", d: "Privacy policy, cookies and your rights", u: "privacidade.html", k: "privacy lgpd data protection cookies terms dpo", tag: "Legal" }
+  ];
   function searchIndex(q) {
     q = norm(q).trim();
     if (!q) return INDEX.slice(0, 7);
@@ -142,7 +194,7 @@
     if (!sResults) return;
     sResults.innerHTML = list.length ? list.map(function (it) {
       return '<a href="' + it.u + '"><div><strong>' + it.t + "</strong><span>" + it.d + '</span></div><span class="tag">' + it.tag + "</span></a>";
-    }).join("") : '<p class="search-hint">Nada encontrado. Tente “boleto”, “consulta” ou “telemedicina” — ou <a class="link" href="atendimento.html">fale com a MedicGLOBAL</a>.</p>';
+    }).join("") : T('<p class="search-hint">Nada encontrado. Tente “boleto”, “consulta” ou “telemedicina” — ou <a class="link" href="atendimento.html">fale com a MedicGLOBAL</a>.</p>', '<p class="search-hint">Nothing found. Try “payment slip”, “appointment” or “telemedicine” — or <a class="link" href="atendimento.html">contact MedicGLOBAL</a>.</p>');
   }
   function openSearch() {
     if (!overlay) return;
@@ -405,8 +457,9 @@
   function fileProblem(field) {
     var file = field.files && field.files[0];
     if (!file) return "";
-    if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== "application/pdf")) return "Formato não aceito: envie o currículo em PDF.";
-    if (file.size > +field.getAttribute("data-max-bytes")) return "O arquivo tem " + (file.size / 1073741824).toFixed(2).replace(".", ",") + " GB e ultrapassa o limite de 1 GB.";
+    if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== "application/pdf")) return T("Formato não aceito: envie o currículo em PDF.", "File type not accepted: please send your résumé as a PDF.");
+    if (file.size > +field.getAttribute("data-max-bytes")) var gb = (file.size / 1073741824).toFixed(2);
+    return T("O arquivo tem " + gb.replace(".", ",") + " GB e ultrapassa o limite de 1 GB.", "The file is " + gb + " GB, which exceeds the 1 GB limit.");
     return "";
   }
   function checkFile(field) {

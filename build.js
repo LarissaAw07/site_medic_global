@@ -10,7 +10,17 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, "src");
 const site = JSON.parse(fs.readFileSync(path.join(SRC, "data", "site.json"), "utf8"));
 const icons = require("./src/data/icons.js");
-const partial = (n) => fs.readFileSync(path.join(SRC, "partials", n + ".html"), "utf8");
+// Idiomas: português na raiz, inglês em /en/. Um partial em src/en/partials substitui o de src/partials na versão em inglês.
+const LANGS = {
+  pt: { dir: "", pages: path.join(SRC, "pages"), html: "pt-BR", og: "pt_BR", home: "Início", crumbsLabel: "Você está em", ldLang: "Portuguese" },
+  en: { dir: "en", pages: path.join(SRC, "en", "pages"), html: "en", og: "en_US", home: "Home", crumbsLabel: "You are here", ldLang: "English" },
+};
+let LANG = "pt";
+const partial = (n) => {
+  const en = path.join(SRC, "en", "partials", n + ".html");
+  if (LANG === "en" && fs.existsSync(en)) return fs.readFileSync(en, "utf8");
+  return fs.readFileSync(path.join(SRC, "partials", n + ".html"), "utf8");
+};
 
 function pic(spec) {
   // {{pic:chave|alt|largura máx.|sizes|eager}}
@@ -64,75 +74,105 @@ function render(tpl, ctx) {
   return out;
 }
 function get(o, k) {
-  const v = k.split(".").reduce((a, p) => (a == null ? a : a[p]), o);
+  // na versão em inglês, site.json → "en" tem prioridade para textos (horários, avisos)
+  const pick = (src) => k.split(".").reduce((a, p) => (a == null ? a : a[p]), src);
+  const v = LANG === "en" && o === site && pick(site.en) !== undefined ? pick(site.en) : pick(o);
   if (v === undefined) throw new Error("Dado ausente em site.json: " + k);
   return v;
 }
 
 require("./src/gen-migracao.js")();
 require("./src/gen-noticias.js")();
-const pagesDir = path.join(SRC, "pages");
-const files = fs.readdirSync(pagesDir).filter((f) => f.endsWith(".html"));
 const sitemap = [];
+const pageUrl = (lang, file) => site.domain + (LANGS[lang].dir ? LANGS[lang].dir + "/" : "") + (file === "index.html" ? "" : file.replace(/.html$/, "/"));
+const hasPage = (lang, file) => fs.existsSync(path.join(LANGS[lang].pages, file));
 
-for (const file of files) {
-  const raw = fs.readFileSync(path.join(pagesDir, file), "utf8");
-  const m = raw.match(/^<!--@([\s\S]*?)@-->\s*/);
-  if (!m) throw new Error("Página sem cabeçalho de metadados: " + file);
-  const meta = JSON.parse(m[1]);
-  const body = raw.slice(m[0].length);
-  const slug = file;
-  const url = site.domain + (slug === "index.html" ? "" : slug.replace(/\.html$/, "/"));
+for (const lang of Object.keys(LANGS)) {
+  LANG = lang;
+  const L = LANGS[lang], other = lang === "pt" ? "en" : "pt";
+  const outDir = path.join(ROOT, L.dir);
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  const files = fs.existsSync(L.pages) ? fs.readdirSync(L.pages).filter((f) => f.endsWith(".html")) : [];
+  // remove páginas em inglês que deixaram de existir na fonte
+  if (L.dir) for (const f of fs.readdirSync(outDir)) if (f.endsWith(".html") && !files.includes(f)) fs.unlinkSync(path.join(outDir, f));
 
-  const crumbs = meta.crumbs || [];
-  const crumbHtml = crumbs.length
-    ? `<nav aria-label="Você está em"><ol class="crumbs"><li><a href="index.html">Início</a></li>${crumbs
-        .map((c, i) => (i === crumbs.length - 1 ? `<li><span aria-current="page">${c[0]}</span></li>` : `<li><a href="${c[1]}">${c[0]}</a></li>`))
-        .join("")}</ol></nav>`
-    : "";
+  for (const file of files) {
+    const raw = fs.readFileSync(path.join(L.pages, file), "utf8");
+    const m = raw.match(/^<!--@([\s\S]*?)@-->\s*/);
+    if (!m) throw new Error("Página sem cabeçalho de metadados: " + lang + "/" + file);
+    const meta = JSON.parse(m[1]);
+    const body = raw.slice(m[0].length);
+    const url = pageUrl(lang, file);
+    const twin = hasPage(other, file);
+    // link para a mesma página no outro idioma (ou para a inicial dele, se a página não existir lá)
+    const toOther = (lang === "pt" ? "en/" : "../") + (twin ? file : "index.html");
+    const hrefPt = lang === "pt" ? file : toOther, hrefEn = lang === "en" ? file : toOther;
+    const alternates = twin && !meta.noindex
+      ? [["pt-BR", pageUrl("pt", file)], ["en", pageUrl("en", file)], ["x-default", pageUrl("pt", file)]].map(([h, u]) => `<link rel="alternate" hreflang="${h}" href="${u}">`).join("\n")
+      : "";
 
-  const ld = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "MedicGLOBAL",
-      alternateName: ["Medic Global", "Medic Global Saúde", "Extremamedic"],
-      url: site.domain,
-      logo: site.domain + "assets/img/brand/logo-medicglobal.svg",
-      address: { "@type": "PostalAddress", streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, postalCode: site.address.zip, addressCountry: "BR" },
-      contactPoint: [{ "@type": "ContactPoint", telephone: site.phones.central.e164, contactType: "customer service", areaServed: "BR", availableLanguage: "Portuguese" }],
-    },
-  ];
-  if (crumbs.length) {
-    ld.push({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [["Início", ""], ...crumbs].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c[0], item: site.domain + (c[1] ? c[1].replace(/\.html.*$/, "/") : "") })),
-    });
+    const crumbs = meta.crumbs || [];
+    const crumbHtml = crumbs.length
+      ? `<nav aria-label="${L.crumbsLabel}"><ol class="crumbs"><li><a href="index.html">${L.home}</a></li>${crumbs
+          .map((c, i) => (i === crumbs.length - 1 ? `<li><span aria-current="page">${c[0]}</span></li>` : `<li><a href="${c[1]}">${c[0]}</a></li>`))
+          .join("")}</ol></nav>`
+      : "";
+
+    const ld = [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "MedicGLOBAL",
+        alternateName: ["Medic Global", "Medic Global Saúde", "Extremamedic"],
+        url: site.domain,
+        logo: site.domain + "assets/img/brand/logo-medicglobal.svg",
+        address: { "@type": "PostalAddress", streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, postalCode: site.address.zip, addressCountry: "BR" },
+        contactPoint: [{ "@type": "ContactPoint", telephone: site.phones.central.e164, contactType: "customer service", areaServed: "BR", availableLanguage: ["Portuguese"] }],
+      },
+    ];
+    if (crumbs.length) {
+      ld.push({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [[L.home, ""], ...crumbs].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c[0], item: site.domain + (L.dir ? L.dir + "/" : "") + (c[1] ? c[1].replace(/\.html.*$/, "/") : "") })),
+      });
+    }
+    if (meta.jsonld) ld.push(...meta.jsonld);
+
+    const ctx = {
+      file,
+      lang,
+      htmlLang: L.html,
+      ogLocale: L.og,
+      ogLocaleAlt: LANGS[other].og,
+      alternates,
+      hrefPt,
+      hrefEn,
+      // a preferência de idioma salva só leva à outra versão quando a mesma página existe nela
+      langRedirect: twin ? `<script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="${lang}")location.replace("${toOther}"+location.hash)}catch(e){}</script>` : "",
+      active: meta.active || "",
+      title: meta.title,
+      description: meta.description,
+      canonical: url,
+      ogImage: ogImage(meta.og || "old_familia"),
+      crumbs: crumbHtml,
+      headerClass: meta.headerDark ? " on-dark" : "",
+      bodyClass: meta.bodyClass || "",
+      jsonld: `<script type="application/ld+json">${JSON.stringify(ld.length === 1 ? ld[0] : ld)}</script>`,
+      extraHead: meta.extraHead || "",
+      extraScripts: meta.extraScripts || "",
+      year: String(new Date().getFullYear()),
+      robots: meta.noindex ? "noindex, nofollow" : "index, follow",
+    };
+    let html = bust(render(partial("layout"), Object.assign({}, ctx, { content: body })));
+    // em /en/ os arquivos estáticos ficam um nível acima
+    if (L.dir) html = html.replace(/(href|src)="assets\//g, '$1="../assets/');
+    fs.writeFileSync(path.join(outDir, file), html);
+    if (!meta.noindex) sitemap.push(url);
+    console.log("✓", (L.dir ? L.dir + "/" : "") + file);
   }
-  if (meta.jsonld) ld.push(...meta.jsonld);
-
-  const ctx = {
-    file,
-    active: meta.active || "",
-    title: meta.title,
-    description: meta.description,
-    canonical: url,
-    ogImage: ogImage(meta.og || "old_familia"),
-    crumbs: crumbHtml,
-    headerClass: meta.headerDark ? " on-dark" : "",
-    bodyClass: meta.bodyClass || "",
-    jsonld: `<script type="application/ld+json">${JSON.stringify(ld.length === 1 ? ld[0] : ld)}</script>`,
-    extraHead: meta.extraHead || "",
-    extraScripts: meta.extraScripts || "",
-    year: String(new Date().getFullYear()),
-    robots: meta.noindex ? "noindex, nofollow" : "index, follow",
-  };
-  const html = bust(render(partial("layout"), Object.assign({}, ctx, { content: body })));
-  fs.writeFileSync(path.join(ROOT, file), html);
-  if (!meta.noindex) sitemap.push(url);
-  console.log("✓", file);
 }
+LANG = "pt";
 
 fs.writeFileSync(
   path.join(ROOT, "sitemap.xml"),

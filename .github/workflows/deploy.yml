@@ -28,9 +28,9 @@ jobs:
       - name: Montar a pasta de publicação (dist/)
         run: |
           mkdir -p dist
-          cp -r *.html assets sitemap.xml robots.txt dist/
+          cp -r *.html en assets sitemap.xml robots.txt dist/
           # mapa de migração é interno (noindex) — não publicar
-          rm -f dist/mapa-de-migracao.html
+          rm -f dist/mapa-de-migracao.html dist/en/mapa-de-migracao.html
 
       - name: Configurar a chave SSH
         run: |

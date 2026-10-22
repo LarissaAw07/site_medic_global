@@ -1729,9 +1729,13 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* "Depois da contratação" → rodapé: quadros um pouco mais visíveis, esmaecendo aos poucos até o azul do rodapé */
 .mosaic .mosaic-grid span { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.6); }
 .mosaic .mosaic-grid {
-  -webkit-mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
-  mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, #000 78%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
+  mask-image: radial-gradient(ellipse at center, transparent 30%, #000 78%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
 }
 /* Globo do rodapé: quando a página termina nessa seção, ele avança sobre ela em vez de ser cortado no limite.
    overflow-x: clip continua evitando rolagem lateral; no eixo vertical o globo pode sair do rodapé. */
 main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflow-y: visible; }
+/* "Depois da contratação": respiro mais enxuto em cima, embaixo e entre os elementos */
+.mosaic-content { gap: 18px; padding-block: clamp(64px, 2.5rem + 2.5vw, 88px) clamp(64px, 2.75rem + 2.5vw, 112px); }
+.mosaic-content .eyebrow { margin-bottom: -4px; }
+.mosaic-content .store-row { margin-top: 6px; }

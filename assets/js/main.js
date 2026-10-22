@@ -69,6 +69,8 @@
     if (panel) {
       panel.addEventListener("mouseenter", function () { clearTimeout(closeTimer); });
       panel.addEventListener("mouseleave", function () { closeTimer = setTimeout(closeAll, 180); });
+      // links para outra seção da mesma página não recarregam: fecha o painel para mostrar o destino
+      panel.addEventListener("click", function (e) { if (e.target.closest("a")) closeAll(); });
     }
   });
   document.addEventListener("keydown", function (e) {
@@ -300,11 +302,17 @@
       var v = c.getAttribute("data-count-for"), g = c.getAttribute("data-count-group");
       c.textContent = v === "all" ? items.length : items.filter(function (it) { return (" " + it.getAttribute("data-" + g) + " ").indexOf(" " + v + " ") > -1; }).length;
     });
-    // pré-seleção pelo hash (#cat=...)
-    var m = location.hash.match(/(\w+)=([\w-]+)/);
-    var anc = $('[data-anchor="' + location.hash.slice(1) + '"]', root);
-    if (anc) { anc.click(); setTimeout(function () { root.scrollIntoView(); }, 50); }
-    if (m) { var b = $('[data-filter-group="' + m[1] + '"][data-value="' + m[2] + '"]', root); if (b) b.click(); }
+    // pré-seleção pelo hash (#cat=...), também ao clicar no menu estando já na página
+    function fromHash() {
+      var m = location.hash.match(/(\w+)=([\w-]+)/);
+      var anc = $('[data-anchor="' + location.hash.slice(1) + '"]', root);
+      var b = m && $('[data-filter-group="' + m[1] + '"][data-value="' + m[2] + '"]', root);
+      if (anc) anc.click();
+      if (b) b.click();
+      if (anc || b) setTimeout(function () { root.scrollIntoView(); }, 50);
+    }
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
     apply();
   }
   $$("[data-filter]").forEach(setupFilter);

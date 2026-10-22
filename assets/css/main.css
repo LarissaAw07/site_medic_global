@@ -257,7 +257,7 @@ ul, ol { margin: 0; padding: 0; }
 .mega .wrap { display: grid; grid-template-columns: 4fr 5fr 3fr; gap: 48px; padding-block: 48px 56px; }
 .mega-intro h3 { font-size: 1.75rem; margin-bottom: 12px; }
 .mega-intro p { color: var(--ink-3); font-size: var(--t-sm); max-width: 22rem; }
-.mega-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; align-content: start; }
+.mega-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; align-content: center; }
 .mega-links a {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 14px 0; border-bottom: 1px solid var(--line-2);

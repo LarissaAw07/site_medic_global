@@ -9,8 +9,8 @@
     "leitura": 2,
     "titulo": "Mamografia digital passa a ter cobertura sem restrição de idade ou gênero",
     "resumo": "Desde 1º de outubro, os planos de saúde cobrem a mamografia digital com indicação médica, sem limite de idade ou de gênero.",
-    "foto": "care",
-    "alt": "Médica conversando com uma paciente em consultório",
+    "foto": "old_medica_sorrindo",
+    "alt": "Médica conversando com pacientes durante consulta",
     "intro": "A Agência Nacional de Saúde Suplementar (ANS) ampliou a cobertura obrigatória da mamografia digital nos planos de saúde. A mudança entrou em vigor em 1º de outubro de 2026.",
     "secoes": [
       {
@@ -46,8 +46,8 @@
     "leitura": 2,
     "titulo": "Planos de assistência médica passam de 53 milhões de beneficiários em agosto",
     "resumo": "Balanço da ANS mostra o número de vínculos em planos médicos e odontológicos e a movimentação de adesões e cancelamentos.",
-    "foto": "laptop",
-    "alt": "Pessoa digitando em um notebook com um estetoscópio ao lado",
+    "foto": "old_escritorio",
+    "alt": "Equipe trabalhando em escritório com notebook e tablet",
     "intro": "A ANS divulgou o balanço de beneficiários de planos de saúde referente a agosto de 2026, com o total de vínculos e a movimentação de entradas e saídas nos últimos 12 meses.",
     "secoes": [
       {
@@ -83,8 +83,8 @@
     "leitura": 2,
     "titulo": "Tratamento para cálculo biliar complexo entra no Rol de cobertura obrigatória",
     "resumo": "A colangioscopia com litotripsia passa a ser coberta pelos planos de saúde a partir de 3 de novembro, em casos definidos pela ANS.",
-    "foto": "corridor",
-    "alt": "Sala cirúrgica equipada em ambiente hospitalar",
+    "foto": "old_quarto",
+    "alt": "Quarto de internação hospitalar",
     "intro": "A Diretoria Colegiada da ANS aprovou, em 2 de outubro, a inclusão de um novo procedimento para o tratamento de cálculos biliares complexos no Rol de Procedimentos e Eventos em Saúde.",
     "secoes": [
       {
@@ -120,8 +120,6 @@
     "leitura": 1,
     "titulo": "Disque ANS volta a funcionar em horário integral",
     "resumo": "O canal telefônico da ANS retomou o atendimento de segunda a sexta, das 8h às 20h. Veja também os outros canais disponíveis.",
-    "foto": "phonedoc",
-    "alt": "Profissional de saúde usando o celular",
     "intro": "O Disque ANS, canal telefônico da Agência Nacional de Saúde Suplementar, retomou o funcionamento em horário integral na segunda-feira, 21 de setembro de 2026.",
     "secoes": [
       {
@@ -151,8 +149,8 @@
     "leitura": 2,
     "titulo": "Circuito de Cuidado da Mulher oferece exames e atendimentos em todo o país",
     "resumo": "A 1ª edição da ação reuniu consultas, exames de rastreamento, vacinas e métodos contraceptivos em diversos territórios.",
-    "foto": "woman",
-    "alt": "Mulher sorrindo em retrato",
+    "foto": "old_medica_paciente",
+    "alt": "Médica atendendo uma paciente em corredor de hospital",
     "intro": "O Ministério da Saúde, em parceria com estados e municípios, promoveu em 17 de outubro a 1ª edição do Circuito de Cuidado da Mulher, com ações em diversos territórios do país.",
     "secoes": [
       {
@@ -188,8 +186,6 @@
     "leitura": 2,
     "titulo": "Dia Nacional da Vacinação reforça a proteção contra mais de 20 doenças",
     "resumo": "Mais de 222 milhões de doses já foram distribuídas em 2026. Veja os dados de cobertura e o calendário da tríplice viral.",
-    "foto": "labmask",
-    "alt": "Profissional de saúde de máscara e luvas em laboratório",
     "intro": "Às vésperas do Dia Nacional da Vacinação, celebrado em 17 de outubro, o Ministério da Saúde destacou o apoio a estados e municípios para ampliar a proteção da população.",
     "secoes": [
       {
@@ -225,8 +221,8 @@
     "leitura": 3,
     "titulo": "Hospital Inteligente e rede de UTIs conectadas têm contrato de gestão assinado",
     "resumo": "Projeto prevê cerca de 800 leitos em São Paulo e uma rede de UTIs conectadas que chegará a 280 leitos em 14 hospitais.",
-    "foto": "scan",
-    "alt": "Profissionais de saúde analisando exames de imagem em monitores",
+    "foto": "old_hemodinamica",
+    "alt": "Sala de procedimentos hospitalares com equipamentos de imagem",
     "intro": "O Ministério da Saúde assinou, em 20 de outubro, o contrato de gestão do Hospital Inteligente e da Rede de UTIs conectadas com o Instituto Tecnológico de Medicina Inteligente do Brasil (ITMI).",
     "secoes": [
       {
@@ -262,8 +258,8 @@
     "leitura": 2,
     "titulo": "SUS começa a oferecer nove novos medicamentos oncológicos",
     "resumo": "Os medicamentos cobrem 13 indicações e devem beneficiar mais de 116 mil pessoas. Rastreamento de câncer colorretal ganha 400 mil testes.",
-    "foto": "lab",
-    "alt": "Pesquisadora observando amostras ao microscópio em laboratório",
+    "foto": "old_consultorio",
+    "alt": "Sala de espera de consultório",
     "intro": "O Ministério da Saúde iniciou a oferta, no SUS, de nove medicamentos oncológicos de alta tecnologia em todas as regiões do país.",
     "secoes": [
       {

@@ -1,5 +1,6 @@
 /* Gera as páginas internas de notícias (src/pages/noticia-*.html) e os cards da listagem
    (src/partials/noticias-cards.html) a partir de src/data/noticias.json (executado por build.js).
+   Notícia sem "foto" recebe automaticamente o fundo dos banners (partial globe-art) no card e na página.
    São referências informativas de fontes oficiais (ANS, Ministério da Saúde): resumos próprios, com
    crédito e link para a publicação original — não são comunicados da MedicGLOBAL. */
 const fs = require("fs");
@@ -21,7 +22,7 @@ module.exports = function () {
   }
 
   const card = (n, sizes = "(min-width:1100px) 30vw, 100vw") =>
-    `<a class="card-post card-post--ext" data-cat="${n.cat}" href="${file(n)}"><div class="img">{{pic:${n.foto}||800|${sizes}}}</div>` +
+    `<a class="card-post card-post--ext" data-cat="${n.cat}" href="${file(n)}">${n.foto ? `<div class="img">{{pic:${n.foto}||800|${sizes}}}</div>` : `<div class="img img--globe">{{> globe-art}}</div>`}` +
     `<div class="post-meta"><span class="cat">${catName[n.cat]}</span><time datetime="${n.data}">${br(n.data)}</time><span class="src-tag">${esc(n.orgao)}</span></div>` +
     `<h3>${esc(n.titulo)}</h3><p>${esc(n.resumo)}</p></a>`;
 
@@ -33,7 +34,7 @@ module.exports = function () {
       title: `${n.titulo} | Conteúdos | MedicGLOBAL`,
       description: n.resumo,
       active: "conteudos",
-      og: n.foto.startsWith("old_") ? "family" : n.foto,
+      og: n.foto || "old_hsl_fachada",
       crumbs: [["Conteúdos", "conteudos.html"], [catName[n.cat], `conteudos.html#cat=${n.cat}`], [n.migalha, file(n)]],
       jsonld: [{ "@context": "https://schema.org", "@type": "NewsArticle", headline: n.titulo, datePublished: n.data, isBasedOn: n.fonteUrl, author: { "@type": "Organization", name: "MedicGLOBAL" }, publisher: { "@type": "Organization", name: "MedicGLOBAL" } }],
     };
@@ -50,7 +51,7 @@ module.exports = function () {
       <p class="news-src-line">Referência informativa · Fonte: <a href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${esc(n.orgao)}<span class="sr-only"> (abre em nova aba)</span></a></p>
     </div>
   </header>
-  <div class="wrap"><figure class="news-figure"><div class="img-round" style="aspect-ratio:21/9">{{pic:${n.foto}|${esc(n.alt)}|2000|(min-width:1360px) 1300px, 100vw|eager}}</div><figcaption>Imagem ilustrativa.</figcaption></figure></div>
+  <div class="wrap"><figure class="news-figure">${n.foto ? `<div class="img-round" style="aspect-ratio:21/9">{{pic:${n.foto}|${esc(n.alt)}|2000|(min-width:1360px) 1300px, 100vw|eager}}</div><figcaption>Imagem ilustrativa.</figcaption>` : `<div class="img-round img--globe" style="aspect-ratio:21/9">{{> globe-art}}</div>`}</figure></div>
   <div class="section section--tight">
     <div class="wrap">
       <div class="prose news-body">

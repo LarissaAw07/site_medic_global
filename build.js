@@ -36,6 +36,13 @@ function bust(html) {
   });
 }
 
+// Imagem de compartilhamento: fotos locais (site antigo) saem com o endereço do domínio; as do Unsplash, recortadas em 1200×630
+function ogImage(key) {
+  const id = site.photos[key];
+  if (!id) throw new Error("Foto desconhecida (og): " + key);
+  return id.startsWith("assets/") ? site.domain + id : `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&h=630&q=70`;
+}
+
 function render(tpl, ctx) {
   let out = tpl;
   for (let i = 0; i < 4; i++) {
@@ -111,7 +118,7 @@ for (const file of files) {
     title: meta.title,
     description: meta.description,
     canonical: url,
-    ogImage: `https://images.unsplash.com/photo-${site.photos[meta.og || "family"]}?auto=format&fit=crop&w=1200&h=630&q=70`,
+    ogImage: ogImage(meta.og || "old_familia"),
     crumbs: crumbHtml,
     headerClass: meta.headerDark ? " on-dark" : "",
     bodyClass: meta.bodyClass || "",

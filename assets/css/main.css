@@ -1648,7 +1648,7 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 .btn--store svg { width: 20px; height: 20px; }
 .btn--store:hover svg { transform: none; }
 .btn--store:hover { --b-bg: var(--medic); --b-bd: var(--medic); }
-.btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27,29,.22); }
+de .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27,29,.22); }
 .btn--store-alt:hover { --b-bg: var(--ink); --b-fg: var(--white); --b-bd: var(--ink); }
 .deep .btn--store { --b-bg: var(--white); --b-fg: var(--deep); --b-bd: var(--white); }
 .deep .btn--store:hover { --b-bg: var(--glow); --b-fg: var(--deep); --b-bd: var(--glow); }
@@ -1739,3 +1739,67 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .mosaic-content { gap: 18px; padding-block: clamp(64px, 2.5rem + 2.5vw, 88px) clamp(64px, 2.75rem + 2.5vw, 112px); }
 .mosaic-content .eyebrow { margin-bottom: -4px; }
 .mosaic-content .store-row { margin-top: 6px; }
+
+/* Publicação sem foto cadastrada: o espaço da imagem recebe o fundo dos banners (degradê azul + órbitas animadas + globo da marca).
+   Escala pelo menor lado do espaço (container query), então serve a cards 4:3 e ao destaque 21:9 sem deformar. */
+.globe-art { position: absolute; inset: 0; overflow: hidden; container-type: size; display: grid; place-items: center; color: var(--glow);
+  background: radial-gradient(120% 90% at 75% 15%, var(--medic) 0%, var(--globo) 38%, var(--deep) 70%, #021A1D 100%); }
+.globe-art .orbits { width: 135cqmin; height: 135cqmin; left: 50%; top: 50%; margin: -67.5cqmin 0 0 -67.5cqmin; color: var(--glow); opacity: .55; }
+.globe-art-emblem { position: relative; z-index: 1; width: 34cqmin; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(79,195,195,.4);
+  box-shadow: 0 0 0 5cqmin rgba(79,195,195,.07), 0 0 0 11cqmin rgba(79,195,195,.035), 0 20px 50px -20px rgba(0,0,0,.5); }
+.globe-art-emblem svg { width: 50%; height: 50%; }
+.img--globe { position: relative; }
+.card-post:hover .globe-art .orbits { opacity: .75; transition: opacity .6s; }
+
+/* Central de Documentos · Reajustes: anos recentes em linhas, anos anteriores agrupados em <details> */
+.rj { background: var(--white); border: 1px solid var(--line-2); border-radius: var(--r-lg); overflow: hidden; }
+.rj-head, .rj-row { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 8px 32px; align-items: center; padding-inline: clamp(20px, 1rem + 1vw, 32px); }
+.rj-head { padding-block: 14px; background: var(--mist); border-bottom: 1px solid var(--line-2); font-family: var(--f-head); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.rj-head span:last-child { text-align: right; }
+.rj-list { list-style: none; margin: 0; padding: 0; }
+.rj-row { padding-block: 22px; border-top: 1px solid var(--line-2); transition: background .25s; }
+.rj-list > .rj-row:first-child { border-top: 0; }
+.rj-row:not(.is-current):hover { background: rgba(227,240,241,.45); }
+.rj-year { font-family: var(--f-head); font-weight: 500; font-size: 1.5rem; letter-spacing: -.02em; color: var(--globo); font-variant-numeric: tabular-nums; }
+.rj-info { display: grid; gap: 6px; min-width: 0; }
+.rj-cat { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--f-head); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.rj-badge { padding: 3px 9px; border-radius: var(--r-pill); background: rgba(79,195,195,.18); color: var(--glow); letter-spacing: .08em; }
+.rj-period { display: inline-flex; align-items: center; gap: 8px; font-size: var(--t-sm); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.rj-period svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--medic); }
+.rj-docs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.rj-doc { display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--white); color: var(--globo); font-size: .8rem; line-height: 1.3; transition: background .2s, border-color .2s; }
+.rj-doc svg { width: 15px; height: 15px; flex-shrink: 0; }
+.rj-doc:hover, .rj-doc:focus-visible { background: var(--tint); border-color: rgba(0,98,109,.35); }
+.rj-pct { font-family: var(--f-head); font-weight: 500; font-size: 1.375rem; letter-spacing: -.01em; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rj-pct .review-flag { font-size: .68rem; }
+/* Ano vigente em destaque, no azul-escuro do site */
+.rj-row.is-current { background: var(--deep); border-top-color: var(--deep); padding-block: 28px; }
+.rj-row.is-current .rj-year, .rj-row.is-current .rj-pct { color: var(--white); }
+.rj-row.is-current .rj-year { font-size: 1.75rem; }
+.rj-row.is-current .rj-pct { font-size: 1.75rem; }
+.rj-row.is-current .rj-cat { color: var(--on-deep-2); }
+.rj-row.is-current .rj-period { color: var(--on-deep); }
+.rj-row.is-current .rj-period svg { color: var(--glow); }
+/* Linha expansível "Anos anteriores" */
+.rj-older { border-top: 1px solid var(--line-2); }
+.rj-older > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px clamp(20px, 1rem + 1vw, 32px); background: var(--mist); cursor: pointer; list-style: none; transition: background .2s; }
+.rj-older > summary::-webkit-details-marker { display: none; }
+.rj-older > summary:hover { background: var(--tint); }
+.rj-older > summary:focus-visible { outline: 2px solid var(--medic); outline-offset: -2px; }
+.rj-older-title { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: var(--f-head); font-weight: 500; font-size: 1.05rem; color: var(--globo); }
+.rj-older-title svg { width: 20px; height: 20px; color: var(--medic); }
+.rj-older-title small { font-family: var(--f-body); font-weight: 400; font-size: var(--t-xs); color: var(--ink-3); }
+.rj-chev { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: var(--white); color: var(--globo); transition: transform .35s var(--ease), background .2s; }
+.rj-chev svg { width: 18px; height: 18px; }
+.rj-older[open] > summary .rj-chev { transform: rotate(180deg); background: var(--globo); color: var(--white); border-color: var(--globo); }
+.rj-older > .rj-list { border-top: 1px solid var(--line-2); }
+@media (prefers-reduced-motion: no-preference) { .rj-older[open] > .rj-list { animation: rj-in .35s var(--ease); } }
+@keyframes rj-in { from { opacity: 0; transform: translateY(-6px); } }
+/* Celular: ano e percentual na primeira linha, detalhes embaixo */
+@media (max-width: 719px) {
+  .rj-head { display: none; }
+  .rj-row { grid-template-columns: 1fr auto; grid-template-areas: "year pct" "info info"; padding-block: 18px; }
+  .rj-year { grid-area: year; } .rj-pct { grid-area: pct; } .rj-info { grid-area: info; }
+  .rj-row.is-current .rj-year, .rj-row.is-current .rj-pct { font-size: 1.5rem; }
+}

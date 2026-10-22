@@ -123,7 +123,7 @@ ul, ol { margin: 0; padding: 0; }
 .grid > * { grid-column: 1 / -1; min-width: 0; }
 @media (min-width: 1100px) {
   .c-1-5 { grid-column: 1 / 6; } .c-1-6 { grid-column: 1 / 7; } .c-1-7 { grid-column: 1 / 8; } .c-1-8 { grid-column: 1 / 9; }
-  .c-2-6 { grid-column: 2 / 7; } .c-2-7 { grid-column: 2 / 8; } .c-2-8 { grid-column: 2 / 9; } .c-2-12 { grid-column: 2 / 12; }
+  .c-2-5 { grid-column: 2 / 6; } .c-2-6 { grid-column: 2 / 7; } .c-2-7 { grid-column: 2 / 8; } .c-2-8 { grid-column: 2 / 9; } .c-2-12 { grid-column: 2 / 12; }
   .c-6-13 { grid-column: 6 / 13; } .c-7-13 { grid-column: 7 / 13; } .c-8-13 { grid-column: 8 / 13; } .c-6-12 { grid-column: 6 / 12; }
   .c-5-13 { grid-column: 5 / 13; } .c-4-10 { grid-column: 4 / 10; } .c-3-11 { grid-column: 3 / 11; } .c-9-13 { grid-column: 9 / 13; }
   .c-1-4 { grid-column: 1 / 5; } .c-5-9 { grid-column: 5 / 9; } .c-7-12 { grid-column: 7 / 12; } .c-8-12 { grid-column: 8 / 12; }
@@ -708,7 +708,7 @@ html:not(.js) .hero-nav { display: none; }
 .filters fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .plans { display: grid; gap: 16px; }
 @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1100px) { .plans { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+@media (min-width: 1100px) { .plans { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
 .plan {
   border: 1px solid var(--line-2); border-radius: var(--r-lg); background: var(--white); padding: 28px 24px;
   display: flex; flex-direction: column; gap: 20px; position: relative;
@@ -1233,7 +1233,15 @@ html:not(.js) .hero-nav { display: none; }
 .hub-node i { background: rgba(255,255,255,.1); }
 .hub-node:hover i { background: rgba(255,255,255,.18); }
 @media (min-width: 720px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .plans { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Plano em destaque (BLUE 300) mais alto que os vizinhos, sobressaindo para cima e alinhado pela base */
+@media (min-width: 1100px) {
+  .plans { padding-top: 64px; }
+  .plan.is-focal { margin-top: -64px; }
+}
+/* Planos laterais (brancos): contorno e sombra suaves para destacar do fundo */
+.plan:not(.is-focal) { border-color: rgba(0,98,109,.14); box-shadow: 0 1px 2px rgba(2,26,29,.04), 0 18px 40px -28px rgba(2,26,29,.28); }
+.plan:not(.is-focal):hover { border-color: rgba(0,98,109,.26); box-shadow: 0 1px 2px rgba(2,26,29,.05), 0 30px 50px -32px rgba(2,26,29,.38); }
 .plan .badge { align-self: flex-start; }
 .plan .btn { white-space: normal; text-align: center; line-height: 1.2; padding-block: 10px; }
 .indexed > div { padding: 32px 0; border-bottom: 1px solid var(--line-2); display: flex; flex-direction: column; align-items: flex-start; }
@@ -1620,7 +1628,8 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Cidades em cinza-claro */
 .deep .marquee--sm .marquee-item, .marquee--sm .marquee-item { color: #C9D3D4; }
 /* Rede de cuidado: cidades discretas, no estilo do rótulo "MedicGLOBAL" do diagrama (caixa-alta, fina, espaçada) */
-.hub-section .marquee--sm .marquee-item { font-family: var(--f-head); font-weight: 300; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: #E3E9EA; }
+.hub-section .marquee--sm .marquee-item { font-family: var(--f-head); font-weight: 300; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.32); }
+.hub-section .marquee--sm .marquee-item::before { width: 3px; height: 3px; margin: 0 14px; background: rgba(255,255,255,.32); opacity: 1; }
 
 /* Para você · Boleto: blocos no padrão do site, com botões no lugar dos links do texto */
 .feature-list--actions { gap: 0; grid-auto-rows: 1fr; }
@@ -1696,3 +1705,33 @@ html.a11y-guide .a11y-guide-bar { display: block; }
   .hero-media .frame--art:not(.frame--card) { min-height: 380px; place-items: start center; padding-top: 48px; }
   .hero-media .frame--card { padding: 16px; }
 }
+
+/* Notícias (referências informativas de fontes oficiais): cards e página interna */
+.post-meta .src-tag { padding: 2px 8px; border-radius: var(--r-pill); background: var(--tint); color: var(--globo); font-size: .68rem; letter-spacing: .04em; }
+.news-back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; font-size: var(--t-xs); color: var(--ink-3); transition: color .2s, gap .25s var(--ease); }
+.news-back svg { width: 16px; height: 16px; }
+.news-back:hover { color: var(--globo); gap: 9px; }
+.prose a.news-back { color: var(--ink-3); }
+.prose a.news-back:hover { color: var(--globo); }
+.news-src-line { margin-top: 16px; font-size: var(--t-sm); color: var(--ink-3); }
+.news-src-line a { color: var(--globo); text-decoration: underline; text-underline-offset: 3px; }
+.news-figure { margin: 0; }
+.news-figure figcaption { margin-top: 10px; font-size: var(--t-xs); color: var(--ink-3); text-align: right; }
+.news-source { margin-top: 48px; padding: 24px 28px; border-radius: var(--r-md); background: var(--mist); border-left: 3px solid var(--medic); display: grid; gap: 12px; justify-items: start; }
+.news-source p { margin: 0; }
+.news-source-label { font-family: var(--f-head); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--medic); }
+.news-source .btn svg { width: 15px; height: 15px; }
+/* título com área ampla, alinhado à margem do site; corpo em coluna única com largura de leitura confortável */
+.page-hero h1.news-title { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); max-width: 32ch; }
+.news-body { max-width: 48rem; }
+.news-body .lead { max-width: none; }
+
+/* "Depois da contratação" → rodapé: quadros um pouco mais visíveis, esmaecendo aos poucos até o azul do rodapé */
+.mosaic .mosaic-grid span { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.6); }
+.mosaic .mosaic-grid {
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
+  mask-image: radial-gradient(ellipse at center, transparent 22%, #000 70%), linear-gradient(180deg, #000 40%, rgba(0,0,0,.45) 70%, transparent 96%);
+}
+/* Globo do rodapé: quando a página termina nessa seção, ele avança sobre ela em vez de ser cortado no limite.
+   overflow-x: clip continua evitando rolagem lateral; no eixo vertical o globo pode sair do rodapé. */
+main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflow-y: visible; }

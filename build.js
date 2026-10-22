@@ -63,6 +63,7 @@ function get(o, k) {
 }
 
 require("./src/gen-migracao.js")();
+require("./src/gen-noticias.js")();
 const pagesDir = path.join(SRC, "pages");
 const files = fs.readdirSync(pagesDir).filter((f) => f.endsWith(".html"));
 const sitemap = [];

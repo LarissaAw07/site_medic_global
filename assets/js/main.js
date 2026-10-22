@@ -104,7 +104,7 @@
     { t: "Encontrar atendimento", d: "Médicos, clínicas, hospitais e laboratórios", u: "rede-credenciada.html", k: "consulta medico medica rede credenciada hospital clinica laboratorio exame especialidade guia medico perto", tag: "Rede" },
     { t: "Telemedicina", d: "Fale com um profissional de saúde a distância", u: "telemedicina.html", k: "telemedicina teleconsulta online video consulta virtual falar com medico", tag: "Serviço" },
     { t: "Autorizações", d: "Consulte e solicite autorizações de procedimentos", u: "servicos.html#autorizacoes", k: "autorizacao autorizar exame procedimento guia liberacao cirurgia", tag: "Serviço" },
-    { t: "Conheça os planos", d: "EMED GLOBAL BLUE 100, 200, 300 e 400", u: "planos.html", k: "planos contratar plano quero ser cliente preco valor proposta blue emed", tag: "Planos" },
+    { t: "Conheça os planos", d: "EMED GLOBAL BLUE 200, 300 e 400", u: "planos.html", k: "planos contratar plano quero ser cliente preco valor proposta blue emed", tag: "Planos" },
     { t: "Comparar planos", d: "Abrangência e características lado a lado", u: "planos.html#comparar", k: "comparar comparativo diferenca abrangencia cidades", tag: "Planos" },
     { t: "Solicitar proposta", d: "Fale com o time comercial", u: "planos.html#contato", k: "proposta cotacao orcamento comercial vendas empresa", tag: "Planos" },
     { t: "Urgência e emergência", d: "Onde buscar atendimento imediato", u: "servicos.html#urgencia", k: "urgencia emergencia pronto socorro pronto atendimento", tag: "Serviço" },

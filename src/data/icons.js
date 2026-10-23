@@ -65,6 +65,7 @@ module.exports = {
   "contrast": '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>',
   "grayscale": '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M12 7.5h7.6M12 12h9M12 16.5h7.6"/>',
   share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/>',
+  x: '<path d="M4 4l16 16M20 4 4 20" stroke-width="1.6"/>',
   "link-mark": '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
   "spacing": '<path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 4.5v15M2.5 6 4 4.5 5.5 6M2.5 18 4 19.5 5.5 18"/>',
   "font": '<path d="M3 18 7.5 6 12 18M4.6 14h5.8"/><circle cx="17.5" cy="15" r="3"/><path d="M20.5 12v6"/>',

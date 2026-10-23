@@ -644,13 +644,30 @@
     }, { rootMargin: '-' + (header ? header.offsetHeight : 0) + 'px 0px 0px 0px' }).observe(newsTitle);
   }
 
+  /* Barra de compartilhar: links das redes montados com o endereço da página */
+  $$('.share-bar').forEach(function (bar) {
+    var url = encodeURIComponent(location.href.split('#')[0]), title = encodeURIComponent(document.title);
+    var nets = {
+      facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + url,
+      x: 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title,
+      linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + url,
+      whatsapp: 'https://api.whatsapp.com/send?text=' + title + '%20' + url,
+      email: 'mailto:?subject=' + title + '&body=' + url
+    };
+    $$('[data-share-net]', bar).forEach(function (l) {
+      var n = l.getAttribute('data-share-net');
+      l.href = nets[n];
+      if (n === 'email') l.removeAttribute('target');
+      l.addEventListener('click', function () { track('compartilhar', { rede: n }); });
+    });
+  });
   /* Botão de compartilhar (Web Share no celular; nos demais, copia o link) */
-  $$('[data-share]').forEach(function (btn) {
+  $$('[data-share], [data-share-copy]').forEach(function (btn) {
     var ok = btn.parentNode.querySelector('.news-share-ok');
     btn.addEventListener('click', function () {
       var data = { title: document.title, url: location.href.split('#')[0] };
       track('compartilhar', { url: data.url });
-      if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+      if (navigator.share && btn.hasAttribute('data-share')) { navigator.share(data).catch(function () {}); return; }
       var done = function () { if (ok) { ok.textContent = EN ? 'Link copied.' : 'Link copiado.'; setTimeout(function () { ok.textContent = ''; }, 3000); } };
       if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(done, function () { prompt(EN ? 'Copy the link:' : 'Copie o link:', data.url); });
       else prompt(EN ? 'Copy the link:' : 'Copie o link:', data.url);

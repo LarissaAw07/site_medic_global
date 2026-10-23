@@ -25,6 +25,7 @@ const UI = {
     disclaimer: "Resumo elaborado pela MedicGLOBAL a partir da publicação oficial, como referência informativa. Não se trata de comunicado da MedicGLOBAL. Em caso de divergência, prevalece o texto da fonte.",
     help: `Dúvidas sobre o seu plano? Fale com a <a href="atendimento.html">central de atendimento</a>.`,
     share: "Compartilhar",
+    shareBar: "<div class=\"share-bar mt-7\"><span class=\"share-bar-label\">Compartilhar:</span><div class=\"share-bar-nets\"><a class=\"share-net\" data-share-net=\"facebook\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"Facebook (abre em nova aba)\">{{i:facebook}}</a><a class=\"share-net\" data-share-net=\"x\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"X (abre em nova aba)\">{{i:x}}</a><a class=\"share-net\" data-share-net=\"linkedin\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"LinkedIn (abre em nova aba)\">{{i:linkedin}}</a><a class=\"share-net\" data-share-net=\"whatsapp\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"WhatsApp (abre em nova aba)\">{{i:whatsapp}}</a><a class=\"share-net\" data-share-net=\"email\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"E-mail\">{{i:mail}}</a><button class=\"share-net\" type=\"button\" data-share-copy aria-label=\"Copiar link\">{{i:link-mark}}</button></div><button class=\"btn btn--sm\" type=\"button\" data-share>{{i:share}} Compartilhar</button><span class=\"news-share-ok small\" role=\"status\"></span></div>",
     related: "Leia também",
     all: "Todos os conteúdos",
   },
@@ -43,6 +44,7 @@ const UI = {
     srcBtn: "Read the official publication",
     disclaimer: "Summary prepared by MedicGLOBAL from the official publication, for information purposes only. This is not a MedicGLOBAL notice. In case of any discrepancy, the source text prevails.",
     share: "Share",
+    shareBar: "<div class=\"share-bar mt-7\"><span class=\"share-bar-label\">Share:</span><div class=\"share-bar-nets\"><a class=\"share-net\" data-share-net=\"facebook\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"Facebook (opens in a new tab)\">{{i:facebook}}</a><a class=\"share-net\" data-share-net=\"x\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"X (opens in a new tab)\">{{i:x}}</a><a class=\"share-net\" data-share-net=\"linkedin\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"LinkedIn (opens in a new tab)\">{{i:linkedin}}</a><a class=\"share-net\" data-share-net=\"whatsapp\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"WhatsApp (opens in a new tab)\">{{i:whatsapp}}</a><a class=\"share-net\" data-share-net=\"email\" href=\"#\" target=\"_blank\" rel=\"noopener\" aria-label=\"Email\">{{i:mail}}</a><button class=\"share-net\" type=\"button\" data-share-copy aria-label=\"Copy link\">{{i:link-mark}}</button></div><button class=\"btn btn--sm\" type=\"button\" data-share>{{i:share}} Share</button><span class=\"news-share-ok small\" role=\"status\"></span></div>",
     help: `Questions about your plan? Contact our <a href="atendimento.html">customer service</a>.`,
     related: "Read also",
     all: "All content",
@@ -112,7 +114,7 @@ ${secoes}
           <a class="btn btn--sm" href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${U.srcBtn}<span class="sr-only">${U.newTab}</span></a>
           <p class="xs muted">${U.disclaimer}</p>
         </div>
-        <div class="news-share mt-7"><button class="btn" type="button" data-share>{{i:share}} ${U.share}</button><span class="news-share-ok small" role="status"></span></div>
+        ${U.shareBar}
         <p class="small mt-7">${U.help}</p>
         <a class="news-back mt-6" href="conteudos.html#cat=${n.cat}">{{i:chevron-left}} ${U.back(cat)}</a>
       </div>

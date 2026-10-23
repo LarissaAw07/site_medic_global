@@ -201,7 +201,7 @@ ul, ol { margin: 0; padding: 0; }
 .link {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--f-head); font-weight: 500; font-size: .875rem; letter-spacing: .04em; text-transform: uppercase;
-  color: var(--globo); border-bottom: 1px solid currentColor; padding-bottom: 4px;
+  color: var(--globo);
   transition: color .25s, gap .25s var(--ease);
 }
 .link:hover { color: var(--medic); gap: 12px; }
@@ -916,10 +916,10 @@ html:not(.js) .hero-nav { display: none; }
 /* Links sublinhados para ficarem claramente clicáveis; o ativo/hover ganha cor e sublinhado mais forte */
 .subnav a {
   flex-shrink: 0; padding: 16px 14px; font-family: var(--f-head); font-size: .875rem; color: var(--ink-2);
-  text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: rgba(11,27,29,.35); text-underline-offset: 6px;
-  transition: color .2s, text-decoration-color .2s;
+  text-decoration: none;
+  transition: color .2s;
 }
-.subnav a:hover, .subnav a.is-active { color: var(--globo); text-decoration-color: var(--medic); text-decoration-thickness: 2px; }
+.subnav a:hover, .subnav a.is-active { color: var(--globo); }
 
 /* ---------- Passos (how it works) ---------- */
 .steps { display: grid; gap: 40px; position: relative; counter-reset: step; }
@@ -1721,7 +1721,7 @@ de .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27
 .prose a.news-back { color: var(--ink-3); }
 .prose a.news-back:hover { color: var(--globo); }
 .news-src-line { margin-top: 16px; font-size: var(--t-sm); color: var(--ink-3); }
-.news-src-line a { color: var(--globo); text-decoration: underline; text-underline-offset: 3px; }
+.news-src-line a { color: var(--globo); font-weight: 500; }
 .news-figure { margin: 0; }
 .news-figure figcaption { margin-top: 10px; font-size: var(--t-xs); color: var(--ink-3); text-align: right; }
 .news-source { margin-top: 48px; padding: 24px 28px; border-radius: var(--r-md); background: var(--mist); border-left: 3px solid var(--medic); display: grid; gap: 12px; justify-items: start; }
@@ -1890,7 +1890,7 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 /* Aviso de ASL (versão em inglês): mesmo padrão dos cartões do painel */
 .a11y-asl { margin-top: 10px; padding: 14px 16px; border-radius: 14px; background: var(--tint); border: 1px solid rgba(0,98,109,.18); font-size: .82rem; line-height: 1.5; color: var(--ink-2); display: grid; gap: 8px; }
 .a11y-asl strong { color: var(--globo); }
-.a11y-asl a { color: var(--globo); text-decoration: underline; text-underline-offset: 2px; }
+.a11y-asl a { color: var(--globo); font-weight: 500; }
 .a11y-asl:focus { outline: none; }
 .a11y-asl:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
 
@@ -1952,3 +1952,17 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .action-card:hover { border-color: rgba(0,140,140,.35); box-shadow: 0 20px 40px -28px rgba(2,26,29,.35); transform: translateY(-2px); }
 .action-card:hover .action-card-go { background: var(--globo); color: var(--white); transform: translateX(2px); }
 .action-card:focus-visible { outline: 2px solid var(--medic); outline-offset: 3px; }
+
+/* Notícias e conteúdos: barra de compartilhar (redes + botão) */
+.share-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 14px 16px 14px 20px; border-radius: var(--r-md); background: #EFF7F8; border: 1px solid var(--line); }
+.share-bar-label { font-family: var(--f-head); font-weight: 500; font-size: var(--t-sm); color: var(--globo); }
+.share-bar-nets { display: flex; flex-wrap: wrap; gap: 8px; }
+.share-net { width: 36px; height: 36px; border-radius: 10px; border: 0; display: grid; place-items: center; background: var(--tint); color: var(--globo); cursor: pointer; transition: background .2s, color .2s; }
+.share-net svg { width: 17px; height: 17px; }
+.share-net:hover { background: var(--globo); color: var(--white); }
+.share-net:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
+.share-bar .btn { margin-left: auto; }
+.share-bar .btn svg { width: 16px; height: 16px; }
+.share-bar .news-share-ok { flex-basis: 100%; color: var(--medic); }
+.share-bar .news-share-ok:empty { display: none; }
+@media (max-width: 559px) { .share-bar .btn { margin-left: 0; width: 100%; } }

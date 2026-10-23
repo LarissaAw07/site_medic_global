@@ -125,7 +125,7 @@ for (const lang of Object.keys(LANGS)) {
         name: "MedicGLOBAL",
         alternateName: ["Medic Global", "Medic Global Saúde", "Extremamedic"],
         url: site.domain,
-        logo: site.domain + "assets/img/brand/logo-medicglobal.svg",
+        logo: site.domain + "assets/img/brand/logo-medicglobal-saude.png",
         address: { "@type": "PostalAddress", streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, postalCode: site.address.zip, addressCountry: "BR" },
         contactPoint: [{ "@type": "ContactPoint", telephone: site.phones.central.e164, contactType: "customer service", areaServed: "BR", availableLanguage: ["Portuguese"] }],
       },

@@ -1894,10 +1894,10 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .a11y-asl:focus { outline: none; }
 .a11y-asl:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
 
-/* MedicGLOBAL · Nossa atuação: faixa de cidades no rodapé da seção (fundo escuro, caixa-alta, separadas por ponto) */
+/* MedicGLOBAL · Nossa atuação: faixa de cidades no rodapé da seção (fundo branco, caixa-alta, separadas por ponto) */
 #atuacao { padding-bottom: 0; }
 #atuacao .grid.mb-8 { margin-bottom: var(--s-9); }
-.atuacao-tags { background: var(--deep); padding: 22px 0; }
+.atuacao-tags { padding: 8px 0 12px; display: grid; gap: 8px; }
 .atuacao-tags .marquee-track { gap: 0; padding-right: 0; }
-.atuacao-tags .marquee-item { border: 0; border-radius: 0; padding: 0; gap: 0; font-size: .72rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #C9D3D4; }
-.atuacao-tags .marquee-item::before { width: 4px; height: 4px; margin: 0 18px; background: var(--glow); opacity: .9; }
+.atuacao-tags .marquee-item { border: 0; border-radius: 0; padding: 0; gap: 0; font-size: .72rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #A9B4B6; }
+.atuacao-tags .marquee-item::before { width: 4px; height: 4px; margin: 0 18px; background: var(--medic); opacity: 1; }

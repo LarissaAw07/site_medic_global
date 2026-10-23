@@ -262,8 +262,8 @@ ul, ol { margin: 0; padding: 0; }
 }
 .mega.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
 .mega .wrap { display: grid; grid-template-columns: 4fr 5fr 3fr; gap: 48px; padding-block: 48px 56px; }
-.mega-intro h3 { font-size: 1.75rem; margin-bottom: 12px; }
-.mega-intro p { color: var(--ink-3); font-size: var(--t-sm); max-width: 22rem; }
+.mega-intro h3 { font-size: 1.75rem; line-height: 1.12; margin-bottom: 12px; min-height: 2.24em; text-wrap: balance; }
+.mega-intro p { color: var(--ink-3); font-size: var(--t-sm); max-width: 22rem; line-height: 1.6; min-height: 3.2em; text-wrap: balance; }
 .mega-links { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(var(--rows, 3), auto); grid-auto-flow: column; gap: 4px 24px; align-content: center; }
 .mega-links a {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;

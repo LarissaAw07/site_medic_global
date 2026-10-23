@@ -289,6 +289,8 @@ ul, ol { margin: 0; padding: 0; }
 @media (min-width: 1100px) { .bar-actions .btn { display: inline-flex; } }
 .btn--benef svg { width: 17px; height: 17px; }
 .btn--benef:hover svg { transform: none; }
+.bar-actions .btn--sm { min-height: 38px; padding: 0 14px; gap: 6px; font-size: .7rem; letter-spacing: .03em; }
+.bar-actions .btn--benef svg { width: 15px; height: 15px; }
 
 .icon-btn {
   width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--white);
@@ -1227,7 +1229,7 @@ html:not(.js) .hero-nav { display: none; }
 @media (min-width: 1100px) and (max-width: 1379px) {
   .nav-main { margin-left: 12px; gap: 0; }
   .nav-trigger { padding: 8px 9px; font-size: .875rem; }
-  .bar-actions .btn--sm { padding: 0 14px; font-size: .72rem; }
+  .bar-actions .btn--sm { padding: 0 12px; font-size: .68rem; }
   .bar { gap: 12px; }
 }
 @media (min-width: 1100px) and (max-width: 1379px) {
@@ -1881,7 +1883,7 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 @media (min-width: 1100px) and (max-width: 1239px) {
   .nav-main { margin-left: 4px; }
   .nav-trigger { padding: 8px 7px; font-size: .84rem; gap: 4px; }
-  .bar-actions .btn--sm { padding: 0 12px; }
+  .bar-actions .btn--sm { padding: 0 10px; }
 }
 /* Aviso de ASL (versão em inglês): mesmo padrão dos cartões do painel */
 .a11y-asl { margin-top: 10px; padding: 14px 16px; border-radius: 14px; background: var(--tint); border: 1px solid rgba(0,98,109,.18); font-size: .82rem; line-height: 1.5; color: var(--ink-2); display: grid; gap: 8px; }

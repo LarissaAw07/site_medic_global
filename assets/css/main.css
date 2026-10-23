@@ -656,6 +656,7 @@ html:not(.js) .hero-nav { display: none; }
 .deep .pill { border-color: var(--line-deep); color: var(--on-deep-2); }
 .deep .pill:hover { border-color: var(--glow); color: var(--white); }
 .deep .pill[aria-pressed="true"] { background: var(--white); border-color: var(--white); color: var(--deep); }
+.pill.esp { min-height: 32px; padding: 0 12px; font-size: .8rem; }
 
 /* ---------- Institucional curto (glass + foto) ---------- */
 .glass-feature { position: relative; border-radius: var(--r-lg); overflow: hidden; min-height: 520px; display: grid; }

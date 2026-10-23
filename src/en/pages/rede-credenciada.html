@@ -72,18 +72,21 @@
   </div>
 </section>
 
-<section class="section deep" id="especialidades" aria-labelledby="esp-t" data-filter data-filter-items="#especialidades .esp" data-filter-empty="#esp-none">
+<section class="section deep" id="especialidades" aria-labelledby="esp-t">
   <div class="wrap">
-    <div class="grid">
+    <div class="grid" style="align-items:center">
       <div class="c-1-5 stack">
         <span class="eyebrow">Search by specialty</span>
         <h2 id="esp-t" class="balance">Which specialty are you looking for?</h2>
         <p class="lead">Some of the specialties available in the network search. The complete, up-to-date list is in the provider directory.</p>
-        <div class="field-dark"><label for="esp-q">Filter specialties</label><input id="esp-q" type="search" data-filter-search placeholder=" "></div>
         <div class="btn-row"><a class="btn btn--light" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory {{i:external}}</a></div>
       </div>
       <div class="c-6-13">
-        <div class="type-pills" style="gap:10px">
+        <div class="feature-list">
+          <div><span class="ico">{{i:doc}}</span><div><h3>Services directory</h3><p>Search by directory type (physicians or services), state and city.</p><div class="btn-row mt-4"><a class="btn btn--light btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory {{i:external}}<span class="sr-only"> (opens in a new tab)</span></a></div></div></div>
+          <div><span class="ico">{{i:smartphone}}</span><div><h3>In the app</h3><p>Save favorites, contact the provider and see their location.</p></div></div>
+        </div>
+        <div class="type-pills mt-8" style="gap:8px">
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Acupuncture</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Allergology</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Anesthesiology</a>
@@ -93,12 +96,6 @@
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Surgical oncology</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Cardiology</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Immunology</a>
-        </div>
-        <p id="esp-none" class="mt-6 muted" hidden>Not on the list? Search the <a class="link" href="{{L.links.guia}}" target="_blank" rel="noopener">complete provider directory</a>.</p>
-        <hr class="rule mt-8" style="background:var(--line-deep)">
-        <div class="feature-list mt-8">
-          <div><span class="ico">{{i:doc}}</span><div><h3>Provider directory</h3><p>Search by directory type (physicians or services), state and city.</p></div></div>
-          <div><span class="ico">{{i:smartphone}}</span><div><h3>In the app</h3><p>Save favorites, contact the provider and see their location.</p></div></div>
         </div>
       </div>
     </div>

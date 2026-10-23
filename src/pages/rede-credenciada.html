@@ -72,18 +72,21 @@
   </div>
 </section>
 
-<section class="section deep" id="especialidades" aria-labelledby="esp-t" data-filter data-filter-items="#especialidades .esp" data-filter-empty="#esp-none">
+<section class="section deep" id="especialidades" aria-labelledby="esp-t">
   <div class="wrap">
-    <div class="grid">
+    <div class="grid" style="align-items:center">
       <div class="c-1-5 stack">
         <span class="eyebrow">Buscar especialidade</span>
         <h2 id="esp-t" class="balance">Qual especialidade você procura?</h2>
         <p class="lead">Algumas das especialidades disponíveis na busca da rede. A relação completa e atualizada está no guia médico.</p>
-        <div class="field-dark"><label for="esp-q">Filtrar especialidades</label><input id="esp-q" type="search" data-filter-search placeholder=" "></div>
         <div class="btn-row"><a class="btn btn--light" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Abrir guia médico {{i:external}}</a></div>
       </div>
       <div class="c-6-13">
-        <div class="type-pills" style="gap:10px">
+        <div class="feature-list">
+          <div><span class="ico">{{i:doc}}</span><div><h3>Guia de serviços</h3><p>Consulte por tipo de guia (médico ou de serviços), estado e cidade.</p><div class="btn-row mt-4"><a class="btn btn--light btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Abrir guia médico {{i:external}}<span class="sr-only"> (abre em nova aba)</span></a></div></div></div>
+          <div><span class="ico">{{i:smartphone}}</span><div><h3>No aplicativo</h3><p>Salve favoritos, entre em contato com o prestador e veja a localização.</p></div></div>
+        </div>
+        <div class="type-pills mt-8" style="gap:8px">
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Acupuntura</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Alergologia</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Anestesiologia</a>
@@ -93,12 +96,6 @@
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Cancerologia cirúrgica</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Cardiologia</a>
           <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Imunologia</a>
-        </div>
-        <p id="esp-none" class="mt-6 muted" hidden>Não está na lista? Procure no <a class="link" href="{{L.links.guia}}" target="_blank" rel="noopener">guia médico completo</a>.</p>
-        <hr class="rule mt-8" style="background:var(--line-deep)">
-        <div class="feature-list mt-8">
-          <div><span class="ico">{{i:doc}}</span><div><h3>Guia médico</h3><p>Consulte por tipo de guia (médico ou de serviços), estado e cidade.</p></div></div>
-          <div><span class="ico">{{i:smartphone}}</span><div><h3>No aplicativo</h3><p>Salve favoritos, entre em contato com o prestador e veja a localização.</p></div></div>
         </div>
       </div>
     </div>

@@ -628,6 +628,60 @@
     });
   } catch (e) {}
 
+  /* Notícias e conteúdos: título fixo durante a leitura */
+  var newsTitle = $('.news-title');
+  if (newsTitle && 'IntersectionObserver' in window) {
+    var bar = document.createElement('div');
+    bar.className = 'news-sticky';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = '<div class="news-sticky-bar"><div class="wrap"><p></p></div></div>';
+    $('p', bar).textContent = newsTitle.textContent;
+    var head = newsTitle.closest('header');
+    head.parentNode.insertBefore(bar, head.nextSibling);
+    new IntersectionObserver(function (en) {
+      var e = en[0];
+      bar.classList.toggle('is-visible', !e.isIntersecting && e.boundingClientRect.top < 0);
+    }, { rootMargin: '-' + (header ? header.offsetHeight : 0) + 'px 0px 0px 0px' }).observe(newsTitle);
+  }
+
+  /* Botão de compartilhar (Web Share no celular; nos demais, copia o link) */
+  $$('[data-share]').forEach(function (btn) {
+    var ok = btn.parentNode.querySelector('.news-share-ok');
+    btn.addEventListener('click', function () {
+      var data = { title: document.title, url: location.href.split('#')[0] };
+      track('compartilhar', { url: data.url });
+      if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+      var done = function () { if (ok) { ok.textContent = EN ? 'Link copied.' : 'Link copiado.'; setTimeout(function () { ok.textContent = ''; }, 3000); } };
+      if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(done, function () { prompt(EN ? 'Copy the link:' : 'Copie o link:', data.url); });
+      else prompt(EN ? 'Copy the link:' : 'Copie o link:', data.url);
+    });
+  });
+
+  /* Botão de seta das barras de pesquisa que filtram a página */
+  $$('[data-search-go]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = b.parentNode.querySelector('input');
+      i.dispatchEvent(new Event('input', { bubbles: true })); i.focus();
+    });
+  });
+
+  /* Links para seções de outras páginas (rodapé, menus): ao abrir a página com #seção,
+     reposiciona depois que imagens e fontes carregam, para a seção não ficar fora do lugar */
+  (function () {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (!id || id.indexOf('=') > -1) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    var moved = false;
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function () { moved = true; }, { once: true, passive: true }); });
+    function go() {
+      if (moved) return;
+      var pad = parseFloat(getComputedStyle(doc).scrollPaddingTop) || 0;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - pad, behavior: 'instant' });
+    }
+    if (document.readyState === 'complete') go(); else window.addEventListener('load', function () { go(); setTimeout(go, 250); });
+  })();
+
   /* Ano no rodapé */
   $$("[data-year]").forEach(function (y) { y.textContent = new Date().getFullYear(); });
 })();

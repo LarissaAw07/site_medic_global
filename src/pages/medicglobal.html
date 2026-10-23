@@ -8,8 +8,11 @@
 
 <style>
 /* Antes/Agora mais compacto */
-.wipe { aspect-ratio: 21/8; }
-@media (max-width: 719px) { .wipe { aspect-ratio: 1/1; } }
+.wipe { aspect-ratio: 21/5; min-height: 260px; }
+.wipe-pane { padding: 20px 32px; }
+.wipe-word { font-size: clamp(2rem, 1rem + 3.4vw, 4.5rem); }
+.wipe-pane p { margin-top: 10px; max-width: 46ch; }
+@media (max-width: 719px) { .wipe { aspect-ratio: 4/3; min-height: 0; } .wipe-pane p { max-width: 28ch; } }
 /* números com a tipografia dos títulos; blocos das pontas destacados do fundo */
 .stat .stat-big { font-weight: 500; letter-spacing: -.03em; }
 .stat:nth-child(1), .stat:nth-child(4) { background: var(--white); box-shadow: 0 1px 0 var(--line-2), 0 24px 48px -32px rgba(2,26,29,.28); }
@@ -48,7 +51,7 @@
   </div>
 </section>
 
-<section class="section section--flush-top" aria-label="Extremamedic e MedicGLOBAL">
+<section class="section section--flush-top" aria-label="Extremamedic e MedicGLOBAL" style="padding-top:var(--s-8);padding-bottom:0">
   <div class="wrap wrap--wide">
     <div class="wipe reveal">
       <div class="wipe-pane wipe-before"><span class="tag">Antes</span><div><div class="wipe-word">Extremamedic</div><p>Uma trajetória construída no cuidado de famílias da região.</p></div></div>
@@ -60,7 +63,7 @@
   </div>
 </section>
 
-<section class="section" id="linha-do-tempo" aria-labelledby="tl-t">
+<section class="section" id="linha-do-tempo" aria-labelledby="tl-t" style="padding-top:var(--s-8)">
   <div class="wrap">
     <div class="grid mb-9"><div><span class="eyebrow">Linha do tempo</span><h2 id="tl-t">Mais de 40 anos de história,<br> cuidando da saúde das pessoas</h2></div></div>
     <div class="timeline">

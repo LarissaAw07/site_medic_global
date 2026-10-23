@@ -32,10 +32,10 @@
       </div>
     </div>
     <form class="search-big mt-8" id="buscar" data-rede data-external="{{L.links.rede}}" role="search">
-      <div class="f"><label for="r-q">Professional, specialty or location</label><input id="r-q" name="q" placeholder="E.g.: cardiology" autocomplete="off"></div>
+      <div class="f f--q">{{i:search}}<label for="r-q">Professional, specialty or location</label><input id="r-q" name="q" placeholder="E.g.: cardiology" autocomplete="off"></div>
       <div class="f"><label for="r-tipo">Type</label><select id="r-tipo" name="tipo"><option value="profissional">Professional</option><option value="especialidade">Specialty</option><option value="clinica">Clinic</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratory</option></select></div>
       <div class="f"><label for="r-cidade">City</label><select id="r-cidade" name="cidade"><option value="">All cities</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>
-      <button class="btn" type="submit">Search the network {{i:search}}</button>
+      <button class="search-go" type="submit" aria-label="Search the network">{{i:arrow-right}}</button>
     </form>
   </div>
 </section>
@@ -79,11 +79,11 @@
         <span class="eyebrow">Search by specialty</span>
         <h2 id="esp-t" class="balance">Which specialty are you looking for?</h2>
         <p class="lead">Some of the specialties available in the network search. The complete, up-to-date list is in the provider directory.</p>
-        <div class="btn-row"><a class="btn btn--light" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory {{i:external}}</a></div>
+        <div class="btn-row"><a class="btn btn--light" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory</a></div>
       </div>
       <div class="c-6-13">
         <div class="feature-list">
-          <div><span class="ico">{{i:doc}}</span><div><h3>Services directory</h3><p>Search by directory type (physicians or services), state and city.</p><div class="btn-row mt-4"><a class="btn btn--light btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory {{i:external}}<span class="sr-only"> (opens in a new tab)</span></a></div></div></div>
+          <div><span class="ico">{{i:doc}}</span><div><h3>Services directory</h3><p>Search by directory type (physicians or services), state and city.</p><div class="btn-row mt-4"><a class="btn btn--light btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener" data-track="click_rede">Open provider directory<span class="sr-only"> (opens in a new tab)</span></a></div></div></div>
           <div><span class="ico">{{i:smartphone}}</span><div><h3>In the app</h3><p>Save favorites, contact the provider and see their location.</p></div></div>
         </div>
         <div class="type-pills mt-8" style="gap:8px">

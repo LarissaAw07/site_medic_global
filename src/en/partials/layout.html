@@ -43,7 +43,6 @@
       <span class="utility-label">Quick access</span>
       <nav aria-label="Quick access">
         <a href="https://telemedicina.medicglobal.com.br/login" target="_blank" rel="noopener" data-track="click_telemedicina">{{i:video}} Telemedicine</a>
-        <a href="rede-credenciada.html" data-track="click_rede">{{i:pin}} Provider network</a>
         <a href="http://187.60.158.90:8080/boletoonline/" target="_blank" rel="noopener" data-track="emitir_boleto">{{i:receipt}} Payment slip</a>
         <a href="https://api.whatsapp.com/send/?phone=5535988459074&amp;text=Desejo+solicitar+autoriza%C3%A7%C3%A3o&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener" data-track="click_whatsapp">{{i:file-check}} Authorizations</a>
         <a href="atendimento.html">{{i:headset}} Customer service</a>
@@ -229,12 +228,15 @@
 
 <div class="search-overlay" role="dialog" aria-modal="true" aria-label="Search the site" inert>
   <div class="search-panel">
-    <form role="search">
-      {{i:search}}
-      <label class="sr-only" for="global-search">What do you need?</label>
-      <input id="global-search" type="search" placeholder="What do you need? E.g.: payment slip, appointment, authorization" autocomplete="off">
+    <div class="search-panel-bar">
+      <form role="search" class="searchbar">
+        {{i:search}}
+        <label class="sr-only" for="global-search">What do you need?</label>
+        <input id="global-search" type="search" placeholder="What do you need? E.g.: payment slip, appointment, authorization" autocomplete="off">
+        <button type="submit" aria-label="Search">{{i:arrow-right}}</button>
+      </form>
       <button class="icon-btn" type="button" onclick="document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}))" aria-label="Close search">{{i:close}}</button>
-    </form>
+    </div>
     <div class="search-results" aria-live="polite"></div>
     <p class="search-hint">Tip: press <kbd>Ctrl</kbd> + <kbd>K</kbd> on any page to search.</p>
   </div>

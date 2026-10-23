@@ -24,6 +24,7 @@ const UI = {
     srcBtn: "Ler a publicação oficial",
     disclaimer: "Resumo elaborado pela MedicGLOBAL a partir da publicação oficial, como referência informativa. Não se trata de comunicado da MedicGLOBAL. Em caso de divergência, prevalece o texto da fonte.",
     help: `Dúvidas sobre o seu plano? Fale com a <a href="atendimento.html">central de atendimento</a>.`,
+    share: "Compartilhar",
     related: "Leia também",
     all: "Todos os conteúdos",
   },
@@ -41,6 +42,7 @@ const UI = {
     srcLine: (o, t, d) => `<strong>${o}</strong> — “${t}” (in Portuguese), published on ${d}.`,
     srcBtn: "Read the official publication",
     disclaimer: "Summary prepared by MedicGLOBAL from the official publication, for information purposes only. This is not a MedicGLOBAL notice. In case of any discrepancy, the source text prevails.",
+    share: "Share",
     help: `Questions about your plan? Contact our <a href="atendimento.html">customer service</a>.`,
     related: "Read also",
     all: "All content",
@@ -107,9 +109,10 @@ ${secoes}
         <div class="news-source">
           <p class="news-source-label">${U.srcLabel}</p>
           <p>${U.srcLine(org, esc(n.fonteTitulo), U.date(n.data))}</p>
-          <a class="btn btn--sm" href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${U.srcBtn} {{i:external}}<span class="sr-only">${U.newTab}</span></a>
+          <a class="btn btn--sm" href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${U.srcBtn}<span class="sr-only">${U.newTab}</span></a>
           <p class="xs muted">${U.disclaimer}</p>
         </div>
+        <div class="news-share mt-7"><button class="btn" type="button" data-share>{{i:share}} ${U.share}</button><span class="news-share-ok small" role="status"></span></div>
         <p class="small mt-7">${U.help}</p>
         <a class="news-back mt-6" href="conteudos.html#cat=${n.cat}">{{i:chevron-left}} ${U.back(cat)}</a>
       </div>

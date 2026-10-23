@@ -504,15 +504,15 @@ html:not(.js) .hero-nav { display: none; }
 @media (max-width: 1099px) { .hero-chips { bottom: 44px; } }
 
 /* ---------- Intenção / "Como podemos ajudar?" ---------- */
-.intent-search { position: relative; max-width: 640px; }
-.intent-search input {
+.intent-search, .searchbar { position: relative; max-width: 640px; }
+.intent-search input, .searchbar input {
   width: 100%; height: 64px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--white);
   padding: 0 64px 0 56px; font-size: 1.05rem; font-family: var(--f-head); transition: border-color .2s, box-shadow .2s;
 }
-.intent-search input:focus { outline: none; border-color: var(--medic); box-shadow: 0 0 0 4px rgba(0,140,140,.12); }
-.intent-search > svg { position: absolute; left: 22px; top: 22px; width: 20px; height: 20px; color: var(--medic); }
-.intent-search button { position: absolute; right: 8px; top: 8px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--globo); color: var(--white); display: grid; place-items: center; }
-.intent-search button svg { width: 18px; height: 18px; }
+.intent-search input:focus, .searchbar input:focus { outline: none; border-color: var(--medic); box-shadow: 0 0 0 4px rgba(0,140,140,.12); }
+.intent-search > svg, .searchbar > svg { position: absolute; left: 22px; top: 22px; width: 20px; height: 20px; color: var(--medic); }
+.intent-search button, .searchbar button { position: absolute; right: 8px; top: 8px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--globo); color: var(--white); display: grid; place-items: center; }
+.intent-search button svg, .searchbar button svg { width: 18px; height: 18px; }
 .intent-suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); background: var(--white); border-radius: var(--r-md); box-shadow: 0 24px 48px -20px rgba(2,26,29,.3); border: 1px solid var(--line-2); padding: 6px; z-index: 5; display: none; }
 .intent-suggest.is-open { display: block; }
 .intent-suggest a { display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 8px; font-size: var(--t-sm); }
@@ -1107,7 +1107,7 @@ html:not(.js) .hero-nav { display: none; }
 .place-media img.is-active { opacity: 1; }
 
 /* Formulário em painel */
-.form-panel { background: var(--white); border: 1px solid var(--line-2); border-radius: var(--r-lg); padding: 28px; display: grid; gap: 20px; }
+.form-panel { background: #EFF7F8; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: grid; gap: 20px; }
 @media (min-width: 1100px) { .form-panel { padding: 48px; } }
 .form-grid { display: grid; gap: 20px; }
 @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .full { grid-column: 1 / -1; } }
@@ -1729,10 +1729,10 @@ de .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27
 .news-source-label { font-family: var(--f-head); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--medic); }
 .news-source .btn svg { width: 15px; height: 15px; }
 /* título com área ampla, alinhado à margem do site; corpo em coluna única com largura de leitura confortável */
-.page-hero h1.news-title { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); max-width: 32ch; }
-.news-body { max-width: none; }
-.news-body .lead { max-width: none; }
-.news-body p, .news-body li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.page-hero h1.news-title { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); max-width: none; text-wrap: pretty; }
+.news-body, .prose--full { max-width: none; }
+.news-body .lead, .prose--full .lead { max-width: none; }
+.news-body p, .news-body li, .prose--full p, .prose--full li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
 /* "Depois da contratação" → rodapé: quadros um pouco mais visíveis, esmaecendo aos poucos até o azul do rodapé */
 .mosaic .mosaic-grid span { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.6); }
@@ -1901,3 +1901,54 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .atuacao-tags .marquee-track { gap: 0; padding-right: 0; }
 .atuacao-tags .marquee-item { border: 0; border-radius: 0; padding: 0; gap: 0; font-size: .72rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #A9B4B6; }
 .atuacao-tags .marquee-item::before { width: 4px; height: 4px; margin: 0 18px; background: var(--medic); opacity: 1; }
+
+/* Notícias e conteúdos: título fixo durante a leitura e botão de compartilhar */
+.news-sticky { position: sticky; top: var(--header-h); z-index: 90; height: 0; }
+.news-sticky-bar { background: rgba(255,255,255,.94); backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px); box-shadow: 0 1px 0 var(--line-2); opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s, transform .25s var(--ease); }
+.news-sticky.is-visible .news-sticky-bar { opacity: 1; transform: none; }
+.news-sticky p { margin: 0; padding: 12px 0; font-family: var(--f-head); font-weight: 500; font-size: var(--t-sm); color: var(--globo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.news-share { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.news-share .btn svg { width: 17px; height: 17px; }
+.news-share-ok { color: var(--medic); }
+
+/* Barras de pesquisa no padrão da busca da home (pílula branca, lupa à esquerda, botão redondo com seta) */
+.searchbar input { -webkit-appearance: none; appearance: none; color: var(--ink); }
+.searchbar input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.searchbar button { cursor: pointer; transition: background .2s; }
+.searchbar button:hover { background: var(--medic); }
+.doc-search .searchbar { max-width: none; }
+/* Busca global (Ctrl+K) */
+.search-panel-bar { display: flex; align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--line-2); }
+.search-panel-bar .searchbar { flex: 1; max-width: none; padding: 0; border: 0; display: block; }
+.search-panel .searchbar input { height: 64px; padding: 0 64px 0 56px; border: 1px solid var(--line); font-size: 1.05rem; }
+.search-panel .searchbar input:focus { border-color: var(--medic); box-shadow: 0 0 0 4px rgba(0,140,140,.12); }
+/* Rede credenciada: mesma linguagem, com os filtros dentro da pílula */
+.search-big { background: var(--white); border: 1px solid var(--line); box-shadow: none; }
+.search-big .f--q > svg { position: absolute; left: 20px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--medic); z-index: 1; pointer-events: none; }
+.search-big .f--q label { left: 52px; }
+.search-big .f--q input { padding-left: 52px; }
+.search-go { justify-self: end; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--globo); color: var(--white); display: grid; place-items: center; cursor: pointer; transition: background .2s; }
+.search-go:hover { background: var(--medic); }
+.search-go svg { width: 18px; height: 18px; }
+@media (max-width: 1099px) { .search-go { width: 100%; height: 56px; border-radius: var(--r-pill); } }
+@media (min-width: 1100px) {
+  .search-big { grid-template-columns: 1.4fr 1fr 1fr auto; align-items: center; gap: 0; padding: 8px; border-radius: var(--r-pill); }
+  .search-big input, .search-big select, .search-big .dd-btn { background: transparent; border-radius: var(--r-pill); }
+  .search-big .f + .f { border-left: 1px solid var(--line-2); }
+  .search-big .search-go { margin-left: 8px; }
+}
+
+/* Para você · Boleto: cards clicáveis (o próprio card é o botão de acesso) */
+.action-cards { display: grid; gap: 16px; }
+@media (min-width: 720px) { .action-cards { grid-template-columns: 1fr 1fr; } }
+.action-card { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--line-2); color: var(--ink); transition: border-color .25s, box-shadow .25s, transform .25s var(--ease); }
+.action-card .ico { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--globo); background: var(--white); }
+.action-card .ico svg { width: 20px; height: 20px; }
+.action-card-txt { display: grid; gap: 4px; padding-right: 40px; }
+.action-card-txt strong { font-family: var(--f-head); font-weight: 500; font-size: 1.05rem; letter-spacing: -.01em; }
+.action-card-txt span { font-size: var(--t-sm); color: var(--ink-3); }
+.action-card-go { position: absolute; right: 20px; bottom: 20px; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--tint); color: var(--globo); transition: background .25s, color .25s, transform .25s var(--ease); }
+.action-card-go svg { width: 16px; height: 16px; }
+.action-card:hover { border-color: rgba(0,140,140,.35); box-shadow: 0 20px 40px -28px rgba(2,26,29,.35); transform: translateY(-2px); }
+.action-card:hover .action-card-go { background: var(--globo); color: var(--white); transform: translateX(2px); }
+.action-card:focus-visible { outline: 2px solid var(--medic); outline-offset: 3px; }

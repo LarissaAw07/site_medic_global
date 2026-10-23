@@ -1850,9 +1850,9 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 /* Seletor de idioma (cabeçalho): bandeira + sigla, menu suspenso em cartão; no celular só a bandeira */
 .flag { display: block; width: 20px; height: 20px; border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(11,27,29,.12); }
 .lang { position: relative; }
-.lang-btn { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding: 0 12px 0 10px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--white); color: var(--globo); font-family: var(--f-head); font-size: .74rem; font-weight: 500; letter-spacing: .06em; cursor: pointer; transition: background .2s, border-color .2s; }
+.lang-btn { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; padding: 0 12px 0 10px; border-radius: var(--r-pill); border: 0; background: none; color: var(--globo); font-family: var(--f-head); font-size: .74rem; font-weight: 500; letter-spacing: .06em; cursor: pointer; transition: opacity .2s; }
 .lang-btn > svg:last-child { width: 14px; height: 14px; transition: transform .3s var(--ease); }
-.lang-btn:hover, .lang-btn[aria-expanded="true"] { background: var(--tint); border-color: rgba(0,98,109,.3); }
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { opacity: .75; }
 .lang-btn[aria-expanded="true"] > svg:last-child { transform: rotate(180deg); }
 .lang-btn:focus-visible, .lang-menu a:focus-visible { outline: 2px solid var(--medic); outline-offset: 2px; }
 .lang-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 60; min-width: 196px; margin: 0; padding: 6px; list-style: none; border-radius: 16px; background: var(--white); border: 1px solid var(--line-2); box-shadow: 0 24px 48px -20px rgba(2,26,29,.35); }
@@ -1865,7 +1865,7 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 /* a sigla do idioma fica só para leitores de tela (o rótulo do botão já diz o idioma); na tela, bandeira + seta */
 .lang-code { display: none; }
 .lang-btn { padding: 0 9px; gap: 4px; }
-.site-header.on-dark:not(.is-scrolled):not(.is-open) .lang-btn { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); color: var(--white); }
+.site-header.on-dark:not(.is-scrolled):not(.is-open) .lang-btn { color: var(--white); }
 /* Menu mobile: os dois idiomas lado a lado */
 .drawer-lang { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
 .drawer-lang a { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; border-radius: var(--r-pill); border: 1px solid var(--line); font-family: var(--f-head); font-size: .9rem; color: var(--ink-2); }

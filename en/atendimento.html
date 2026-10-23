@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/main.css?v=3d1d3b88">
+<link rel="stylesheet" href="../assets/css/main.css?v=0d1f0291">
 <script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="en")location.replace("../atendimento.html"+location.hash)}catch(e){}</script>
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
@@ -350,8 +350,9 @@
         <span class="eyebrow">Ombudsman</span>
         <h2 id="ov-t" class="balance">Your voice is heard</h2>
         <p class="lead">A member service channel available on business days, Monday through Friday, from 7:30 a.m. to 5:30 p.m.</p>
+        <p>The Ombudsman is the second level of service: contact it when your request has not been resolved through our customer service channels. A conclusive answer is sent within 7 business days; in more complex cases, the deadline may be agreed with you and extended to up to 30 business days.</p>
         <ul class="checklist small"><li>(35) 3435-4442</li><li>ouvidoria@extremamedic.com.br</li><li>Provide your protocol number, if you already have one.</li></ul>
-        <p class="xs muted">You can also file complaints with ANS (Brazil's National Supplementary Health Agency): Disque ANS 0800 701 9656.</p>
+        <p class="xs muted">If your request is not resolved by the Ombudsman, you can escalate it to ANS (Brazil's National Supplementary Health Agency): Disque ANS 0800 701 9656 or <a href="https://www.gov.br/ans/pt-br" target="_blank" rel="noopener">gov.br/ans<span class="sr-only"> (opens in a new tab)</span></a>.</p>
       </div>
       <div class="c-6-13">
         <form class="form-panel" data-validate="ouvidoria" action="#" method="post">
@@ -360,7 +361,9 @@
             <div class="field"><label for="o-tel">WhatsApp</label><input id="o-tel" name="whatsapp" type="tel" autocomplete="tel" required aria-describedby="o-tel-err"><span class="error" id="o-tel-err">Please enter a phone number.</span></div>
             <div class="field"><label for="o-mail">Email</label><input id="o-mail" name="email" type="email" autocomplete="email" required aria-describedby="o-mail-err"><span class="error" id="o-mail-err">Please enter a valid email address.</span></div>
             <div class="field"><label for="o-perfil">Profile</label><select id="o-perfil" name="perfil"><option>Member</option><option>Client company</option><option>Service provider</option><option>Visitor</option></select></div>
-            <div class="field"><label for="o-prot">Previous protocol number <span class="muted">(optional)</span></label><input id="o-prot" name="protocolo"></div>
+            <div class="field"><label for="o-prot">Previous protocol number <span class="muted">(optional)</span></label><input id="o-prot" name="protocolo" aria-describedby="o-prot-hint"><span class="hint" id="o-prot-hint">The number you received from your previous contact about the same issue.</span></div>
+            <div class="field"><label for="o-cart">Member card number <span class="muted">(optional)</span></label><input id="o-cart" name="carteirinha" inputmode="numeric"></div>
+            <div class="field"><label for="o-cpf">CPF (Brazilian taxpayer ID) <span class="muted">(optional)</span></label><input id="o-cpf" name="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00"></div>
             <div class="field full"><label for="o-assunto">Subject</label><select id="o-assunto" name="assunto" required aria-describedby="o-assunto-err"><option value="">Select</option><option>Complaint</option><option>Request</option><option>Question</option><option>Compliment</option><option>Suggestion</option></select><span class="error" id="o-assunto-err">Please select a subject.</span></div>
             <div class="field full"><label for="o-msg">Message</label><textarea id="o-msg" name="mensagem" required aria-describedby="o-msg-hint o-msg-err"></textarea><span class="hint" id="o-msg-hint">To protect your privacy, do not include details about diagnoses or tests beyond what is necessary.</span><span class="error" id="o-msg-err">Please write your message.</span></div>
             <div class="full"><label class="check"><input type="checkbox" required aria-describedby="o-ok-err"><span>I authorize the use of this data to handle my request, in accordance with the <a href="privacidade.html">Privacy Policy</a>.</span></label><span class="error" id="o-ok-err">Your authorization is required.</span></div>

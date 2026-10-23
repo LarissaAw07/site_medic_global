@@ -6,7 +6,7 @@
     "data": "2026-10-02",
     "tema": "Rol de procedimentos",
     "migalha": "Mamografia digital",
-    "leitura": 2,
+    "leitura": 3,
     "titulo": "Mamografia digital passa a ter cobertura sem restrição de idade ou gênero",
     "resumo": "Desde 1º de outubro, os planos de saúde cobrem a mamografia digital com indicação médica, sem limite de idade ou de gênero.",
     "foto": "old_medica_sorrindo",
@@ -16,20 +16,40 @@
       {
         "h": "O que mudou",
         "p": [
-          "Antes, a cobertura obrigatória da mamografia digital era garantida para mulheres de 40 a 69 anos. Com a atualização aprovada pela ANS em 3 de setembro, os planos passam a cobrir o exame sem restrição de idade ou de gênero, sempre que houver indicação do médico.",
-          "A ANS retirou a diretriz de utilização que limitava o acesso. Com isso, a decisão sobre a realização do exame passa a depender da avaliação clínica de cada caso."
+          "Até setembro, a cobertura obrigatória da mamografia digital pelos planos de saúde era garantida apenas para mulheres de 40 a 69 anos. Com a atualização aprovada pela ANS em 3 de setembro, o exame passa a ser coberto sem restrição de idade ou de gênero, desde que haja indicação do médico.",
+          "Para isso, a ANS retirou a diretriz de utilização que limitava o acesso ao exame. Na prática, a decisão sobre a realização da mamografia digital deixa de seguir uma faixa etária fixa e passa a depender da avaliação clínica de cada caso."
         ]
       },
       {
         "h": "Para que o exame é coberto",
         "p": [
-          "A cobertura vale para o rastreamento, o diagnóstico e o acompanhamento do tratamento do câncer de mama."
+          "A cobertura vale para as três etapas do cuidado com o câncer de mama: o rastreamento, que busca identificar a doença antes dos sintomas; o diagnóstico, quando há suspeita; e o acompanhamento do tratamento."
+        ]
+      },
+      {
+        "h": "Por que a mudança é importante",
+        "p": [
+          "A medida coincide com o Outubro Rosa, campanha mundial de conscientização sobre a prevenção e o diagnóstico precoce do câncer de mama. Nas últimas décadas, esse é o tipo de câncer mais frequente entre as brasileiras, sem contar o câncer de pele não melanoma.",
+          "Segundo o Ministério da Saúde, a taxa estimada atual é de 66,54 novos casos para cada 100 mil mulheres. O Instituto Nacional de Câncer (Inca) destaca que identificar a doença em estágios iniciais aumenta as possibilidades de tratamento e contribui para reduzir a mortalidade."
+        ]
+      },
+      {
+        "h": "Homens também podem ter câncer de mama",
+        "p": [
+          "Embora seja raro, o câncer de mama também atinge homens: segundo o Ministério da Saúde, eles representam cerca de 1% dos casos. Por isso, a retirada da restrição de gênero amplia o acesso ao exame para todas as pessoas com indicação médica."
+        ]
+      },
+      {
+        "h": "Sinais de alerta",
+        "p": [
+          "Nas mulheres, merecem atenção o aparecimento de nódulos nas mamas, alterações na pele, retração do mamilo, saída espontânea de secreção e caroços na região das axilas. Nos homens, a presença de nódulo palpável na mama também deve ser investigada.",
+          "Diante de qualquer um desses sinais, a orientação é procurar um médico, que vai avaliar a necessidade de exames como a mamografia."
         ]
       },
       {
         "h": "Outra cobertura que passou a valer",
         "p": [
-          "Na mesma data, os planos também passaram a ser obrigados a cobrir o DIU/SIU hormonal para pacientes com endometriose."
+          "Também em 1º de outubro, os planos de saúde passaram a ser obrigados a cobrir o dispositivo ou sistema intrauterino hormonal (DIU/SIU) para pacientes com endometriose."
         ]
       }
     ],
@@ -46,20 +66,40 @@
         {
           "h": "What changed",
           "p": [
-            "Previously, mandatory coverage of digital mammography was guaranteed for women aged 40 to 69. With the update approved by ANS on September 3, health plans now cover the exam with no age or gender restriction, whenever it is ordered by a physician.",
-            "ANS removed the utilization guideline that limited access. As a result, the decision to perform the exam now depends on the clinical assessment of each case."
+            "Until September, mandatory health plan coverage of digital mammography applied only to women aged 40 to 69. Under the update approved by ANS on September 3, the exam is now covered with no age or gender restriction, as long as it is ordered by a physician.",
+            "To make this possible, ANS removed the usage guideline that limited access to the exam. In practice, whether a digital mammography is performed no longer depends on a fixed age range, but on the clinical assessment of each case."
           ]
         },
         {
           "h": "What the exam is covered for",
           "p": [
-            "Coverage applies to breast cancer screening, diagnosis and treatment follow-up."
+            "Coverage applies to all three stages of breast cancer care: screening, which seeks to detect the disease before symptoms appear; diagnosis, when the disease is suspected; and follow-up during treatment."
           ]
         },
         {
-          "h": "Another coverage now in effect",
+          "h": "Why the change matters",
           "p": [
-            "On the same date, health plans also became required to cover the hormonal IUD/IUS for patients with endometriosis."
+            "The measure coincides with Pink October, the worldwide awareness campaign on breast cancer prevention and early diagnosis. In recent decades, breast cancer has been the most common type of cancer among Brazilian women, excluding non-melanoma skin cancer.",
+            "According to the Ministry of Health, the current estimated rate is 66.54 new cases per 100,000 women. Brazil's National Cancer Institute (Inca) points out that detecting the disease at an early stage increases treatment options and helps reduce mortality."
+          ]
+        },
+        {
+          "h": "Men can also have breast cancer",
+          "p": [
+            "Although rare, breast cancer also affects men: according to the Ministry of Health, they account for about 1% of cases. Removing the gender restriction therefore extends access to the exam to everyone with a medical indication."
+          ]
+        },
+        {
+          "h": "Warning signs",
+          "p": [
+            "In women, warning signs include lumps in the breasts, changes in the skin, nipple retraction, spontaneous nipple discharge and lumps in the armpit area. In men, a palpable lump in the breast should also be investigated.",
+            "If you notice any of these signs, see a physician, who will assess whether exams such as a mammography are needed."
+          ]
+        },
+        {
+          "h": "Another coverage that took effect",
+          "p": [
+            "Also on October 1, health plans became required to cover the hormonal intrauterine device or system (IUD/IUS) for patients with endometriosis."
           ]
         }
       ]
@@ -72,7 +112,7 @@
     "data": "2026-10-05",
     "tema": "Dados do setor",
     "migalha": "Balanço de beneficiários",
-    "leitura": 2,
+    "leitura": 3,
     "titulo": "Planos de assistência médica passam de 53 milhões de beneficiários em agosto",
     "resumo": "Balanço da ANS mostra o número de vínculos em planos médicos e odontológicos e a movimentação de adesões e cancelamentos.",
     "foto": "old_escritorio",
@@ -82,20 +122,34 @@
       {
         "h": "Os números de agosto",
         "p": [
-          "Em agosto de 2026, os planos de assistência médica registraram 53.164.516 beneficiários. Os planos exclusivamente odontológicos somaram 37.311.529.",
-          "Somente no mês, foram 1.237.646 adesões e 1.175.486 cancelamentos em planos médicos, o que corresponde a uma taxa de rotatividade de 2,21%."
+          "A ANS divulgou, em 5 de outubro, os dados de beneficiários de planos de saúde referentes a agosto de 2026. No mês, os planos de assistência médica registraram 53.164.516 beneficiários, e os planos exclusivamente odontológicos somaram 37.311.529.",
+          "Os dados completos, inclusive a distribuição por tipo de contratação e por estado, podem ser consultados na Sala de Situação, ferramenta de pesquisa disponível no portal da ANS."
+        ]
+      },
+      {
+        "h": "Entradas e saídas no mês",
+        "p": [
+          "A ANS acompanha a movimentação de beneficiários por meio da taxa de rotatividade, calculada a partir das adesões e dos cancelamentos de vínculos nos planos de assistência médica.",
+          "Somente em agosto, foram 1.237.646 adesões e 1.175.486 cancelamentos, o que corresponde a uma taxa de rotatividade de 2,21%. Com isso, as adesões superaram os cancelamentos no mês."
         ]
       },
       {
         "h": "Movimentação em 12 meses",
         "p": [
-          "Nos últimos 12 meses, os planos médicos tiveram 16.117.456 adesões e 15.434.267 cancelamentos, com taxa de rotatividade de 29,41%."
+          "Considerando os últimos 12 meses, os planos médicos tiveram 16.117.456 adesões e 15.434.267 cancelamentos, com taxa de rotatividade de 29,41%. Também nesse período, o número de entradas foi maior que o de saídas."
+        ]
+      },
+      {
+        "h": "O que conta como adesão e cancelamento",
+        "p": [
+          "As adesões incluem novos beneficiários, transferências de carteira e mudanças voluntárias de plano, entre outras situações. Já os cancelamentos englobam, por exemplo, o encerramento de contratos de planos coletivos, a saída de beneficiários do setor e os óbitos."
         ]
       },
       {
         "h": "Como ler esses dados",
         "p": [
-          "Os números se referem a vínculos contratuais, e não a pessoas, já que um mesmo beneficiário pode ter mais de um plano. A ANS informa ainda que os dados podem sofrer alterações retroativas, em razão das revisões mensais enviadas pelas operadoras."
+          "Os números se referem a vínculos contratuais, e não a pessoas: como um mesmo beneficiário pode ter mais de um plano, ele pode aparecer mais de uma vez na contagem.",
+          "A ANS informa ainda que os dados podem sofrer alterações retroativas, em razão das revisões enviadas mensalmente pelas operadoras."
         ]
       }
     ],
@@ -112,20 +166,34 @@
         {
           "h": "August figures",
           "p": [
-            "In August 2026, medical health plans recorded 53,164,516 members. Dental-only plans totaled 37,311,529.",
-            "In that month alone, medical plans had 1,237,646 new enrollments and 1,175,486 cancellations, which corresponds to a turnover rate of 2.21%."
+            "On October 5, ANS released health plan membership data for August 2026. In the month, medical care plans recorded 53,164,516 members, and dental-only plans totaled 37,311,529.",
+            "The complete data, including the breakdown by type of contract and by state, are available in the Sala de Situação, a search tool on the ANS website."
           ]
         },
         {
-          "h": "12-month movement",
+          "h": "Enrollments and cancellations in the month",
           "p": [
-            "Over the past 12 months, medical plans had 16,117,456 new enrollments and 15,434,267 cancellations, with a turnover rate of 29.41%."
+            "ANS tracks member movement through the turnover rate, calculated from enrollments and cancellations in medical care plans.",
+            "In August alone, there were 1,237,646 enrollments and 1,175,486 cancellations, a turnover rate of 2.21%. Enrollments therefore outnumbered cancellations in the month."
           ]
         },
         {
-          "h": "How to read these data",
+          "h": "Movement over 12 months",
           "p": [
-            "The figures refer to contractual enrollments, not to individuals, since the same member may have more than one plan. ANS also notes that the data may be revised retroactively, due to the monthly revisions submitted by health plan operators."
+            "Over the last 12 months, medical plans had 16,117,456 enrollments and 15,434,267 cancellations, with a turnover rate of 29.41%. In this period as well, enrollments outnumbered cancellations."
+          ]
+        },
+        {
+          "h": "What counts as an enrollment or cancellation",
+          "p": [
+            "Enrollments include new members, portfolio transfers and voluntary plan changes, among other situations. Cancellations include, for example, the termination of group plan contracts, members leaving the sector and deaths."
+          ]
+        },
+        {
+          "h": "How to read these figures",
+          "p": [
+            "The figures refer to contracts, not people: since the same person may hold more than one plan, they may be counted more than once.",
+            "ANS also notes that the data may be revised retroactively, due to the monthly updates submitted by health plan operators."
           ]
         }
       ]
@@ -138,7 +206,7 @@
     "data": "2026-10-07",
     "tema": "Rol de procedimentos",
     "migalha": "Cálculo biliar",
-    "leitura": 2,
+    "leitura": 3,
     "titulo": "Tratamento para cálculo biliar complexo entra no Rol de cobertura obrigatória",
     "resumo": "A colangioscopia com litotripsia passa a ser coberta pelos planos de saúde a partir de 3 de novembro, em casos definidos pela ANS.",
     "foto": "old_quarto",
@@ -148,20 +216,33 @@
       {
         "h": "Qual procedimento foi incluído",
         "p": [
-          "Trata-se da colangioscopia com litotripsia, a laser ou eletro-hidráulica, usada no tratamento de cálculos biliares complexos. A cobertura vale para pacientes em que o tratamento por colangiopancreatografia retrógrada endoscópica (CPRE) falhou."
+          "A Diretoria Colegiada da ANS aprovou, em 2 de outubro, a inclusão da colangioscopia com litotripsia, a laser ou eletro-hidráulica, no Rol de coberturas obrigatórias dos planos de saúde.",
+          "A técnica é usada no tratamento de cálculos biliares complexos: ela permite destruir e remover cálculos grandes ou de difícil acesso pelo método tradicional."
+        ]
+      },
+      {
+        "h": "Quem tem direito",
+        "p": [
+          "A cobertura vale para pacientes que apresentaram falha no tratamento por colangiopancreatografia retrógrada endoscópica (CPRE), que é o procedimento usual nesses casos."
         ]
       },
       {
         "h": "A partir de quando",
         "p": [
-          "A cobertura passa a ser obrigatória a partir de 3 de novembro de 2026."
+          "A cobertura passa a ser obrigatória a partir de 3 de novembro de 2026. Desde então, os planos de saúde devem cobrir a colangioscopia com litotripsia sempre que houver falha da CPRE."
         ]
       },
       {
         "h": "Como foi a análise",
         "p": [
-          "A tecnologia foi avaliada na 53ª e na 55ª reuniões técnicas da Cosaúde, em julho e setembro, e passou pela Consulta Pública nº 175 e pela Audiência Pública nº 68, realizadas em agosto.",
-          "O Rol de Procedimentos e Eventos em Saúde é a lista de coberturas obrigatórias dos planos de saúde e contempla todas as doenças da Classificação Internacional de Doenças (CID) da Organização Mundial da Saúde."
+          "A tecnologia foi submetida diretamente à ANS e avaliada na 53ª e na 55ª reuniões técnicas da Comissão de Atualização do Rol de Procedimentos e Eventos em Saúde Suplementar (Cosaúde), realizadas em julho e setembro.",
+          "Antes da decisão, o tema também passou pela Consulta Pública nº 175 e pela Audiência Pública nº 68, ambas realizadas em agosto, que abrem espaço para a participação da sociedade."
+        ]
+      },
+      {
+        "h": "O que é o Rol de Procedimentos",
+        "p": [
+          "O Rol de Procedimentos e Eventos em Saúde é a lista de coberturas obrigatórias para os beneficiários de planos de saúde. Ele inclui consultas, terapias, exames, procedimentos e cirurgias para o tratamento de todas as doenças da Classificação Internacional de Doenças (CID), da Organização Mundial da Saúde (OMS)."
         ]
       }
     ],
@@ -178,20 +259,33 @@
         {
           "h": "Which procedure was added",
           "p": [
-            "The procedure is cholangioscopy with laser or electrohydraulic lithotripsy, used to treat complex gallstones. Coverage applies to patients for whom treatment by endoscopic retrograde cholangiopancreatography (ERCP) has failed."
+            "On October 2, the ANS Board of Directors approved adding cholangioscopy with laser or electrohydraulic lithotripsy to the list of mandatory health plan coverage (Rol).",
+            "The technique is used to treat complex gallstones: it makes it possible to break up and remove stones that are large or hard to reach with the traditional method."
           ]
         },
         {
-          "h": "When it takes effect",
+          "h": "Who is eligible",
           "p": [
-            "Coverage becomes mandatory starting November 3, 2026."
+            "Coverage applies to patients whose treatment with endoscopic retrograde cholangiopancreatography (ERCP), the usual procedure in these cases, has failed."
           ]
         },
         {
-          "h": "How it was reviewed",
+          "h": "Effective date",
           "p": [
-            "The technology was assessed at Cosaúde's 53rd and 55th technical meetings, in July and September, and went through Public Consultation No. 175 and Public Hearing No. 68, both held in August.",
-            "The List of Health Procedures and Events (Rol) is the list of mandatory coverage for health plans and includes all diseases in the World Health Organization's International Classification of Diseases (ICD)."
+            "Coverage becomes mandatory on November 3, 2026. From then on, health plans must cover cholangioscopy with lithotripsy whenever ERCP has failed."
+          ]
+        },
+        {
+          "h": "How it was assessed",
+          "p": [
+            "The technology was submitted directly to ANS and assessed at the 53rd and 55th technical meetings of Cosaúde, the committee that updates the List of Procedures, held in July and September.",
+            "Before the decision, the topic also went through Public Consultation No. 175 and Public Hearing No. 68, both held in August, which open the process to public participation."
+          ]
+        },
+        {
+          "h": "What the List of Procedures is",
+          "p": [
+            "The List of Health Procedures and Events (Rol) sets out the mandatory coverage for health plan members. It includes consultations, therapies, exams, procedures and surgeries to treat all diseases in the World Health Organization's International Classification of Diseases (ICD)."
           ]
         }
       ]
@@ -204,7 +298,7 @@
     "data": "2026-09-21",
     "tema": "Atendimento ao beneficiário",
     "migalha": "Disque ANS",
-    "leitura": 1,
+    "leitura": 2,
     "titulo": "Disque ANS volta a funcionar em horário integral",
     "resumo": "O canal telefônico da ANS retomou o atendimento de segunda a sexta, das 8h às 20h. Veja também os outros canais disponíveis.",
     "intro": "O Disque ANS, canal telefônico da Agência Nacional de Saúde Suplementar, retomou o funcionamento em horário integral na segunda-feira, 21 de setembro de 2026.",
@@ -212,14 +306,26 @@
       {
         "h": "Horário de atendimento",
         "p": [
-          "O atendimento telefônico funciona de segunda a sexta-feira, das 8h às 20h, exceto em feriados nacionais.",
-          "Segundo a ANS, as restrições de horário e de fluxo de ligações haviam sido adotadas por limitações orçamentárias e terminam com o início da prestação do serviço pela nova empresa contratada."
+          "Desde segunda-feira, 21 de setembro, o Disque ANS voltou a funcionar no horário normal: de segunda a sexta-feira, das 8h às 20h, exceto em feriados nacionais."
+        ]
+      },
+      {
+        "h": "Por que o horário havia sido reduzido",
+        "p": [
+          "Segundo a ANS, as restrições de horário e de fluxo de ligações haviam sido adotadas por limitações orçamentárias. Elas terminaram com o início da prestação do serviço pela nova empresa contratada para o atendimento."
+        ]
+      },
+      {
+        "h": "Para que serve o Disque ANS",
+        "p": [
+          "O Disque ANS (0800 701 9656) é o canal telefônico da Agência Nacional de Saúde Suplementar. Por ele, o beneficiário pode tirar dúvidas sobre os seus direitos e registrar reclamações contra a operadora do plano de saúde.",
+          "Antes de recorrer à ANS, a recomendação é procurar os canais de atendimento e a ouvidoria da própria operadora, informando o número de protocolo do atendimento anterior."
         ]
       },
       {
         "h": "Outros canais da ANS",
         "p": [
-          "Além do telefone, o beneficiário pode usar o formulário eletrônico Fale Conosco, no portal da ANS, ou o atendimento presencial com agendamento nos Núcleos da ANS das cinco regiões do país."
+          "Além do telefone, o beneficiário pode usar o formulário eletrônico Fale Conosco, disponível no portal da ANS, ou agendar um atendimento presencial em um dos Núcleos da ANS nas cinco regiões do país."
         ]
       }
     ],
@@ -235,14 +341,26 @@
         {
           "h": "Service hours",
           "p": [
-            "Phone service is available Monday through Friday, 8 a.m. to 8 p.m., except on national holidays.",
-            "According to ANS, the restrictions on hours and call volume had been adopted due to budget constraints and end as the newly contracted company begins providing the service."
+            "Since Monday, September 21, Disque ANS has been back to its normal hours: Monday to Friday, 8 a.m. to 8 p.m., except on national holidays."
+          ]
+        },
+        {
+          "h": "Why hours had been reduced",
+          "p": [
+            "According to ANS, the restrictions on hours and call volume had been adopted due to budget constraints. They ended when the newly contracted company began providing the service."
+          ]
+        },
+        {
+          "h": "What Disque ANS is for",
+          "p": [
+            "Disque ANS (0800 701 9656) is the phone line of Brazil's National Supplementary Health Agency. Members can use it to ask about their rights and file complaints against their health plan operator.",
+            "Before contacting ANS, it is recommended to use the operator's own customer service channels and Ombudsman, providing the protocol number of the previous contact."
           ]
         },
         {
           "h": "Other ANS channels",
           "p": [
-            "In addition to the phone line, members can use the Fale Conosco (Contact Us) online form on the ANS website, or in-person service by appointment at the ANS regional offices (Núcleos da ANS) in the country's five regions."
+            "Besides the phone line, members can use the Fale Conosco online form on the ANS website, or book an in-person appointment at one of the ANS offices in Brazil's five regions."
           ]
         }
       ]
@@ -255,7 +373,7 @@
     "data": "2026-10-16",
     "tema": "Prevenção",
     "migalha": "Cuidado da mulher",
-    "leitura": 2,
+    "leitura": 4,
     "titulo": "Circuito de Cuidado da Mulher oferece exames e atendimentos em todo o país",
     "resumo": "A 1ª edição da ação reuniu consultas, exames de rastreamento, vacinas e métodos contraceptivos em diversos territórios.",
     "foto": "old_medica_paciente",
@@ -263,22 +381,43 @@
     "intro": "O Ministério da Saúde, em parceria com estados e municípios, promoveu em 17 de outubro a 1ª edição do Circuito de Cuidado da Mulher, com ações em diversos territórios do país.",
     "secoes": [
       {
-        "h": "O que foi oferecido",
+        "h": "Sobre o Circuito",
         "p": [
-          "A ação reuniu atendimentos, exames, métodos contraceptivos, vacinas e rodas de conversa. Entre os serviços estavam o teste DNA-HPV, a mamografia quando indicada e a inserção de DIU e de implante subdérmico.",
-          "Alguns locais receberam as Carretas de Saúde da Mulher, com mamografia, ultrassonografia e colposcopia, com o objetivo de reduzir as filas nos municípios."
+          "Realizado no sábado, 17 de outubro, durante o Outubro Rosa, o Circuito de Cuidado da Mulher é uma iniciativa do Ministério da Saúde em parceria com estados e municípios. A ação reuniu atendimentos, exames, métodos contraceptivos, vacinas, atividades coletivas, como rodas de conversa, e encaminhamentos na rede do SUS.",
+          "Segundo a secretária de Atenção Primária à Saúde, Ana Luiza Caldas, o objetivo é promover o cuidado integral das mulheres, identificando as necessidades de cada uma e aproximando-as dos serviços de saúde."
         ]
       },
       {
-        "h": "Dignidade Menstrual",
+        "h": "Prevenção e detecção precoce do câncer",
         "p": [
-          "O Programa Dignidade Menstrual também fez parte da iniciativa: mulheres elegíveis puderam receber a autorização para retirar absorventes gratuitamente."
+          "Entre os serviços estavam a avaliação clínica das mamas, a investigação de sinais e sintomas, a mamografia conforme indicação, a coleta do exame citológico ou do teste DNA-HPV, de acordo com a estratégia de cada território, e a atualização da vacina contra o HPV.",
+          "Algumas localidades receberam as Carretas de Saúde da Mulher, com mamografia, ultrassonografia e colposcopia, com o objetivo de reduzir as filas nos municípios."
+        ]
+      },
+      {
+        "h": "Saúde sexual, reprodutiva e ginecológica",
+        "p": [
+          "As mulheres também puderam receber aconselhamento sobre planejamento reprodutivo e métodos contraceptivos, com foco no DIU e no implante subdérmico, além de ações de prevenção de infecções sexualmente transmissíveis, como testes rápidos e preservativos.",
+          "Na área ginecológica, a ação incluiu a avaliação de sangramento uterino anormal, dor pélvica e suspeita de endometriose, com acompanhamento na Atenção Primária e encaminhamento para especialistas quando necessário."
+        ]
+      },
+      {
+        "h": "Menstruação, menopausa e saúde mental",
+        "p": [
+          "O Circuito ofereceu avaliação de alterações do ciclo menstrual e dos sintomas da transição para a menopausa. Pelo Programa Dignidade Menstrual, mulheres elegíveis puderam receber a autorização para retirar absorventes gratuitamente.",
+          "A programação incluiu ainda escuta qualificada em saúde mental e orientações sobre hábitos de vida, como alimentação, atividade física, pressão arterial, tabagismo e consumo de álcool."
+        ]
+      },
+      {
+        "h": "Como participar",
+        "p": [
+          "Para saber se a sua cidade participa e quais atividades estão previstas, a orientação do Ministério da Saúde é procurar a Secretaria Municipal de Saúde. Os municípios ainda podem aderir ao Circuito."
         ]
       },
       {
         "h": "Orientação aos profissionais",
         "p": [
-          "Para apoiar os gestores, foi publicada a Nota Técnica Conjunta nº 360/2026. A série Papo de Mulher, com três cadernos temáticos, foi disponibilizada para os profissionais de saúde."
+          "Para apoiar os gestores, foi publicada a Nota Técnica Conjunta nº 360/2026, com orientações para a organização das ações. A série Papo de Mulher, com três cadernos temáticos, um vídeo sobre rodas de conversa e um guia para agentes comunitários de saúde também foram disponibilizados e podem ser usados ao longo de todo o ano."
         ]
       }
     ],
@@ -293,22 +432,43 @@
       "migalha": "Women's care",
       "secoes": [
         {
-          "h": "What was offered",
+          "h": "About the initiative",
           "p": [
-            "The initiative brought together care, exams, contraceptive methods, vaccines and discussion groups. Services included the HPV DNA test, mammography when indicated, and IUD and subdermal implant insertion.",
-            "Some locations received the Carretas de Saúde da Mulher (Women's Health mobile units), offering mammography, ultrasound and colposcopy, with the goal of reducing waiting lists in the municipalities."
+            "Held on Saturday, October 17, during Pink October, the Women's Care Circuit is an initiative of the Ministry of Health in partnership with states and municipalities. It brought together consultations, exams, contraceptive methods, vaccines, group activities such as discussion circles, and referrals within the SUS network.",
+            "According to the Secretary of Primary Health Care, Ana Luiza Caldas, the goal is to promote comprehensive care for women, identifying each woman's needs and bringing her closer to health services."
           ]
         },
         {
-          "h": "Dignidade Menstrual (Menstrual Dignity)",
+          "h": "Cancer prevention and early detection",
           "p": [
-            "The Dignidade Menstrual (Menstrual Dignity) Program was also part of the initiative: eligible women could receive authorization to obtain free sanitary pads."
+            "Services included clinical breast exams, investigation of signs and symptoms, mammography when indicated, Pap smear collection or DNA-HPV testing, depending on each area's strategy, and HPV vaccine updates.",
+            "Some locations received the Women's Health Trucks, offering mammography, ultrasound and colposcopy, to help reduce waiting lists in municipalities."
           ]
         },
         {
-          "h": "Guidance for professionals",
+          "h": "Sexual, reproductive and gynecological health",
           "p": [
-            "To support health managers, Joint Technical Note No. 360/2026 was published. The Papo de Mulher series, with three thematic booklets, was made available to health professionals."
+            "Women could also receive counseling on reproductive planning and contraceptive methods, focusing on the IUD and the subdermal implant, as well as prevention of sexually transmitted infections, such as rapid tests and condoms.",
+            "In gynecology, the initiative included assessment of abnormal uterine bleeding, pelvic pain and suspected endometriosis, with follow-up in primary care and specialist referral when needed."
+          ]
+        },
+        {
+          "h": "Menstruation, menopause and mental health",
+          "p": [
+            "The Circuit offered assessment of menstrual cycle changes and symptoms of the menopausal transition. Through the Menstrual Dignity Program, eligible women could receive authorization to pick up free sanitary pads.",
+            "The program also included mental health support and guidance on lifestyle habits, such as diet, physical activity, blood pressure, smoking and alcohol use."
+          ]
+        },
+        {
+          "h": "How to take part",
+          "p": [
+            "To find out whether your city is taking part and which activities are planned, the Ministry of Health advises contacting the Municipal Health Department. Municipalities can still join the Circuit."
+          ]
+        },
+        {
+          "h": "Guidance for health professionals",
+          "p": [
+            "To support managers, Joint Technical Note No. 360/2026 was published with guidance on organizing the activities. The Papo de Mulher series, with three thematic booklets, a video on discussion circles and a guide for community health workers were also released and can be used throughout the year."
           ]
         }
       ]
@@ -321,28 +481,44 @@
     "data": "2026-10-16",
     "tema": "Vacinação",
     "migalha": "Vacinação",
-    "leitura": 2,
+    "leitura": 4,
     "titulo": "Dia Nacional da Vacinação reforça a proteção contra mais de 20 doenças",
     "resumo": "Mais de 222 milhões de doses já foram distribuídas em 2026. Veja os dados de cobertura e o calendário da tríplice viral.",
     "intro": "Às vésperas do Dia Nacional da Vacinação, celebrado em 17 de outubro, o Ministério da Saúde destacou o apoio a estados e municípios para ampliar a proteção da população.",
     "secoes": [
       {
-        "h": "Doses e cobertura",
+        "h": "Doses e vacinas disponíveis",
         "p": [
-          "Em 2026, o Ministério da Saúde já distribuiu mais de 222 milhões de doses. O SUS oferece gratuitamente vacinas contra mais de 20 doenças.",
-          "Em 2025, a cobertura da primeira dose da tríplice viral chegou a 93,10%. Dados da OMS e do UNICEF divulgados em julho apontam que o número de crianças sem a primeira dose da pentavalente caiu de 360 mil para 50 mil entre 2023 e 2025, uma redução de cerca de 90%."
+          "Em 2026, o Ministério da Saúde já distribuiu mais de 222 milhões de doses para apoiar a vacinação de rotina em estados e municípios. O SUS oferece gratuitamente vacinas contra mais de 20 doenças, entre elas poliomielite, sarampo, rubéola, caxumba, coqueluche, difteria, tétano, hepatites A e B, febre amarela, meningites, tuberculose, HPV e dengue, conforme a idade, o histórico e as condições de saúde de cada pessoa.",
+          "Gestantes também podem receber a vacina contra o vírus sincicial respiratório (VSR), principal causador de bronquiolite em bebês."
+        ]
+      },
+      {
+        "h": "Coberturas em alta",
+        "p": [
+          "Desde 2023, a cobertura das 16 vacinas do calendário infantil aumentou, e o número de crianças não vacinadas caiu 86%, segundo a OMS e o Unicef. Em 2025, a cobertura da primeira dose da tríplice viral chegou a 93,10%.",
+          "Dados divulgados pela OMS e pelo Unicef em julho mostram ainda que o número de crianças sem a primeira dose da pentavalente caiu de 360 mil para 50 mil entre 2023 e 2025, uma redução de cerca de 90%. Com isso, o Brasil passou a integrar o grupo de países que mais reduziram o número de crianças não vacinadas."
         ]
       },
       {
         "h": "Sarampo",
         "p": [
-          "O Brasil recuperou em 2024 a certificação de país livre do sarampo, que havia perdido em 2019, ano com mais de 20 mil casos. Em 2026, foram registrados 61 casos importados ou relacionados à importação."
+          "O Brasil recuperou em 2024 a certificação de país livre da circulação endêmica do sarampo, que havia perdido em 2019, ano com mais de 20 mil casos. Em 2026, foram confirmados 61 casos importados ou relacionados à importação.",
+          "O cenário internacional exige atenção: segundo o CDC, os Estados Unidos registram o maior número anual de casos em mais de 35 anos, com quase 4 mil confirmações em 2026, a maioria em pessoas não vacinadas ou com situação vacinal desconhecida."
         ]
       },
       {
-        "h": "Quando vacinar",
+        "h": "Novidades no calendário",
         "p": [
-          "A tríplice viral é aplicada aos 12 meses (primeira dose) e aos 15 meses (segunda dose). A ausência da caderneta de vacinação não impede a aplicação das vacinas."
+          "Entre 2023 e 2026, o calendário nacional passou a incluir a vacina contra a dengue, a dose única da vacina contra o HPV para o público de 9 a 14 anos, a vacina contra o VSR para gestantes e uma segunda dose de reforço da vacina inativada contra a poliomielite (VIP) aos 4 anos de idade."
+        ]
+      },
+      {
+        "h": "Como se vacinar",
+        "p": [
+          "A orientação é conferir a caderneta de vacinação e, se houver doses em atraso, procurar a Unidade Básica de Saúde (UBS) de referência, de preferência levando a caderneta. A falta do documento, porém, não impede a vacinação.",
+          "A caderneta digital, com o histórico de doses, pode ser consultada gratuitamente no aplicativo ou na versão web do Meu SUS Digital, com acesso pela conta Gov.br.",
+          "A tríplice viral, que protege contra sarampo, caxumba e rubéola, é aplicada aos 12 meses (primeira dose) e aos 15 meses (segunda dose). Adolescentes e adultos não vacinados também devem procurar a UBS."
         ]
       }
     ],
@@ -356,22 +532,38 @@
       "migalha": "Vaccination",
       "secoes": [
         {
-          "h": "Doses and coverage",
+          "h": "Doses and available vaccines",
           "p": [
-            "In 2026, the Ministry of Health has already distributed more than 222 million doses. The SUS (Brazil's public health system) offers free vaccines against more than 20 diseases.",
-            "In 2025, coverage of the first dose of the MMR vaccine reached 93.10%. WHO and UNICEF data released in July show that the number of children without the first dose of the pentavalent vaccine fell from 360,000 to 50,000 between 2023 and 2025, a reduction of about 90%."
+            "In 2026, the Ministry of Health has already distributed more than 222 million doses to support routine vaccination in states and municipalities. SUS offers free vaccines against more than 20 diseases, including polio, measles, rubella, mumps, whooping cough, diphtheria, tetanus, hepatitis A and B, yellow fever, meningitis, tuberculosis, HPV and dengue, according to each person's age, history and health conditions.",
+            "Pregnant women can also receive the vaccine against respiratory syncytial virus (RSV), the main cause of bronchiolitis in babies."
+          ]
+        },
+        {
+          "h": "Coverage on the rise",
+          "p": [
+            "Since 2023, coverage of the 16 vaccines in the childhood schedule has increased, and the number of unvaccinated children has fallen by 86%, according to WHO and UNICEF. In 2025, first-dose coverage of the MMR vaccine reached 93.10%.",
+            "Data released by WHO and UNICEF in July also show that the number of children without the first dose of the pentavalent vaccine fell from 360,000 to 50,000 between 2023 and 2025, a reduction of about 90%. As a result, Brazil joined the group of countries that most reduced the number of unvaccinated children."
           ]
         },
         {
           "h": "Measles",
           "p": [
-            "In 2024, Brazil regained its measles-free certification, which it had lost in 2019, a year with more than 20,000 cases. In 2026, 61 imported or import-related cases were recorded."
+            "In 2024, Brazil regained its certification as free of endemic measles transmission, which it had lost in 2019, a year with more than 20,000 cases. In 2026, 61 imported or import-related cases were confirmed.",
+            "The international situation calls for attention: according to the CDC, the United States is recording its highest annual number of cases in more than 35 years, with nearly 4,000 confirmed in 2026, mostly among unvaccinated people or those with unknown vaccination status."
           ]
         },
         {
-          "h": "When to vaccinate",
+          "h": "Updates to the schedule",
           "p": [
-            "The MMR vaccine is given at 12 months (first dose) and at 15 months (second dose). Not having a vaccination card does not prevent vaccines from being given."
+            "Between 2023 and 2026, the national schedule added the dengue vaccine, a single dose of the HPV vaccine for ages 9 to 14, the RSV vaccine for pregnant women, and a second booster dose of the inactivated polio vaccine (IPV) at age 4."
+          ]
+        },
+        {
+          "h": "How to get vaccinated",
+          "p": [
+            "Check your vaccination card and, if any doses are overdue, go to your local primary care unit (UBS), preferably with the card. Not having the card, however, does not prevent vaccination.",
+            "The digital vaccination card, with your dose history, is available free of charge in the Meu SUS Digital app or website, using a Gov.br account.",
+            "The MMR vaccine, which protects against measles, mumps and rubella, is given at 12 months (first dose) and 15 months (second dose). Unvaccinated teenagers and adults should also go to a UBS."
           ]
         }
       ]
@@ -384,7 +576,7 @@
     "data": "2026-10-20",
     "tema": "Saúde digital",
     "migalha": "Hospital Inteligente",
-    "leitura": 3,
+    "leitura": 4,
     "titulo": "Hospital Inteligente e rede de UTIs conectadas têm contrato de gestão assinado",
     "resumo": "Projeto prevê cerca de 800 leitos em São Paulo e uma rede de UTIs conectadas que chegará a 280 leitos em 14 hospitais.",
     "foto": "old_hemodinamica",
@@ -392,22 +584,37 @@
     "intro": "O Ministério da Saúde assinou, em 20 de outubro, o contrato de gestão do Hospital Inteligente e da Rede de UTIs conectadas com o Instituto Tecnológico de Medicina Inteligente do Brasil (ITMI).",
     "secoes": [
       {
+        "h": "O contrato",
+        "p": [
+          "O contrato de gestão assinado com o Instituto Tecnológico de Medicina Inteligente do Brasil (ITMI) apoia a implantação da Rede Nacional de Hospitais e Serviços Inteligentes e Medicina de Alta Precisão do SUS. A iniciativa inclui a criação do Hospital Inteligente e a gestão e ampliação de uma rede de UTIs conectadas.",
+          "A estratégia combina conectividade, integração de dados e inteligência artificial para identificar riscos precocemente, organizar leitos e apoiar a decisão clínica. As decisões sobre o cuidado dos pacientes continuam sendo responsabilidade dos profissionais de saúde."
+        ]
+      },
+      {
         "h": "O Hospital Inteligente",
         "p": [
-          "Instalado em São Paulo, o Hospital Inteligente terá cerca de 800 leitos — 250 de emergência, 350 de UTI e 200 de enfermaria — e 25 salas cirúrgicas. O início da operação está previsto para o segundo trimestre de 2029.",
-          "Uma das metas é reduzir o tempo médio de permanência na emergência de 17 para 4 horas em até quatro anos de funcionamento."
+          "Instalado em São Paulo, o Hospital Inteligente terá cerca de 800 leitos (250 de emergência, 350 de UTI e 200 de enfermaria) e atuará em medicina de emergência, terapia intensiva e neurologia. O centro cirúrgico contará com 25 salas, com capacidade para cerca de 27 mil cirurgias por ano, e a estrutura poderá realizar até 190 mil internações anuais.",
+          "Entre as tecnologias previstas estão leitos híbridos, que podem ser adaptados de enfermaria para UTI conforme a necessidade; ambulâncias conectadas por 5G, que transmitem informações clínicas durante o transporte; um centro de comando que monitora os leitos em tempo real; e um prontuário integrado do atendimento pré-hospitalar até a alta.",
+          "O início da operação está previsto para o segundo trimestre de 2029. Uma das principais metas é reduzir o tempo médio de permanência na emergência de 17 para 4 horas em até quatro anos de funcionamento."
         ]
       },
       {
         "h": "UTIs conectadas",
         "p": [
-          "A Rede de UTIs conectadas começa com 60 leitos em 6 hospitais, distribuídos pelas cinco regiões do país, e deve chegar a 280 leitos em 14 hospitais."
+          "A Rede de UTIs conectadas já reúne 60 leitos em 6 hospitais, distribuídos pelas cinco regiões do país, e deve chegar a 280 leitos em 14 hospitais. Nesse modelo, especialistas em terapia intensiva acompanham os pacientes à distância, em tempo real, 24 horas por dia, e apoiam as equipes locais.",
+          "Sistemas de monitoramento contínuo e inteligência artificial ajudam a identificar sinais de agravamento, como sepse e insuficiência respiratória. As metas incluem que 85% das UTIs elegíveis alcancem os objetivos de melhoria e que os eventos adversos relacionados à assistência caiam pelo menos 10%."
         ]
       },
       {
         "h": "Financiamento e metas",
         "p": [
-          "O financiamento inclui uma operação de crédito de US$ 320 milhões com o Novo Banco de Desenvolvimento (NDB). O contrato de gestão prevê 78 indicadores, com pagamentos vinculados ao cumprimento de metas."
+          "O financiamento inclui uma operação de crédito de US$ 320 milhões com o Novo Banco de Desenvolvimento (NDB). O contrato de gestão prevê 78 indicadores, e os pagamentos estão vinculados ao cumprimento das metas, com possibilidade de desconto em caso de entregas não realizadas."
+        ]
+      },
+      {
+        "h": "Proadi-SUS",
+        "p": [
+          "Na mesma ocasião, o Ministério da Saúde assinou os termos do Proadi-SUS para o triênio 2027-2029, com a participação de sete hospitais de excelência. O programa apoia projetos voltados a ampliar o acesso à atenção especializada, enfrentar filas, qualificar a assistência e fortalecer a pesquisa e a gestão no SUS."
         ]
       }
     ],
@@ -422,22 +629,37 @@
       "migalha": "Smart Hospital",
       "secoes": [
         {
-          "h": "The Smart Hospital",
+          "h": "The contract",
           "p": [
-            "Located in São Paulo, the Smart Hospital will have about 800 beds — 250 emergency, 350 ICU and 200 ward beds — and 25 operating rooms. Operations are scheduled to begin in the second quarter of 2029.",
-            "One of the goals is to reduce the average length of stay in the emergency department from 17 to 4 hours within four years of operation."
+            "The management contract signed with the Brazilian Technological Institute of Intelligent Medicine (ITMI) supports the rollout of SUS's National Network of Intelligent Hospitals and Services and High-Precision Medicine. The initiative includes creating the Intelligent Hospital and managing and expanding a network of connected ICUs.",
+            "The strategy combines connectivity, data integration and artificial intelligence to identify risks early, organize beds and support clinical decisions. Decisions about patient care remain the responsibility of health professionals."
+          ]
+        },
+        {
+          "h": "The Intelligent Hospital",
+          "p": [
+            "Located in São Paulo, the Intelligent Hospital will have around 800 beds (250 emergency, 350 ICU and 200 ward beds) and will focus on emergency medicine, intensive care and neurology. The surgical center will have 25 operating rooms, with capacity for about 27,000 surgeries a year, and the facility will be able to handle up to 190,000 admissions annually.",
+            "Planned technologies include hybrid beds that can be converted from ward to ICU as needed; 5G-connected ambulances that transmit clinical information during transport; a command center that monitors beds in real time; and an integrated medical record from pre-hospital care to discharge.",
+            "Operations are scheduled to begin in the second quarter of 2029. One of the main goals is to reduce the average length of stay in the emergency department from 17 to 4 hours within four years of operation."
           ]
         },
         {
           "h": "Connected ICUs",
           "p": [
-            "The Connected ICU Network starts with 60 beds in 6 hospitals, spread across the country's five regions, and is expected to reach 280 beds in 14 hospitals."
+            "The connected ICU network already includes 60 beds in 6 hospitals across Brazil's five regions and is expected to reach 280 beds in 14 hospitals. In this model, intensive care specialists monitor patients remotely, in real time, 24 hours a day, and support local teams.",
+            "Continuous monitoring systems and artificial intelligence help identify signs of deterioration, such as sepsis and respiratory failure. Targets include 85% of eligible ICUs meeting their improvement goals and a reduction of at least 10% in care-related adverse events."
           ]
         },
         {
           "h": "Funding and targets",
           "p": [
-            "Funding includes a US$320 million loan from the New Development Bank (NDB). The management contract sets out 78 indicators, with payments tied to meeting targets."
+            "Funding includes a US$320 million loan from the New Development Bank (NDB). The management contract sets 78 indicators, and payments are tied to meeting targets, with possible deductions for undelivered results."
+          ]
+        },
+        {
+          "h": "Proadi-SUS",
+          "p": [
+            "On the same occasion, the Ministry of Health signed the Proadi-SUS agreements for 2027-2029, with the participation of seven leading hospitals. The program supports projects to expand access to specialized care, reduce waiting lists, improve care quality and strengthen research and management in SUS."
           ]
         }
       ]
@@ -450,7 +672,7 @@
     "data": "2026-10-20",
     "tema": "Oncologia",
     "migalha": "Medicamentos oncológicos",
-    "leitura": 2,
+    "leitura": 4,
     "titulo": "SUS começa a oferecer nove novos medicamentos oncológicos",
     "resumo": "Os medicamentos cobrem 13 indicações e devem beneficiar mais de 116 mil pessoas. Rastreamento de câncer colorretal ganha 400 mil testes.",
     "foto": "old_consultorio",
@@ -460,20 +682,36 @@
       {
         "h": "Os novos medicamentos",
         "p": [
-          "Os nove medicamentos atendem 13 indicações e devem beneficiar mais de 116 mil pessoas. Ao todo, 23 medicamentos estão previstos até o fim do ano, uma ampliação de 35%.",
-          "A oferta começa em 20 centros de tratamento, com impacto anual de aquisição de R$ 155,4 milhões. Considerando todas as medidas anunciadas, o impacto anual é de R$ 4 bilhões."
+          "Os nove medicamentos atendem 13 indicações de câncer, entre eles tumores de mama, próstata, pulmão e linfomas, e devem beneficiar mais de 116 mil pessoas. Muitos já estavam incorporados ao SUS havia mais de dez anos, mas não eram efetivamente ofertados.",
+          "A lista inclui trastuzumabe, abemaciclibe, acetato de lanreotida, pazopanibe, rituximabe, abiraterona, gefitinibe, alfatirotropina (TSH recombinante) e sunitinibe. Ao todo, 23 novos medicamentos estão previstos até o fim do ano, o que amplia em 35% as alternativas de tratamento na rede pública.",
+          "Os tratamentos podem aumentar a sobrevida e melhorar a qualidade de vida dos pacientes. Alguns também têm indicação após a cirurgia, mesmo sem sinal visível de tumor, para evitar que a doença volte."
+        ]
+      },
+      {
+        "h": "Onde a oferta começa",
+        "p": [
+          "A oferta começa em 20 centros de tratamento, em 17 estados de todas as regiões do país, e deve chegar aos demais centros até o fim do ano. As equipes serão capacitadas para usar um novo sistema, mais digital e integrado, para solicitação, registro e controle dos tratamentos.",
+          "O impacto anual da aquisição dos nove medicamentos é de R$ 155,4 milhões. Considerando todas as medidas anunciadas, o impacto chega a R$ 4 bilhões por ano. A iniciativa faz parte do programa Agora Tem Especialistas e da Assistência Farmacêutica Oncológica."
         ]
       },
       {
         "h": "Rastreamento do câncer colorretal",
         "p": [
-          "A partir de novembro, serão distribuídos 400 mil testes FIT para o rastreamento do câncer colorretal em pessoas sem sintomas, de 50 a 75 anos. Segundo o Ministério, o teste tem precisão de até 92%."
+          "A partir de novembro, o Ministério da Saúde começa a distribuir aos estados 400 mil testes imunoquímicos fecais (FIT) para o rastreamento do câncer de intestino em pessoas sem sintomas, de 50 a 75 anos. A implantação nas Unidades Básicas de Saúde será gradual, começando pelas capitais e pelos municípios com mais de 500 mil habitantes.",
+          "O FIT detecta quantidades mínimas de sangue oculto nas fezes, com precisão de até 92%. Quem tiver resultado positivo é encaminhado para colonoscopia, o que evita a realização desse exame em pessoas com resultado negativo."
         ]
       },
       {
-        "h": "Câncer de tireoide",
+        "h": "Outras medidas",
         "p": [
-          "O custeio da iodoterapia, usada no tratamento do câncer de tireoide, passa de R$ 5,2 milhões para R$ 18 milhões por ano, um aumento de 246%."
+          "O custeio da iodoterapia, usada no tratamento do câncer de tireoide, passa de R$ 5,2 milhões para R$ 18 milhões por ano, um aumento de 246%. O repasse para medicamentos aplicados na veia será quatro vezes maior, e o valor para os medicamentos orais vai dobrar.",
+          "O pacote inclui ainda R$ 46 milhões por ano para cirurgias videotorácicas oncológicas, técnica minimamente invasiva usada principalmente no câncer de pulmão, e a atualização dos valores de exames de diagnóstico, como biópsias e testes de biologia molecular."
+        ]
+      },
+      {
+        "h": "Câncer infantojuvenil",
+        "p": [
+          "O Ministério também vai criar um grupo de trabalho para elaborar a primeira linha de cuidado do retinoblastoma no Brasil, câncer que afeta principalmente crianças com menos de 5 anos. O principal sinal de alerta é um reflexo branco na pupila. Com diagnóstico e tratamento precoces em serviço especializado, a sobrevida supera 90%."
         ]
       }
     ],
@@ -490,20 +728,36 @@
         {
           "h": "The new drugs",
           "p": [
-            "The nine drugs cover 13 indications and are expected to benefit more than 116,000 people. In total, 23 drugs are planned by the end of the year, a 35% expansion.",
-            "The rollout begins at 20 treatment centers, with an annual procurement impact of R$155.4 million. Considering all the measures announced, the annual impact is R$4 billion."
+            "The nine drugs cover 13 cancer indications, including breast, prostate and lung tumors and lymphomas, and are expected to benefit more than 116,000 people. Many had been incorporated into SUS for more than ten years but were not actually available.",
+            "The list includes trastuzumab, abemaciclib, lanreotide acetate, pazopanib, rituximab, abiraterone, gefitinib, thyrotropin alfa (recombinant TSH) and sunitinib. In total, 23 new drugs are planned by the end of the year, expanding treatment options in the public network by 35%.",
+            "The treatments can increase survival and improve patients' quality of life. Some are also indicated after surgery, even with no visible sign of a tumor, to prevent the disease from returning."
+          ]
+        },
+        {
+          "h": "Where the rollout begins",
+          "p": [
+            "The rollout begins at 20 treatment centers in 17 states across all regions of the country and should reach the remaining centers by the end of the year. Teams will be trained on a new, more digital and integrated system for requesting, recording and monitoring treatments.",
+            "The annual cost of purchasing the nine drugs is R$155.4 million. Including all the measures announced, the impact reaches R$4 billion a year. The initiative is part of the Agora Tem Especialistas program and Oncology Pharmaceutical Care."
           ]
         },
         {
           "h": "Colorectal cancer screening",
           "p": [
-            "Starting in November, 400,000 FIT tests will be distributed for colorectal cancer screening in people aged 50 to 75 without symptoms. According to the Ministry, the test is up to 92% accurate."
+            "Starting in November, the Ministry of Health will distribute 400,000 fecal immunochemical tests (FIT) to states for bowel cancer screening in people aged 50 to 75 without symptoms. Rollout in primary care units will be gradual, starting with state capitals and municipalities with more than 500,000 inhabitants.",
+            "FIT detects tiny amounts of hidden blood in stool, with accuracy of up to 92%. People with a positive result are referred for colonoscopy, which avoids this exam for those with a negative result."
           ]
         },
         {
-          "h": "Thyroid cancer",
+          "h": "Other measures",
           "p": [
-            "Funding for radioiodine therapy, used to treat thyroid cancer, rises from R$5.2 million to R$18 million per year, an increase of 246%."
+            "Funding for radioiodine therapy, used to treat thyroid cancer, rises from R$5.2 million to R$18 million a year, an increase of 246%. Payments for intravenous drugs will be four times higher, and the amount for oral drugs will double.",
+            "The package also includes R$46 million a year for oncological video-assisted thoracic surgery, a minimally invasive technique used mainly for lung cancer, and updated fees for diagnostic tests such as biopsies and molecular biology tests."
+          ]
+        },
+        {
+          "h": "Childhood cancer",
+          "p": [
+            "The Ministry will also set up a working group to develop Brazil's first care pathway for retinoblastoma, a cancer that mainly affects children under 5. The main warning sign is a white reflection in the pupil. With early diagnosis and treatment at a specialized service, survival exceeds 90%."
           ]
         }
       ]

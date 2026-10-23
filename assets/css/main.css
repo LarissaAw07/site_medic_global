@@ -1729,8 +1729,9 @@ de .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27
 .news-source .btn svg { width: 15px; height: 15px; }
 /* título com área ampla, alinhado à margem do site; corpo em coluna única com largura de leitura confortável */
 .page-hero h1.news-title { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem); max-width: 32ch; }
-.news-body { max-width: 48rem; }
+.news-body { max-width: none; }
 .news-body .lead { max-width: none; }
+.news-body p, .news-body li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
 /* "Depois da contratação" → rodapé: quadros um pouco mais visíveis, esmaecendo aos poucos até o azul do rodapé */
 .mosaic .mosaic-grid span { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.6); }

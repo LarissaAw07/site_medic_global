@@ -61,44 +61,51 @@
   </div>
 </section>
 
-<section class="section mist" aria-labelledby="faq-t" id="duvidas">
+<section class="section mist faq-sec" aria-labelledby="faq-t" id="duvidas">
   <div class="wrap">
-    <span class="eyebrow">Dúvidas frequentes</span>
-    <h2 id="faq-t" class="balance">Resolva rápido</h2>
-    <div class="faq-cols mt-7">
-      <div class="faq-col">
-        <details class="faq-item"><summary>Como emito a segunda via do boleto?</summary><div class="ans">Acesse o <a href="{{L.links.boleto}}" target="_blank" rel="noopener">sistema de boletos</a>. Em caso de dúvida, fale com o financeiro pelo WhatsApp {{L.wa.financeiro.label}}.</div></details>
-        <details class="faq-item"><summary>Como solicito uma autorização?</summary><div class="ans">Envie a solicitação pelo WhatsApp de autorizações {{L.wa.autorizacoes.label}}, com o pedido do profissional e os dados do beneficiário.</div></details>
-        <details class="faq-item"><summary>Como encontro um médico ou laboratório?</summary><div class="ans">Use a <a href="rede-credenciada.html">busca da rede credenciada</a> ou o aplicativo MedicGLOBAL.</div></details>
+    <div class="faq-sec-grid">
+      <div class="faq-sec-intro">
+        <span class="eyebrow">Dúvidas frequentes</span>
+        <h2 id="faq-t" class="balance">Resolva rápido</h2>
+        <p class="lead">As respostas para as perguntas mais comuns dos beneficiários, em poucos cliques.</p>
+        <div class="faq-sec-help"><span class="faq-sec-help-ico" aria-hidden="true">{{i:chat}}</span><div><p>Não encontrou o que procurava?</p><a class="btn btn--sm" href="#beneficiario">Falar com a Central</a></div></div>
       </div>
-      <div class="faq-col">
-        <details class="faq-item"><summary>Como acesso a telemedicina?</summary><div class="ans">Veja o passo a passo na página de <a href="telemedicina.html">telemedicina</a>.</div></details>
-        <details class="faq-item"><summary>Esqueci a senha da Área do Beneficiário.</summary><div class="ans">Use a opção <a href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Esqueci minha senha</a>. Se for o seu primeiro acesso, faça o <a href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">cadastro inicial</a>.</div></details>
-        <details class="faq-item"><summary>Quando devo procurar a ouvidoria?</summary><div class="ans">Quando a sua solicitação não tiver sido resolvida pelos canais de atendimento. A ouvidoria atende em {{L.phones.ouvidoriaHours}}.</div></details>
+      <div class="faq-sec-list">
+        <div class="faq-sec-col">
+          <details class="faq-item"><summary>Como emito a segunda via do boleto?</summary><div class="ans">Acesse o <a href="{{L.links.boleto}}" target="_blank" rel="noopener">sistema de boletos</a>. Em caso de dúvida, fale com o financeiro pelo WhatsApp {{L.wa.financeiro.label}}.</div></details>
+          <details class="faq-item"><summary>Como solicito uma autorização?</summary><div class="ans">Envie a solicitação pelo WhatsApp de autorizações {{L.wa.autorizacoes.label}}, com o pedido do profissional e os dados do beneficiário.</div></details>
+          <details class="faq-item"><summary>Como encontro um médico ou laboratório?</summary><div class="ans">Use a <a href="rede-credenciada.html">busca da rede credenciada</a> ou o aplicativo MedicGLOBAL.</div></details>
+        </div>
+        <div class="faq-sec-col">
+          <details class="faq-item"><summary>Como acesso a telemedicina?</summary><div class="ans">Veja o passo a passo na página de <a href="telemedicina.html">telemedicina</a>.</div></details>
+          <details class="faq-item"><summary>Esqueci a senha da Área do Beneficiário.</summary><div class="ans">Use a opção <a href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Esqueci minha senha</a>. Se for o seu primeiro acesso, faça o <a href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">cadastro inicial</a>.</div></details>
+          <details class="faq-item"><summary>Quando devo procurar a ouvidoria?</summary><div class="ans">Quando a sua solicitação não tiver sido resolvida pelos canais de atendimento. A ouvidoria atende em {{L.phones.ouvidoriaHours}}.</div></details>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" aria-label="Canais por público" data-filter data-filter-items="#canais .support">
+<section class="section central-sec" aria-label="Canais de atendimento">
+  <!-- âncoras dos canais antigos (links de outras páginas) apontam para a Central -->
+  <span class="central-alias" id="empresa"></span><span class="central-alias" id="prestador"></span><span class="central-alias" id="comercial"></span><span class="central-alias" id="autorizacoes-canal"></span>
   <div class="wrap">
-    <div class="audience mb-7" role="group" aria-label="Quem é você?">
-      <button class="pill" type="button" data-filter-group="who" data-value="all" aria-pressed="true">Todos os canais</button>
-      <button class="pill" type="button" data-filter-group="who" data-value="beneficiario" data-anchor="beneficiario" aria-pressed="false">Beneficiário</button>
-      <button class="pill" type="button" data-filter-group="who" data-value="empresa" data-anchor="empresa" aria-pressed="false">Empresa</button>
-      <button class="pill" type="button" data-filter-group="who" data-value="prestador" data-anchor="prestador" aria-pressed="false">Prestador</button>
-      <button class="pill" type="button" data-filter-group="who" data-value="futuro" data-anchor="comercial" aria-pressed="false">Quero contratar</button>
-    </div>
-    <div class="support-grid" id="canais">
-      <article class="support" data-who="beneficiario" id="beneficiario"><span class="ico">{{i:user}}</span><span class="who">Beneficiário</span><h3>Central de atendimento</h3><p>Dúvidas sobre o plano, rede credenciada e serviços.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></li><li><a href="beneficiario.html">{{i:user}} Área do Beneficiário</a></li></ul></article>
-      <article class="support" data-who="beneficiario prestador" id="autorizacoes-canal"><span class="ico">{{i:file-check}}</span><span class="who">Beneficiário · Prestador</span><h3>Autorizações</h3><p>Solicitação de autorização de exames e procedimentos.</p><ul><li><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.autorizacoes.label}}</a></li><li><a href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Autorizador Web (prestador)</a></li></ul></article>
-      <article class="support" data-who="beneficiario empresa"><span class="ico">{{i:receipt}}</span><span class="who">Beneficiário · Empresa</span><h3>Financeiro</h3><p>Boletos, pagamentos e questões financeiras.</p><ul><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.financeiro.label}}</a></li><li><a href="{{L.links.boleto}}" target="_blank" rel="noopener">{{i:receipt}} 2ª via de boleto</a></li></ul></article>
-      <article class="support" data-who="futuro empresa" id="comercial"><span class="ico">{{i:user-plus}}</span><span class="who">Quero contratar · Empresa</span><h3>Comercial</h3><p>Planos, propostas e contratação para você, sua família ou sua empresa.</p><ul><li><a href="{{L.wa.comercial.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.comercial.label}}</a></li><li><a href="planos.html#contato">{{i:mail}} Solicitar proposta</a></li></ul></article>
-      <article class="support" data-who="prestador" id="prestador"><span class="ico">{{i:briefcase}}</span><span class="who">Prestador</span><h3>Faturamento</h3><p>Faturamento, guias TISS e informações operacionais.</p><ul><li><a href="{{L.wa.faturamento.url}}" target="_blank" rel="noopener">{{i:whatsapp}} {{L.wa.faturamento.label}}</a></li><li><a href="documentos.html#tiss">{{i:doc}} Guias e TISS</a></li></ul></article>
-      <article class="support" data-who="empresa" id="empresa"><span class="ico">{{i:building}}</span><span class="who">Empresa cliente</span><h3>Portal da empresa</h3><p>Acesso exclusivo para empresas clientes.</p><ul><li><a href="{{L.links.empresa}}" target="_blank" rel="noopener">{{i:lock}} Acessar portal</a></li><li><a href="{{L.wa.financeiro.url}}" target="_blank" rel="noopener">{{i:whatsapp}} Financeiro</a></li></ul></article>
-      <article class="support" data-who="beneficiario empresa prestador futuro"><span class="ico">{{i:chat}}</span><span class="who">Todos</span><h3>Ouvidoria</h3><p>Se a sua demanda não foi resolvida pelos canais de atendimento, registre uma manifestação.</p><ul><li><a href="{{L.phones.central.tel}}">{{i:phone}} {{L.phones.central.label}}</a></li><li><a href="mailto:{{L.mail.ouvidoria}}">{{i:mail}} {{L.mail.ouvidoria}}</a></li><li><a href="#ouvidoria">{{i:doc}} Formulário</a></li></ul></article>
-      <article class="support" data-who="beneficiario futuro"><span class="ico">{{i:pin}}</span><span class="who">Presencial</span><h3>Onde estamos</h3><p>{{L.address.full}}</p><ul><li><a href="contato.html">{{i:pin}} Ver mapa e horários</a></li></ul></article>
-      <article class="support" data-who="colaborador"><span class="ico">{{i:users}}</span><span class="who">Colaborador</span><h3>Acesso interno</h3><p>Webmail para colaboradores MedicGLOBAL.</p><ul><li><a href="{{L.links.webmail}}" target="_blank" rel="noopener">{{i:lock}} Webmail</a></li></ul></article>
-    </div>
+    <article class="central reveal" id="beneficiario" aria-labelledby="central-t">
+      <div class="central-main">
+        <svg class="central-deco" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle cx="330" cy="70" r="70"/><circle cx="330" cy="70" r="130"/><circle cx="330" cy="70" r="190" stroke-dasharray="2 8"/><path d="M0 330c90-40 170-40 260 0s150 30 200-10"/></svg>
+        <span class="central-bubbles" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="central-ico" aria-hidden="true">{{i:headset}}</span>
+        <span class="central-eyebrow">Fale com a gente · Beneficiário</span>
+        <h2 id="central-t">Central de atendimento</h2>
+        <p>Dúvidas sobre o plano, rede credenciada e serviços.</p>
+      </div>
+      <div class="central-side">
+        <ul class="central-actions" role="list">
+          <li><a class="central-act central-act--phone" href="{{L.phones.central.tel}}"><span class="central-act-ico">{{i:phone}}</span><span class="central-act-txt"><small>Telefone</small><strong>{{L.phones.central.label}}</strong></span><span class="central-act-go" aria-hidden="true">{{i:arrow-right}}</span></a></li>
+          <li><a class="central-act central-act--wa" href="{{L.wa.geral.url}}" target="_blank" rel="noopener"><span class="central-act-ico">{{i:whatsapp}}</span><span class="central-act-txt"><small>WhatsApp</small><strong>Enviar mensagem</strong></span><span class="central-act-go" aria-hidden="true">{{i:arrow-right}}</span><span class="sr-only"> (abre em nova aba)</span></a></li>
+          <li><a class="central-act central-act--area" href="beneficiario.html"><span class="central-act-ico">{{i:user}}</span><span class="central-act-txt"><small>Acesso on-line</small><strong>Área do Beneficiário</strong></span><span class="central-act-go" aria-hidden="true">{{i:arrow-right}}</span></a></li>
+        </ul>
+      </div>
+    </article>
   </div>
 </section>

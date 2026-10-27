@@ -110,6 +110,7 @@
 .svc-steps li:first-child { background: var(--globo); border-color: var(--globo); color: rgba(255,255,255,.84); }
 .svc-steps li:first-child::before { color: var(--glow); }
 .svc-steps li:first-child strong { color: #fff; }
+.svc-steps li > .btn { align-self: flex-start; margin-top: auto; }
 
 /* Atendimento: faixa azul em linha única */
 .svc-cta { position: relative; overflow: hidden; background: var(--globo); color: #fff; padding-block: clamp(56px, 2rem + 3vw, 88px); }
@@ -213,9 +214,9 @@
     </div>
     <ul class="svc-steps">
       <li class="reveal"><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
-      <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</span></li>
-      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo <a class="accent" href="#abramge">Sistema ABRAMGE</a>.</span></li>
-      <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações <a class="accent" href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a>.</span></li>
+      <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da rede credenciada.</span><a class="btn btn--sm" href="rede-credenciada.html?tipo=hospital">Ver rede credenciada</a></li>
+      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</span><a class="btn btn--sm" href="#abramge">Sistema ABRAMGE</a></li>
+      <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações {{L.wa.autorizacoes.label}}.</span><a class="btn btn--sm" href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">Falar no WhatsApp</a></li>
     </ul>
   </div>
 </section>

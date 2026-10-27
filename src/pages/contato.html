@@ -1,6 +1,6 @@
 <!--@{
   "title": "Contato | Endereço, telefones e WhatsApp | MedicGLOBAL",
-  "description": "Fale com a MedicGLOBAL: R. Alcebíades Wohlers, 02, Extrema/MG. Telefone (35) 3435-4442, WhatsApp por setor e formulário de contato.",
+  "description": "Fale com a MedicGLOBAL: sedes em Pouso Alegre/MG (Av. Porfírio Ribeiro de Andrade, 90) e Extrema/MG (R. Alcebíades Wohlers, 02). Telefone (35) 3435-4442, WhatsApp por setor e formulário de contato.",
   "active": "voce",
   "og": "old_hsl_recepcao",
   "crumbs": [["Atendimento", "atendimento.html"], ["Contato", "contato.html"]]
@@ -14,7 +14,7 @@
       <div class="hero-copy c-1-6">
         <span class="eyebrow">Contato</span>
         <h1 id="t" class="balance">Fale com a MedicGLOBAL</h1>
-        <p class="lead">Tire suas dúvidas, envie sua mensagem ou visite a nossa sede em Extrema/MG. Escolha o canal mais conveniente e a nossa equipe dará o retorno.</p>
+        <p class="lead">Tire suas dúvidas, envie sua mensagem ou visite uma das nossas sedes, em Pouso Alegre/MG e Extrema/MG. Escolha o canal mais conveniente e a nossa equipe dará o retorno.</p>
         <div class="btn-row">
           <a class="btn" href="#f-t">Enviar mensagem</a>
           <a class="btn btn--ghost" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a>
@@ -23,7 +23,7 @@
       <div class="hero-media c-7-13">
         <div class="frame frame--art">{{> mosaic}}<span class="art-emblem" aria-hidden="true">{{i:mail}}</span></div>
         <div class="hero-chips" aria-hidden="true">
-          <span class="chip"><i>{{i:pin}}</i><span>Sede em Extrema/MG<small>atendimento e comercial</small></span></span>
+          <span class="chip"><i>{{i:pin}}</i><span>Sedes em Pouso Alegre e Extrema<small>atendimento e comercial</small></span></span>
           <span class="chip"><i>{{i:whatsapp}}</i><span>WhatsApp<small>canal direto com a equipe</small></span></span>
         </div>
       </div>
@@ -33,23 +33,68 @@
 
 <section aria-label="Onde estamos">
   <div class="wrap">
-    <div class="place">
-      <div class="place-card">
-        <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
-        <h2>Extrema, Minas Gerais</h2>
-        <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
-        <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02<br>Extrema/MG · CEP 37640-000</p></div>
+    <!-- Duas sedes (cartão + mapa) e duas unidades menores; no celular as sedes vêm primeiro; no desktop formam um xadrez 8/4 · 4/8 -->
+    <div class="places">
+      <article class="place place--main" aria-labelledby="sede-pa">
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
+          <h2 id="sede-pa">Pouso Alegre, Minas Gerais</h2>
+          <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
+          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">Av. Porfírio Ribeiro de Andrade, 90<br>Pouso Alegre/MG · CEP 37554-200</p></div>
+          <dl>
+            <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
+            <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
+            <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
+            <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="{{L.address.pousoAlegre.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Mapa: Av. Porfírio Ribeiro de Andrade, 90 - Pouso Alegre/MG" src="{{L.address.pousoAlegre.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </article>
+      <article class="place place--main" aria-labelledby="sede-ex">
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
+          <h2 id="sede-ex">Extrema, Minas Gerais</h2>
+          <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
+          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02 · Ponte Alta<br>Extrema/MG · CEP 37640-402</p></div>
+          <dl>
+            <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
+            <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
+            <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
+            <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="{{L.address.extrema.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Mapa: R. Alcebíades Wohlers, 02 · Ponte Alta - Extrema/MG" src="{{L.address.extrema.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </article>
+      <article class="place-unit" aria-labelledby="unidade-1">
+        <span class="place-unit-ico" aria-hidden="true">{{i:pin}}</span>
+        <span class="eyebrow" style="margin:0">Unidade</span>
+        <h3 id="unidade-1">Unidade MedicGLOBAL</h3>
+        <span class="badge">Endereço em atualização</span>
         <dl>
-          <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
-          <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
-          <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
-          <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
+          <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
+          <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
+          <div><dt>Cidade</dt><dd>Cidade Teste/MG</dd></div>
+          <div><dt>CEP</dt><dd>00000-000</dd></div>
         </dl>
-        <div class="btn-row"><a class="btn btn--light" href="{{L.address.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
-      </div>
-      <div class="place-media" data-carousel>
-        <iframe class="is-active" title="Mapa: R. Alcebíades Wohlers, 02 - Extrema/MG" src="{{L.address.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="opacity:1"></iframe>
-      </div>
+      </article>
+      <article class="place-unit" aria-labelledby="unidade-2">
+        <span class="place-unit-ico" aria-hidden="true">{{i:pin}}</span>
+        <span class="eyebrow" style="margin:0">Unidade</span>
+        <h3 id="unidade-2">Unidade MedicGLOBAL</h3>
+        <span class="badge">Endereço em atualização</span>
+        <dl>
+          <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
+          <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
+          <div><dt>Cidade</dt><dd>Cidade Teste/MG</dd></div>
+          <div><dt>CEP</dt><dd>00000-000</dd></div>
+        </dl>
+      </article>
     </div>
   </div>
 </section>

@@ -10,7 +10,7 @@ const path = require("path");
 const SRC = __dirname;
 const TEXT_ATTRS = new Set(["alt", "aria-label", "placeholder", "title", "content", "data-label", "aria-description"]);
 // nomes próprios e termos que ficam no original
-const ALLOW = /São Lucas|São Paulo|Bragança Paulista|Pouso Alegre|Cambuí|Extrema|Renascentista|Santa Casa|Alcebíades Wohlers|Extremamedic|Medic ?GLOBAL|EMED GLOBAL BLUE|ABRAMGE|Libras|VLibras|LGPD|boleto|Rol|Cosaúde|Dignidade Menstrual|Papo de Mulher|Governo Federal|Núcleos|Fale Conosco|Ministério da Saúde|Sistema Único de Saúde|Diário Oficial da União|Recomposição|Atualização|Agrupamento/g;
+const ALLOW = /São Lucas|São Paulo|Bragança Paulista|Pouso Alegre|Cambuí|Extrema|Renascentista|Santa Casa|Alcebíades Wohlers|Porfírio Ribeiro de Andrade|Ponte Alta|Rua Teste|Bairro Medic Global|Cidade Teste|Extremamedic|Medic ?GLOBAL|EMED GLOBAL BLUE|ABRAMGE|Libras|VLibras|LGPD|boleto|Rol|Cosaúde|Dignidade Menstrual|Papo de Mulher|Governo Federal|Núcleos|Fale Conosco|Ministério da Saúde|Sistema Único de Saúde|Diário Oficial da União|Recomposição|Atualização|Agrupamento/g;
 const PT_WORDS = /\b(de|do|da|dos|das|para|com|você|não|são|uma|seu|sua|nossa|nosso|pelo|pela|mais|ou|em|no|na|os|as|ao|à|é|também|aqui|atendimento|plano|planos|saúde|rede|serviços|beneficiário|consulte|acessar|ver|saiba)\b|[ãõç]|ção\b|ções\b/i;
 
 function parse(html) {

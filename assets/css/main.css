@@ -1094,6 +1094,32 @@ html:not(.js) .hero-nav { display: none; }
 .place > .place-card { padding: 28px; gap: 20px; }
 @media (min-width: 1100px) { .place > .place-card { padding: 36px; } }
 .place > .place-card h2 { font-size: clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem); }
+/* Contato: duas sedes (cartão + mapa) e duas unidades menores. Celular: uma coluna; tablet: sedes na largura toda e
+   unidades lado a lado; desktop: xadrez 8/4 · 4/8 (sede, unidade / unidade, sede) */
+.places { display: grid; gap: 20px; }
+@media (min-width: 760px) {
+  .places { grid-template-columns: 1fr 1fr; }
+  .places > .place--main { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1100px) {
+  .places { grid-template-columns: repeat(12, 1fr); }
+  /* ordem no HTML: sede, sede, unidade, unidade */
+  .places > :nth-child(1) { grid-column: 1 / 9; grid-row: 1; }
+  .places > :nth-child(3) { grid-column: 9 / 13; grid-row: 1; }
+  .places > :nth-child(4) { grid-column: 1 / 5; grid-row: 2; }
+  .places > :nth-child(2) { grid-column: 5 / 13; grid-row: 2; }
+  .places > .place--main { grid-template-columns: 1fr 1fr; }
+}
+.place-unit { display: flex; flex-direction: column; gap: 16px; padding: 28px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--white); }
+@media (min-width: 1100px) { .place-unit { padding: 36px; } }
+.place-unit-ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--mist); color: var(--globo); }
+.place-unit-ico svg { width: 22px; height: 22px; }
+.place-unit h3 { font-size: var(--t-h4, 1.375rem); color: var(--ink); }
+.place-unit .badge { align-self: flex-start; }
+.place-unit dl { margin: auto 0 0; display: grid; }
+.place-unit dl div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--t-sm); }
+.place-unit dt { color: var(--ink-3); flex-shrink: 0; }
+.place-unit dd { margin: 0; color: var(--ink); text-align: right; font-family: var(--f-head); font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
 .place-card dl { margin: 0; display: grid; gap: 0; }
 .place-card dl div { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-deep); font-size: var(--t-sm); }
 .place-card dt { color: var(--on-deep-2); }

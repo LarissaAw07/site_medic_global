@@ -3,17 +3,31 @@
   "domain": "https://medicglobal.com.br/",
   "ans": "41186-8",
   "legal": {
-    "razao": "Razão social a confirmar",
+    "razao": "Medic Global Planos de Saúde Ltda.",
     "cnpj": "CNPJ a confirmar"
   },
+  "_address": "Duas sedes principais. Os campos street/district/city/state/zip alimentam o schema.org (build.js); full é o texto exibido no site.",
   "address": {
-    "street": "R. Alcebíades Wohlers, 02",
-    "city": "Extrema",
-    "state": "MG",
-    "zip": "37640-000",
-    "full": "R. Alcebíades Wohlers, 02 · Extrema/MG · 37640-000",
-    "maps": "https://www.google.com/maps/search/?api=1&query=R.+Alceb%C3%ADades+Wohlers%2C+02+-+Extrema%2C+MG%2C+37640-000",
-    "embed": "https://www.google.com/maps?q=R.+Alceb%C3%ADades+Wohlers,+02+-+Extrema,+MG,+37640-000&output=embed"
+    "pousoAlegre": {
+      "street": "Av. Porfírio Ribeiro de Andrade, 90",
+      "district": "",
+      "city": "Pouso Alegre",
+      "state": "MG",
+      "zip": "37554-200",
+      "full": "Av. Porfírio Ribeiro de Andrade, 90 · Pouso Alegre/MG · CEP 37554-200",
+      "maps": "https://www.google.com/maps/search/?api=1&query=Av.+Porf%C3%ADrio+Ribeiro+de+Andrade%2C+90+-+Pouso+Alegre%2C+MG%2C+37554-200",
+      "embed": "https://www.google.com/maps?q=Av.+Porf%C3%ADrio+Ribeiro+de+Andrade,+90+-+Pouso+Alegre,+MG,+37554-200&output=embed"
+    },
+    "extrema": {
+      "street": "R. Alcebíades Wohlers, 02",
+      "district": "Ponte Alta",
+      "city": "Extrema",
+      "state": "MG",
+      "zip": "37640-402",
+      "full": "R. Alcebíades Wohlers, 02 · Ponte Alta · Extrema/MG · CEP 37640-402",
+      "maps": "https://www.google.com/maps/search/?api=1&query=R.+Alceb%C3%ADades+Wohlers%2C+02+-+Ponte+Alta%2C+Extrema%2C+MG%2C+37640-402",
+      "embed": "https://www.google.com/maps?q=R.+Alceb%C3%ADades+Wohlers,+02+-+Ponte+Alta,+Extrema,+MG,+37640-402&output=embed"
+    }
   },
   "phones": {
     "central": {

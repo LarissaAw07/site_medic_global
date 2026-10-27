@@ -7,10 +7,10 @@
   var T = window.mgT || function (pt) { return pt; };
   if (!el || !window.L) return;
   var cities = {
-    "Extrema/MG": { c: [-22.8547, -46.3178], hq: true },
+    "Extrema/MG": { c: [-22.8547, -46.3178], hq: "R. Alcebíades Wohlers, 02 · Ponte Alta" },
     "Bragança Paulista/SP": { c: [-22.9527, -46.5419] },
     "Cambuí/MG": { c: [-22.6122, -46.0575] },
-    "Pouso Alegre/MG": { c: [-22.2300, -45.9364] }
+    "Pouso Alegre/MG": { c: [-22.2300, -45.9364], hq: "Av. Porfírio Ribeiro de Andrade, 90" }
   };
   var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true }).setView([-22.62, -46.2], 9);
   // Esri Light Gray Canvas: visual claro, sem chave e sem exigir Referer (os tiles do OSM bloqueiam acesso via file:// e sites sem política de uso)
@@ -35,7 +35,7 @@
   Object.keys(cities).forEach(function (name) {
     var d = cities[name];
     var icon = L.divIcon({ className: "", html: '<span class="mg-pin' + (d.hq ? " hq" : "") + '"></span>', iconSize: [22, 22], iconAnchor: [11, 11] });
-    var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>" + T("Sede MedicGLOBAL", "MedicGLOBAL headquarters") + " · R. Alcebíades Wohlers, 02</small>" : "") +
+    var popup = '<strong style="font-family:Poppins">' + name + "</strong>" + (d.hq ? "<br><small>" + T("Sede MedicGLOBAL", "MedicGLOBAL headquarters") + " · " + d.hq + "</small>" : "") +
       '<br><a href="#buscar" data-search-city="' + name + '" style="color:#00626D">' + T("Buscar atendimento nesta cidade", "Find care in this city") + "</a>";
     markers[name] = L.marker(d.c, { icon: icon, title: name, keyboard: true }).addTo(map).bindPopup(popup);
     markers[name].on("click", function () { select(name); });

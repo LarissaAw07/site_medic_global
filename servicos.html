@@ -26,11 +26,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=665e4614">
+<link rel="stylesheet" href="assets/css/main.css?v=f1677d9f">
 <script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="pt")location.replace("en/servicos.html"+location.hash)}catch(e){}</script>
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"MedicGLOBAL","alternateName":["Medic Global","Medic Global Saúde","Extremamedic"],"url":"https://medicglobal.com.br/","logo":"https://medicglobal.com.br/assets/img/brand/logo-medicglobal-saude.png","address":{"@type":"PostalAddress","streetAddress":"R. Alcebíades Wohlers, 02","addressLocality":"Extrema","addressRegion":"MG","postalCode":"37640-000","addressCountry":"BR"},"contactPoint":[{"@type":"ContactPoint","telephone":"+55-35-3435-4442","contactType":"customer service","areaServed":"BR","availableLanguage":["Portuguese"]}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://medicglobal.com.br/"},{"@type":"ListItem","position":2,"name":"Serviços","item":"https://medicglobal.com.br/servicos/"}]}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"MedicGLOBAL","alternateName":["Medic Global","Medic Global Saúde","Extremamedic"],"url":"https://medicglobal.com.br/","logo":"https://medicglobal.com.br/assets/img/brand/logo-medicglobal-saude.png","address":[{"@type":"PostalAddress","streetAddress":"Av. Porfírio Ribeiro de Andrade, 90","addressLocality":"Pouso Alegre","addressRegion":"MG","postalCode":"37554-200","addressCountry":"BR"},{"@type":"PostalAddress","streetAddress":"R. Alcebíades Wohlers, 02 - Ponte Alta","addressLocality":"Extrema","addressRegion":"MG","postalCode":"37640-402","addressCountry":"BR"}],"contactPoint":[{"@type":"ContactPoint","telephone":"+55-35-3435-4442","contactType":"customer service","areaServed":"BR","availableLanguage":["Portuguese"]}]},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://medicglobal.com.br/"},{"@type":"ListItem","position":2,"name":"Serviços","item":"https://medicglobal.com.br/servicos/"}]}]</script>
 <!-- Google Tag Manager / GA4: o container é carregado por assets/js/main.js somente após consentimento (LGPD).
      Substituir GTM-XXXXXXX pelo ID real. Eventos enviados ao dataLayer:
      click_area_beneficiario, click_rede, click_telemedicina, click_whatsapp, click_telefone, click_quero_ser_cliente,
@@ -297,6 +297,7 @@
 .svc-steps li:first-child { background: var(--globo); border-color: var(--globo); color: rgba(255,255,255,.84); }
 .svc-steps li:first-child::before { color: var(--glow); }
 .svc-steps li:first-child strong { color: #fff; }
+.svc-steps li > .btn { align-self: flex-start; margin-top: auto; }
 
 /* Atendimento: faixa azul em linha única */
 .svc-cta { position: relative; overflow: hidden; background: var(--globo); color: #fff; padding-block: clamp(56px, 2rem + 3vw, 88px); }
@@ -536,9 +537,9 @@
     </div>
     <ul class="svc-steps">
       <li class="reveal"><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
-      <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da <a class="accent" href="rede-credenciada.html?tipo=hospital">rede credenciada</a>.</span></li>
-      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo <a class="accent" href="#abramge">Sistema ABRAMGE</a>.</span></li>
-      <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações <a class="accent" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener">(35) 9 8845-9074</a>.</span></li>
+      <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da rede credenciada.</span><a class="btn btn--sm" href="rede-credenciada.html?tipo=hospital">Ver rede credenciada</a></li>
+      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</span><a class="btn btn--sm" href="#abramge">Sistema ABRAMGE</a></li>
+      <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações (35) 9 8845-9074.</span><a class="btn btn--sm" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener">Falar no WhatsApp</a></li>
     </ul>
   </div>
 </section>
@@ -663,7 +664,9 @@
       <div class="footer-legal-main">
         <a class="ans-seal" href="https://www.gov.br/ans/pt-br" target="_blank" rel="noopener" aria-label="Agência Nacional de Saúde Suplementar — registro ANS nº 41186-8 (abre em nova aba)"><span>ANS - nº 41186-8</span></a>
         <div class="footer-legal-info">
-          <p>Razão social a confirmar · CNPJ a confirmar · R. Alcebíades Wohlers, 02 · Extrema/MG · 37640-000</p>
+          <p>Medic Global Planos de Saúde Ltda. · CNPJ a confirmar</p>
+          <p>Sede Pouso Alegre: Av. Porfírio Ribeiro de Andrade, 90 · Pouso Alegre/MG · CEP 37554-200</p>
+          <p>Sede Extrema: R. Alcebíades Wohlers, 02 · Ponte Alta · Extrema/MG · CEP 37640-402</p>
           <p>Disque ANS: 0800 701 9656 · <a href="https://www.gov.br/ans/pt-br" target="_blank" rel="noopener">www.gov.br/ans</a></p>
         </div>
       </div>

@@ -33,13 +33,18 @@
 
 <section aria-label="Onde estamos">
   <div class="wrap">
-    <!-- Duas sedes (cartão + mapa) e duas unidades menores; no celular as sedes vêm primeiro; no desktop formam um xadrez 8/4 · 4/8 -->
-    <div class="places">
-      <article class="place place--main" aria-labelledby="sede-pa">
+    <!-- Quatro endereços (cartão + mapa) alternados pelas abas de cidade -->
+    <div class="tabs places-tabs">
+      <div role="tablist" aria-label="Escolha a cidade">
+        <button type="button" role="tab" id="tab-pa" aria-controls="local-pa" aria-selected="true">Pouso Alegre</button>
+        <button type="button" role="tab" id="tab-ex" aria-controls="local-ex" aria-selected="false" tabindex="-1">Extrema</button>
+        <button type="button" role="tab" id="tab-u1" aria-controls="local-u1" aria-selected="false" tabindex="-1">Cidade Teste 1</button>
+        <button type="button" role="tab" id="tab-u2" aria-controls="local-u2" aria-selected="false" tabindex="-1">Cidade Teste 2</button>
+      </div>
+      <article class="place" role="tabpanel" id="local-pa" aria-labelledby="tab-pa">
         <div class="place-card">
           <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
-          <h2 id="sede-pa">Pouso Alegre, Minas Gerais</h2>
-          <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
+          <h2>Pouso Alegre, Minas Gerais</h2>
           <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">Av. Porfírio Ribeiro de Andrade, 90<br>Pouso Alegre/MG · CEP 37554-200</p></div>
           <dl>
             <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
@@ -53,11 +58,10 @@
           <iframe title="Mapa: Av. Porfírio Ribeiro de Andrade, 90 - Pouso Alegre/MG" src="{{L.address.pousoAlegre.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
-      <article class="place place--main" aria-labelledby="sede-ex">
+      <article class="place" role="tabpanel" id="local-ex" aria-labelledby="tab-ex" hidden>
         <div class="place-card">
           <span class="eyebrow" style="margin:0">{{i:pin}} Sede</span>
-          <h2 id="sede-ex">Extrema, Minas Gerais</h2>
-          <p style="color:var(--on-deep-2)">Atendimento ao beneficiário, comercial e administrativo da MedicGLOBAL.</p>
+          <h2>Extrema, Minas Gerais</h2>
           <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Endereço</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02 · Ponte Alta<br>Extrema/MG · CEP 37640-402</p></div>
           <dl>
             <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
@@ -71,29 +75,39 @@
           <iframe title="Mapa: R. Alcebíades Wohlers, 02 · Ponte Alta - Extrema/MG" src="{{L.address.extrema.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
-      <article class="place-unit" aria-labelledby="unidade-1">
-        <span class="place-unit-ico" aria-hidden="true">{{i:pin}}</span>
-        <span class="eyebrow" style="margin:0">Unidade</span>
-        <h3 id="unidade-1">Unidade MedicGLOBAL</h3>
-        <span class="badge">Endereço em atualização</span>
-        <dl>
-          <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
-          <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
-          <div><dt>Cidade</dt><dd>Cidade Teste/MG</dd></div>
-          <div><dt>CEP</dt><dd>00000-000</dd></div>
-        </dl>
+      <article class="place" role="tabpanel" id="local-u1" aria-labelledby="tab-u1" hidden>
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0">{{i:pin}} Unidade</span>
+          <h2>Cidade Teste 1, Minas Gerais</h2>
+          <span class="badge">Endereço em atualização</span>
+          <dl>
+            <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
+            <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
+            <div><dt>Cidade</dt><dd>Cidade Teste 1/MG</dd></div>
+            <div><dt>CEP</dt><dd>00000-000</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Mapa: Cidade Teste 1/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </article>
-      <article class="place-unit" aria-labelledby="unidade-2">
-        <span class="place-unit-ico" aria-hidden="true">{{i:pin}}</span>
-        <span class="eyebrow" style="margin:0">Unidade</span>
-        <h3 id="unidade-2">Unidade MedicGLOBAL</h3>
-        <span class="badge">Endereço em atualização</span>
-        <dl>
-          <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
-          <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
-          <div><dt>Cidade</dt><dd>Cidade Teste/MG</dd></div>
-          <div><dt>CEP</dt><dd>00000-000</dd></div>
-        </dl>
+      <article class="place" role="tabpanel" id="local-u2" aria-labelledby="tab-u2" hidden>
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0">{{i:pin}} Unidade</span>
+          <h2>Cidade Teste 2, Minas Gerais</h2>
+          <span class="badge">Endereço em atualização</span>
+          <dl>
+            <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
+            <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
+            <div><dt>Cidade</dt><dd>Cidade Teste 2/MG</dd></div>
+            <div><dt>CEP</dt><dd>00000-000</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Mapa: Cidade Teste 2/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </article>
     </div>
   </div>

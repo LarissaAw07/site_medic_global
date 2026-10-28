@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/main.css?v=f1677d9f">
+<link rel="stylesheet" href="../assets/css/main.css?v=06c4b963">
 <script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="en")location.replace("../servicos.html"+location.hash)}catch(e){}</script>
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
@@ -103,7 +103,7 @@
         <a href="planos.html#abrangencia">Coverage area</a>
         <a href="planos.html#duvidas">FAQ</a>
         <a href="planos.html">Our plans</a>
-        <a href="documentos.html#reajuste">Rate adjustments (RN 565)</a>
+        <a href="documentos.html#reajuste">RN 565</a>
         <a href="planos.html#contato">Request a quote</a>
       </div>
       <a class="mega-feature" href="planos.html#comparar"><img src="../assets/img/provisorio/familia.jpg" alt="Smiling family together at home" loading="lazy" decoding="async"><strong>Compare coverage areas side by side</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre</span></a>
@@ -177,7 +177,7 @@
     <details><summary>Services</summary><ul><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#autorizacoes">Authorizations</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li><li><a href="servicos.html#urgencia">Urgent and emergency care</a></li></ul></details>
     <details><summary>MedicGLOBAL</summary><ul><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="medicglobal.html">Our story</a></li></ul></details>
     <details><summary>Content</summary><ul><li><a href="conteudos.html">All content</a></li><li><a href="conteudos.html#cat=saude">Health</a></li><li><a href="conteudos.html#cat=comunicados">Notices</a></li></ul></details>
-    <details><summary>Documents</summary><ul><li><a href="documentos.html#ans">ANS and IDSS</a></li><li><a href="documentos.html">Document center</a></li><li><a href="documentos.html#tiss">TISS and forms</a></li></ul></details>
+    <details><summary>Documents</summary><ul><li><a href="documentos.html#ans">IDSS</a></li><li><a href="documentos.html">Document center</a></li><li><a href="documentos.html#tiss">TISS and forms</a></li></ul></details>
     <div class="drawer-lang" role="group" aria-label="Language">
       <a href="../servicos.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt"><svg class="flag" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g><rect width="32" height="32" fill="#009B3A"/><path d="M16 5.5 29 16 16 26.5 3 16z" fill="#FEDF00"/><circle cx="16" cy="16" r="6.2" fill="#002776"/><path d="M10.1 14.6c3.9-.7 8.1.2 11.7 2.6" fill="none" stroke="#fff" stroke-width="1.1"/></g></svg>
  Português</a>
@@ -270,8 +270,10 @@
 .svc-abramge .svc-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(3,79,86,.86), rgba(2,40,44,.96) 75%); }
 .svc-abramge .orbits { width: min(1100px, 140vw); aspect-ratio: 1; left: 50%; top: 50%; color: var(--glow); opacity: .22; transform: translate3d(-50%, calc(-50% + var(--py, 0px)), 0); will-change: transform; z-index: 1; }
 .svc-abramge .wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.svc-abramge .eyebrow { color: var(--glow); gap: 14px; }
-.svc-abramge .eyebrow::before, .svc-abramge .eyebrow::after { content: ""; width: 40px; height: 1px; background: var(--glow); }
+.svc-abramge .svc-logo { display: block; width: auto; height: clamp(38px, 2rem + .8vw, 50px); }
+.svc-abramge .svc-pills { margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.svc-abramge .svc-pills .svc-pill { margin-top: 0; }
+.svc-pill svg { width: 18px; height: 18px; flex-shrink: 0; }
 .svc-abramge h2 { color: #fff; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem); line-height: 1.05; letter-spacing: -.035em; max-width: 16ch; }
 .svc-abramge h2 em { font-style: normal; font-weight: 600; color: var(--glow); }
 .svc-abramge .lead { color: rgba(255,255,255,.78); max-width: 44rem; }
@@ -521,10 +523,13 @@
 </svg>
 
   <div class="wrap">
-    <span class="eyebrow reveal">ABRAMGE</span>
+    <img class="svc-logo reveal" src="../assets/img/brand/logo-abramge-branco.png" alt="ABRAMGE System" width="544" height="160">
     <h2 id="t-abramge" class="balance reveal reveal-d1">Care while traveling <em>across Brazil</em></h2>
     <p class="lead reveal reveal-d2">Outside the coverage area, you can count on urgent and emergency care while traveling through the ABRAMGE System, anywhere in Brazil, according to the terms of your contract.</p>
-    <a class="svc-pill reveal reveal-d2" href="https://abramge.com.br/" target="_blank" rel="noopener">Contact ABRAMGE</a>
+    <div class="svc-pills reveal reveal-d2">
+      <a class="svc-pill" href="https://atendimentoabramge.com.br/#/home/service-locations" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Care locations</a>
+      <a class="svc-pill" href="tel:08007227511" data-track="click_telefone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> 0800.722.7511</a>
+    </div>
   </div>
 </section>
 
@@ -537,7 +542,7 @@
     <ul class="svc-steps">
       <li class="reveal"><span><strong>Immediate risk to life?</strong> Call 192 (SAMU) or go to the nearest emergency room.</span></li>
       <li class="reveal reveal-d1"><span><strong>Within the coverage area:</strong> check the hospitals in the <a class="accent" href="rede-credenciada.html?tipo=hospital">provider network</a>.</span></li>
-      <li class="reveal reveal-d2"><span><strong>While traveling:</strong> urgent and emergency care while traveling through the <a class="accent" href="#abramge">ABRAMGE System</a>.</span></li>
+      <li class="reveal reveal-d2"><span><strong>While traveling:</strong> urgent and emergency care while traveling through the ABRAMGE System.</span><a class="btn btn--sm" href="tel:08007227511" data-track="click_telefone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg> 0800.722.7511</a></li>
       <li class="reveal reveal-d3"><span><strong>Urgent authorization:</strong> authorizations WhatsApp <a class="accent" href="https://wa.me/5535988459074?text=Desejo%20solicitar%20autoriza%C3%A7%C3%A3o" target="_blank" rel="noopener">(35) 9 8845-9074</a>.</span></li>
     </ul>
   </div>
@@ -655,7 +660,7 @@
       <div><h3>Plans</h3><ul><li><a href="planos.html">EMED GLOBAL BLUE</a></li><li><a href="planos.html#comparar">Compare plans</a></li><li><a href="planos.html#abrangencia">Coverage area</a></li><li><a href="planos.html#contato">Request a quote</a></li></ul></div>
       <div><h3>Network and services</h3><ul><li><a href="rede-credenciada.html">Provider network</a></li><li><a href="https://extremamedic.com/manual/" target="_blank" rel="noopener">Provider directory</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li></ul></div>
       <div><h3>About us</h3><ul><li><a href="medicglobal.html">Our story</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="conteudos.html">Content</a></li><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li></ul></div>
-      <div><h3>Regulatory</h3><ul><li><a href="documentos.html#ans">ANS · IDSS</a></li><li><a href="documentos.html#ans">Quality Factor</a></li><li><a href="documentos.html#tiss">TISS · Forms</a></li><li><a href="documentos.html#reajuste">Rate adjustments</a></li><li><a href="documentos.html">Document center</a></li></ul></div>
+      <div><h3>Regulatory</h3><ul><li><a href="documentos.html#ans">IDSS</a></li><li><a href="documentos.html#ans">Quality Factor</a></li><li><a href="documentos.html#tiss">TISS · Forms</a></li><li><a href="documentos.html#reajuste">RN 565</a></li><li><a href="documentos.html">Document center</a></li></ul></div>
       <div><h3>Logins</h3><ul><li><a href="beneficiario.html">Member Area</a></li><li><a href="http://187.60.158.90:8080/CSSOL_Clientes/Login.aspx?ReturnUrl=/CSSOL_clientes/default.aspx" target="_blank" rel="noopener">Corporate clients</a></li><li><a href="http://187.60.158.90:8080/AUTORIZADORWEB/Account/Login" target="_blank" rel="noopener">Providers · TISS 3.0</a></li><li><a href="http://webmail.medicglobal.com.br/" target="_blank" rel="noopener">Employees</a></li><li><a href="atendimento.html#ouvidoria">Ombudsman</a></li></ul></div>
       </nav>
     </div>
@@ -765,7 +770,7 @@
   </section>
 </div>
 <div class="a11y-guide-bar" aria-hidden="true"></div>
-<script src="../assets/js/main.js?v=74361197" defer></script>
+<script src="../assets/js/main.js?v=5e612635" defer></script>
 <script src="../assets/js/a11y.js?v=bb4c2760" defer></script>
 
 </body>

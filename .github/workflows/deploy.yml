@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: 20
 
+      # Atualiza a rede credenciada a partir do sistema oficial (se ele estiver fora do ar, mantém o assets/data/rede.json do repositório)
+      - name: Sincronizar a rede credenciada
+        run: node src/rede-sync.js
+
       - name: Gerar o site estático
         run: node build.js
 

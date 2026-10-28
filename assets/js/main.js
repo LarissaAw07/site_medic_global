@@ -512,18 +512,26 @@
     btn.setAttribute("aria-haspopup", "listbox"); btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-controls", sel.id + "-list");
     list.className = "dd-list"; list.id = sel.id + "-list"; list.setAttribute("role", "listbox"); list.tabIndex = -1;
     if (lbl) { lbl.id = lbl.id || sel.id + "-lbl"; lbl.htmlFor = btn.id; list.setAttribute("aria-labelledby", lbl.id); btn.setAttribute("aria-labelledby", lbl.id + " " + btn.id); }
-    opts.forEach(function (o, k) {
-      var li = document.createElement("li");
-      li.id = sel.id + "-opt-" + k; li.setAttribute("role", "option"); li.textContent = o.text;
-      li.addEventListener("mousedown", function (e) { e.preventDefault(); });
-      li.addEventListener("click", function () { choose(k); close(); btn.focus(); });
-      li.addEventListener("mousemove", function () { setActive(k); });
-      list.appendChild(li);
-    });
-    var items = $$("li", list);
+    var items = [];
+    function build() {
+      opts = Array.prototype.slice.call(sel.options);
+      list.textContent = "";
+      opts.forEach(function (o, k) {
+        var li = document.createElement("li");
+        li.id = sel.id + "-opt-" + k; li.setAttribute("role", "option"); li.textContent = o.text;
+        li.addEventListener("mousedown", function (e) { e.preventDefault(); });
+        li.addEventListener("click", function () { choose(k); close(); btn.focus(); });
+        li.addEventListener("mousemove", function () { setActive(k); });
+        list.appendChild(li);
+      });
+      items = $$("li", list);
+    }
+    build();
     function render() {
-      btn.textContent = opts[sel.selectedIndex].text;
+      var o = opts[sel.selectedIndex];
+      btn.textContent = o ? o.text : "";
       btn.classList.toggle("is-empty", !sel.value);
+      btn.disabled = sel.disabled;
       items.forEach(function (li, k) { li.setAttribute("aria-selected", k === sel.selectedIndex ? "true" : "false"); });
     }
     function setActive(k) {
@@ -564,6 +572,9 @@
     });
     document.addEventListener("click", function (e) { if (isOpen() && !field.contains(e.target)) close(); });
     sel.addEventListener("change", render);
+    // Opções trocadas por script (filtros em cascata da rede) ou campo desativado: refaz a lista
+    new MutationObserver(function () { close(); build(); render(); }).observe(sel, { childList: true, attributes: true, attributeFilter: ["disabled"] });
+    sel.addEventListener("dd:refresh", function () { build(); render(); });
     // A validação dos formulários marca/foca o <select>: repassamos isso para o botão visível
     new MutationObserver(function () { var v = sel.getAttribute("aria-invalid"); if (v) btn.setAttribute("aria-invalid", v); else btn.removeAttribute("aria-invalid"); }).observe(sel, { attributes: true, attributeFilter: ["aria-invalid"] });
     if (sel.getAttribute("aria-describedby")) btn.setAttribute("aria-describedby", sel.getAttribute("aria-describedby"));

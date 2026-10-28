@@ -35,6 +35,10 @@
       "tel": "tel:+553534354442",
       "e164": "+55-35-3435-4442"
     },
+    "abramge": {
+      "label": "0800.722.7511",
+      "tel": "tel:08007227511"
+    },
     "ouvidoriaHours": "Dias úteis, de segunda a sexta-feira, das 7h30 às 17h30"
   },
   "wa": {
@@ -85,7 +89,7 @@
     "fatorQualidade": "http://www.ans.gov.br/aans/noticias-ans/sobre-a-ans/3726-cadastro-fator-de-qualidade",
     "qualificacaoAns": "https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans",
     "ans": "https://www.gov.br/ans/pt-br",
-    "abramge": "https://abramge.com.br/",
+    "abramge": "https://atendimentoabramge.com.br/#/home/service-locations",
     "play": "https://play.google.com/store/apps/details?id=com.extremamedic",
     "appstore": "https://apps.apple.com/br/app/medic-global/id1531494461"
   },

@@ -5,11 +5,11 @@
   "og": "old_santa_casa",
   "crumbs": [["Care network", "rede-credenciada.html"]],
   "extraHead": "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css\">",
-  "extraScripts": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" defer></script><script src=\"assets/js/rede.js\" defer></script>"
+  "extraScripts": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" defer></script><script src=\"assets/js/rede.js\" defer></script><script src=\"assets/js/rede-busca.js\" defer></script>"
 }@-->
 
 <!-- Banner no mesmo molde do hero da home; a busca da rede fica logo abaixo -->
-<section class="hero hero--page hero--search" aria-labelledby="t">
+<section class="hero hero--page" aria-labelledby="t">
   {{> orbits}}
   <div class="wrap">
     {{crumbs}}
@@ -31,31 +31,86 @@
         </div>
       </div>
     </div>
-    <form class="search-big mt-8" id="buscar" data-rede data-external="{{L.links.rede}}" role="search">
-      <div class="f f--q">{{i:search}}<label for="r-q">Professional, specialty or location</label><input id="r-q" name="q" placeholder="E.g.: cardiology" autocomplete="off"></div>
-      <div class="f"><label for="r-tipo">Type</label><select id="r-tipo" name="tipo"><option value="profissional">Professional</option><option value="especialidade">Specialty</option><option value="clinica">Clinic</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratory</option></select></div>
-      <div class="f"><label for="r-cidade">City</label><select id="r-cidade" name="cidade"><option value="">All cities</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>
-      <button class="search-go" type="submit" aria-label="Search the network">{{i:arrow-right}}</button>
-    </form>
   </div>
 </section>
 
-<section class="section" style="padding-top:clamp(120px,8rem + 2vw,180px)" aria-labelledby="tipo-t">
+<section class="section rb-sec" id="buscar" aria-labelledby="busca-t">
   <div class="wrap">
-    <div class="flex-between mb-6">
-      <h2 id="tipo-t" class="h4" style="font-size:var(--t-h4)">Type of care</h2>
-      <p class="small muted">The search opens the official provider network system in a new tab.</p>
+    <div class="rb" data-rede-busca>
+      <aside class="rb-side">
+        <span class="eyebrow">Search the network</span>
+        <h2 id="busca-t" class="rb-title">Find professionals and providers</h2>
+        <div class="tabs rb-tabs">
+          <div role="tablist" aria-label="Search type">
+            <button type="button" role="tab" id="rb-tab-comb" aria-controls="rb-comb" aria-selected="true">Combined search</button>
+            <button type="button" role="tab" id="rb-tab-av" aria-controls="rb-av" aria-selected="false" tabindex="-1">Advanced search</button>
+          </div>
+          <form class="rb-form" id="rb-comb" role="tabpanel" aria-labelledby="rb-tab-comb">
+            <div class="rb-seg" role="group" aria-label="Search for">
+              <button type="button" data-modo="profissional" aria-pressed="true">{{i:stethoscope}} Professional</button>
+              <button type="button" data-modo="prestador" aria-pressed="false">{{i:hospital}} Providers</button>
+            </div>
+            <div class="field"><label for="rb-plano">Plan</label><select id="rb-plano"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-tipo">Facility type</label><select id="rb-tipo"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-estado">State</label><select id="rb-estado"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-cidade">City</label><select id="rb-cidade"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-bairro">District</label><select id="rb-bairro"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-esp">Specialty</label><select id="rb-esp"><option value="">…</option></select></div>
+            <div class="field"><label for="rb-nome">Name</label><input id="rb-nome" type="search" placeholder="Type the name" autocomplete="off"></div>
+            <div class="btn-row"><button class="btn" type="submit">{{i:search}} Search</button><button class="btn btn--ghost" type="reset">Clear</button></div>
+          </form>
+          <form class="rb-form" id="rb-av" role="tabpanel" aria-labelledby="rb-tab-av" hidden>
+            <div class="field"><label for="rb-metodo">Search method</label><select id="rb-metodo"><option value="">Select the search method</option><option value="plano">Plan</option><option value="nome">Name (professional/provider)</option><option value="tipo">Facility type</option><option value="especialidade">Specialty</option><option value="regiao">Region</option><option value="qualificacao">Qualification</option><option value="urgencia">Urgent/Emergency care</option></select></div>
+            <div class="field" data-metodo="plano" hidden><label for="rba-plano">Plan</label><select id="rba-plano"><option value="">…</option></select></div>
+            <div class="field" data-metodo="nome" hidden><label for="rba-nome">Name</label><input id="rba-nome" type="search" list="rba-nomes" placeholder="Type the name" autocomplete="off"><datalist id="rba-nomes"></datalist></div>
+            <div class="field" data-metodo="tipo" hidden><label for="rba-tipo">Facility type</label><select id="rba-tipo"><option value="">…</option></select></div>
+            <div class="field" data-metodo="especialidade" hidden><label for="rba-esp">Specialty</label><select id="rba-esp"><option value="">…</option></select></div>
+            <div class="rb-group" data-metodo="regiao" hidden>
+              <div class="field"><label for="rba-estado">State</label><select id="rba-estado"><option value="">…</option></select></div>
+              <div class="field"><label for="rba-cidade">City</label><select id="rba-cidade"><option value="">…</option></select></div>
+              <div class="field"><label for="rba-bairro">District</label><select id="rba-bairro"><option value="">…</option></select></div>
+            </div>
+            <div class="field" data-metodo="qualificacao" hidden><label for="rba-qual">Qualification</label><select id="rba-qual"><option value="">…</option></select></div>
+            <p class="small muted" data-metodo="urgencia" hidden>Lists the providers offering urgent and emergency care.</p>
+            <div class="btn-row"><button class="btn" type="submit">{{i:search}} Search</button></div>
+          </form>
+        </div>
+      </aside>
+      <div class="rb-main" role="region" aria-label="Search results">
+        <div class="rb-start">
+          <span class="rb-start-ico" aria-hidden="true">{{i:search}}</span>
+          <h3>Start your search on the side.</h3>
+          <p class="muted">Use the <strong>Combined search</strong> to cross plan, location and specialty, or the <strong>Advanced search</strong> to search by a single criterion.</p>
+          <p class="rb-stat small muted">Loading the provider network…</p>
+          <p class="rb-err small">We couldn't load the network right now. <a class="accent" href="{{L.links.rede}}" target="_blank" rel="noopener">Open the official system</a></p>
+          <div class="rb-atalhos">
+            <span class="label">Shortcuts</span>
+            <div class="type-pills">
+              <button class="pill" type="button" data-rb-fn="tipo" data-rb="CLÍNICA/CONSULTÓRIO">{{i:stethoscope}} Appointment</button>
+              <button class="pill" type="button" data-rb-fn="tipo" data-rb="SERVICO AUXILIAR DE DIAGNOSE E TERAPIA">{{i:flask}} Tests</button>
+              <button class="pill" type="button" data-rb-fn="tipo" data-rb="HOSPITAL">{{i:bed}} Hospitalization</button>
+              <button class="pill" type="button" data-rb-fn="especialidade" data-rb="OBSTETRICIA">{{i:baby}} Obstetrics</button>
+              <button class="pill" type="button" data-rb-fn="urgencia" data-rb="">{{i:siren}} Urgent and emergency care</button>
+            </div>
+          </div>
+        </div>
+        <div class="rb-head" aria-live="polite" hidden></div>
+        <ol class="rb-list"></ol>
+        <button class="btn btn--ghost rb-more" type="button" hidden>Load more</button>
+        <div class="rb-foot">
+          <div class="rb-legend"><span class="label">Qualification legend</span><ul><li><span class="rb-q" aria-hidden="true">E</span>Specialist title</li><li><span class="rb-q" aria-hidden="true">P</span>Professional with specialization</li><li><span class="rb-q" aria-hidden="true">R</span>Professional with residency</li><li><span class="rb-q" aria-hidden="true">N</span>Adverse event reporting</li></ul></div>
+          <p class="small muted"><strong>Note:</strong> services from the listed professionals and providers are available for plans regulated by law, according to the coverage area and contractual coverage of each plan type.</p>
+          <p class="xs muted">Data from the official provider network system, updated on <span class="rb-updated">—</span>.</p>
+        </div>
+      </div>
     </div>
-    <div class="type-pills" data-pill-target="r-atendimento">
-      <button class="pill" type="button" data-value="consulta" aria-pressed="false">{{i:stethoscope}} Appointment</button>
-      <button class="pill" type="button" data-value="exame" aria-pressed="false">{{i:flask}} Tests</button>
-      <button class="pill" type="button" data-value="internacao" aria-pressed="false">{{i:bed}} Hospitalization</button>
-      <button class="pill" type="button" data-value="maternidade" aria-pressed="false">{{i:baby}} Obstetrics</button>
-      <button class="pill" type="button" data-value="urgencia" aria-pressed="false">{{i:siren}} Urgent and emergency care</button>
-    </div>
-    <input type="hidden" id="r-atendimento" name="atendimento" form="buscar">
+  </div>
+</section>
 
-    <div class="map-shell mt-8" id="mapa">
+<section class="section" style="padding-top:0" aria-label="Service area">
+  <div class="wrap">
+
+    <div class="map-shell" id="mapa">
       <aside class="map-side" aria-labelledby="map-t">
         <div><span class="eyebrow">Coverage area</span><h2 id="map-t" style="font-size:var(--t-h3)">From the Bragança Paulista region to southern Minas Gerais</h2></div>
         <p class="small muted">Select a city to center the map and filter your search.</p>
@@ -87,15 +142,15 @@
           <div><span class="ico">{{i:smartphone}}</span><div><h3>In the app</h3><p>Save favorites, contact the provider and see their location.</p></div></div>
         </div>
         <div class="type-pills mt-8" style="gap:8px">
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Acupuncture</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Allergology</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Anesthesiology</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Angiology</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Art therapy</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Oral and maxillofacial surgery</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Surgical oncology</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Cardiology</a>
-          <a class="pill esp" href="{{L.links.especialidade}}" target="_blank" rel="noopener">Immunology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuncture</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Allergology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anesthesiology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Art therapy</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatrics</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Surgical oncology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiology</a>
+          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Immunology</a>
         </div>
       </div>
     </div>

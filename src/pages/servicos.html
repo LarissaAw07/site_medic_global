@@ -83,8 +83,10 @@
 .svc-abramge .svc-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(3,79,86,.86), rgba(2,40,44,.96) 75%); }
 .svc-abramge .orbits { width: min(1100px, 140vw); aspect-ratio: 1; left: 50%; top: 50%; color: var(--glow); opacity: .22; transform: translate3d(-50%, calc(-50% + var(--py, 0px)), 0); will-change: transform; z-index: 1; }
 .svc-abramge .wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.svc-abramge .eyebrow { color: var(--glow); gap: 14px; }
-.svc-abramge .eyebrow::before, .svc-abramge .eyebrow::after { content: ""; width: 40px; height: 1px; background: var(--glow); }
+.svc-abramge .svc-logo { display: block; width: auto; height: clamp(38px, 2rem + .8vw, 50px); }
+.svc-abramge .svc-pills { margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.svc-abramge .svc-pills .svc-pill { margin-top: 0; }
+.svc-pill svg { width: 18px; height: 18px; flex-shrink: 0; }
 .svc-abramge h2 { color: #fff; font-family: var(--f-display); font-weight: 400; font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem); line-height: 1.05; letter-spacing: -.035em; max-width: 16ch; }
 .svc-abramge h2 em { font-style: normal; font-weight: 600; color: var(--glow); }
 .svc-abramge .lead { color: rgba(255,255,255,.78); max-width: 44rem; }
@@ -199,10 +201,13 @@
   <div class="svc-bg">{{pic:old_renascentista|Recepção do Hospital Renascentista|2000|100vw}}</div>
   {{> orbits}}
   <div class="wrap">
-    <span class="eyebrow reveal">ABRAMGE</span>
+    <img class="svc-logo reveal" src="assets/img/brand/logo-abramge-branco.png" alt="Sistema ABRAMGE" width="544" height="160">
     <h2 id="t-abramge" class="balance reveal reveal-d1">Atendimento em trânsito <em>pelo Brasil</em></h2>
     <p class="lead reveal reveal-d2">Fora da área de atuação, você conta com atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE, em todo o território nacional, conforme as condições do seu contrato.</p>
-    <a class="svc-pill reveal reveal-d2" href="{{L.links.abramge}}" target="_blank" rel="noopener">Fale com a ABRAMGE</a>
+    <div class="svc-pills reveal reveal-d2">
+      <a class="svc-pill" href="{{L.links.abramge}}" target="_blank" rel="noopener">{{i:pin}} Locais de atendimento</a>
+      <a class="svc-pill" href="{{L.phones.abramge.tel}}" data-track="click_telefone">{{i:phone}} {{L.phones.abramge.label}}</a>
+    </div>
   </div>
 </section>
 
@@ -215,7 +220,7 @@
     <ul class="svc-steps">
       <li class="reveal"><span><strong>Risco imediato à vida?</strong> Ligue 192 (SAMU) ou procure o pronto-socorro mais próximo.</span></li>
       <li class="reveal reveal-d1"><span><strong>Na área de atuação:</strong> consulte os hospitais da rede credenciada.</span><a class="btn btn--sm" href="rede-credenciada.html?tipo=hospital">Ver rede credenciada</a></li>
-      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</span><a class="btn btn--sm" href="#abramge">Sistema ABRAMGE</a></li>
+      <li class="reveal reveal-d2"><span><strong>Em viagem:</strong> atendimento de urgência e emergência em trânsito pelo Sistema ABRAMGE.</span><a class="btn btn--sm" href="{{L.phones.abramge.tel}}" data-track="click_telefone">{{i:phone}} {{L.phones.abramge.label}}</a></li>
       <li class="reveal reveal-d3"><span><strong>Autorização urgente:</strong> WhatsApp de autorizações {{L.wa.autorizacoes.label}}.</span><a class="btn btn--sm" href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">Falar no WhatsApp</a></li>
     </ul>
   </div>

@@ -1,6 +1,5 @@
 /* Mapa funcional da área de atuação — Leaflet + mapa base Esri (dados OpenStreetMap).
-   Ponto de integração: quando houver API da rede credenciada, os prestadores
-   podem ser plotados aqui como marcadores (L.marker) a partir da busca. */
+   O link do balão de cada cidade abre a busca da rede (rede-busca.js) já filtrada pela cidade. */
 (function () {
   "use strict";
   var el = document.getElementById("map");
@@ -22,13 +21,11 @@
   var line = [cities["Bragança Paulista/SP"].c, cities["Extrema/MG"].c, cities["Cambuí/MG"].c, cities["Pouso Alegre/MG"].c];
   L.polyline(line, { color: "#008C8C", weight: 2, dashArray: "4 8", opacity: .8 }).addTo(map);
   var markers = {};
-  var citySelect = document.getElementById("r-cidade");
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-city]"));
   function select(name) {
     var m = markers[name]; if (!m) return;
     map.flyTo(m.getLatLng(), 11, { duration: .8 });
     m.openPopup();
-    if (citySelect) citySelect.value = name;
     buttons.forEach(function (b) { b.classList.toggle("is-active", b.getAttribute("data-city") === name); });
     if (window.mgTrack) window.mgTrack("mapa_cidade", { cidade: name });
   }
@@ -44,6 +41,6 @@
   buttons.forEach(function (b) { b.addEventListener("click", function () { select(b.getAttribute("data-city")); }); });
   el.addEventListener("click", function (e) {
     var a = e.target.closest("[data-search-city]");
-    if (a && citySelect) { citySelect.value = a.getAttribute("data-search-city"); document.getElementById("r-q").focus(); }
+    if (a && window.mgRede) { e.preventDefault(); window.mgRede("cidade", a.getAttribute("data-search-city")); }
   });
 })();

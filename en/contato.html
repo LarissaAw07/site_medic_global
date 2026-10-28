@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/css/main.css?v=f1677d9f">
+<link rel="stylesheet" href="../assets/css/main.css?v=06c4b963">
 <script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="en")location.replace("../contato.html"+location.hash)}catch(e){}</script>
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
@@ -103,7 +103,7 @@
         <a href="planos.html#abrangencia">Coverage area</a>
         <a href="planos.html#duvidas">FAQ</a>
         <a href="planos.html">Our plans</a>
-        <a href="documentos.html#reajuste">Rate adjustments (RN 565)</a>
+        <a href="documentos.html#reajuste">RN 565</a>
         <a href="planos.html#contato">Request a quote</a>
       </div>
       <a class="mega-feature" href="planos.html#comparar"><img src="../assets/img/provisorio/familia.jpg" alt="Smiling family together at home" loading="lazy" decoding="async"><strong>Compare coverage areas side by side</strong><span>Extrema · Cambuí · Bragança Paulista · Pouso Alegre</span></a>
@@ -177,7 +177,7 @@
     <details><summary>Services</summary><ul><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#autorizacoes">Authorizations</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li><li><a href="servicos.html#urgencia">Urgent and emergency care</a></li></ul></details>
     <details><summary>MedicGLOBAL</summary><ul><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="medicglobal.html">Our story</a></li></ul></details>
     <details><summary>Content</summary><ul><li><a href="conteudos.html">All content</a></li><li><a href="conteudos.html#cat=saude">Health</a></li><li><a href="conteudos.html#cat=comunicados">Notices</a></li></ul></details>
-    <details><summary>Documents</summary><ul><li><a href="documentos.html#ans">ANS and IDSS</a></li><li><a href="documentos.html">Document center</a></li><li><a href="documentos.html#tiss">TISS and forms</a></li></ul></details>
+    <details><summary>Documents</summary><ul><li><a href="documentos.html#ans">IDSS</a></li><li><a href="documentos.html">Document center</a></li><li><a href="documentos.html#tiss">TISS and forms</a></li></ul></details>
     <div class="drawer-lang" role="group" aria-label="Language">
       <a href="../contato.html" hreflang="pt-BR" lang="pt-BR" data-set-lang="pt"><svg class="flag" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><g><rect width="32" height="32" fill="#009B3A"/><path d="M16 5.5 29 16 16 26.5 3 16z" fill="#FEDF00"/><circle cx="16" cy="16" r="6.2" fill="#002776"/><path d="M10.1 14.6c3.9-.7 8.1.2 11.7 2.6" fill="none" stroke="#fff" stroke-width="1.1"/></g></svg>
  Português</a>
@@ -348,13 +348,18 @@
 
 <section aria-label="Where we are">
   <div class="wrap">
-    <!-- Duas sedes (cartão + mapa) e duas unidades menores; no celular as sedes vêm primeiro; no desktop formam um xadrez 8/4 · 4/8 -->
-    <div class="places">
-      <article class="place place--main" aria-labelledby="sede-pa">
+    <!-- Quatro endereços (cartão + mapa) alternados pelas abas de cidade -->
+    <div class="tabs places-tabs">
+      <div role="tablist" aria-label="Choose the city">
+        <button type="button" role="tab" id="tab-pa" aria-controls="local-pa" aria-selected="true">Pouso Alegre</button>
+        <button type="button" role="tab" id="tab-ex" aria-controls="local-ex" aria-selected="false" tabindex="-1">Extrema</button>
+        <button type="button" role="tab" id="tab-u1" aria-controls="local-u1" aria-selected="false" tabindex="-1">Cidade Teste 1</button>
+        <button type="button" role="tab" id="tab-u2" aria-controls="local-u2" aria-selected="false" tabindex="-1">Cidade Teste 2</button>
+      </div>
+      <article class="place" role="tabpanel" id="local-pa" aria-labelledby="tab-pa">
         <div class="place-card">
           <span class="eyebrow" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Headquarters</span>
-          <h2 id="sede-pa">Pouso Alegre, Minas Gerais</h2>
-          <p style="color:var(--on-deep-2)">MedicGLOBAL member services, sales and administrative offices.</p>
+          <h2>Pouso Alegre, Minas Gerais</h2>
           <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">Av. Porfírio Ribeiro de Andrade, 90<br>Pouso Alegre/MG · CEP 37554-200</p></div>
           <dl>
             <div><dt>Ombudsman</dt><dd>Mon–Fri · 7:30 a.m.–5:30 p.m.</dd></div>
@@ -368,11 +373,10 @@
           <iframe title="Map: Av. Porfírio Ribeiro de Andrade, 90 - Pouso Alegre/MG" src="https://www.google.com/maps?q=Av.+Porf%C3%ADrio+Ribeiro+de+Andrade,+90+-+Pouso+Alegre,+MG,+37554-200&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
-      <article class="place place--main" aria-labelledby="sede-ex">
+      <article class="place" role="tabpanel" id="local-ex" aria-labelledby="tab-ex" hidden>
         <div class="place-card">
           <span class="eyebrow" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Headquarters</span>
-          <h2 id="sede-ex">Extrema, Minas Gerais</h2>
-          <p style="color:var(--on-deep-2)">MedicGLOBAL member services, sales and administrative offices.</p>
+          <h2>Extrema, Minas Gerais</h2>
           <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02 · Ponte Alta<br>Extrema/MG · CEP 37640-402</p></div>
           <dl>
             <div><dt>Ombudsman</dt><dd>Mon–Fri · 7:30 a.m.–5:30 p.m.</dd></div>
@@ -386,29 +390,39 @@
           <iframe title="Map: R. Alcebíades Wohlers, 02 · Ponte Alta - Extrema/MG" src="https://www.google.com/maps?q=R.+Alceb%C3%ADades+Wohlers,+02+-+Ponte+Alta,+Extrema,+MG,+37640-402&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
-      <article class="place-unit" aria-labelledby="unidade-1">
-        <span class="place-unit-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-        <span class="eyebrow" style="margin:0">Office</span>
-        <h3 id="unidade-1">MedicGLOBAL office</h3>
-        <span class="badge">Address being updated</span>
-        <dl>
-          <div><dt>Address</dt><dd>Rua Teste, 00</dd></div>
-          <div><dt>District</dt><dd>Bairro Medic Global</dd></div>
-          <div><dt>City</dt><dd>Cidade Teste/MG</dd></div>
-          <div><dt>Postal code</dt><dd>00000-000</dd></div>
-        </dl>
+      <article class="place" role="tabpanel" id="local-u1" aria-labelledby="tab-u1" hidden>
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Office</span>
+          <h2>Cidade Teste 1, Minas Gerais</h2>
+          <span class="badge">Address being updated</span>
+          <dl>
+            <div><dt>Address</dt><dd>Rua Teste, 00</dd></div>
+            <div><dt>District</dt><dd>Bairro Medic Global</dd></div>
+            <div><dt>City</dt><dd>Cidade Teste 1/MG</dd></div>
+            <div><dt>Postal code</dt><dd>00000-000</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></svg> Directions</a><a class="btn btn--light" href="https://api.whatsapp.com/send?phone=553534354442&text=Estava%20no%20site%20da%20MedicGLOBAL%20e%20desejo%20mais%20informa%C3%A7%C3%B5es" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9a4.5 4.5 0 0 1-2.3-2.3l.9-1-1-2z"/></svg> WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Map: Cidade Teste 1/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </article>
-      <article class="place-unit" aria-labelledby="unidade-2">
-        <span class="place-unit-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-        <span class="eyebrow" style="margin:0">Office</span>
-        <h3 id="unidade-2">MedicGLOBAL office</h3>
-        <span class="badge">Address being updated</span>
-        <dl>
-          <div><dt>Address</dt><dd>Rua Teste, 00</dd></div>
-          <div><dt>District</dt><dd>Bairro Medic Global</dd></div>
-          <div><dt>City</dt><dd>Cidade Teste/MG</dd></div>
-          <div><dt>Postal code</dt><dd>00000-000</dd></div>
-        </dl>
+      <article class="place" role="tabpanel" id="local-u2" aria-labelledby="tab-u2" hidden>
+        <div class="place-card">
+          <span class="eyebrow" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Office</span>
+          <h2>Cidade Teste 2, Minas Gerais</h2>
+          <span class="badge">Address being updated</span>
+          <dl>
+            <div><dt>Address</dt><dd>Rua Teste, 00</dd></div>
+            <div><dt>District</dt><dd>Bairro Medic Global</dd></div>
+            <div><dt>City</dt><dd>Cidade Teste 2/MG</dd></div>
+            <div><dt>Postal code</dt><dd>00000-000</dd></div>
+          </dl>
+          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></svg> Directions</a><a class="btn btn--light" href="https://api.whatsapp.com/send?phone=553534354442&text=Estava%20no%20site%20da%20MedicGLOBAL%20e%20desejo%20mais%20informa%C3%A7%C3%B5es" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9a4.5 4.5 0 0 1-2.3-2.3l.9-1-1-2z"/></svg> WhatsApp</a></div>
+        </div>
+        <div class="place-media">
+          <iframe title="Map: Cidade Teste 2/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </article>
     </div>
   </div>
@@ -475,7 +489,7 @@
       <div><h3>Plans</h3><ul><li><a href="planos.html">EMED GLOBAL BLUE</a></li><li><a href="planos.html#comparar">Compare plans</a></li><li><a href="planos.html#abrangencia">Coverage area</a></li><li><a href="planos.html#contato">Request a quote</a></li></ul></div>
       <div><h3>Network and services</h3><ul><li><a href="rede-credenciada.html">Provider network</a></li><li><a href="https://extremamedic.com/manual/" target="_blank" rel="noopener">Provider directory</a></li><li><a href="servicos.html#programas">Health programs</a></li><li><a href="servicos.html#abramge">ABRAMGE</a></li><li><a href="servicos.html#aplicativo">Mobile app</a></li></ul></div>
       <div><h3>About us</h3><ul><li><a href="medicglobal.html">Our story</a></li><li><a href="medicglobal.html#estrutura">Our facilities</a></li><li><a href="conteudos.html">Content</a></li><li><a href="trabalhe-conosco.html">Careers</a></li><li><a href="contato.html">Contact</a></li></ul></div>
-      <div><h3>Regulatory</h3><ul><li><a href="documentos.html#ans">ANS · IDSS</a></li><li><a href="documentos.html#ans">Quality Factor</a></li><li><a href="documentos.html#tiss">TISS · Forms</a></li><li><a href="documentos.html#reajuste">Rate adjustments</a></li><li><a href="documentos.html">Document center</a></li></ul></div>
+      <div><h3>Regulatory</h3><ul><li><a href="documentos.html#ans">IDSS</a></li><li><a href="documentos.html#ans">Quality Factor</a></li><li><a href="documentos.html#tiss">TISS · Forms</a></li><li><a href="documentos.html#reajuste">RN 565</a></li><li><a href="documentos.html">Document center</a></li></ul></div>
       <div><h3>Logins</h3><ul><li><a href="beneficiario.html">Member Area</a></li><li><a href="http://187.60.158.90:8080/CSSOL_Clientes/Login.aspx?ReturnUrl=/CSSOL_clientes/default.aspx" target="_blank" rel="noopener">Corporate clients</a></li><li><a href="http://187.60.158.90:8080/AUTORIZADORWEB/Account/Login" target="_blank" rel="noopener">Providers · TISS 3.0</a></li><li><a href="http://webmail.medicglobal.com.br/" target="_blank" rel="noopener">Employees</a></li><li><a href="atendimento.html#ouvidoria">Ombudsman</a></li></ul></div>
       </nav>
     </div>
@@ -585,7 +599,7 @@
   </section>
 </div>
 <div class="a11y-guide-bar" aria-hidden="true"></div>
-<script src="../assets/js/main.js?v=74361197" defer></script>
+<script src="../assets/js/main.js?v=5e612635" defer></script>
 <script src="../assets/js/a11y.js?v=bb4c2760" defer></script>
 
 </body>

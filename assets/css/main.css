@@ -1125,6 +1125,7 @@ html:not(.js) .hero-nav { display: none; }
 @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .full { grid-column: 1 / -1; } }
 .form-ok { display: none; padding: 20px; border-radius: var(--r-md); background: rgba(0,140,140,.1); color: var(--globo); font-weight: 500; }
 .form-ok.is-visible { display: block; }
+.form-fail { background: rgba(180,35,24,.08); color: #B42318; }
 .topic-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 .topic-grid input { position: absolute; opacity: 0; pointer-events: none; }
 .topic-grid label { display: inline-flex; min-height: 44px; align-items: center; padding: 0 18px; border-radius: var(--r-pill); border: 1px solid var(--line); font-size: var(--t-sm); cursor: pointer; transition: .2s; font-family: var(--f-head); color: var(--ink-2); }

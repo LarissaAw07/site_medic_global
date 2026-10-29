@@ -1,0 +1,26 @@
+# Serviço do painel MedicGLOBAL (systemd)
+# Instalação: sudo cp deploy/medicglobal-cms.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable --now medicglobal-cms
+[Unit]
+Description=MedicGLOBAL - painel administrativo (/admin) e formularios (/api)
+After=network.target
+
+[Service]
+Type=simple
+User=medicglobal
+Group=medicglobal
+# código do site (enviado pelo deploy) e variáveis (fora do repositório)
+WorkingDirectory=/opt/medicglobal/app
+EnvironmentFile=/etc/medicglobal-cms.env
+ExecStart=/usr/bin/node cms/server.js
+Restart=on-failure
+RestartSec=3
+# endurecimento
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+# o serviço só grava na pasta de dados e na pasta publicada pelo nginx
+ReadWritePaths=/var/lib/medicglobal-cms /var/www/medicglobal
+
+[Install]
+WantedBy=multi-user.target

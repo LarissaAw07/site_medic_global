@@ -1,7 +1,7 @@
 /* Gera src/pages/mapa-de-migracao.html a partir de src/data/migracao.tsv (executado por build.js). */
 const fs = require("fs");
 const path = require("path");
-module.exports = function () {
+module.exports = function (fs = require("fs")) {
   const rows = fs.readFileSync(path.join(__dirname, "data", "migracao.tsv"), "utf8").trim().split(/\r?\n/).map((l) => l.split("\t"));
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
   const needs = (r) => r[6].startsWith("Sim");

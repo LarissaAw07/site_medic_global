@@ -116,7 +116,7 @@ const UI = {
 };
 function dot(n) { return n.replace(",", "."); }
 
-module.exports = function () {
+module.exports = function (fs = require("fs")) {
   const data = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "idss.json"), "utf8"));
   const regs = data.registros.slice().sort((a, b) => b.ano - a.ano);
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

@@ -19,6 +19,9 @@
   function track(event, params) {
     var payload = Object.assign({ event: event }, params || {});
     window.dataLayer.push(payload);
+    // só com GA4 (sem GTM), os eventos vão direto pelo gtag
+    var cfg = window.MG_CFG || {};
+    if (window.gtag && cfg.ga && !cfg.gtm) window.gtag("event", event, params || {});
   }
   window.mgTrack = track;
   document.addEventListener("click", function (e) {
@@ -462,9 +465,10 @@
     var file = field.files && field.files[0];
     if (!file) return "";
     if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== "application/pdf")) return T("Formato não aceito: envie o currículo em PDF.", "File type not accepted: please send your résumé as a PDF.");
-    if (file.size > +field.getAttribute("data-max-bytes")) var gb = (file.size / 1073741824).toFixed(2);
-    return T("O arquivo tem " + gb.replace(".", ",") + " GB e ultrapassa o limite de 1 GB.", "The file is " + gb + " GB, which exceeds the 1 GB limit.");
-    return "";
+    var max = +field.getAttribute("data-max-bytes");
+    if (file.size <= max) return "";
+    var size = function (b) { return b >= 1073741824 ? (b / 1073741824).toFixed(2) + " GB" : (b / 1048576).toFixed(1) + " MB"; };
+    return T("O arquivo tem " + size(file.size).replace(".", ",") + " e ultrapassa o limite de " + size(max).replace(".", ",").replace(",0 ", " ") + ".", "The file is " + size(file.size) + ", which exceeds the " + size(max).replace(".0 ", " ") + " limit.");
   }
   function checkFile(field) {
     var err = errFor(field), problem = fileProblem(field);
@@ -498,11 +502,40 @@
       });
       if (!ok) { first.focus(); return; }
       var name = f.getAttribute("data-validate");
-      track("envio_formulario", { formulario: name });
-      // Integração: substituir por envio real (endpoint/CRM) após validação jurídica e de LGPD.
       var okBox = $(".form-ok", f);
-      if (okBox) { okBox.classList.add("is-visible"); okBox.focus(); }
-      f.reset();
+      var done = function () {
+        track("envio_formulario", { formulario: name });
+        if (okBox) { okBox.classList.add("is-visible"); okBox.focus(); }
+        f.reset();
+      };
+      // Sem o painel (site estático puro) não há para onde enviar: mantém o comportamento anterior
+      if (!(window.MG_CFG && window.MG_CFG.forms) || !window.fetch) return done();
+      // Envio real para o servidor do painel (/api/forms/nome), que valida de novo e encaminha aos destinos configurados
+      var fail = $(".form-fail", f);
+      if (!fail) { fail = document.createElement("p"); fail.className = "form-ok form-fail"; fail.setAttribute("role", "alert"); fail.tabIndex = -1; (okBox || f.lastElementChild).insertAdjacentElement("afterend", fail); }
+      fail.classList.remove("is-visible");
+      if (okBox) okBox.classList.remove("is-visible");
+      var data = new FormData(f), btn = $("[type=submit]", f);
+      data.append("_lgpd", "1");
+      data.append("_page", location.pathname);
+      if (btn) btn.disabled = true;
+      fetch("/api/forms/" + encodeURIComponent(name), { method: "POST", body: data, credentials: "same-origin" })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (j) { j.status = r.status; return j; }); })
+        .then(function (j) {
+          if (j.ok) return done();
+          // erros por campo vindos do servidor
+          Object.keys(j.fields || {}).forEach(function (k) {
+            var field = f.elements[k];
+            if (field && field.setAttribute) { field.setAttribute("aria-invalid", "true"); var err = errFor(field); if (err) { err.textContent = j.fields[k]; err.classList.add("is-visible"); } }
+          });
+          fail.textContent = j.error || T("Não foi possível enviar agora. Tente novamente em instantes.", "We could not send it right now. Please try again shortly.");
+          fail.classList.add("is-visible"); fail.focus();
+        })
+        .catch(function () {
+          fail.textContent = T("Sem conexão com o servidor. Verifique a sua internet e tente novamente.", "No connection to the server. Check your connection and try again.");
+          fail.classList.add("is-visible"); fail.focus();
+        })
+        .then(function () { if (btn) btn.disabled = false; });
     });
   });
 
@@ -621,8 +654,21 @@
   function setConsent(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function applyConsent(v) {
     window.dataLayer.push({ event: "consent_update", analytics_storage: v === "all" ? "granted" : "denied" });
-    // GTM: carregar o container somente após consentimento.
-    // if (v === "all") { (function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX'); }
+    // GA4 / GTM configurados no painel: carregados somente após o consentimento (LGPD)
+    var cfg = window.MG_CFG || {};
+    if (v !== "all" || window.mgTagsLoaded || (!cfg.ga && !cfg.gtm)) return;
+    window.mgTagsLoaded = true;
+    var load = function (src) { var s = document.createElement("script"); s.async = true; s.src = src; document.head.appendChild(s); };
+    if (cfg.gtm) {
+      window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      load("https://www.googletagmanager.com/gtm.js?id=" + encodeURIComponent(cfg.gtm));
+    }
+    if (cfg.ga) {
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", cfg.ga, { anonymize_ip: true });
+      load("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(cfg.ga));
+    }
   }
   var c = getConsent();
   if (c) applyConsent(c); else if (cookie) cookie.classList.add("is-visible");

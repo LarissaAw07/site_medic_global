@@ -51,7 +51,7 @@ const UI = {
   },
 };
 
-module.exports = function () {
+module.exports = function (fs = require("fs")) {
   const ROOT = path.join(__dirname, "..");
   const all = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "noticias.json"), "utf8"))
     .sort((a, b) => b.data.localeCompare(a.data));

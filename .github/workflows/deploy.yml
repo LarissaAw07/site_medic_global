@@ -43,9 +43,28 @@ jobs:
           chmod 600 ~/.ssh/id_deploy
           ssh-keyscan -p "${{ secrets.VPS_PORT || '22' }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
 
+      # Modo estático (padrão): o HTML gerado aqui substitui o da VPS
       - name: Enviar arquivos para a VPS (rsync)
+        if: vars.CMS_ENABLED != 'true'
         run: |
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/id_deploy -p ${{ secrets.VPS_PORT || '22' }}" \
             dist/ \
             "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
+
+      # Modo painel (variável do repositório CMS_ENABLED=true, depois de preparar a VPS — ver README):
+      # envia o código para VPS_APP_PATH e reinicia o serviço, que gera o site com o conteúdo editado no painel.
+      # O HTML publicado e os dados do painel (CMS_DATA_DIR) não são apagados por este deploy.
+      - name: Enviar o código do site e do painel (rsync)
+        if: vars.CMS_ENABLED == 'true'
+        run: |
+          rsync -avz --delete --exclude '.git' --exclude '.github' --exclude '.cms-data' --exclude 'node_modules' --exclude 'dist' \
+            -e "ssh -i ~/.ssh/id_deploy -p ${{ secrets.VPS_PORT || '22' }}" \
+            ./ \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_APP_PATH }}/"
+
+      - name: Reiniciar o painel (regera o site publicado)
+        if: vars.CMS_ENABLED == 'true'
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "${{ secrets.VPS_PORT || '22' }}" "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "sudo systemctl restart medicglobal-cms && sleep 3 && systemctl is-active medicglobal-cms"

@@ -107,7 +107,7 @@ const UI = {
 // datas no padrão americano (MM/DD/AAAA) e percentual com ponto na versão em inglês
 function en(d) { const [dd, mm, y] = d.split("/"); return `${mm}/${dd}/${y}`; }
 
-module.exports = function () {
+module.exports = function (fs = require("fs")) {
   const data = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "rn565.json"), "utf8"));
   const anos = data.anos.slice().sort((a, b) => b.ano - a.ano);
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

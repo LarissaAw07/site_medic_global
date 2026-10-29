@@ -2384,3 +2384,5 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .feature-list--cards p { font-family: var(--f-head); font-weight: 500; font-size: 1.05rem; line-height: 1.35; color: var(--white); }
 .deep .feature-list--cards p { color: var(--white); }
 .feature-list--cards .btn-row { margin-top: auto; padding-top: 16px; }
+/* RN 565 e IDSS: filtro de anos só com a lista suspensa (todos os anos dentro dela) */
+.rn-years-seg > .rn-years-more:first-child > summary { margin-left: 0; border-left: 0; border-radius: var(--r-pill); }

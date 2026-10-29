@@ -24,6 +24,8 @@ const UI = {
     jump: "Ir para o ano",
     older: "Anos anteriores",
     olderShort: "Anteriores",
+    pickYear: "Selecionar ano",
+    allYears: "Todos os anos",
     olderRange: (l) => `${l[l.length - 1].ano} a ${l[0].ano} · ${l.length} anos`,
     view: "Ver agrupamento",
     download: "Baixar agrupamento",
@@ -71,6 +73,8 @@ const UI = {
     jump: "Go to year",
     older: "Previous years",
     olderShort: "Earlier",
+    pickYear: "Select year",
+    allYears: "All years",
     olderRange: (l) => `${l[l.length - 1].ano} to ${l[0].ano} · ${l.length} years`,
     view: "View contract pool",
     download: "Download contract pool",
@@ -171,12 +175,11 @@ module.exports = function () {
       <nav class="rn-years" aria-label="${U.jump}">
         <span class="rn-years-label">${U.jump}</span>
         <div class="rn-years-seg">
-          ${recentes.map((a) => `<a href="#ano-${a.ano}">${a.ano}</a>`).join("")}
           <details class="rn-years-more">
-            <summary>${U.olderShort} {{i:chevron-down}}</summary>
+            <summary>${U.pickYear} {{i:chevron-down}}</summary>
             <div class="rn-years-pop">
-              <span class="rn-years-pop-title">${U.older} · ${U.olderRange(anteriores)}</span>
-              <div class="rn-years-grid">${anteriores.map((a) => `<a href="#ano-${a.ano}">${a.ano}</a>`).join("")}</div>
+              <span class="rn-years-pop-title">${U.allYears} · ${U.olderRange(anos)}</span>
+              <div class="rn-years-grid">${anos.map((a) => `<a href="#ano-${a.ano}">${a.ano}</a>`).join("")}</div>
             </div>
           </details>
         </div>

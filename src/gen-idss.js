@@ -35,6 +35,8 @@ const UI = {
     hist: "Histórico do IDSS",
     jump: "Ir para o ano",
     olderShort: "Anteriores",
+    pickYear: "Selecionar ano",
+    allYears: "Todos os anos",
     older: "Anos anteriores",
     olderRange: (l) => `${l[l.length - 1].ano} a ${l[0].ano} · ${l.length} anos`,
     cols: ["Ano", "Descrição", "Nota IDSS", ""],
@@ -74,6 +76,8 @@ const UI = {
     hist: "IDSS history",
     jump: "Go to year",
     olderShort: "Earlier",
+    pickYear: "Select year",
+    allYears: "All years",
     older: "Previous years",
     olderRange: (l) => `${l[l.length - 1].ano} to ${l[0].ano} · ${l.length} years`,
     cols: ["Year", "Description", "IDSS score", ""],
@@ -172,12 +176,11 @@ ${ind}</li>`;
       <nav class="rn-years" aria-label="${U.jump}">
         <span class="rn-years-label">${U.jump}</span>
         <div class="rn-years-seg">
-          ${recentes.map((r) => `<a href="#ano-${r.ano}">${r.ano}</a>`).join("")}
           <details class="rn-years-more">
-            <summary>${U.olderShort} {{i:chevron-down}}</summary>
+            <summary>${U.pickYear} {{i:chevron-down}}</summary>
             <div class="rn-years-pop">
-              <span class="rn-years-pop-title">${U.older} · ${U.olderRange(anteriores)}</span>
-              <div class="rn-years-grid">${anteriores.map((r) => `<a href="#ano-${r.ano}">${r.ano}</a>`).join("")}</div>
+              <span class="rn-years-pop-title">${U.allYears} · ${U.olderRange(regs)}</span>
+              <div class="rn-years-grid">${regs.map((r) => `<a href="#ano-${r.ano}">${r.ano}</a>`).join("")}</div>
             </div>
           </details>
         </div>

@@ -405,7 +405,6 @@ ul, ol { margin: 0; padding: 0; }
 .hero .grid { align-items: end; row-gap: 40px; }
 .hero-copy { padding-bottom: 8px; position: relative; z-index: 2; }
 .hero-copy h1 { margin-bottom: 28px; }
-.hero-partner { display: block; align-self: flex-start; width: auto; height: 36px; margin-bottom: 24px; object-fit: contain; }
 .hero-copy h1 em { font-style: normal; color: var(--medic); }
 .hero-copy .lead { margin-bottom: 36px; max-width: 30rem; }
 .hero-media { position: relative; }

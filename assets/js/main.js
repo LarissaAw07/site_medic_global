@@ -131,6 +131,7 @@
     { t: "Área do Beneficiário", d: "Carteirinha, dados do plano, boletos e serviços", u: "beneficiario.html", k: "beneficiario cliente login entrar acessar area carteirinha app", tag: "Beneficiário" },
     { t: "Segunda via de boleto", d: "Emita o boleto do seu plano", u: "beneficiario.html#boleto", k: "boleto pagar pagamento mensalidade segunda via fatura", tag: "Beneficiário" },
     { t: "Encontrar atendimento", d: "Médicos, clínicas, hospitais e laboratórios", u: "rede-credenciada.html", k: "consulta medico medica rede credenciada hospital clinica laboratorio exame especialidade guia medico perto", tag: "Rede" },
+    { t: "Guia médico e guia de serviços", d: "Consulte o guia por tipo, estado e cidade", u: "guia-medico.html", k: "guia medico servicos manual especialidade cidade rede", tag: "Rede" },
     { t: "Telemedicina", d: "Fale com um profissional de saúde a distância", u: "telemedicina.html", k: "telemedicina teleconsulta online video consulta virtual falar com medico", tag: "Serviço" },
     { t: "Autorizações", d: "Consulte e solicite autorizações de procedimentos", u: "servicos.html#autorizacoes", k: "autorizacao autorizar exame procedimento guia liberacao cirurgia", tag: "Serviço" },
     { t: "Conheça os planos", d: "EMED GLOBAL BLUE 200, 300 e 400", u: "planos.html", k: "planos contratar plano quero ser cliente preco valor proposta blue emed", tag: "Planos" },

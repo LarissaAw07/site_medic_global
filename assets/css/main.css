@@ -403,7 +403,7 @@ ul, ol { margin: 0; padding: 0; }
 .hero .grid { align-items: end; row-gap: 40px; }
 .hero-copy { padding-bottom: 8px; position: relative; z-index: 2; }
 .hero-copy h1 { margin-bottom: 28px; }
-.hero-partner { display: block; width: auto; height: 36px; margin-bottom: 24px; }
+.hero-partner { display: block; align-self: flex-start; width: auto; height: 36px; margin-bottom: 24px; object-fit: contain; }
 .hero-copy h1 em { font-style: normal; color: var(--medic); }
 .hero-copy .lead { margin-bottom: 36px; max-width: 30rem; }
 .hero-media { position: relative; }
@@ -2132,6 +2132,22 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .rb-foot { display: grid; gap: 12px; margin-top: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
 .rb-legend ul { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; font-size: var(--t-xs); color: var(--ink-2); }
 .rb-legend li { display: inline-flex; align-items: center; gap: 8px; }
+
+
+/* Guia médico (guia-medico.html): tela do site antigo (logo + Tipo de guia, Estado, Cidade → Visualizar manual) */
+.gm-sec { background: var(--mist); min-height: 60vh; padding-top: calc(var(--header-h) + 32px); }
+.gm-card { display: grid; gap: 24px; justify-items: center; max-width: 760px; margin: 24px auto 0; padding: 40px 24px; border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--line); text-align: center; }
+@media (min-width: 760px) { .gm-card { padding: 48px; } }
+.gm-logo { width: 240px; height: auto; }
+.gm-intro { display: grid; gap: 8px; }
+.gm-intro h1 { font-size: var(--t-h3); }
+.gm-form { display: grid; gap: 16px; width: 100%; text-align: left; }
+@media (min-width: 760px) { .gm-form { grid-template-columns: 1fr 1fr; } .gm-tipo { grid-column: 1 / -1; } .gm-go { grid-column: 1 / -1; justify-self: center; } }
+.gm-form select:disabled { opacity: .55; cursor: not-allowed; }
+.gm-go svg { width: 18px; height: 18px; }
+.gm-go:disabled { opacity: .5; pointer-events: none; }
+.gm-result { width: 100%; text-align: left; }
+.gm-result[hidden] { display: none; }
 
 /* RN 565: histórico de reajustes (rn565.html) e páginas internas de cada agrupamento (rn565-agrupamento-AAAA.html) */
 .rn-hero { background: var(--mist); }

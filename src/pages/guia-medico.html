@@ -1,0 +1,48 @@
+<!--@{
+  "title": "Guia médico e guia de serviços | MedicGLOBAL",
+  "description": "Consulte o guia médico ou o guia de serviços da MedicGLOBAL por estado e cidade.",
+  "active": "rede",
+  "og": "old_consultorio",
+  "crumbs": [["Rede de cuidado", "rede-credenciada.html"], ["Guia médico", "guia-medico.html"]],
+  "extraScripts": "<script src=\"assets/js/guia-medico.js\" defer></script>"
+}@-->
+
+<!-- Guia médico no molde do site antigo (extremamedic.com/manual): logo + Tipo de guia, Estado e Cidade → Visualizar manual.
+     Por enquanto só a parte visual e os filtros; a integração com o sistema que gera o manual será feita depois.
+     Os valores das cidades são os códigos do sistema antigo (buscacidade.php). -->
+<section class="section gm-sec" aria-labelledby="t">
+  <div class="wrap">
+    {{crumbs}}
+    <div class="gm-card" data-guia-medico>
+      <img class="gm-logo" src="assets/img/brand/logo-medicglobal-saude.png" alt="MedicGLOBAL Saúde" width="240" height="96">
+      <div class="gm-intro">
+        <h1 id="t">Guia médico</h1>
+        <p class="muted">Selecione o tipo de guia, o estado e a cidade para visualizar o manual.</p>
+      </div>
+      <form class="gm-form" novalidate>
+        <div class="field gm-tipo"><label for="gm-tipo">Tipo de guia</label>
+          <select id="gm-tipo" name="tipo" required>
+            <option value="">Selecione</option>
+            <option value="medico">Guia médico</option>
+            <option value="servico">Guia de serviços</option>
+          </select>
+        </div>
+        <div class="field"><label for="gm-estado">Estado</label>
+          <select id="gm-estado" name="estado" disabled>
+            <option value="">Selecione</option>
+            <option value="0">Todos</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="SP">São Paulo</option>
+          </select>
+        </div>
+        <div class="field"><label for="gm-cidade">Cidade</label>
+          <select id="gm-cidade" name="cidade" disabled>
+            <option value="">Selecione</option>
+          </select>
+        </div>
+        <button class="btn gm-go" type="submit" disabled>{{i:doc}} Visualizar manual</button>
+      </form>
+      <div class="notice gm-result" role="status" hidden>{{i:info}}<span><strong class="gm-result-t"></strong> O manual será exibido aqui assim que a integração com o sistema da rede for concluída.</span></div>
+    </div>
+  </div>
+</section>

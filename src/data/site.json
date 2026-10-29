@@ -78,7 +78,7 @@
     "boleto": "http://187.60.158.90:8080/boletoonline/",
     "telemedicina": "https://telemedicina.medicglobal.com.br/",
     "rede": "https://extremamedic.com/rede_credenciada.php",
-    "guia": "https://extremamedic.com/manual/",
+    "guia": "guia-medico.html",
     "especialidade": "https://extremamedic.com/index.asp",
     "empresa": "http://187.60.158.90:8080/CSSOL_Clientes/Login.aspx?ReturnUrl=/CSSOL_clientes/default.aspx",
     "autorizador": "http://187.60.158.90:8080/AUTORIZADORWEB/Account/Login",

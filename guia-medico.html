@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=7c207ec1">
+<link rel="stylesheet" href="assets/css/main.css?v=efb01e7a">
 
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
@@ -191,42 +191,67 @@
 </div>
 
 <main id="conteudo" tabindex="-1">
-<!-- Guia médico no molde do site antigo (extremamedic.com/manual): logo + Tipo de guia, Estado e Cidade → Visualizar manual.
+<!-- Guia médico (no molde de extremamedic.com/manual): Tipo de guia, Estado e Cidade → Visualizar manual.
+     Layout dividido: painel da marca à esquerda (passos + destaques) e formulário à direita.
      Por enquanto só a parte visual e os filtros; a integração com o sistema que gera o manual será feita depois.
      Os valores das cidades são os códigos do sistema antigo (buscacidade.php). -->
 <section class="section gm-sec" aria-labelledby="t">
   <div class="wrap">
     <nav aria-label="Você está em"><ol class="crumbs"><li><a href="index.html">Início</a></li><li><a href="rede-credenciada.html">Rede de cuidado</a></li><li><span aria-current="page">Guia médico</span></li></ol></nav>
-    <div class="gm-card" data-guia-medico>
-      <img class="gm-logo" src="assets/img/brand/logo-medicglobal-saude.png" alt="MedicGLOBAL Saúde" width="240" height="96">
-      <div class="gm-intro">
-        <h1 id="t">Guia médico</h1>
-        <p class="muted">Selecione o tipo de guia, o estado e a cidade para visualizar o manual.</p>
+    <div class="gm-shell" data-guia-medico>
+      <div class="gm-brand">
+        <svg class="gm-deco" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle cx="330" cy="70" r="70"/><circle cx="330" cy="70" r="130"/><circle cx="330" cy="70" r="190" stroke-dasharray="2 8"/><path d="M0 330c90-40 170-40 260 0s150 30 200-10"/></svg>
+        <img class="gm-logo" src="assets/img/brand/logo-medicglobal-saude-branco.png" alt="MedicGLOBAL Saúde" width="200" height="80">
+        <div class="gm-intro">
+          <span class="gm-eyebrow">Rede de cuidado · Consulta</span>
+          <h1 id="t">Guia médico</h1>
+          <p>Médicos, clínicas, laboratórios e hospitais da rede MedicGLOBAL, organizados por estado e cidade.</p>
+        </div>
+        <ol class="gm-steps" role="list">
+          <li data-step="tipo"><span>01</span>Escolha o tipo de guia</li>
+          <li data-step="estado"><span>02</span>Selecione o estado</li>
+          <li data-step="cidade"><span>03</span>Selecione a cidade</li>
+        </ol>
+        <ul class="gm-facts" role="list">
+          <li><strong>11</strong><small>cidades</small></li>
+          <li><strong>MG · SP</strong><small>estados</small></li>
+          <li><strong>2</strong><small>guias</small></li>
+        </ul>
+        <span class="gm-chip gm-chip--a" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M7.5 15h9"/></svg> Laboratórios</span>
+        <span class="gm-chip gm-chip--b" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg> Especialidades</span>
       </div>
-      <form class="gm-form" novalidate>
-        <div class="field gm-tipo"><label for="gm-tipo">Tipo de guia</label>
-          <select id="gm-tipo" name="tipo" required>
-            <option value="">Selecione</option>
-            <option value="medico">Guia médico</option>
-            <option value="servico">Guia de serviços</option>
-          </select>
+
+      <div class="gm-panel">
+        <div class="gm-panel-head">
+          <h2>Encontre a sua rede</h2>
+          <p class="muted">Preencha os três passos para visualizar o manual.</p>
         </div>
-        <div class="field"><label for="gm-estado">Estado</label>
-          <select id="gm-estado" name="estado" disabled>
-            <option value="">Selecione</option>
-            <option value="0">Todos</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="SP">São Paulo</option>
-          </select>
-        </div>
-        <div class="field"><label for="gm-cidade">Cidade</label>
-          <select id="gm-cidade" name="cidade" disabled>
-            <option value="">Selecione</option>
-          </select>
-        </div>
-        <button class="btn gm-go" type="submit" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg> Visualizar manual</button>
-      </form>
-      <div class="notice gm-result" role="status" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg><span><strong class="gm-result-t"></strong> O manual será exibido aqui assim que a integração com o sistema da rede for concluída.</span></div>
+        <form class="gm-form" novalidate>
+          <fieldset class="gm-tipo">
+            <legend>Tipo de guia</legend>
+            <div class="gm-choices">
+              <label class="gm-choice"><input type="radio" name="tipo" value="medico"><span class="gm-choice-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/></svg></span><span class="gm-choice-txt"><strong>Guia médico</strong><small>Médicos e especialidades</small></span></label>
+              <label class="gm-choice"><input type="radio" name="tipo" value="servico"><span class="gm-choice-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 21V8l8-5 8 5v13"/><path d="M10 21v-5h4v5"/><path d="M12 8v5M9.5 10.5h5"/><path d="M2 21h20"/></svg></span><span class="gm-choice-txt"><strong>Guia de serviços</strong><small>Clínicas, laboratórios e hospitais</small></span></label>
+            </div>
+          </fieldset>
+          <div class="field"><label for="gm-estado">Estado</label>
+            <select id="gm-estado" name="estado" disabled>
+              <option value="">Selecione</option>
+              <option value="0">Todos</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="SP">São Paulo</option>
+            </select>
+          </div>
+          <div class="field"><label for="gm-cidade">Cidade</label>
+            <select id="gm-cidade" name="cidade" disabled>
+              <option value="">Selecione</option>
+            </select>
+          </div>
+          <button class="btn gm-go" type="submit" disabled>Visualizar manual</button>
+        </form>
+        <div class="notice gm-result" role="status" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg><span><strong class="gm-result-t"></strong> O manual será exibido aqui assim que a integração com o sistema da rede for concluída.</span></div>
+        <p class="gm-alt">Prefere buscar por nome ou especialidade? <a href="rede-credenciada.html#buscar">Use a busca da rede credenciada</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -361,6 +386,6 @@
 <div class="a11y-guide-bar" aria-hidden="true"></div>
 <script src="assets/js/main.js?v=c72be0d0" defer></script>
 <script src="assets/js/a11y.js?v=bb4c2760" defer></script>
-<script src="assets/js/guia-medico.js?v=39d576cc" defer></script>
+<script src="assets/js/guia-medico.js?v=bef0ba1e" defer></script>
 </body>
 </html>

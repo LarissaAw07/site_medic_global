@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=3c9223c3">
+<link rel="stylesheet" href="assets/css/main.css?v=7c207ec1">
 <script>try{var l=localStorage.getItem("mg-lang");if(l&&l!=="pt")location.replace("en/rede-credenciada.html"+location.hash)}catch(e){}</script>
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -321,7 +321,7 @@
 
 <section class="section deep" id="especialidades" aria-labelledby="esp-t">
   <div class="wrap">
-    <div class="grid" style="align-items:center">
+    <div class="grid esp-grid">
       <div class="c-1-5 stack">
         <span class="eyebrow">Buscar especialidade</span>
         <h2 id="esp-t" class="balance">Qual especialidade você procura?</h2>
@@ -329,22 +329,20 @@
         <div class="btn-row"><a class="btn btn--light" href="guia-medico.html" data-track="click_rede">Abrir guia médico</a></div>
       </div>
       <div class="c-6-13">
-        <div class="feature-list">
+        <div class="feature-list feature-list--cards">
           <div><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><div><h3>Guia de serviços</h3><p>Consulte por tipo de guia (médico ou de serviços), estado e cidade.</p><div class="btn-row mt-4"><a class="btn btn--light btn--sm" href="guia-medico.html" data-track="click_rede">Abrir guia médico</a></div></div></div>
           <div><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><div><h3>No aplicativo</h3><p>Salve favoritos, entre em contato com o prestador e veja a localização.</p></div></div>
         </div>
-        <div class="type-pills mt-8" style="gap:8px">
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuntura</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Alergologia</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anestesiologia</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiologia</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Arteterapia</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatria</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Cancerologia cirúrgica</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiologia</a>
-          <a class="pill esp" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Imunologia</a>
-        </div>
       </div>
+    </div>
+  </div>
+  <!-- Especialidades em faixa rotativa no fim da seção; o conjunto se repete para a volta ficar contínua (só o 1º é acessível) -->
+  <div class="marquee marquee--sm mt-9">
+    <div class="marquee-track">
+      <a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuntura</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Alergologia</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anestesiologia</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiologia</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Arteterapia</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatria</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Cancerologia cirúrgica</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiologia</a><a class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Imunologia</a>
+      <span class="marquee-dup" aria-hidden="true"><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuntura</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Alergologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anestesiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Arteterapia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatria</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Cancerologia cirúrgica</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Imunologia</a></span>
+      <span class="marquee-dup" aria-hidden="true"><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuntura</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Alergologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anestesiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Arteterapia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatria</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Cancerologia cirúrgica</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Imunologia</a></span>
+      <span class="marquee-dup" aria-hidden="true"><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ACUPUNTURA">Acupuntura</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ALERGOLOGIA">Alergologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANESTESIOLOGIA">Anestesiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ANGIOLOGIA">Angiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="ARTETERAPIA">Arteterapia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="PEDIATRIA">Pediatria</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CANCEROLOGIA CIRURGICA">Cancerologia cirúrgica</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="CARDIOLOGIA">Cardiologia</a><a tabindex="-1" class="marquee-item" href="#buscar" data-rb-fn="especialidade" data-rb="IMUNOLOGIA">Imunologia</a></span>
     </div>
   </div>
 </section>

@@ -13,6 +13,7 @@ node serve.js   # abre em http://localhost:8080
 - `src/partials/`: layout global (header, mega menus, rodapé, cookies), logo, cards de planos, mockup do app
 - `src/data/site.json`: **fonte única** de telefones, WhatsApp, links de sistemas, PDFs e registro ANS
 - `src/data/rn565.json`: histórico da RN 565 transcrito do site antigo; gera `rn565.html` e `rn565-agrupamento-AAAA.html` (via `src/gen-rn565.js`)
+- `src/data/idss.json`: histórico do IDSS transcrito do site antigo (textos, notas e imagens em `assets/img/idss/`); gera `idss.html` e `idss-AAAA.html` (via `src/gen-idss.js`)
 - `src/data/migracao.tsv`: inventário de migração; gera `mapa-de-migracao.html` (interno, noindex)
 - `assets/css/main.css`: design system (tokens, grid 4/8/12, componentes)
 - `assets/js/main.js`: navegação por necessidade, busca (Ctrl+K), filtros, formulários, consentimento LGPD, eventos GA4

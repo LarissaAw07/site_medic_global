@@ -1,0 +1,346 @@
+{
+ "fonte": "https://extremamedic.com/idss_historico.php",
+ "titulo": "IDSS",
+ "subtitulo": "Índice de Desempenho da Saúde Suplementar",
+ "registros": [
+  {
+   "ano": 2025,
+   "anoBase": 2024,
+   "descricao": "IDSS Referente a 2025 (Ano Base 2024)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2025",
+   "subtitulo": "IDSS Referente a 2025 (Ano Base 2024)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=8",
+   "resultado": {
+    "nota": "0,4859",
+    "dim": [
+     "0,2715",
+     "0,1092",
+     "0,9093",
+     "0,9888"
+    ],
+    "acred": "Operadora não bonificada",
+    "bonus": "0,0000 · Operadora não bonificada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "img": "assets/img/idss/2025-0.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-1.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-2.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-3.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-4.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-5.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-6.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-7.jpg"
+    },
+    {
+     "img": "assets/img/idss/2025-8.jpg"
+    }
+   ]
+  },
+  {
+   "ano": 2024,
+   "anoBase": 2023,
+   "descricao": "IDSS Referente a 2024 (Ano Base 2023)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2024",
+   "subtitulo": "IDSS Referente a 2024 (Ano Base 2023)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=7",
+   "resultado": {
+    "nota": "0,5641",
+    "dim": [
+     "0,4065",
+     "0,2291",
+     "0,9251",
+     "0,9591"
+    ],
+    "acred": "Operadora não bonificada",
+    "bonus": "0,0000 · Operadora não bonificada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "O Resultado da Medic Global foi: <strong><u>0,5641</u></strong>"
+    },
+    {
+     "img": "assets/img/idss/2024-0.png"
+    },
+    {
+     "img": "assets/img/idss/2024-1.png"
+    }
+   ]
+  },
+  {
+   "ano": 2023,
+   "anoBase": 2022,
+   "descricao": "IDSS Referente a 2023 (Ano Base 2022)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2023",
+   "subtitulo": "IDSS Referente a 2023 (Ano Base 2022)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=6",
+   "resultado": {
+    "nota": "0,6851",
+    "dim": [
+     "0,7069",
+     "0,2779",
+     "0,9654",
+     "1,0000"
+    ],
+    "acred": null,
+    "bonus": null
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2023 (Ano base 2022) foi <strong>0,6851</strong>, conforme divulgado pela ANS:"
+    },
+    {
+     "faltando": "blob"
+    },
+    {
+     "img": "assets/img/idss/2023-1.jpg"
+    }
+   ]
+  },
+  {
+   "ano": 2022,
+   "anoBase": 2021,
+   "descricao": "IDSS Referente a 2022 (Ano Base 2021)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2022",
+   "subtitulo": "IDSS Referente a 2022 (Ano Base 2021)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=5",
+   "resultado": {
+    "nota": "0,6464",
+    "dim": [
+     "0,6903",
+     "0,4346",
+     "0,7527",
+     "0,8315"
+    ],
+    "acred": "Operadora não Acreditada",
+    "bonus": "Operadora não pontuada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2022 (Ano base 2021) foi <strong>0,6464</strong>, conforme divulgado pela ANS:"
+    },
+    {
+     "img": "assets/img/idss/2022-0.jpg"
+    },
+    {
+     "img": "assets/img/idss/2022-1.jpg",
+     "truncada": true
+    }
+   ]
+  },
+  {
+   "ano": 2021,
+   "anoBase": 2020,
+   "descricao": "IDSS Referente a 2021 (Ano Base 2020)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2021",
+   "subtitulo": "IDSS Referente a 2021 (Ano Base 2020)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=4",
+   "resultado": {
+    "nota": "0,6479",
+    "dim": [
+     "0,5911",
+     "0,3033",
+     "0,9875",
+     "0,8333"
+    ],
+    "acred": "Operadora não Acreditada",
+    "bonus": "Operadora não pontuada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"https://www.gov.br/ans/pt-br/assuntos/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2021 (Ano base 2020) foi <strong>0,6479</strong>, conforme divulgado pela ANS:"
+    },
+    {
+     "img": "assets/img/idss/2021-0.png"
+    },
+    {
+     "faltando": "blob"
+    },
+    {
+     "faltando": "blob"
+    },
+    {
+     "img": "assets/img/idss/2021-3.png"
+    }
+   ]
+  },
+  {
+   "ano": 2020,
+   "anoBase": 2019,
+   "descricao": "IDSS Referente a 2020 (Ano Base 2019)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2020",
+   "subtitulo": "IDSS Referente a 2020 (Ano Base 2019)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=3",
+   "resultado": {
+    "nota": "0,6552",
+    "dim": [
+     "0,7626",
+     "0,4872",
+     "0,6566",
+     "0,8328"
+    ],
+    "acred": "Operadora não Acreditada",
+    "bonus": "Operadora não pontuada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"http://www.ans.gov.br/planos-de-saude-e-operadoras/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2020 (Ano base 2019) foi 0.6552, conforme divulgado pela ANS:"
+    },
+    {
+     "img": "assets/img/idss/2020-0.jpg"
+    }
+   ]
+  },
+  {
+   "ano": 2019,
+   "anoBase": 2018,
+   "descricao": "IDSS Referente a 2019 (Ano Base 2018)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2019",
+   "subtitulo": "IDSS Referente a 2019 (Ano Base 2018)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=2",
+   "resultado": {
+    "nota": "0,7291",
+    "dim": [
+     "0,7804",
+     "0,4481",
+     "0,9795",
+     "0,6666"
+    ],
+    "acred": "Operadora não Acreditada",
+    "bonus": "Operadora não pontuada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"http://www.ans.gov.br/planos-de-saude-e-operadoras/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2019 (Ano base 2018) foi 0.7291, conforme divulgado pela ANS:"
+    },
+    {
+     "img": "assets/img/idss/2019-0.png"
+    },
+    {
+     "img": "assets/img/idss/2019-1.png"
+    }
+   ]
+  },
+  {
+   "ano": 2018,
+   "anoBase": 2017,
+   "descricao": "IDSS Referente a 2018 (Ano Base 2017)",
+   "botaoOriginal": "Visualizar",
+   "titulo": "IDSS ANO 2018",
+   "subtitulo": "IDSS Referente a 2018 (Ano Base 2017)",
+   "origem": "https://extremamedic.com/idss_detalhe.php?id=1",
+   "resultado": {
+    "nota": "0,7491",
+    "dim": [
+     "0,7798",
+     "0,4742",
+     "0,9099",
+     "1,0000"
+    ],
+    "acred": "Operadora não Acreditada",
+    "bonus": "Operadora não pontuada"
+   },
+   "blocos": [
+    {
+     "h2": "ÍNDICE DE DESEMPENHO DA SAÚDE SUPLEMENTAR - IDSS"
+    },
+    {
+     "p": "O Índice de Desempenho da Saúde Suplementar (IDSS) faz parte do Programa de Qualificação de Operadoras (PQO), que é uma iniciativa desenvolvida pela Agência Nacional de Saúde Suplementar (ANS), para avaliação anual do desempenho das operadoras de planos de saúde. O IDSS é um índice composto por um conjunto de indicadores agrupados em quatro dimensões, e é calculado com base nos dados extraídos dos sistemas de informações da Agência ou coletados nos sistemas nacionais de informações em saúde."
+    },
+    {
+     "p": "\"Para acesso ao Programa de Qualificação das Operadoras, clique <a href=\"http://www.ans.gov.br/planos-de-saude-e-operadoras/informacoes-e-avaliacoes-de-operadoras/qualificacao-ans\">aqui</a>.\""
+    },
+    {
+     "p": "A nota do Extremamedic com relação ao IDSS 2018 (Ano base 2017) foi 0.7491, conforme divulgado pela ANS:"
+    },
+    {
+     "img": "assets/img/idss/2018-0.jpg"
+    }
+   ]
+  }
+ ]
+}

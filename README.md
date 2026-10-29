@@ -26,7 +26,7 @@ node serve.js   # abre em http://localhost:8080
 1. Razão social e CNPJ (o rodapé tem um espaço reservado, sinalizado).
 2. Vetor oficial do logo e arquivos WOFF2 da Agenor Neue.
 3. Planos: diferença entre BLUE 300 e 400, segmentação, contratação e nº de registro de cada produto.
-4. Canal comercial: o número exibido (35) 3435-4442 é diferente do WhatsApp (35) 98826-9853.
+4. Telefones: todos os canais (central, autorizações, financeiro, comercial) usam o número único (35) 3435-4442, definido em `src/data/site.json`.
 5. E-mail da ouvidoria no domínio antigo; nome e contato do DPO.
 6. Política de Privacidade: texto-modelo, precisa de validação jurídica.
 7. Programas de saúde, nomes dos 5 hospitais e textos dos posts marcados "Em atualização".

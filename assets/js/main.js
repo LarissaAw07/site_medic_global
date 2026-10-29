@@ -333,7 +333,8 @@
           var v = groups[g]; if (!v || v === "all") return true;
           return (" " + (it.getAttribute("data-" + g) || "") + " ").indexOf(" " + v + " ") > -1;
         });
-        if (ok && term) ok = norm(it.textContent).indexOf(term) > -1;
+        // data-k: palavras extras de busca que não aparecem no texto do item (ex.: "cid10")
+        if (ok && term) ok = norm(it.textContent + " " + (it.getAttribute("data-k") || "")).indexOf(term) > -1;
         if (mode === "dim") it.classList.toggle("is-dim", !ok); else it.hidden = !ok;
         if (ok) shown++;
       });

@@ -857,7 +857,7 @@ html:not(.js) .hero-nav { display: none; }
 @media (min-width: 1100px) { .footer-top { grid-template-columns: 5fr 7fr; align-items: end; } }
 .footer-top h2 { color: var(--white); font-size: clamp(2rem, 1.4rem + 2.5vw, 3.75rem); max-width: 20ch; }
 .footer-contact { display: grid; gap: 16px; }
-@media (min-width: 720px) { .footer-contact { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 720px) { .footer-contact { grid-template-columns: repeat(2, 1fr); } }
 .footer-contact a { display: block; padding: 22px; border: 1px solid var(--line-deep); border-radius: var(--r-md); }
 .footer-contact a:hover { border-color: var(--glow); }
 .footer-contact small { display: block; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--glow); font-family: var(--f-head); margin-bottom: 6px; }
@@ -2009,7 +2009,7 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .central-act-txt { display: grid; gap: 2px; min-width: 0; flex: 1; }
 .central-act-txt small { font-family: var(--f-head); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 .central-act-txt strong { font-family: var(--f-head); font-weight: 500; font-size: 1.15rem; letter-spacing: -.01em; color: var(--ink); }
-.central-act--phone strong { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.7rem); color: var(--globo); }
+.central-act--phone strong { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.7rem); color: #000; }
 .central-act-go { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); color: var(--globo); transition: background .25s, color .25s, border-color .25s, transform .25s var(--ease); }
 .central-act-go svg { width: 16px; height: 16px; }
 .central-act + .central-act, .central-actions li + li { border-top: 1px solid var(--line-2); }

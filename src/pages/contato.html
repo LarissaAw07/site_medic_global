@@ -33,13 +33,11 @@
 
 <section aria-label="Onde estamos">
   <div class="wrap">
-    <!-- Quatro endereços (cartão + mapa) alternados pelas abas de cidade -->
+    <!-- Endereços das sedes (cartão + mapa) alternados pelas abas de cidade -->
     <div class="tabs places-tabs">
       <div role="tablist" aria-label="Escolha a cidade">
         <button type="button" role="tab" id="tab-pa" aria-controls="local-pa" aria-selected="true">Pouso Alegre</button>
         <button type="button" role="tab" id="tab-ex" aria-controls="local-ex" aria-selected="false" tabindex="-1">Extrema</button>
-        <button type="button" role="tab" id="tab-u1" aria-controls="local-u1" aria-selected="false" tabindex="-1">Cidade Teste 1</button>
-        <button type="button" role="tab" id="tab-u2" aria-controls="local-u2" aria-selected="false" tabindex="-1">Cidade Teste 2</button>
       </div>
       <article class="place" role="tabpanel" id="local-pa" aria-labelledby="tab-pa">
         <div class="place-card">
@@ -49,7 +47,6 @@
           <dl>
             <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
             <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
-            <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
             <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
           </dl>
           <div class="btn-row"><a class="btn btn--light" href="{{L.address.pousoAlegre.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
@@ -66,47 +63,12 @@
           <dl>
             <div><dt>Ouvidoria</dt><dd>Seg. a sex. · 7h30–17h30</dd></div>
             <div><dt>Central</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
-            <div><dt>Autorizações</dt><dd><a href="{{L.wa.autorizacoes.url}}" target="_blank" rel="noopener">{{L.wa.autorizacoes.label}}</a></dd></div>
             <div><dt>E-mail ouvidoria</dt><dd><a href="mailto:{{L.mail.ouvidoria}}">{{L.mail.ouvidoria}}</a></dd></div>
           </dl>
           <div class="btn-row"><a class="btn btn--light" href="{{L.address.extrema.maps}}" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
         </div>
         <div class="place-media">
           <iframe title="Mapa: R. Alcebíades Wohlers, 02 · Ponte Alta - Extrema/MG" src="{{L.address.extrema.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </article>
-      <article class="place" role="tabpanel" id="local-u1" aria-labelledby="tab-u1" hidden>
-        <div class="place-card">
-          <span class="eyebrow" style="margin:0">{{i:pin}} Unidade</span>
-          <h2>Cidade Teste 1, Minas Gerais</h2>
-          <span class="badge">Endereço em atualização</span>
-          <dl>
-            <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
-            <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
-            <div><dt>Cidade</dt><dd>Cidade Teste 1/MG</dd></div>
-            <div><dt>CEP</dt><dd>00000-000</dd></div>
-          </dl>
-          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
-        </div>
-        <div class="place-media">
-          <iframe title="Mapa: Cidade Teste 1/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </article>
-      <article class="place" role="tabpanel" id="local-u2" aria-labelledby="tab-u2" hidden>
-        <div class="place-card">
-          <span class="eyebrow" style="margin:0">{{i:pin}} Unidade</span>
-          <h2>Cidade Teste 2, Minas Gerais</h2>
-          <span class="badge">Endereço em atualização</span>
-          <dl>
-            <div><dt>Endereço</dt><dd>Rua Teste, 00</dd></div>
-            <div><dt>Bairro</dt><dd>Bairro Medic Global</dd></div>
-            <div><dt>Cidade</dt><dd>Cidade Teste 2/MG</dd></div>
-            <div><dt>CEP</dt><dd>00000-000</dd></div>
-          </dl>
-          <div class="btn-row"><a class="btn btn--light" href="https://www.google.com/maps/search/?api=1&query=Minas+Gerais" target="_blank" rel="noopener">{{i:route}} Como chegar</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
-        </div>
-        <div class="place-media">
-          <iframe title="Mapa: Cidade Teste 2/MG" src="https://www.google.com/maps?q=Minas+Gerais&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
     </div>

@@ -17,7 +17,7 @@
         <p class="lead">Registro na ANS, indicadores de qualidade, guias TISS, manuais e reajustes — com fonte, categoria e data de atualização.</p>
         <div class="btn-row">
           <a class="btn" href="#doc-list">Consultar documentos</a>
-          <a class="btn btn--ghost" href="#reajuste">RN 565</a>
+          <a class="btn btn--ghost" href="rn565.html">RN 565</a>
         </div>
       </div>
       <div class="hero-media c-7-13">
@@ -47,7 +47,7 @@
             <button type="button" data-filter-group="cat" data-value="ans" data-anchor="ans" aria-pressed="false">ANS e IDSS <span data-count-for="ans" data-count-group="cat"></span></button>
             <button type="button" data-filter-group="cat" data-value="tiss" data-anchor="tiss" aria-pressed="false">TISS e guias <span data-count-for="tiss" data-count-group="cat"></span></button>
             <button type="button" data-filter-group="cat" data-value="manuais" aria-pressed="false">Manuais <span data-count-for="manuais" data-count-group="cat"></span></button>
-            <button type="button" data-filter-group="cat" data-value="reajustes" aria-pressed="false">RN 565 <span data-count-for="reajustes" data-count-group="cat"></span></button>
+            <a class="doc-cat-link" href="rn565.html" title="Abrir a página da RN 565">RN 565 {{i:arrow-right}}</a>
             <button type="button" data-filter-group="cat" data-value="comunicados" aria-pressed="false">Comunicados <span data-count-for="comunicados" data-count-group="cat"></span></button>
             <button type="button" data-filter-group="cat" data-value="legais" aria-pressed="false">Informações legais <span data-count-for="legais" data-count-group="cat"></span></button>
           </div>
@@ -70,7 +70,6 @@
           <article class="doc" data-cat="tiss"><span class="doc-ico">WEB</span><div><h3>Autorizador Web — TISS 3.0</h3><p>Sistema para prestadores solicitarem e acompanharem autorizações.</p><div class="meta"><b>TISS · Prestador</b><span>Acesso restrito</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.autorizador}}" target="_blank" rel="noopener">{{i:lock}} Acessar</a></div></article>
           <article class="doc" data-cat="tiss"><span class="doc-ico">CID</span><div><h3>Declaração de Saúde — CID-10</h3><p>Sistema de declaração de saúde com classificação CID-10.</p><div class="meta"><b>CID-10</b><span>Acesso restrito</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.cid10}}" target="_blank" rel="noopener">{{i:lock}} Acessar</a></div></article>
           <article class="doc" data-cat="manuais"><span class="doc-ico">WEB</span><div><h3>Guia médico e guia de serviços</h3><p>Consulte prestadores por tipo de guia, estado e cidade.</p><div class="meta"><b>Manuais</b><span>Atualização contínua</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.links.guia}}" target="_blank" rel="noopener">{{i:eye}} Visualizar</a></div></article>
-          <article class="doc" data-cat="reajustes"><span class="doc-ico">RN</span><div><h3>RN 565 — agrupamento de contratos</h3><p>Percentuais aplicados ao agrupamento de contratos coletivos com até 30 vidas, de 2013 a 2026.</p><div class="meta"><b>RN 565</b><span>Atualização: período 2026/2027</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="#reajuste">{{i:eye}} Ver tabela</a><a class="btn btn--ghost btn--sm" href="{{L.links.rn565}}" target="_blank" rel="noopener"> Detalhes</a></div></article>
           <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Empresas para o reajuste da RN 309 — 2013</h3><p>Relação de contratos do agrupamento para o reajuste de 2013.</p><div class="meta"><b>RN 309</b><span>Ano de referência: 2013</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.rn309_2013}}" target="_blank" rel="noopener" data-doc="RN309 2013">{{i:eye}} Visualizar</a><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2013}}" download data-doc="RN309 2013">{{i:download}} Baixar</a></div></article>
           <article class="doc" data-cat="reajustes"><span class="doc-ico">PDF</span><div><h3>Empresas para o reajuste da RN 309 — 2014</h3><p>Relação de contratos do agrupamento para o reajuste de 2014.</p><div class="meta"><b>RN 309</b><span>Ano de referência: 2014</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="{{L.docs.rn309_2014}}" target="_blank" rel="noopener" data-doc="RN309 2014">{{i:eye}} Visualizar</a><a class="btn btn--ghost btn--sm" href="{{L.docs.rn309_2014}}" download data-doc="RN309 2014">{{i:download}} Baixar</a></div></article>
           <article class="doc" data-cat="comunicados"><span class="doc-ico">COM</span><div><h3>Comunicado — recomposição do reajuste 2020</h3><p>Suspensão dos reajustes de setembro a dezembro de 2020 determinada pela ANS.</p><div class="meta"><b>Comunicados</b><span>Publicado em 08/06/2024</span></div></div><div class="doc-actions"><a class="btn btn--sm" href="artigo-reajuste-2020.html">{{i:eye}} Visualizar</a></div></article>
@@ -86,7 +85,7 @@
   <div class="wrap">
     <div class="grid mb-7">
       <div class="c-1-6"><span class="eyebrow">RN 565</span><h2 id="rj-t" class="balance" style="font-size:var(--t-h3)">Agrupamento de contratos com até 30 vidas</h2></div>
-      <div class="c-7-13" style="align-self:end"><p class="muted">Percentuais publicados por período de aplicação. Para a relação de contratos de cada ano, consulte os <a class="accent" href="{{L.links.rn565}}" target="_blank" rel="noopener">detalhes do agrupamento</a>.</p></div>
+      <div class="c-7-13" style="align-self:end"><p class="muted">Percentuais publicados por período de aplicação. Para a relação de contratos de cada ano, consulte os <a class="accent" href="rn565.html">detalhes do agrupamento</a>.</p></div>
     </div>
     <div class="rj">
       <div class="rj-head" aria-hidden="true"><span>Ano</span><span>Período de aplicação</span><span>Percentual</span></div>

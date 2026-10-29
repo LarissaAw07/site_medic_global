@@ -83,6 +83,7 @@ function get(o, k) {
 
 require("./src/gen-migracao.js")();
 require("./src/gen-noticias.js")();
+require("./src/gen-rn565.js")();
 const sitemap = [];
 const pageUrl = (lang, file) => site.domain + (LANGS[lang].dir ? LANGS[lang].dir + "/" : "") + (file === "index.html" ? "" : file.replace(/.html$/, "/"));
 const hasPage = (lang, file) => fs.existsSync(path.join(LANGS[lang].pages, file));

@@ -639,6 +639,49 @@
     });
   } catch (e) {}
 
+  /* Link para um item dentro de um <details> fechado (ex.: rn565.html#ano-2018): abre o bloco e rola até o item */
+  function openHashTarget() {
+    var id = location.hash.slice(1), el = id && document.getElementById(id);
+    var det = el && el.closest('details:not([open])');
+    if (!det) return;
+    det.open = true;
+    setTimeout(function () { el.scrollIntoView(); }, 30);
+  }
+  openHashTarget();
+  window.addEventListener('hashchange', openHashTarget);
+
+  /* RN 565 · painel "Anteriores": fecha ao escolher um ano, ao clicar fora ou com Esc */
+  var rnMore = $('.rn-years-more');
+  if (rnMore) {
+    document.addEventListener('click', function (e) { if (rnMore.open && (!rnMore.contains(e.target) || e.target.closest('.rn-years-grid a'))) rnMore.open = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && rnMore.open) { rnMore.open = false; $('summary', rnMore).focus(); } });
+  }
+
+  /* RN 565 · agrupamentos: o próprio título fica fixo abaixo do menu. Ao fixar fica compacto, e a margem de baixo
+     recebe a diferença de altura, para o conteúdo não "pular"; --sticky-title-h posiciona o cabeçalho da tabela. */
+  var agrBar = $('[data-agr-titlebar]');
+  if (agrBar) {
+    var agrMark = document.createElement('div');
+    agrBar.parentNode.insertBefore(agrMark, agrBar);
+    var agrFull = 0;
+    var agrUpdate = function () {
+      var top = header ? header.getBoundingClientRect().bottom : 0;
+      var stuck = agrMark.getBoundingClientRect().top < top - 1;
+      if (!stuck || !agrFull) {
+        agrBar.classList.remove('is-stuck'); agrBar.style.marginBottom = '';
+        agrFull = agrBar.offsetHeight;
+      }
+      if (stuck) {
+        agrBar.classList.add('is-stuck');
+        agrBar.style.marginBottom = Math.max(0, agrFull - agrBar.offsetHeight) + 'px';
+        document.documentElement.style.setProperty('--sticky-title-h', agrBar.offsetHeight + 'px');
+      }
+    };
+    window.addEventListener('scroll', agrUpdate, { passive: true });
+    window.addEventListener('resize', function () { agrFull = 0; agrUpdate(); });
+    agrUpdate();
+  }
+
   /* Notícias e conteúdos: título fixo durante a leitura */
   var newsTitle = $('.news-title');
   if (newsTitle && 'IntersectionObserver' in window) {

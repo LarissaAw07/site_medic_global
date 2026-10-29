@@ -1,0 +1,6409 @@
+{
+ "fonte": "https://extremamedic.com/agrupamento.php",
+ "titulo": "RN 565 - Percentual de reajuste",
+ "subtitulo": "Histórico dos Percentuais de Reajuste",
+ "anos": [
+  {
+   "ano": 2026,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2026 a 30/04/2027: 8,70%",
+   "percentual": "8,70%",
+   "inicio": "01/05/2026",
+   "fim": "30/04/2027",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2026",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "65",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3110",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9768",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9769",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9770",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9772",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9773",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9777",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9778",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "9780",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9782",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9786",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9787",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9788",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9790",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9791",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9793",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9794",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9796",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9798",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9799",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9801",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9802",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9803",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9813",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9815",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9816",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9821",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9822",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9823",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9824",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9828",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9832",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9833",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9841",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9843",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9846",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9847",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9848",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9850",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9851",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9852",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9854",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9856",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9857",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9858",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9859",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9860",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9861",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9862",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9863",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9864",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9866",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9869",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9869",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9874",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9874",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9877",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9878",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9883",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9884",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9885",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9889",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9893",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9898",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9900",
+     "plano": "EMED GLOBAL BLUE 100",
+     "registro": "498019241"
+    },
+    {
+     "contrato": "9903",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9904",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9906",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9907",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9908",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9910",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9911",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9912",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9913",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9914",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9915",
+     "plano": "EMED GLOBAL BLUE 300 CA",
+     "registro": "500176245"
+    },
+    {
+     "contrato": "9916",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9920",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9921",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9922",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9923",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9924",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9925",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9926",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9928",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9929",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9929",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9930",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9931",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9934",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9936",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9937",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9937",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9938",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9938",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9940",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9940",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9941",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9941",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9947",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9948",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9949",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9950",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9951",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9952",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9953",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9954",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9955",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9957",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9960",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9962",
+     "plano": "EMED GLOBAL BLUE 300 CA",
+     "registro": "500176245"
+    },
+    {
+     "contrato": "9963",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9965",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9966",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9967",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9968",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9969",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9970",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9971",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9972",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9973",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9980",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9983",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9984",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9985",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9987",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9988",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9992",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9992",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9993",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9993",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9994",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9994",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9995",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9995",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9996",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9996",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9997",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9997",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9998",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10002",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10002",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10004",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10004",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10005",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10006",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10007",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10009",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10010",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10011",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10012",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10015",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10018",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10018",
+     "plano": "EMED GLOBAL BLUE 300 SO",
+     "registro": "505336256"
+    },
+    {
+     "contrato": "10018",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10020",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10024",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10025",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10026",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10028",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10030",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10030",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10031",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10031",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10035",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10036",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10037",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10038",
+     "plano": "EMED GLOBAL BLUE 100",
+     "registro": "498019241"
+    },
+    {
+     "contrato": "10039",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10041",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10042",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10046",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10047",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10049",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10050",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10052",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10053",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10054",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10056",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10057",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10058",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10059",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10060",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10061",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10062",
+     "plano": "EMED GLOBAL BLUE 100",
+     "registro": "498019241"
+    },
+    {
+     "contrato": "10063",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10068",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10070",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "10071",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10072",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10073",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10074",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10075",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10076",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10077",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10079",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10080",
+     "plano": "EMED GLOBAL BLUE 100",
+     "registro": "498019241"
+    },
+    {
+     "contrato": "10081",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10083",
+     "plano": "EMED GLOBAL BLUE 100",
+     "registro": "498019241"
+    },
+    {
+     "contrato": "10084",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10086",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10087",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10088",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10089",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10090",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10093",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "10095",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10097",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "10100",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    }
+   ]
+  },
+  {
+   "ano": 2025,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2025 a 30/04/2026: 6,55%",
+   "percentual": "6,55%",
+   "inicio": "01/05/2025",
+   "fim": "30/04/2026",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2025",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3110",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9726",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9768",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9769",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9770",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9772",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9773",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9778",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "9779",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9782",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9786",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9787",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9788",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9790",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9791",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9793",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9794",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9796",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9798",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9799",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9801",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9802",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9803",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9813",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9815",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9816",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9821",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9822",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9823",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9824",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9828",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9832",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9833",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9835",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9841",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9843",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9846",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9847",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9848",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9850",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9851",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9852",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9854",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9856",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9857",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9858",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9859",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9860",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9861",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9862",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9863",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9864",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9866",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9874",
+     "plano": "EMED GLOBAL BLUE 400 CE",
+     "registro": "500178241"
+    },
+    {
+     "contrato": "9874",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9877",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    }
+   ]
+  },
+  {
+   "ano": 2024,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2024 a 30/04/2025: 11,98%",
+   "percentual": "11,98%",
+   "inicio": "01/05/2024",
+   "fim": "30/04/2025",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2024",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3110",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9726",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9768",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9769",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9770",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9772",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9773",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9778",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "9782",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9786",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9787",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9788",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9790",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9791",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9793",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9794",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9796",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9797",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9798",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9799",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9801",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9802",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9803",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2023,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2023 a 30/04/2024: 9.00%",
+   "percentual": "9,00%",
+   "inicio": "01/05/2023",
+   "fim": "30/04/2024",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2023",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3110",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9768",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9769",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9770",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9772",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9773",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9778",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9779",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "9779",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9782",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9786",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9787",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9788",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9790",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9791",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9793",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    }
+   ]
+  },
+  {
+   "ano": 2022,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2022 a 30/04/2023: 10.00%",
+   "percentual": "10,00%",
+   "inicio": "01/05/2022",
+   "fim": "30/04/2023",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2022",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9722",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9767",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9768",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9769",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9770",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9772",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9773",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2021,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2021 a 30/04/2022: 5.00%",
+   "percentual": "5,00%",
+   "inicio": "01/05/2021",
+   "fim": "30/04/2022",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2021",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3110",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9722",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9731",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9748",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9755",
+     "plano": "PLANO COL EMP AMB COM CO-PARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9762",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9763",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9764",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9765",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9767",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2020,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2020 a 30/04/2021: 7.35%",
+   "percentual": "7,35%",
+   "inicio": "01/05/2020",
+   "fim": "30/04/2021",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2020",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9722",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9726",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9731",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9746",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9748",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9756",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9757",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9758",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9761",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2019,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2019 a 30/04/2020: 9,40%",
+   "percentual": "9,40%",
+   "inicio": "01/05/2019",
+   "fim": "30/04/2020",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2019",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "204",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9711",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9713",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9715",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9720",
+     "plano": "EMED GLOBAL BLUE 300 CE",
+     "registro": "500177243"
+    },
+    {
+     "contrato": "9721",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9722",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9723",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9726",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9728",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9731",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9732",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9742",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9743",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9744",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9746",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9747",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9748",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9750",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9752",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2018,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2018 a 30/04/2019: 22,22%",
+   "percentual": "22,22%",
+   "inicio": "01/05/2018",
+   "fim": "30/04/2019",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2018",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "139",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "204",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "432",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "438",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4002",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9712",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2017,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2017 a 30/04/2018: 17,96%",
+   "percentual": "17,96%",
+   "inicio": "01/05/2017",
+   "fim": "30/04/2018",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2017",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "139",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "204",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "432",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "438",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "901",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4002",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5050",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9697",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9703",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9704",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9705",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9708",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9709",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    }
+   ]
+  },
+  {
+   "ano": 2016,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2016 a 30/04/2017",
+   "percentual": null,
+   "inicio": "01/05/2016",
+   "fim": "30/04/2017",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2016",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "139",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "204",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "432",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "438",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "901",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4002",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5050",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "5051",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9690",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9695",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9696",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9697",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9698",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    }
+   ]
+  },
+  {
+   "ano": 2015,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2015 a 30/04/2016 20.97%.",
+   "percentual": "20,97%",
+   "inicio": "01/05/2015",
+   "fim": "30/04/2016",
+   "botaoOriginal": "Ver Agrupamento",
+   "linkOriginal": "agrupamento_detalhe.php?ano=2015",
+   "contratos": [
+    {
+     "contrato": "16",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "20",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "39",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "42",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "51",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "57",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "74",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "82",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "119",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "120",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "139",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "201",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "204",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "302",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "312",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "314",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "320",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "329",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "330",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "331",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "349",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "352",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "375",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "381",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "387",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "393",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "404",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "410",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "424",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "427",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "430",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "432",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "434",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "438",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "443",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "447",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "448",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "449",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "451",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "500",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "901",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1065",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1350",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1400",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1445",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EXTREMAMEDIC ODONTO EMPRESARIAL",
+     "registro": "491469224"
+    },
+    {
+     "contrato": "1510",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "1520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "1550",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2600",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "2700",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3502",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3520",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3530",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "3650",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4002",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "4003",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4010",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "4015",
+     "plano": "EMED GLOBAL BLUE 200",
+     "registro": "498018242"
+    },
+    {
+     "contrato": "5002",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5005",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "5050",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9664",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9672",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9677",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9680",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    },
+    {
+     "contrato": "9683",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9685",
+     "plano": "PLANO COL EMP AMB COM COPARTIC",
+     "registro": "470013139"
+    },
+    {
+     "contrato": "9687",
+     "plano": "PLANO COL EMP AMB SEM COPARTIC",
+     "registro": "470014137"
+    }
+   ]
+  },
+  {
+   "ano": 2014,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2014 a 30/04/2015: 13,24%.",
+   "percentual": "13,24%",
+   "inicio": "01/05/2014",
+   "fim": "30/04/2015",
+   "botaoOriginal": "Baixar Agrupamento",
+   "linkOriginal": "../administrador/uploads/agrupamento/EMPRESA PARA O REAJUSTE DA RN309 - 2014.pdf",
+   "pdf": "rn309_2014"
+  },
+  {
+   "ano": 2013,
+   "descricao": "Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de 01/05/2013 a 30/04/2014: 11,33%.",
+   "percentual": "11,33%",
+   "inicio": "01/05/2013",
+   "fim": "30/04/2014",
+   "botaoOriginal": "Baixar Agrupamento",
+   "linkOriginal": "../administrador/uploads/agrupamento/EMPRESA PARA O REAJUSTE DA RN309 - 2013.pdf",
+   "pdf": "rn309_2013"
+  }
+ ]
+}

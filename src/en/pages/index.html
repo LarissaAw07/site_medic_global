@@ -153,13 +153,11 @@
         <span class="eyebrow">Care network</span>
         <h2 id="rede-title" class="balance">Find care wherever you need it</h2>
         <p class="lead mt-6">A network equipped for outpatient, hospital and obstetric care, with a presence between Bragança Paulista/SP and Pouso Alegre/MG — plus urgent and emergency care while traveling through the ABRAMGE System.</p>
-        <form class="finder mt-7" action="rede-credenciada.html" method="get" data-rede>
-          <div class="field-dark"><label for="h-tipo">What are you looking for?</label>
-            <select id="h-tipo" name="tipo" data-dropdown><option value="profissional">Professional</option><option value="especialidade">Specialty</option><option value="clinica">Clinic</option><option value="hospital">Hospital</option><option value="laboratorio">Laboratory</option></select></div>
-          <div class="field-dark"><label for="h-cidade">City</label>
-            <select id="h-cidade" name="cidade" data-dropdown><option value="">All cities</option><option>Extrema/MG</option><option>Cambuí/MG</option><option>Pouso Alegre/MG</option><option>Bragança Paulista/SP</option></select></div>
-          <button class="btn btn--light" type="submit">Search the network</button>
-        </form>
+        <!-- Cada botão abre a rede credenciada já na aba de busca correspondente -->
+        <div class="btn-row mt-7">
+          <a class="btn btn--light" href="rede-credenciada.html?busca=combinada#buscar" data-track="busca_rede">{{i:search}} Combined search</a>
+          <a class="btn btn--light" href="rede-credenciada.html?busca=avancada#buscar" data-track="busca_rede">{{i:filter}} Advanced search</a>
+        </div>
       </div>
       <div class="c-7-13">
         <div class="hub reveal">

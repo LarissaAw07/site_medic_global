@@ -143,7 +143,8 @@
     "old_familia": "assets/img/provisorio/familia.jpg",
     "old_escritorio": "assets/img/provisorio/escritorio.jpg",
     "old_profissional": "assets/img/provisorio/profissional.jpg",
-    "old_comunicado": "assets/img/provisorio/comunicado.jpg"
+    "old_comunicado": "assets/img/provisorio/comunicado.jpg",
+    "old_rn565_banner": "assets/img/provisorio/rn565-banner.jpg"
   },
   "en": {
     "_nota": "Textos em inglês que substituem os de cima nas páginas em /en/ (mesmo caminho de chave).",

@@ -237,6 +237,9 @@
     if (esp) api.especialidade(esp.toUpperCase());
     else if (TIPO_URL[t]) api.tipo(TIPO_URL[t]);
     else if (t === "especialidade") { openTab("rb-tab-av"); A.metodo.value = "especialidade"; A.metodo.dispatchEvent(new Event("dd:refresh")); showMetodo(); }
+    // botões da home: ?busca=combinada|avancada abre a aba correspondente
+    var busca = qs.get("busca");
+    if (busca === "avancada") openTab("rb-tab-av"); else if (busca === "combinada") openTab("rb-tab-comb");
     if (pending) { window.mgRede(pending[0], pending[1]); pending = null; }
   }).catch(function () {
     app.classList.add("is-error");

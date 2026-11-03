@@ -2205,10 +2205,18 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .gm-form select:disabled { opacity: .55; cursor: not-allowed; }
 .gm-go { width: 100%; justify-content: center; min-height: 54px; }
 .gm-go:disabled { opacity: .45; pointer-events: none; }
-.gm-result { text-align: left; }
-.gm-result[hidden] { display: none; }
 .gm-alt { padding-top: 20px; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--ink-3); }
 .gm-alt a { color: var(--globo); font-weight: 500; }
+/* Manual gerado ao vivo (iframe via proxy /guia-api/) */
+.gm-manual { position: relative; z-index: 1; margin-top: 24px; border-radius: 24px; overflow: hidden; background: var(--white); border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(0,60,64,.35); scroll-margin-top: calc(var(--header-h) + 16px); }
+.gm-manual[hidden] { display: none; }
+.gm-manual-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 20px; border-bottom: 1px solid var(--line); background: var(--mist); }
+.gm-manual-t { font-family: var(--f-head); font-size: var(--t-sm); color: var(--deep); }
+.gm-manual-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.gm-frame-wrap { position: relative; }
+.gm-frame { display: block; width: 100%; height: min(78vh, 900px); border: 0; background: #f1f1f1; }
+.gm-frame-load { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: var(--t-sm); color: var(--ink-3); background: var(--white); }
+.gm-frame-load[hidden] { display: none; }
 
 /* RN 565: histórico de reajustes (rn565.html) e páginas internas de cada agrupamento (rn565-agrupamento-AAAA.html) */
 .rn-hero { background: var(--mist); }

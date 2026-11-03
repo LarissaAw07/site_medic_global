@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/main.css?v=7177ab78">
+<link rel="stylesheet" href="assets/css/main.css?v=3b8e6906">
 
 <script>/* aplica os ajustes de acessibilidade salvos antes de desenhar a página */try{var a=JSON.parse(localStorage.getItem("mg-a11y")||"{}"),d=document.documentElement;if(a.size)d.setAttribute("data-a11y-size",a.size);(a.on||[]).forEach(function(k){d.classList.add("a11y-"+k)})}catch(e){}</script>
 
@@ -249,8 +249,22 @@
           </div>
           <button class="btn gm-go" type="submit" disabled>Visualizar manual</button>
         </form>
-        <div class="notice gm-result" role="status" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg><span><strong class="gm-result-t"></strong> O manual será exibido aqui assim que a integração com o sistema da rede for concluída.</span></div>
         <p class="gm-alt">Prefere buscar por nome ou especialidade? <a href="rede-credenciada.html#buscar">Use a busca da rede credenciada</a></p>
+      </div>
+    </div>
+
+    <!-- Manual gerado ao vivo pelo sistema oficial (manual.php), embutido via proxy /guia-api/ -->
+    <div class="gm-manual" data-gm-manual hidden>
+      <div class="gm-manual-bar">
+        <strong class="gm-manual-t"></strong>
+        <div class="gm-manual-actions">
+          <button type="button" class="btn btn--ghost btn--sm gm-print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg> Imprimir</button>
+          <a class="btn btn--ghost btn--sm gm-newtab" target="_blank" rel="noopener">Abrir em nova aba</a>
+        </div>
+      </div>
+      <div class="gm-frame-wrap">
+        <div class="gm-frame-load" role="status">Gerando o manual…</div>
+        <iframe class="gm-frame" name="gm-frame" title="Manual da rede credenciada MedicGLOBAL" loading="lazy"></iframe>
       </div>
     </div>
   </div>
@@ -386,6 +400,6 @@
 <div class="a11y-guide-bar" aria-hidden="true"></div>
 <script src="assets/js/main.js?v=4715f546" defer></script>
 <script src="assets/js/a11y.js?v=bb4c2760" defer></script>
-<script src="assets/js/guia-medico.js?v=bef0ba1e" defer></script>
+<script src="assets/js/guia-medico.js?v=440a2da2" defer></script>
 </body>
 </html>

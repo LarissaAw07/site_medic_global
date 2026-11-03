@@ -77,6 +77,9 @@ function loadSources(content) {
   deriveAddresses(site, content.site || {});
   const dataFiles = {};
   if (content.noticias) dataFiles[path.join(SRC, "data", "noticias.json")] = JSON.stringify(content.noticias);
+  // anos de documentos cadastrados no painel (RN 565 e IDSS)
+  if (content.rn565) dataFiles[path.join(SRC, "data", "rn565.json")] = JSON.stringify(content.rn565);
+  if (content.idss) dataFiles[path.join(SRC, "data", "idss.json")] = JSON.stringify(content.idss);
   const vfs = content.virtual === false ? fs : overlayFs(dataFiles);
   // os geradores gravam as páginas deles em src/pages (em memória no build do painel)
   require("./src/gen-migracao.js")(vfs);

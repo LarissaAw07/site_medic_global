@@ -222,6 +222,8 @@
     link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
     key: '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3M15 8l2 2"/>',
+    layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+    percent: '<path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
     trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
   };
   var SHARED_HINT = "Trechos entre {{ }} são dados compartilhados: edite o valor logo abaixo e ele muda em todo o site.";
@@ -233,7 +235,7 @@
     ["Acompanhamento", [["inbox", "Mensagens recebidas", "inbox", "inbox"], ["audit", "Auditoria", "history", "audit"], ["users", "Usuários", "user"]]],
   ];
   var TITLES = {}, NEED = {}; NAV.forEach(function (g) { g[1].forEach(function (n) { TITLES[n[0]] = n[1]; NEED[n[0]] = n[3]; }); });
-  TITLES.page = TITLES.pages; NEED.page = "pages";
+  TITLES.page = TITLES.pages; NEED.page = "pages"; TITLES.docs = "Documentos anuais"; NEED.docs = "pages";
   function can(p) { return !p || !!(S.user && (S.user.role === "admin" || (S.user.perms || []).indexOf(p) >= 0)); }
   var dirty = null; // função que diz se a tela atual tem alterações não salvas
   // trilha "onde estou" no topo: [["Páginas do site", "#/pages"], ["Página inicial"]]
@@ -252,7 +254,7 @@
       NAV.map(function (g) {
         var items = g[1].filter(function (n) { return can(n[3]); });
         if (!items.length) return null;
-        return [h("div", { class: "side-group", text: g[0] }), items.map(function (n) { return n[0] === "pages" ? pagesNav() : h("a", { class: "nav", href: "#/" + n[0], "data-nav": n[0] }, icon(n[2]), n[1]); })];
+        return [h("div", { class: "side-group", text: g[0] }), items.map(function (n) { return n[0] === "pages" ? menusNav() : h("a", { class: "nav", href: "#/" + n[0], "data-nav": n[0] }, icon(n[2]), n[1]); })];
       }),
       h("div", { class: "side-user" }, h("span", { class: "avatar", text: initials }),
         h("div", { class: "who" }, h("b", { text: (S.user && S.user.name) || "Administrador" }), h("span", { text: S.user ? S.user.email : "" })),
@@ -272,16 +274,25 @@
     route();
   }
 
-  /* ---------- menu "Páginas": lista suspensa com as páginas do site ---------- */
+  /* ---------- menus suspensos: páginas do site, componentes e documentos anuais (RN 565, IDSS) ---------- */
+  // [id, nome no menu, ícone, grupo de páginas no servidor, tipo de documento anual]
+  var DD = [
+    ["site", "Páginas", "pages", "Páginas do site"],
+    ["comp", "Componentes compartilhados", "layers", "Componentes compartilhados"],
+    ["rn565", "Reajuste (RN 565)", "percent", "Reajuste de contratos (RN 565)", "rn565"],
+    ["idss", "IDSS", "chart", "IDSS", "idss"],
+  ];
   var navPages = null;
-  function pagesNav() {
-    var list = h("div", { class: "dd", id: "dd-pages", hidden: true });
-    var btn = h("button", { class: "nav nav--dd", type: "button", "data-nav": "page", "aria-expanded": "false", "aria-controls": "dd-pages", onclick: function () { toggleDd(); } },
-      icon("pages"), h("span", { class: "grow", text: "Páginas" }), h("span", { class: "dd-chev" }, icon("chev")));
-    return h("div", { class: "dd-wrap" }, btn, list);
+  function menusNav() {
+    return DD.map(function (d) {
+      var list = h("div", { class: "dd", id: "dd-" + d[0], hidden: true });
+      var btn = h("button", { class: "nav nav--dd", type: "button", "data-dd": d[0], "aria-expanded": "false", "aria-controls": "dd-" + d[0], onclick: function () { toggleDd(d[0]); } },
+        icon(d[2]), h("span", { class: "grow", text: d[1] }), h("span", { class: "dd-chev" }, icon("chev")));
+      return h("div", { class: "dd-wrap" }, btn, list);
+    });
   }
-  function toggleDd(open) {
-    var list = $("#dd-pages"), btn = $(".nav--dd");
+  function toggleDd(id, open) {
+    var list = $("#dd-" + id), btn = $('[data-dd="' + id + '"]');
     if (!list) return;
     var show = open === undefined ? list.hidden : open;
     list.hidden = !show; btn.setAttribute("aria-expanded", String(show));
@@ -291,28 +302,26 @@
     if (!can("pages")) return;
     return api("GET", "/api/admin/pages").then(function (r) {
       navPages = r.pages;
-      var list = $("#dd-pages"); if (!list) return;
-      var groups = {}; r.pages.forEach(function (p) { (groups[p.group] = groups[p.group] || []).push(p); });
-      var item = function (p) {
-        return h("a", { class: "dd-item", href: "#/page/" + p.key, "data-key": p.key, title: p.title },
-          h("span", { class: "lbl", text: p.title }), p.pending ? h("i", { class: "mark on", title: "Alterações ainda não publicadas" }) : p.reviewed ? h("i", { class: "mark ok", title: "Revisada" }) : null);
-      };
-      fill(list,
-        h("a", { class: "dd-item dd-all", href: "#/pages" }, h("span", { class: "lbl", text: "Todas as páginas" })),
-        r.groups.map(function (g) {
-          var items = groups[g]; if (!items) return null;
-          if (g === "Páginas do site") return h("div", { class: "dd-group" }, items.map(item));
-          return h("details", { class: "dd-group dd-sub", open: items.some(function (p) { return p.key === S.currentKey || p.key === S.openKey; }) || null },
-            h("summary", { text: g === "Componentes compartilhados" ? "Componentes compartilhados" : "Documentos regulatórios (" + items.length + ")" }), items.map(item));
-        }));
+      DD.forEach(function (d) {
+        var list = $("#dd-" + d[0]); if (!list) return;
+        var items = r.pages.filter(function (p) { return p.group === d[3]; });
+        fill(list, items.map(function (p) {
+          return h("a", { class: "dd-item", href: "#/page/" + p.key, "data-key": p.key }, h("span", { class: "lbl", text: p.title }), p.pending ? h("i", { class: "mark on", title: "Alterações ainda não publicadas" }) : null);
+        }), d[4] ? h("a", { class: "dd-item dd-add", href: "#/docs/" + d[4] + "/novo", "data-doc": d[4] }, h("span", { class: "lbl", text: "+ Cadastrar novo ano" })) : null);
+      });
       markDd();
     }).catch(fail);
   }
+  // destaca o item aberto e abre o menu em que ele está
   function markDd() {
     document.querySelectorAll(".dd-item[data-key]").forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("data-key") === S.openKey); });
+    document.querySelectorAll(".dd-add").forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("data-doc") === S.openDoc); });
+    document.querySelectorAll(".nav--dd").forEach(function (b) { b.classList.toggle("is-active", !!document.querySelector("#" + b.getAttribute("aria-controls") + " .dd-item.is-active")); });
     var cur = document.querySelector(".dd-item.is-active");
-    if (cur && cur.closest("details")) cur.closest("details").open = true;
+    if (cur) toggleDd(cur.closest(".dd").id.slice(3), true);
   }
+  // em qual menu fica uma página (antes de a lista chegar do servidor)
+  function ddOf(key) { return /^pt\/rn565/.test(key) ? "rn565" : /^pt\/idss/.test(key) ? "idss" : /^partial\//.test(key) ? "comp" : "site"; }
   function refreshStatus() {
     return api("GET", "/api/admin/status").then(function (s) {
       S.status = s;
@@ -362,9 +371,11 @@
     var parts = location.hash.replace(/^#\/?/, "").split("/");
     var name = parts[0] || "";
     if (!VIEWS[name] || !can(NEED[name])) name = "";
-    document.querySelectorAll("[data-nav]").forEach(function (a) { var n = a.getAttribute("data-nav"); a.classList.toggle("is-active", n === name || (n === "page" && (name === "pages" || name === "page"))); });
+    document.querySelectorAll("[data-nav]").forEach(function (a) { var n = a.getAttribute("data-nav"); a.classList.toggle("is-active", n === name); });
     S.openKey = name === "page" ? parts.slice(1).join("/") : null;
-    if (name === "page" || name === "pages") toggleDd(true);
+    S.openDoc = name === "docs" && parts[2] === "novo" ? parts[1] : null;
+    if (S.openKey) toggleDd(ddOf(S.openKey), true);
+    if (name === "docs" && parts[1]) toggleDd(parts[1], true);
     markDd();
     var view = $("#view");
     if (!view) return;
@@ -388,22 +399,11 @@
 
   function head(title, desc, actions) { return h("div", { class: "page-head" }, h("div", {}, h("h1", { text: title }), desc ? h("p", { text: desc }) : null), actions ? h("div", { class: "actions" }, actions) : null); }
   var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-  // progresso da revisão das páginas do site (português)
-  function reviewProgress(pages) {
-    var main = pages.filter(function (p) { return p.lang === "pt" && p.group === "Páginas do site"; });
-    var done = main.filter(function (p) { return p.reviewed; }).length;
-    var next = main.find(function (p) { return !p.reviewed; });
-    return { done: done, total: main.length, next: next,
-      el: h("div", { class: "progress" }, h("div", { class: "progress-top" }, h("span", {}, h("b", { text: done + " de " + main.length }), " páginas do site revisadas"), h("span", { text: Math.round(done / Math.max(1, main.length) * 100) + "%" })),
-        h("div", { class: "bar" }, (function () { var i = h("i"); i.style.width = (done / Math.max(1, main.length) * 100) + "%"; return i; })())) };
-  }
-
   /* ---------- visão geral ---------- */
   VIEWS[""] = function (view) {
     var none = Promise.resolve(null);
     Promise.all([api("GET", "/api/admin/status"), can("pages") ? api("GET", "/api/admin/pages") : none, can("inbox") ? api("GET", "/api/admin/forms") : none]).then(function (r) {
       var st = r[0], pages = r[1] && r[1].pages, fm = r[2] && r[2].forms;
-      var pr = pages ? reviewProgress(pages) : null;
       function stat(ic, val, label, small) { return h("div", { class: "stat" }, icon(ic), h("b", { class: small ? "small" : null, text: val }), h("span", { text: label })); }
       var shortcuts = [["pages", "#/page/pt/index.html", "home", "Editar a página inicial"], ["news", "#/news/nova", "news", "Publicar uma notícia"], ["inbox", "#/inbox", "inbox", "Ver mensagens recebidas"], ["audit", "#/audit", "history", "Ver quem alterou o quê"], ["analytics", "#/analytics", "chart", "Configurar o Google Analytics"]].filter(function (x) { return can(x[0]); });
       fill(view,
@@ -413,8 +413,6 @@
           stat("edit", st.pending.length, "alterações aguardando publicação"),
           fm ? stat("inbox", fm.reduce(function (a, f) { return a + f.count; }, 0), "mensagens recebidas pelos formulários") : null,
           stat("history", st.lastPublish ? fmtDate(st.lastPublish) : "Ainda não", "última publicação" + (st.lastPublishBy ? " · " + st.lastPublishBy : ""), true)),
-        pr ? h("div", { class: "card" }, h("div", { class: "page-head" }, h("div", {}, h("h2", { text: "Revisão do site, página por página" }), h("p", { text: "Siga a ordem do menu do site e marque cada página como revisada ao terminar." })),
-          pr.next ? h("a", { class: "btn", href: "#/page/" + pr.next.key }, "Continuar: " + pr.next.title, icon("chev")) : h("span", { class: "badge badge--ok", text: "Todas revisadas" })), pr.el) : null,
         h("div", { class: "card" }, h("h2", { text: "Como funciona" }), h("p", { class: "desc", text: "Nada vai para o ar sem confirmação." }),
           h("ol", { class: "steps" },
             h("li", {}, h("b", { text: "Edite em português" }), "Textos, imagens, botões e links de cada seção. O inglês é traduzido automaticamente."),
@@ -431,16 +429,15 @@
     api("GET", "/api/admin/pages").then(function (r) {
       var q = inp({ type: "search", class: "input", placeholder: "Buscar página…", "aria-label": "Buscar página" });
       var list = h("div", {});
-      var DESC = { "Páginas do site": "Na ordem do menu do site", "Componentes compartilhados": "Blocos que aparecem em mais de uma página", "Documentos regulatórios": "RN 565 e IDSS (gerados a partir dos dados oficiais)", "Outras": "" };
+      var DESC = { "Páginas do site": "Na ordem do menu do site", "Componentes compartilhados": "Blocos que aparecem em mais de uma página", "Reajuste de contratos (RN 565)": "Um agrupamento por ano", "IDSS": "Um resultado por ano", "Outras": "" };
       function row(p, n) {
-        return h("a", { class: "prow" + (p.reviewed ? " is-reviewed" : ""), href: "#/page/" + p.key },
-          h("span", { class: "num", text: p.reviewed ? "✓" : pad(n) }),
+        return h("a", { class: "prow", href: "#/page/" + p.key },
+          h("span", { class: "num", text: pad(n) }),
           h("div", {}, h("div", { class: "t", text: p.title }), h("div", { class: "f" }, h("span", { text: p.partial ? "Usado em várias páginas" : "/" + p.file }), p.area && !p.partial ? h("span", { class: "badge badge--line", text: p.area }) : null)),
           h("div", { class: "tags" },
             p.enPending ? h("span", { class: "badge badge--err", text: "tradução pendente" }) : null,
             p.pending ? h("span", { class: "badge badge--warn", text: "não publicado" }) : null,
-            p.edits ? h("span", { class: "badge", text: p.edits + (p.edits === 1 ? " alteração" : " alterações") }) : null,
-            p.reviewed ? h("span", { class: "badge badge--ok", text: "Revisada" }) : null),
+            p.edits ? h("span", { class: "badge", text: p.edits + (p.edits === 1 ? " alteração" : " alterações") }) : null),
           h("span", { class: "go" }, icon("chev")));
       }
       function draw() {
@@ -450,19 +447,15 @@
         r.groups.forEach(function (g) {
           var items = groups[g];
           if (!items) return;
-          var done = items.filter(function (p) { return p.reviewed; }).length;
-          var title = h("h3", {}, g, h("span", { class: "badge badge--line", text: done + "/" + items.length + " revisadas" }), DESC[g] ? h("span", { class: "xs muted", text: "· " + DESC[g] }) : null);
+          var title = h("h3", {}, g, h("span", { class: "badge badge--line", text: items.length + (items.length === 1 ? " página" : " páginas") }), DESC[g] ? h("span", { class: "xs muted", text: "· " + DESC[g] }) : null);
           var rows = h("div", { class: "plist" }, items.map(function (p, i) { return row(p, i + 1); }));
-          // documentos regulatórios: muitas páginas parecidas, ficam recolhidos
-          if (g === "Documentos regulatórios" && !term) list.appendChild(h("details", { class: "plist-group" }, h("summary", { class: "small muted", text: "Mostrar " + items.length + " páginas de documentos regulatórios (RN 565 e IDSS)" }), title, rows));
-          else list.appendChild(h("div", { class: "plist-group" }, title, rows));
+          list.appendChild(h("div", { class: "plist-group" }, title, rows));
         });
         if (!list.children.length) list.appendChild(h("p", { class: "muted", text: "Nenhuma página encontrada." }));
       }
       q.addEventListener("input", draw);
-      var pr = reviewProgress(r.pages);
       fill(view, head("Páginas do site", "As páginas estão na mesma ordem do menu do site (e também no menu lateral, em Páginas). Edite em português: a versão em inglês é traduzida automaticamente."),
-        h("div", { class: "card" }, pr.el), h("div", { class: "toolbar" }, q), list);
+        h("div", { class: "toolbar" }, q), list);
       draw();
     }).catch(fail);
   };
@@ -738,16 +731,11 @@
       secs.forEach(function (d) { var hit = !t || d.searchText.indexOf(t) >= 0; d.classList.toggle("hidden", !hit); d.outlineBtn.classList.toggle("hidden", !hit); if (t && hit) d.open = true; });
     });
 
-    // ---- cabeçalho: onde estou, revisão e navegação em sequência ----
+    // ---- cabeçalho: onde estou e navegação em sequência ----
+    var dm = /^pt\/(rn565|idss)(?:-agrupamento)?(?:-(\d{4}))?\.html$/.exec(P.key);
+    var docBtns = dm && can("pages") ? [dm[2] ? h("a", { class: "btn btn--ghost btn--sm", href: "#/docs/" + dm[1] + "/" + dm[2] }, icon("edit"), "Editar dados de " + dm[2]) : h("a", { class: "btn btn--ghost btn--sm", href: "#/docs/" + dm[1] }, icon("edit"), "Gerenciar anos"),
+      h("a", { class: "btn btn--sm", href: "#/docs/" + dm[1] + "/novo" }, "+ Cadastrar novo ano")] : null;
     var pl = P.place || {};
-    var reviewed = !!pl.reviewed;
-    var rv = h("button", { class: "review-toggle", type: "button", "aria-pressed": String(reviewed), onclick: function () {
-      api("POST", "/api/admin/review", { key: P.key, done: !reviewed }).then(function (j) {
-        reviewed = !!j.reviewed; rv.setAttribute("aria-pressed", String(reviewed));
-        rv.lastChild.textContent = reviewed ? "Página revisada" : "Marcar página como revisada";
-        toast(reviewed ? "Página marcada como revisada." + (pl.next ? " Próxima: " + pl.next.title + "." : "") : "Marcação de revisão removida.", "ok");
-      }).catch(fail);
-    } }, h("span", { class: "box" }, icon("check")), h("span", { text: reviewed ? "Página revisada" : "Marcar página como revisada" }));
     var where = P.partial ? "Componente compartilhado" : pl.group === "Páginas do site" ? "Página " + pl.pos + " de " + pl.total + " · " + pl.area : (pl.area || pl.group) + " · " + pl.pos + " de " + pl.total;
     var headCard = h("div", { class: "ed-head" },
       h("div", { class: "ed-head-top" },
@@ -760,7 +748,7 @@
         h("div", { class: "actions" },
           P.url ? h("a", { class: "btn btn--quiet btn--sm", href: "/" + P.url, target: "_blank", rel: "noopener" }, icon("ext"), "Abrir no site") : null,
           h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () { if (dirty()) toast("Salve o rascunho antes de visualizar.", "err"); else preview(P.key); } }, icon("eye"), "Visualizar rascunho"))),
-      h("div", { class: "ed-head-bottom" }, rv,
+      h("div", { class: "ed-head-bottom" }, h("div", { class: "actions" }, docBtns),
         h("div", { class: "actions" },
           pl.prev ? h("a", { class: "btn btn--quiet btn--sm", href: "#/page/" + pl.prev.key, title: pl.prev.title }, icon("left"), "Anterior") : null,
           pl.next ? h("a", { class: "btn btn--ghost btn--sm", href: "#/page/" + pl.next.key, title: pl.next.title }, "Próxima: " + pl.next.title, icon("chev")) : null)));
@@ -770,10 +758,145 @@
 
     fill(view,
       headCard,
-      P.generated ? h("div", { class: "alert alert--info", text: "Página gerada automaticamente a partir dos dados regulatórios. As edições aqui ficam por cima desses dados." }) : null,
+      P.generated ? h("div", { class: "alert alert--info", text: dm ? "Página gerada a partir dos dados do ano (percentual, período, contratos, notas e imagens): para mudar esses dados use “Editar dados” acima. Aqui ficam só os ajustes de texto." : "Página gerada automaticamente. As edições aqui ficam por cima dos dados." }) : null,
       P.orphans.length ? h("div", { class: "alert alert--warn", text: P.orphans.length + " edição(ões) antiga(s) não foram aplicadas porque o código desta página mudou desde então. Revise os campos e salve de novo." }) : null,
       h("div", { class: "ed-layout" }, outline,
         h("div", {}, h("div", { class: "toolbar" }, q), seo, secs, pager, savebar)));
+  }
+
+  /* ---------- documentos anuais: RN 565 (reajuste) e IDSS ---------- */
+  var DOC_INFO = {
+    rn565: { title: "Reajuste de contratos (RN 565)", unit: "agrupamento", page: function (a) { return "pt/rn565-agrupamento-" + a + ".html"; }, main: "pt/rn565.html" },
+    idss: { title: "IDSS", unit: "resultado", page: function (a) { return "pt/idss-" + a + ".html"; }, main: "pt/idss.html" },
+  };
+  VIEWS.docs = function (view, parts) {
+    var type = parts[0], D = DOC_INFO[type];
+    if (!D) { location.hash = "#/"; return; }
+    api("GET", "/api/admin/docs?type=" + type).then(function (r) {
+      if (parts[1]) {
+        var cur = parts[1] === "novo" ? null : r.items.find(function (x) { return String(x.ano) === parts[1]; });
+        if (parts[1] !== "novo" && !cur) { location.hash = "#/docs/" + type; return; }
+        return docForm(view, type, r, cur);
+      }
+      setCrumbs([[D.title, "#/page/" + D.main], ["Anos cadastrados"]]);
+      fill(view, head(D.title, "Cada ano gera a sua página (em português e em inglês) e entra no histórico. Cadastre o novo ano quando o documento for renovado.", h("a", { class: "btn", href: "#/docs/" + type + "/novo" }, "+ Cadastrar novo ano")),
+        h("div", { class: "card" }, h("div", { class: "table-wrap" }, h("table", { class: "table" },
+          h("thead", {}, h("tr", {}, ["Ano", type === "rn565" ? "Percentual" : "Nota IDSS", type === "rn565" ? "Período de aplicação" : "Ano-base", type === "rn565" ? "Relação" : "Imagens", ""].map(function (t) { return h("th", { text: t }); }))),
+          h("tbody", {}, r.items.map(function (x) {
+            return h("tr", {}, h("td", {}, h("b", { text: x.ano })),
+              h("td", { text: type === "rn565" ? x.percentual || "não informado" : x.resultado.nota }),
+              h("td", { text: type === "rn565" ? x.inicio + " a " + x.fim : String(x.anoBase) }),
+              h("td", { text: type === "rn565" ? (x.contratos.length ? x.contratos.length + " contratos" : "PDF") : x.imagens.length + " imagem(ns)" }),
+              h("td", {}, h("div", { class: "actions" },
+                h("a", { class: "btn btn--ghost btn--sm", href: "#/docs/" + type + "/" + x.ano }, icon("edit"), "Editar dados"),
+                type === "idss" || x.contratos.length ? h("a", { class: "btn btn--quiet btn--sm", href: "#/page/" + D.page(x.ano) }, "Textos da página") : null)));
+          }))))));
+    }).catch(fail);
+  };
+  function docForm(view, type, r, cur) {
+    var D = DOC_INFO[type], isNew = !cur, latest = r.items[0];
+    setCrumbs([[D.title, "#/docs/" + type], [isNew ? "Novo ano" : "Ano " + cur.ano]]);
+    var changed = false; dirty = function () { return changed; };
+    var F = {}, touch = function () { changed = true; };
+    var mk = function (k, label, value, o) { o = o || {}; var el = inp({ type: "text", value: value == null ? "" : value, placeholder: o.ph || null, inputmode: o.num ? "decimal" : null }); el.addEventListener("input", touch); F[k] = field(label, el, { hint: o.hint }); F[k].input = el; return F[k]; };
+    var nextYear = latest ? latest.ano + 1 : new Date().getFullYear();
+    var ano = mk("ano", "Ano", cur ? cur.ano : nextYear, { num: true });
+    var body, collect;
+    if (type === "rn565") {
+      var ini = mk("inicio", "Início da aplicação", cur ? cur.inicio : "01/05/" + nextYear, { ph: "DD/MM/AAAA" });
+      var fim = mk("fim", "Fim da aplicação", cur ? cur.fim : "30/04/" + (nextYear + 1), { ph: "DD/MM/AAAA" });
+      var pct = mk("percentual", "Percentual de reajuste", cur ? cur.percentual : "", { ph: "8,70%", hint: "Em branco: aparece “não informado”." });
+      ano.input.addEventListener("input", function () { var y = +ano.input.value; if (isNew && y > 1999) { ini.input.value = "01/05/" + y; fim.input.value = "30/04/" + (y + 1); } });
+      var rows = cur ? cur.contratos.slice() : [];
+      var pdfFile = cur ? cur.pdfFile : "";
+      var area = inp({ tag: "textarea", rows: 8, spellcheck: "false", placeholder: "Contrato;Plano;Registro ANS\n16;PLANO COL EMP AMB COM COPARTIC;470013139" });
+      area.value = rows.map(function (c) { return [c.contrato, c.plano, c.registro].join(";"); }).join("\n");
+      var count = h("span", { class: "small muted" });
+      var parse = function () {
+        rows = area.value.split(/\r?\n/).map(function (l) { return l.split(/\t|;|,(?=\s*\S)/).map(function (x) { return x.trim().replace(/^"|"$/g, ""); }); })
+          .filter(function (c) { return c[0] && /\d/.test(c[0]) && c[1]; }).map(function (c) { return { contrato: c[0], plano: c[1], registro: c[2] || "" }; });
+        count.textContent = rows.length + (rows.length === 1 ? " contrato reconhecido" : " contratos reconhecidos");
+      };
+      area.addEventListener("input", function () { touch(); parse(); });
+      parse();
+      var csvIn = h("input", { type: "file", accept: ".csv,.txt", class: "sr-only", id: "f" + (++uid) });
+      csvIn.addEventListener("change", function () { var f = csvIn.files[0]; if (!f) return; f.text().then(function (t) { area.value = t; touch(); parse(); toast("Planilha importada: confira a contagem abaixo.", "ok"); }); });
+      var pdfBox = h("div", {});
+      var pdfIn = h("input", { type: "file", accept: ".pdf,application/pdf", class: "sr-only", id: "f" + (++uid) });
+      var drawPdf = function () {
+        fill(pdfBox, pdfFile ? h("p", { class: "small" }, icon("check"), " PDF enviado: ", h("a", { href: "/admin/media/" + pdfFile.slice(15), target: "_blank", rel: "noopener", text: "abrir" }), " · ", h("button", { class: "link-btn", type: "button", text: "Remover PDF", onclick: function () { pdfFile = ""; touch(); drawPdf(); } })) : null,
+          h("label", { class: "btn btn--ghost btn--sm", for: pdfIn.id }, pdfFile ? "Trocar PDF" : "Enviar PDF do agrupamento"));
+      };
+      pdfIn.addEventListener("change", function () {
+        var f = pdfIn.files[0]; if (!f) return;
+        uploadFile(f, "pdf").then(function (j) { pdfFile = j.path; touch(); drawPdf(); toast("PDF enviado.", "ok"); }).catch(fail);
+      });
+      drawPdf();
+      F.contratos = field("Relação de contratos", area, { hint: "Uma linha por contrato: contrato; plano; registro ANS (separados por ponto e vírgula ou tabulação — dá para colar direto do Excel)." });
+      F.pdfFile = h("div", {});
+      body = [h("div", { class: "card" }, h("h2", { text: "Dados do reajuste" }), h("div", { class: "grid2" }, ano, pct, ini, fim)),
+        h("div", { class: "card" }, h("h2", { text: "Contratos do agrupamento" }), h("p", { class: "desc", text: "Cole a relação de contratos ou importe uma planilha salva em CSV. Se o agrupamento só existir em PDF, envie o arquivo abaixo." }),
+          h("div", { class: "actions" }, h("label", { class: "btn btn--ghost btn--sm", for: csvIn.id }, "Importar planilha (CSV)"), latest && latest.contratos.length && isNew ? h("button", { class: "btn btn--quiet btn--sm", type: "button", text: "Copiar a relação de " + latest.ano, onclick: function () { area.value = latest.contratos.map(function (c) { return [c.contrato, c.plano, c.registro].join(";"); }).join("\n"); touch(); parse(); } }) : null, count), csvIn,
+          h("div", { class: "mt" }), F.contratos, h("h3", { class: "mt", text: "Ou: PDF do agrupamento" }), pdfIn, pdfBox, F.pdfFile)];
+      collect = function () { return { ano: +ano.input.value, percentual: pct.input.value, inicio: ini.input.value, fim: fim.input.value, contratos: rows, pdfFile: pdfFile || "" }; };
+    } else {
+      var res = cur ? cur.resultado : { nota: "", dim: ["", "", "", ""], acred: "Operadora não bonificada", bonus: "0,0000 · Operadora não bonificada" };
+      var base = mk("anoBase", "Ano-base", cur ? cur.anoBase : nextYear - 1, { num: true });
+      ano.input.addEventListener("input", function () { if (isNew && +ano.input.value > 1999) base.input.value = +ano.input.value - 1; });
+      var nota = mk("nota", "Nota IDSS", res.nota, { ph: "0,4859", num: true });
+      var DIMS = [["IDQS", "Qualidade em Atenção à Saúde"], ["IDGA", "Garantia de Acesso"], ["IDSM", "Sustentabilidade no Mercado"], ["IDGR", "Gestão de Processos e Regulação"]];
+      var dims = DIMS.map(function (d, i) { return mk("dim" + i, d[0] + " · " + d[1], res.dim[i], { ph: "0,0000", num: true }); });
+      var acred = mk("acred", "Pontuação para operadora acreditada", res.acred), bonus = mk("bonus", "Indicador bônus", res.bonus);
+      var imgs = cur ? cur.imagens.map(function (p, i) { return { path: p, url: cur.preview[i] }; }) : [];
+      var grid = h("div", { class: "doc-imgs" });
+      var imgIn = h("input", { type: "file", accept: ".jpg,.jpeg,.png,.webp", multiple: true, class: "sr-only", id: "f" + (++uid) });
+      var drawImgs = function () {
+        fill(grid, imgs.map(function (im, i) {
+          return h("div", { class: "doc-img" }, h("div", { class: "thumb" }, h("img", { src: im.url, alt: "" })), h("div", { class: "actions" },
+            h("span", { class: "xs muted", text: "Imagem " + (i + 1) }),
+            i ? h("button", { class: "link-btn", type: "button", text: "↑", title: "Mover para cima", onclick: function () { imgs.splice(i - 1, 0, imgs.splice(i, 1)[0]); touch(); drawImgs(); } }) : null,
+            i < imgs.length - 1 ? h("button", { class: "link-btn", type: "button", text: "↓", title: "Mover para baixo", onclick: function () { imgs.splice(i + 1, 0, imgs.splice(i, 1)[0]); touch(); drawImgs(); } }) : null,
+            h("button", { class: "link-btn", type: "button", text: "Remover", onclick: function () { imgs.splice(i, 1); touch(); drawImgs(); } })));
+        }), h("label", { class: "drop doc-add", for: imgIn.id }, h("strong", { text: "+ Enviar imagens" }), h("div", { class: "xs", text: "JPG, PNG ou WebP · até 5 MB cada" })));
+      };
+      imgIn.addEventListener("change", function () {
+        var files = Array.prototype.slice.call(imgIn.files), errs = [];
+        files.reduce(function (p, f) { return p.then(function () { return uploadFile(f, "doc").then(function (j) { imgs.push({ path: j.path, url: j.url }); }).catch(function (e) { errs.push(f.name + ": " + e.message); }); }); }, Promise.resolve())
+          .then(function () { touch(); drawImgs(); if (errs.length) toast(errs.join(" · "), "err"); else toast("Imagens enviadas.", "ok"); imgIn.value = ""; });
+      });
+      drawImgs();
+      F.imagens = h("div", { class: "field" }, h("span", { class: "err", role: "alert" }));
+      F.imagens.setError = function (m) { F.imagens.firstChild.textContent = m || ""; };
+      F.dim = h("div", { class: "field" }, h("span", { class: "err", role: "alert" }));
+      F.dim.setError = function (m) { F.dim.firstChild.textContent = m || ""; };
+      body = [h("div", { class: "card" }, h("h2", { text: "Resultado divulgado pela ANS" }), h("div", { class: "grid3" }, ano, base, nota), h("div", { class: "grid2" }, dims), F.dim, h("div", { class: "grid2" }, acred, bonus)),
+        h("div", { class: "card" }, h("h2", { text: "Imagens do resultado" }), h("p", { class: "desc", text: "Capturas do painel da ANS com o resultado do ano, na ordem em que devem aparecer na página." }), imgIn, grid, F.imagens)];
+      collect = function () { return { ano: +ano.input.value, anoBase: +base.input.value, resultado: { nota: nota.input.value.trim(), dim: dims.map(function (d) { return d.input.value.trim(); }), acred: acred.input.value, bonus: bonus.input.value }, imagens: imgs.map(function (i) { return i.path; }) }; };
+    }
+    var alert = h("div", { class: "alert alert--err hidden", role: "alert" });
+    var saveBtn = h("button", { class: "btn", type: "button", text: isNew ? "Cadastrar ano" : "Salvar alterações", onclick: function () {
+      Object.keys(F).forEach(function (k) { if (F[k].setError) F[k].setError(""); }); alert.classList.add("hidden");
+      var b = Object.assign(collect(), cur ? { original: cur.ano } : {});
+      saveBtn.disabled = true;
+      api("PUT", "/api/admin/docs?type=" + type, b).then(function (j) {
+        changed = false; toast((isNew ? "Ano " + b.ano + " cadastrado" : "Dados de " + b.ano + " salvos") + " no rascunho. Publique para colocar no ar.", "ok");
+        refreshStatus(); navPages = null; refreshPagesNav();
+        location.hash = type === "rn565" && !b.contratos.length ? "#/page/" + D.main : "#/page/" + j.key;
+      }).catch(function (e) {
+        var f = e.fields || {};
+        Object.keys(f).forEach(function (k) { var t = F[k] || (k === "nota" ? F.nota : null); if (t && t.setError) t.setError(f[k]); });
+        alert.textContent = e.message; alert.classList.remove("hidden"); alert.scrollIntoView({ block: "center" });
+      }).then(function () { saveBtn.disabled = false; });
+    } });
+    var del = !isNew ? h("button", { class: "btn btn--quiet", type: "button", onclick: function () {
+      confirmDialog("Remover o ano " + cur.ano + "?", "A página deste ano sai do site (português e inglês) na próxima publicação.", "Remover", true).then(function (ok) {
+        if (ok) api("PUT", "/api/admin/docs?type=" + type, { original: cur.ano, remove: true }).then(function () { changed = false; toast("Ano removido do rascunho.", "ok"); refreshStatus(); navPages = null; refreshPagesNav(); location.hash = "#/docs/" + type; }).catch(fail);
+      });
+    } }, icon("trash"), "Remover este ano") : null;
+    fill(view, h("div", { class: "toolbar" }, h("a", { class: "btn btn--quiet btn--sm", href: "#/docs/" + type, text: "← Anos cadastrados" })),
+      head(isNew ? "Cadastrar novo ano · " + D.title : D.title + " · " + cur.ano, "A página do ano é gerada automaticamente em português e em inglês, no mesmo modelo dos anos anteriores, e entra no histórico."),
+      alert, body,
+      h("div", { class: "savebar" }, h("span", { class: "grow", text: "As alterações entram no site após Publicar." }), del, h("a", { class: "btn btn--ghost", href: "#/docs/" + type, text: "Cancelar" }), saveBtn));
   }
 
   /* ---------- seletor de imagem (envio com validação + biblioteca) ---------- */

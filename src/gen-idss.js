@@ -26,7 +26,7 @@ const UI = {
   pt: {
     crumbsBase: [["MedicGLOBAL", "medicglobal.html"], ["Documentos", "documentos.html"]],
     metaTitle: "IDSS — Índice de Desempenho da Saúde Suplementar | MedicGLOBAL",
-    metaDesc: "Histórico do IDSS da MedicGLOBAL (Extremamedic), de 2018 a 2025: nota geral, notas por dimensão e os resultados divulgados pela ANS em cada ano.",
+    metaDesc: (a, b) => `Histórico do IDSS da MedicGLOBAL (Extremamedic), de ${a} a ${b}: nota geral, notas por dimensão e os resultados divulgados pela ANS em cada ano.`,
     eyebrow: "ANS · Programa de Qualificação de Operadoras",
     sub: "Índice de Desempenho da Saúde Suplementar",
     latest: "Mais recente",
@@ -67,7 +67,7 @@ const UI = {
   en: {
     crumbsBase: [["MedicGLOBAL", "medicglobal.html"], ["Documents", "documentos.html"]],
     metaTitle: "IDSS — Supplementary Health Performance Index | MedicGLOBAL",
-    metaDesc: "MedicGLOBAL (Extremamedic) IDSS history from 2018 to 2025: overall score, scores by dimension and the results published by the ANS each year.",
+    metaDesc: (a, b) => `MedicGLOBAL (Extremamedic) IDSS history from ${a} to ${b}: overall score, scores by dimension and the results published by the ANS each year.`,
     eyebrow: "ANS · Operator Qualification Program",
     sub: "Supplementary Health Performance Index",
     latest: "Latest",
@@ -142,7 +142,7 @@ ${ind}  </div>
 ${ind}  <span class="rj-pct"><span class="sr-only">${U.score}: </span>${num(r.resultado.nota)}</span>
 ${ind}  <span class="rj-act"><a class="btn btn--sm" href="${file(r)}">{{i:eye}} ${U.view}</a></span>
 ${ind}</li>`;
-    const meta = { title: U.metaTitle, description: U.metaDesc, active: "institucional", og: "old_rn565_banner", crumbs: [...U.crumbsBase, ["IDSS", "idss.html"]] };
+    const meta = { title: U.metaTitle, description: U.metaDesc(regs[regs.length - 1].ano, regs[0].ano), active: "institucional", og: "old_rn565_banner", crumbs: [...U.crumbsBase, ["IDSS", "idss.html"]] };
     fs.writeFileSync(path.join(pages, "idss.html"), `<!--@${JSON.stringify(meta, null, 2)}@-->
 
 <section class="page-hero rn-hero" aria-labelledby="t">

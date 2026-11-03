@@ -2,7 +2,8 @@
    a partir de src/data/rn565.json (executado por build.js), em português e em inglês.
    Os dados foram transcritos do site antigo (extremamedic.com/agrupamento.php e agrupamento_detalhe.php?ano=AAAA):
    descrição, percentual, período e a relação de contratos (contrato, plano, registro ANS) de cada ano.
-   Anos sem relação de contratos no site antigo (2013 e 2014) têm só o PDF (site.json → docs.rn309_AAAA). */
+   Anos sem relação de contratos no site antigo (2013 e 2014) têm só o PDF (site.json → docs.rn309_AAAA);
+   anos cadastrados no painel podem trazer o PDF enviado (pdfFile: assets/uploads/…) no lugar da relação. */
 const fs = require("fs");
 const path = require("path");
 
@@ -14,7 +15,7 @@ const UI = {
     h1: "Percentual de reajuste",
     sub: "Histórico dos percentuais de reajuste",
     lead: "Percentuais aplicados ao agrupamento de contratos coletivos com até 30 vidas, por período de aplicação. Em cada ano, consulte a relação completa de contratos do agrupamento.",
-    metaDesc: "RN 565 MedicGLOBAL: histórico dos percentuais de reajuste do agrupamento de contratos com até 30 vidas, de 2013 a 2026, com a relação de contratos de cada ano.",
+    metaDesc: (a, b) => `RN 565 MedicGLOBAL: histórico dos percentuais de reajuste do agrupamento de contratos com até 30 vidas, de ${a} a ${b}, com a relação de contratos de cada ano.`,
     cat: "Agrupamento de contratos · até 30 vidas",
     current: "Vigente",
     period: "Período de aplicação",
@@ -30,6 +31,7 @@ const UI = {
     view: "Ver agrupamento",
     download: "Baixar agrupamento",
     pdfLabel: "Empresas do agrupamento (RN 309) — PDF",
+    pdfLabelNew: "Relação de contratos do agrupamento — PDF",
     noPct: "Percentual não informado na publicação original",
     noPctShort: "Não informado",
     newTab: " (abre em nova aba)",
@@ -63,7 +65,7 @@ const UI = {
     h1: "Adjustment percentage",
     sub: "History of adjustment percentages",
     lead: "Percentages applied to the pool of group contracts with up to 30 lives (members), by application period. For each year, see the full list of contracts in the pool.",
-    metaDesc: "MedicGLOBAL RN 565: history of the adjustment percentages for the pool of contracts with up to 30 lives, from 2013 to 2026, with the list of contracts for each year.",
+    metaDesc: (a, b) => `MedicGLOBAL RN 565: history of the adjustment percentages for the pool of contracts with up to 30 lives, from ${a} to ${b}, with the list of contracts for each year.`,
     cat: "Contract pool · up to 30 lives",
     current: "Current",
     period: "Application period",
@@ -79,6 +81,7 @@ const UI = {
     view: "View contract pool",
     download: "Download contract pool",
     pdfLabel: "Companies in the pool (RN 309) — PDF (in Portuguese)",
+    pdfLabelNew: "List of contracts in the pool — PDF (in Portuguese)",
     noPct: "Percentage not stated in the original publication",
     noPctShort: "Not stated",
     newTab: " (opens in a new tab)",
@@ -123,14 +126,14 @@ module.exports = function (fs = require("fs")) {
     // ---------- Página principal: histórico de todos os anos ----------
     const acao = (a, cls = "btn btn--sm") => a.contratos
       ? `<a class="${cls}" href="${file(a)}">{{i:eye}} ${U.view}</a>`
-      : `<a class="${cls}" href="{{L.docs.${a.pdf}}}" target="_blank" rel="noopener" download data-doc="RN309 ${a.ano}">{{i:download}} ${U.download}<span class="sr-only">${U.newTab}</span></a>`;
+      : `<a class="${cls}" href="${a.pdfFile || `{{L.docs.${a.pdf}}}`}" target="_blank" rel="noopener" download data-doc="${a.pdfFile ? "RN565" : "RN309"} ${a.ano}">{{i:download}} ${U.download}<span class="sr-only">${U.newTab}</span></a>`;
     const row = (a) => `        <li class="rj-row${a === atual ? " is-current" : ""}" id="ano-${a.ano}">
           <span class="rj-year">${a.ano}</span>
           <div class="rj-info">
             <span class="rj-cat">${U.cat}${a === atual ? `<span class="rj-badge">${U.current}</span>` : ""}</span>
             <span class="rj-period">{{i:calendar}}<span class="sr-only">${U.period}: </span>${U.validity(a)}</span>
             <p class="rj-desc">${esc(U.descricao(a))}</p>${a.contratos ? "" : `
-            <span class="rj-docs"><span class="rj-doc rj-doc--static">{{i:doc}} ${U.pdfLabel}</span></span>`}
+            <span class="rj-docs"><span class="rj-doc rj-doc--static">{{i:doc}} ${a.pdfFile ? U.pdfLabelNew : U.pdfLabel}</span></span>`}
           </div>
           <span class="rj-pct"><span class="sr-only">${U.pct}: </span>${pct(a) || `<span class="review-flag">${U.noPctShort}</span>`}</span>
           <span class="rj-act">${acao(a)}</span>
@@ -139,7 +142,7 @@ module.exports = function (fs = require("fs")) {
     const recentes = anos.slice(0, anos.length - 10), anteriores = anos.slice(-10);
     const meta = {
       title: `${U.pageTitle} | MedicGLOBAL`,
-      description: U.metaDesc,
+      description: U.metaDesc(anos[anos.length - 1].ano, anos[0].ano),
       active: "institucional",
       og: "old_rn565_banner",
       crumbs: [...U.crumbsBase, ["RN 565", "rn565.html"]],

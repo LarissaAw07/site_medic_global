@@ -38,6 +38,8 @@ const RULES = {
   photo:   { label: "Foto de conteúdo", types: ["jpg", "png", "webp"], maxBytes: 5 * 1024 * 1024, minW: 400, minH: 300, maxW: 6000, maxH: 6000 },
   logo:    { label: "Logotipo", types: ["png", "webp", "svg"], maxBytes: 1024 * 1024, minW: 120, minH: 40, maxW: 3000, maxH: 1500 },
   favicon: { label: "Favicon", types: ["png", "svg"], maxBytes: 512 * 1024, minW: 32, minH: 32, maxW: 1024, maxH: 1024, square: true },
+  // capturas de resultados (IDSS): costumam ser faixas largas e baixas
+  doc:     { label: "Imagem de documento", types: ["jpg", "png", "webp"], maxBytes: 5 * 1024 * 1024, minW: 200, minH: 60, maxW: 6000, maxH: 8000 },
 };
 
 function validate(buf, purpose) {

@@ -37,16 +37,21 @@ function pageRank(p) {
   const i = SITE_ORDER.findIndex(([f]) => f === p.file);
   if (i >= 0) return { group: "Páginas do site", n: i, area: SITE_ORDER[i][1] };
   const m = /^(rn565|idss)(?:-agrupamento)?(?:-(\d{4}))?\.html$/.exec(p.file);
-  if (m) return { group: "Documentos regulatórios", n: (m[1] === "rn565" ? 0 : 1000) + (m[2] ? 3000 - +m[2] : 0), area: m[1] === "rn565" ? "RN 565" : "IDSS" };
+  if (m) return { group: m[1] === "rn565" ? DOC_GROUPS.rn565 : DOC_GROUPS.idss, n: m[2] ? 3000 - +m[2] : 0, area: m[1] === "rn565" ? "RN 565" : "IDSS" };
   return { group: "Outras", n: 9999, area: "" };
 }
-const GROUP_ORDER = ["Páginas do site", "Componentes compartilhados", "Documentos regulatórios", "Outras"];
+// documentos renovados todo ano: cada um tem o seu menu e o cadastro de um novo ano
+const DOC_GROUPS = { rn565: "Reajuste de contratos (RN 565)", idss: "IDSS" };
+const GROUP_ORDER = ["Páginas do site", "Componentes compartilhados", DOC_GROUPS.rn565, DOC_GROUPS.idss, "Outras"];
 function orderedPages(pages, lang) {
   return Object.values(pages).filter((p) => p.lang === lang && !/^noticia-/.test(p.file))
     .map((p) => Object.assign({ p }, pageRank(p)))
     .sort((a, b) => GROUP_ORDER.indexOf(a.group) - GROUP_ORDER.indexOf(b.group) || a.n - b.n || a.p.file.localeCompare(b.p.file));
 }
-const reviews = () => store.read("review.json", {});
+
+/* ---------- rotas do painel (registradas ao longo do arquivo) ---------- */
+const routes = {};
+const on = (method, p, fn, opts = {}) => (routes[method + " " + p] = Object.assign(fn, opts));
 
 /* ---------- utilidades HTTP ---------- */
 function headers(res, extra) {
@@ -103,7 +108,7 @@ function safeJoin(base, rel) {
 /* ---------- fontes e campos editáveis ---------- */
 let srcCache = { key: "", data: null };
 function sources(content) {
-  const key = crypto.createHash("md5").update(JSON.stringify([content.site, content.noticias])).digest("hex");
+  const key = crypto.createHash("md5").update(JSON.stringify([content.site, content.noticias, content.rn565, content.idss])).digest("hex");
   if (srcCache.key === key) return srcCache.data;
   const { site, vfs } = build.loadSources(Object.assign({}, content, { virtual: true }));
   const pages = {};
@@ -124,8 +129,14 @@ function sources(content) {
   return srcCache.data;
 }
 // nomes das páginas no painel (as demais usam o título da própria página)
-const PAGE_NAMES = { "index.html": "Página inicial", "planos.html": "Planos", "rede-credenciada.html": "Rede credenciada", "guia-medico.html": "Guia médico", "telemedicina.html": "Telemedicina", "servicos.html": "Serviços", "beneficiario.html": "Área do beneficiário", "atendimento.html": "Atendimento e ouvidoria", "contato.html": "Contato", "medicglobal.html": "Institucional (MedicGLOBAL)", "conteudos.html": "Conteúdos", "documentos.html": "Documentos", "trabalhe-conosco.html": "Trabalhe conosco", "privacidade.html": "Política de privacidade", "404.html": "Página não encontrada (404)" };
-const pageTitle = (p) => (p.partial ? p.meta.title : PAGE_NAMES[p.file] || String(p.meta.title || p.file).split("|")[0].trim());
+const PAGE_NAMES = { "index.html": "Página inicial", "planos.html": "Planos", "rede-credenciada.html": "Rede credenciada", "guia-medico.html": "Guia médico", "telemedicina.html": "Telemedicina", "servicos.html": "Serviços", "beneficiario.html": "Área do beneficiário", "atendimento.html": "Atendimento e ouvidoria", "contato.html": "Contato", "medicglobal.html": "Institucional (MedicGLOBAL)", "conteudos.html": "Conteúdos", "documentos.html": "Documentos", "trabalhe-conosco.html": "Trabalhe conosco", "privacidade.html": "Política de privacidade", "404.html": "Página não encontrada (404)", "rn565.html": "Histórico de reajustes", "idss.html": "Histórico do IDSS" };
+const pageTitle = (p) => {
+  if (p.partial) return p.meta.title;
+  if (PAGE_NAMES[p.file]) return PAGE_NAMES[p.file];
+  const m = /^(?:rn565-agrupamento|idss)-(\d{4})\.html$/.exec(p.file);
+  if (m) return (p.file.startsWith("idss") ? "IDSS " : "Agrupamento ") + m[1];
+  return String(p.meta.title || p.file).split("|")[0].trim();
+};
 
 // token {{L.x}} existe em site.json?
 const tokenCheck = (site) => (k) => k.split(".").reduce((a, p) => (a == null ? a : a[p]), site) !== undefined;
@@ -177,7 +188,7 @@ function pageView(content, live, key) {
   const seq = orderedPages(pages, p.lang), rank = seq.find((x) => x.p.key === key);
   const same = seq.filter((x) => x.group === rank.group), pos = same.findIndex((x) => x.p.key === key);
   const nav = (x) => (x ? { key: x.p.key, title: pageTitle(x.p) } : null);
-  const place = { group: rank.group, area: rank.area, pos: pos + 1, total: same.length, prev: nav(same[pos - 1]), next: nav(same[pos + 1]), reviewed: reviews()[key] || null };
+  const place = { group: rank.group, area: rank.area, pos: pos + 1, total: same.length, prev: nav(same[pos - 1]), next: nav(same[pos + 1]) };
   const ek = enKeyOf(key);
   const english = ek && pages[ek] ? { url: p.partial ? null : "en/" + p.file, pending: !!(content.enPending || {})[key], fields: Object.keys(((content.pages[ek] || {}).edits) || {}).length } : null;
   return { key, title: pageTitle(p), place, lang: p.lang, file: p.file, partial: !!p.partial, generated: p.generated, url: p.partial ? null : (p.lang === "en" ? "en/" : "") + p.file, meta, sections, units: out, orphans, shared, english };
@@ -535,6 +546,106 @@ function newsAudit(user, prev, list) {
   for (const p of prev) if (!list.find((x) => x.slug === p.slug)) store.audit(user, "noticia_removida", p.titulo, [{ field: "Título", before: p.titulo, after: "" }]);
 }
 
+/* ---------- documentos renovados todo ano: RN 565 (reajuste) e IDSS ----------
+   O painel cadastra, edita e remove anos. Os textos em inglês dessas páginas são montados pelos geradores
+   (src/gen-rn565.js, src/gen-idss.js) a partir dos números, então não dependem de tradução. */
+const DOCS = {
+  rn565: { file: "rn565.json", list: "anos" },
+  idss: { file: "idss.json", list: "registros" },
+};
+const docsData = (content, type) => content[type] || JSON.parse(fs.readFileSync(path.join(ROOT, "src/data", DOCS[type].file), "utf8"));
+const DATE = /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/(20\d\d)$/;
+const SCORE = /^[01],\d{4}$/;
+const clean = (v, max) => String(v == null ? "" : v).replace(/\s+/g, " ").trim().slice(0, max);
+const isDocFile = (p) => /^assets\/img\/idss\/[\w.-]+$/.test(p) ? fs.existsSync(path.join(ROOT, p)) : /^assets\/uploads\/[\w.-]+$/.test(p) && uploadExists(p.slice(15));
+// RN 565: um ano = percentual, período e a relação de contratos (ou um PDF com a relação)
+function rnYear(b, prev, errors) {
+  const ano = +b.ano;
+  const a = Object.assign({}, prev || {}, {
+    ano, percentual: clean(b.percentual, 12), inicio: clean(b.inicio, 10), fim: clean(b.fim, 10),
+    botaoOriginal: (prev && prev.botaoOriginal) || "Ver Agrupamento", linkOriginal: (prev && prev.linkOriginal) || "",
+  });
+  if (a.percentual && !/^\d{1,3}(,\d{1,2})?%$/.test(a.percentual)) errors.percentual = "Use o formato 8,70%.";
+  if (!DATE.test(a.inicio)) errors.inicio = "Data no formato DD/MM/AAAA.";
+  if (!DATE.test(a.fim)) errors.fim = "Data no formato DD/MM/AAAA.";
+  a.descricao = `Percentual de reajuste a ser aplicado ao agrupamento de contratos com até 30 vidas, no período de ${a.inicio} a ${a.fim}` + (a.percentual ? `: ${a.percentual}` : "");
+  const rows = Array.isArray(b.contratos) ? b.contratos : [];
+  if (rows.length > 5000) errors.contratos = "No máximo 5000 contratos.";
+  a.contratos = rows.map((c) => ({ contrato: clean(c.contrato, 20), plano: clean(c.plano, 120), registro: clean(c.registro, 20) })).filter((c) => c.contrato || c.plano);
+  if (a.contratos.some((c) => !c.contrato || !c.plano || /[<>{}]/.test(c.contrato + c.plano + c.registro))) errors.contratos = "Cada linha precisa de contrato e plano (sem < > { }).";
+  if (b.pdfFile !== undefined) a.pdfFile = b.pdfFile || undefined;
+  if (a.pdfFile && !(/^assets\/uploads\/[\w-]+\.pdf$/.test(a.pdfFile) && uploadExists(a.pdfFile.slice(15)))) errors.pdfFile = "Envie o PDF pelo botão deste campo.";
+  if (!a.contratos.length) delete a.contratos;
+  if (!a.contratos && !a.pdfFile && !a.pdf) errors.contratos = "Informe a relação de contratos ou envie o PDF do agrupamento.";
+  return a;
+}
+// IDSS: um ano = nota geral, notas por dimensão e as imagens do resultado divulgado pela ANS
+function idssYear(b, prev, latest, errors) {
+  const ano = +b.ano, anoBase = +b.anoBase || ano - 1;
+  const r = Object.assign({}, prev || {}, { ano, anoBase, descricao: `IDSS Referente a ${ano} (Ano Base ${anoBase})`, titulo: `IDSS ANO ${ano}`, subtitulo: `IDSS Referente a ${ano} (Ano Base ${anoBase})` });
+  r.botaoOriginal = r.botaoOriginal || "Visualizar"; r.origem = r.origem || "";
+  const res = b.resultado || {};
+  r.resultado = { nota: clean(res.nota, 6), dim: [0, 1, 2, 3].map((i) => clean((res.dim || [])[i], 6)), acred: clean(res.acred, 120) || "Operadora não bonificada", bonus: clean(res.bonus, 120) || "0,0000 · Operadora não bonificada" };
+  if (!SCORE.test(r.resultado.nota)) errors.nota = "Nota no formato 0,4859.";
+  if (r.resultado.dim.some((d) => !SCORE.test(d))) errors.dim = "As quatro notas por dimensão no formato 0,2715.";
+  if (/[<>{}]/.test(r.resultado.acred + r.resultado.bonus)) errors.acred = "Não use < > { }.";
+  const imgs = (Array.isArray(b.imagens) ? b.imagens : []).map(String);
+  if (!imgs.length) errors.imagens = "Envie ao menos uma imagem do resultado divulgado pela ANS.";
+  if (imgs.length > 20) errors.imagens = "No máximo 20 imagens.";
+  if (imgs.some((p) => !isDocFile(p))) errors.imagens = "Imagem inválida: envie pelo botão deste campo.";
+  // textos: os do ano anterior (apresentação do IDSS e link do programa) + a frase com o resultado
+  const base = (prev || latest).blocos.filter((x) => x.h2 || (x.p && !/^(O Resultado|A nota)/.test(x.p)));
+  r.blocos = [...base, { p: `O Resultado da Medic Global foi: <strong><u>${r.resultado.nota}</u></strong>` }, ...imgs.map((img) => ({ img }))];
+  return r;
+}
+const docSummary = (type, x) => type === "rn565"
+  ? { ano: x.ano, percentual: x.percentual, inicio: x.inicio, fim: x.fim, contratos: x.contratos || [], pdfFile: x.pdfFile || "", pdf: x.pdf || "" }
+  : { ano: x.ano, anoBase: x.anoBase, resultado: x.resultado, imagens: x.blocos.filter((b) => b.img).map((b) => b.img), preview: x.blocos.filter((b) => b.img).map((b) => "/admin/" + (b.img.startsWith("assets/uploads/") ? "media/" + b.img.slice(15) : "site-assets/" + b.img.slice(7))) };
+on("GET", "/api/admin/docs", async (req, res, s, url) => {
+  const type = url.searchParams.get("type");
+  if (!DOCS[type]) return json(res, 404, { error: "Documento não encontrado." });
+  const list = docsData(store.content.draft(), type)[DOCS[type].list].slice().sort((a, b) => b.ano - a.ano);
+  json(res, 200, { type, title: DOC_GROUPS[type], items: list.map((x) => docSummary(type, x)) });
+}, { perm: "pages" });
+// grava um ano (novo ou existente) ou remove (remove: true)
+on("PUT", "/api/admin/docs", async (req, res, s, url) => {
+  const type = url.searchParams.get("type");
+  if (!DOCS[type]) return json(res, 404, { error: "Documento não encontrado." });
+  const b = await readJson(req, 2 * 1024 * 1024);
+  const draft = store.content.draft();
+  const data = JSON.parse(JSON.stringify(docsData(draft, type))), key = DOCS[type].list;
+  const list = data[key], orig = +b.original || null, ano = +b.ano;
+  const idx = orig ? list.findIndex((x) => x.ano === orig) : -1;
+  if (orig && idx < 0) return json(res, 404, { error: "Ano não encontrado." });
+  const label = (type === "rn565" ? "Reajuste RN 565 " : "IDSS ") + (orig || ano);
+  if (b.remove) {
+    if (list.length <= 1) return json(res, 422, { error: "É preciso manter pelo menos um ano." });
+    list.splice(idx, 1);
+    draft[type] = data;
+    store.content.saveDraft(draft);
+    store.audit(s.email, "documento_ano_removido", label, [{ field: "Ano", before: String(orig), after: "" }]);
+    return json(res, 200, { ok: true });
+  }
+  const errors = {};
+  if (!(Number.isInteger(ano) && ano >= 2000 && ano <= 2100)) errors.ano = "Ano inválido.";
+  else if (list.some((x, i) => x.ano === ano && i !== idx)) errors.ano = "Este ano já está cadastrado.";
+  const latest = list.slice().sort((x, y) => y.ano - x.ano)[0];
+  const item = type === "rn565" ? rnYear(b, list[idx], errors) : idssYear(b, list[idx], latest, errors);
+  if (Object.keys(errors).length) return json(res, 422, { error: "Corrija os campos destacados.", fields: errors });
+  // o que mudou, para a auditoria
+  const before = idx >= 0 ? docSummary(type, list[idx]) : null, after = docSummary(type, item);
+  const show = (k, v) => (k === "contratos" ? (v || []).length + " contratos" : k === "imagens" ? (v || []).length + " imagem(ns)" : k === "resultado" ? `nota ${v.nota} · dimensões ${v.dim.join(" / ")}` : String(v == null ? "" : v));
+  const NAMES = { ano: "Ano", anoBase: "Ano-base", percentual: "Percentual", inicio: "Início", fim: "Fim", contratos: "Relação de contratos", pdfFile: "PDF do agrupamento", resultado: "Resultado", imagens: "Imagens do resultado" };
+  const changes = Object.keys(NAMES).filter((k) => k in after && JSON.stringify(before ? before[k] : undefined) !== JSON.stringify(after[k]) && (before || after[k] !== "")).map((k) => ({ field: NAMES[k], before: before ? show(k, before[k]) : "", after: show(k, after[k]) }));
+  if (idx >= 0) list[idx] = item; else list.push(item);
+  data[key] = list.sort((x, y) => y.ano - x.ano);
+  draft[type] = data;
+  try { sources(draft); } catch (e) { return json(res, 422, { error: "Não foi possível gerar as páginas com estes dados: " + e.message }); }
+  store.content.saveDraft(draft);
+  store.audit(s.email, idx >= 0 ? "documento_ano_alterado" : "documento_ano_cadastrado", label, changes);
+  json(res, 200, { ok: true, key: `pt/${type === "rn565" ? "rn565-agrupamento-" : "idss-"}${ano}.html` });
+}, { perm: "pages" });
+
 /* ---------- publicação ---------- */
 function copyDir(from, to) {
   fs.mkdirSync(to, { recursive: true });
@@ -565,13 +676,11 @@ function pendingSummary(draft, live) {
   const ch = [];
   const keys = new Set([...Object.keys(draft.pages), ...Object.keys(live.pages)]);
   for (const k of keys) if (JSON.stringify(draft.pages[k] || null) !== JSON.stringify(live.pages[k] || null)) ch.push({ area: "page", key: k });
-  for (const a of ["site", "noticias", "identity", "analytics", "forms"]) if (JSON.stringify(draft[a] || null) !== JSON.stringify(live[a] || null)) ch.push({ area: a });
+  for (const a of ["site", "noticias", "rn565", "idss", "identity", "analytics", "forms"]) if (JSON.stringify(draft[a] || null) !== JSON.stringify(live[a] || null)) ch.push({ area: a });
   return ch;
 }
 
-/* ---------- rotas do painel ---------- */
-const routes = {};
-const on = (method, p, fn, opts = {}) => (routes[method + " " + p] = Object.assign(fn, opts));
+/* ---------- login e sessão ---------- */
 
 on("POST", "/api/admin/login", async (req, res) => {
   if (!sameOrigin(req)) return json(res, 403, { error: "Origem não permitida." });
@@ -700,26 +809,13 @@ on("GET", "/api/admin/status", async (req, res) => {
 on("GET", "/api/admin/pages", async (req, res) => {
   const draft = store.content.draft(), live = store.content.live();
   const { pages } = sources(draft);
-  const rv = reviews();
   const changed = (k) => JSON.stringify(draft.pages[k] || null) !== JSON.stringify(live.pages[k] || null);
   const list = orderedPages(pages, "pt").map(({ p, group, area }) => ({
-    key: p.key, lang: p.lang, file: p.file, title: pageTitle(p), partial: !!p.partial, group, area, reviewed: rv[p.key] || null,
+    key: p.key, lang: p.lang, file: p.file, title: pageTitle(p), partial: !!p.partial, group, area,
     edits: draft.pages[p.key] ? Object.keys(draft.pages[p.key].edits || {}).length + Object.keys(draft.pages[p.key].meta || {}).length : 0,
     pending: changed(p.key) || (!!enKeyOf(p.key) && changed(enKeyOf(p.key))), enPending: !!(draft.enPending || {})[p.key],
   }));
-  json(res, 200, { pages: list, groups: GROUP_ORDER });
-}, { perm: "pages" });
-
-// "página revisada": marca de acompanhamento da equipe (não altera o site)
-on("POST", "/api/admin/review", async (req, res, s) => {
-  const b = await readJson(req, 10000);
-  const { pages } = sources(store.content.draft());
-  if (!pages[b.key]) return json(res, 404, { error: "Página não encontrada." });
-  const rv = reviews();
-  if (b.done) rv[b.key] = { by: s.email, at: new Date().toISOString() }; else delete rv[b.key];
-  store.write("review.json", rv);
-  store.audit(s.email, b.done ? "pagina_revisada" : "pagina_nao_revisada", b.key);
-  json(res, 200, { reviewed: rv[b.key] || null });
+  json(res, 200, { pages: list, groups: GROUP_ORDER, docGroups: DOC_GROUPS });
 }, { perm: "pages" });
 
 on("GET", "/api/admin/page", async (req, res, s, url) => {
@@ -793,11 +889,13 @@ on("PUT", "/api/admin/noticias", async (req, res, s) => {
 }, { perm: "news" });
 
 /* mídia */
+const PDF_MAX = 15 * 1024 * 1024;
 on("POST", "/api/admin/upload", async (req, res, s, url) => {
   const purpose = url.searchParams.get("purpose") || "photo";
-  if (!images.RULES[purpose]) return json(res, 400, { error: "Uso da imagem inválido." });
-  const buf = await readBody(req, images.RULES[purpose].maxBytes + 1);
-  const v = images.validate(buf, purpose);
+  if (!images.RULES[purpose] && purpose !== "pdf") return json(res, 400, { error: "Uso do arquivo inválido." });
+  const buf = await readBody(req, purpose === "pdf" ? PDF_MAX + 1 : images.RULES[purpose].maxBytes + 1);
+  // PDF (documentos anuais): só confere a assinatura do formato e o tamanho
+  const v = purpose === "pdf" ? (buf.length > PDF_MAX ? { error: "PDF grande demais (máximo de 15 MB)." } : buf.subarray(0, 5).toString() !== "%PDF-" ? { error: "O arquivo não é um PDF válido." } : { info: { type: "pdf", mime: "application/pdf", w: 0, h: 0 } }) : images.validate(buf, purpose);
   if (v.error) return json(res, 422, { error: v.error });
   const name = crypto.createHash("sha256").update(buf).digest("hex").slice(0, 20) + "." + v.info.type;
   fs.writeFileSync(path.join(store.dirs.uploads, name), buf, { mode: 0o644 });
@@ -1000,7 +1098,7 @@ on("POST", "/api/admin/publish", async (req, res, s) => {
     if (tr.error && !b.force) return json(res, 409, { error: tr.error, enPending: true });
   }
   try { previewSite(draft); } catch (e) { return json(res, 422, { error: "O rascunho tem um problema e não foi publicado: " + e.message }); }
-  const names = pageNames(), AREAS = { site: "Dados compartilhados", noticias: "Notícias", identity: "Identidade visual", analytics: "Google Analytics", forms: "Formulários" };
+  const names = pageNames(), AREAS = { site: "Dados compartilhados", noticias: "Notícias", rn565: "Reajuste RN 565", idss: "IDSS", identity: "Identidade visual", analytics: "Google Analytics", forms: "Formulários" };
   const what = pendingSummary(draft, store.content.live()).map((p) => (p.area === "page" ? names[p.key] || p.key : AREAS[p.area] || p.area));
   const live = store.content.publish(draft, s.email);
   const r = publishSite(live);

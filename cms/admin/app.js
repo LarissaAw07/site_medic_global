@@ -486,17 +486,19 @@
       Object.keys(shared).forEach(function (p) { P.units.forEach(function (u) { if (u.shared.indexOf(p) >= 0) unsaved[unitSec[u.id]] = true; }); });
       if (Object.keys(metaChanges).length) unsaved.seo = true;
       Object.keys(marks).forEach(function (sid) { marks[sid].classList.toggle("on", !!unsaved[sid]); });
+      (typeof secs !== "undefined" ? secs : []).forEach(function (d) { d.sec.items.forEach(function (it) { if (it.dot) it.dot.classList.toggle("on", it.unitIds.some(function (id) { return changes[id] !== undefined; })); }); });
     }
     function set(u, value) {
       var next = Object.assign({}, changes[u.id] || u.value, value);
-      if (JSON.stringify(next) === JSON.stringify(u.value)) delete changes[u.id]; else changes[u.id] = next;
+      // textos repetidos no mesmo bloco (ex.: faixa de cidades) mudam juntos
+      [u].concat(u.twins || []).forEach(function (x) { if (JSON.stringify(next) === JSON.stringify(x.value)) delete changes[x.id]; else changes[x.id] = next; });
       var el = fields[u.id]; if (el) el.classList.toggle("is-dirty", !!changes[u.id]);
       mark();
     }
     function restore(u) {
       confirmDialog("Restaurar o conteúdo original?", "Este campo volta ao texto/imagem original do site (é preciso publicar depois).", "Restaurar").then(function (ok) {
         if (!ok) return;
-        changes[u.id] = null; mark();
+        [u].concat(u.twins || []).forEach(function (x) { if (x.edited) changes[x.id] = null; }); changes[u.id] = null; mark();
         save();
       });
     }
@@ -693,25 +695,133 @@
     }
 
     // ---- seções, numeradas na ordem em que aparecem na página (o conteúdo é montado ao abrir) ----
-    var secs = P.sections.map(function (s, i) {
-      var ids = s.units.filter(function (id) { var u = byId[id]; return !(u.link && s.units.indexOf(u.link) >= 0); });
-      var us = s.units.map(function (id) { return byId[id]; });
-      var edited = us.filter(function (u) { return u.edited; }).length, pending = us.some(function (u) { return u.pending; });
-      var firstHead = us.find(isHeading);
-      var sub = firstHead ? plainOf(firstHead.value.html) : us[0] && us[0].value.html ? plainOf(us[0].value.html) : "";
-      var body = h("div", { class: "sec-body" });
-      var det = secCard(s.id, pad(i + 1), s.label, sub && sub !== s.label ? "“" + sub.slice(0, 90) + "”" : s.units.length + " campos",
-        [edited ? h("span", { class: "badge", text: edited + (edited === 1 ? " alterado" : " alterados") }) : null, pending ? h("span", { class: "badge badge--warn", text: "não publicado" }) : null, h("span", { class: "badge badge--line", text: s.units.length + " campos" })],
-        body, function () {
-          if (body.children.length) return;
+    // Cada seção mostra primeiro o título e os textos de abertura; os itens repetidos (slides, cards, documentos, perguntas)
+    // ficam recolhidos, um por linha, com o próprio título. Textos repetidos dentro do mesmo bloco viram um campo só.
+    var unitText = function (u) { return (u.value.html || "") + " " + (u.value.alt || "") + " " + (u.value.href || "") + " " + (u.value.placeholder || ""); };
+    var hiddenData = 0, docM = /^pt\/(rn565|idss)(?:-agrupamento)?(?:-(\d{4}))?\.html$/.exec(P.key);
+    function shown(ids, sec) {
+      var seen = {}, out = [];
+      ids.forEach(function (id) {
+        var u = byId[id];
+        if (u.data) { hiddenData++; return; }
+        if (u.sr) { sec.sr.push(id); return; }
+        if (u.link && sec.all.indexOf(u.link) >= 0) return; // aparece dentro do link
+        var k = [u.kind, u.tag, u.cls, JSON.stringify(u.base), JSON.stringify(u.value)].join("|");
+        if (seen[k]) { seen[k].twins.push(u); return; }
+        u.twins = []; seen[k] = u; out.push(id);
+      });
+      return out;
+    }
+    var countOf = function (ids) { return ids.reduce(function (n, id) { return n + 1 + P.units.filter(function (x) { return x.link === id && !x.data && !x.sr; }).length; }, 0); };
+    var headOf = function (us) { return us.find(isHeading) || us.find(function (u) { return u.kind === "text" && /^(strong|dt|th|summary|legend|label)$/.test(u.tag); }) || us.find(function (u) { return u.kind === "text" || (u.kind === "link" && u.value.html); }); };
+    function itemTitle(ids) {
+      var us = []; ids.forEach(function (id) { us.push(byId[id]); P.units.forEach(function (x) { if (x.link === id) us.push(x); }); });
+      var hd = headOf(us), t = hd ? plainOf(hd.value.html) : "";
+      var rest = us.find(function (u) { return u !== hd && u.kind === "text" && plainOf(u.value.html).length > 3; });
+      var img = us.find(function (u) { return u.kind === "image" || u.kind === "pic"; });
+      if (!t && img) t = img.value.alt || "Imagem";
+      if (!t) { var l = us.find(function (u) { return u.kind === "link"; }); t = l ? l.value.href : "Item"; }
+      return { title: t, sub: rest ? plainOf(rest.value.html) : "", us: us };
+    }
+    function itemCard(num, info, ids, sec) {
+      var body = h("div", { class: "item-body" });
+      var edited = info.us.filter(function (u) { return u.edited; }).length;
+      var dot = h("i", { class: "mark" + (edited ? " saved" : "") });
+      var det = h("details", { class: "item" },
+        h("summary", {}, h("span", { class: "inum", text: num }), h("span", { class: "ititle" }, h("b", { text: info.title.slice(0, 90) }), info.sub && info.sub !== info.title ? h("small", { text: info.sub.slice(0, 110) }) : null),
+          h("span", { class: "itags" }, edited ? h("span", { class: "badge", text: "alterado" }) : null, h("span", { class: "badge badge--line", text: countOf(ids) + (countOf(ids) === 1 ? " campo" : " campos") })), dot, h("span", { class: "chev" }, icon("chev"))), body);
+      det.unitIds = info.us.map(function (u) { return u.id; }).concat(info.us.reduce(function (a, u) { return a.concat((u.twins || []).map(function (t) { return t.id; })); }, []));
+      det.dot = dot;
+      det.searchText = info.us.map(unitText).join(" ").toLowerCase();
+      det.build = function () { if (!body.children.length) ids.forEach(function (id) { body.appendChild(renderUnit(byId[id])); }); };
+      det.addEventListener("toggle", function () { if (det.open) det.build(); });
+      sec.items.push(det);
+      return det;
+    }
+    function itemList(cards, sec, label) {
+      var list = h("div", { class: "items" }, cards);
+      var top = h("div", { class: "items-head" }, h("span", { class: "items-title", text: label || (cards.length + " itens") }), h("span", { class: "grow" }));
+      if (cards.length > 7) {
+        var f = inp({ type: "search", class: "input input--sm", placeholder: "Filtrar estes itens…", "aria-label": "Filtrar itens" });
+        f.addEventListener("input", function () { var t = f.value.toLowerCase().trim(); cards.forEach(function (c) { c.classList.toggle("hidden", !!t && c.searchText.indexOf(t) < 0); }); });
+        top.appendChild(f);
+      }
+      return h("div", { class: "block block--items" }, top, list);
+    }
+    // conteúdo de uma seção (ou de uma seção juntada a ela, com título próprio)
+    function sectionBody(s, sec, sub) {
+      var out = [], big = s.units.length > 14;
+      if (sub) out.push(h("div", { class: "block-title block-title--join", text: s.label }));
+      (s.parts || [{ ids: s.units }]).forEach(function (p, pi) {
+        if (p.ids) {
+          var ids = shown(p.ids, sec);
+          if (!ids.length) return;
           var bl = blocks(ids);
-          bl.forEach(function (b) { body.appendChild(h("div", { class: "block" }, bl.length > 1 && b.title ? h("div", { class: "block-title", text: b.title }) : null, b.ids.map(function (id) { return renderUnit(byId[id]); }))); });
-        });
-      det.searchText = us.map(function (u) { return (u.value.html || "") + " " + (u.value.alt || "") + " " + (u.value.href || ""); }).join(" ").toLowerCase();
+          // primeiro bloco (título e abertura) aberto; nas seções grandes, os blocos seguintes (cada um com seu título) recolhidos
+          if (big && bl.length > 2) {
+            var first = bl[0].title && pi === 0 ? bl.shift() : null;
+            if (first) out.push(h("div", { class: "block" }, first.ids.map(function (id) { return renderUnit(byId[id]); })));
+            out.push(itemList(bl.map(function (b, k) { return itemCard(pad(k + 1), itemTitle(b.ids), b.ids, sec); }), sec, bl.length + " blocos"));
+            return;
+          }
+          bl.forEach(function (b) { out.push(h("div", { class: "block" }, bl.length > 1 && b.title ? h("div", { class: "block-title", text: b.title }) : null, b.ids.map(function (id) { return renderUnit(byId[id]); }))); });
+        } else {
+          var cards = [];
+          p.items.forEach(function (it) {
+            var ids = shown(it.ids, sec);
+            if (ids.length) cards.push(itemCard(pad(cards.length + 1), itemTitle(ids), ids, sec));
+          });
+          if (cards.length) out.push(itemList(cards, sec));
+        }
+      });
+      return out;
+    }
+    // seções juntadas: o menu "Nesta página" entra no banner
+    var groups = [];
+    P.sections.forEach(function (s) { if (s.join && groups.length) groups[groups.length - 1].push(s); else groups.push([s]); });
+    var secs = groups.map(function (g, i) {
+      var s = g[0], all = [].concat.apply([], g.map(function (x) { return x.units; }));
+      g.slice(1).forEach(function (x) { x.units.forEach(function (id) { unitSec[id] = s.id; }); });
+      var us = all.map(function (id) { return byId[id]; }), vis = us.filter(function (u) { return !u.data; });
+      var edited = us.filter(function (u) { return u.edited; }).length, pending = us.some(function (u) { return u.pending; });
+      var firstHead = vis.find(isHeading);
+      var sub = firstHead ? plainOf(firstHead.value.html) : vis[0] && vis[0].value.html ? plainOf(vis[0].value.html) : "";
+      // contagem prévia (sem montar a seção): itens e campos que a pessoa vai ver
+      var sec = { all: all, sr: [], items: [] }, nItems = 0, nFields = 0;
+      g.forEach(function (x) { (x.parts || []).forEach(function (p) { if (p.items) nItems += p.items.filter(function (it) { return shown(it.ids, { all: all, sr: [], items: [] }).length; }).length; }); });
+      g.forEach(function (x) { (x.parts || [{ ids: x.units }]).forEach(function (p) { (p.ids ? [p.ids] : p.items.map(function (it) { return it.ids; })).forEach(function (ids) { nFields += countOf(shown(ids, { all: all, sr: [], items: [] })); }); }); });
+      hiddenData = 0;
+      var body = h("div", { class: "sec-body" });
+      var det = secCard(s.id, pad(i + 1), s.label, sub && sub !== s.label ? "“" + sub.slice(0, 90) + "”" : null,
+        [edited ? h("span", { class: "badge", text: edited + (edited === 1 ? " alterado" : " alterados") }) : null, pending ? h("span", { class: "badge badge--warn", text: "não publicado" }) : null,
+          nItems ? h("span", { class: "badge badge--line", text: nItems + " itens" }) : null, h("span", { class: "badge badge--line", text: nFields + (nFields === 1 ? " campo" : " campos") })],
+        body, function () { det.build(); });
+      det.build = function () {
+        if (body.children.length) return;
+        hiddenData = 0; sec.sr = []; sec.items = [];
+        var parts = [];
+        g.forEach(function (x, k) { parts = parts.concat(sectionBody(x, sec, k > 0)); });
+        if (hiddenData && docM) body.appendChild(h("div", { class: "note-data" }, icon("info"), h("span", { text: "Os dados de cada ano (percentual, período, contratos, notas, imagens) não aparecem aqui: são editados no cadastro do ano." }),
+          h("a", { class: "btn btn--ghost btn--sm", href: "#/docs/" + docM[1] + (docM[2] ? "/" + docM[2] : "") }, icon("edit"), docM[2] ? "Editar dados de " + docM[2] : "Gerenciar anos")));
+        g.forEach(function (x) { (x.includes || []).forEach(function (c) { body.appendChild(h("div", { class: "note-data" }, icon("layers"), h("span", { text: "Esta seção também mostra “" + c.title + "”, que é igual em todas as páginas e se edita em Componentes compartilhados." }), h("a", { class: "btn btn--ghost btn--sm", href: "#/page/" + c.key }, "Editar " + c.title.toLowerCase()))); }); });
+        parts.forEach(function (x) { body.appendChild(x); });
+        if (sec.sr.length) {
+          var srBody = h("div", { class: "item-body" });
+          var srDet = h("details", { class: "item item--sr" }, h("summary", {}, h("span", { class: "inum" }, icon("eye")), h("span", { class: "ititle" }, h("b", { text: "Textos para leitores de tela" }), h("small", { text: "Não aparecem na tela; descrevem botões e campos para pessoas com deficiência visual." })),
+            h("span", { class: "itags" }, h("span", { class: "badge badge--line", text: sec.sr.length + (sec.sr.length === 1 ? " campo" : " campos") })), h("span", { class: "chev" }, icon("chev"))), srBody);
+          srDet.addEventListener("toggle", function () { if (srDet.open && !srBody.children.length) sec.sr.forEach(function (id) { srBody.appendChild(renderUnit(byId[id])); }); });
+          srDet.unitIds = sec.sr.slice(); srDet.searchText = sec.sr.map(function (id) { return unitText(byId[id]); }).join(" ").toLowerCase();
+          sec.items.push(srDet);
+          body.appendChild(h("div", { class: "block block--items" }, srDet));
+        }
+        mark();
+      };
+      det.sec = sec;
+      det.searchText = us.filter(function (u) { return !u.data; }).map(unitText).join(" ").toLowerCase();
       addOutline(det, pad(i + 1), s.label, edited > 0);
       return det;
     });
-    if (secs.length === 1) secs[0].open = true;
+    if (secs.length === 1) { secs[0].open = true; secs[0].build(); }
 
     // destaca no índice a seção que está na tela (a última cujo topo já passou da barra superior)
     var spyLock = 0;
@@ -728,7 +838,13 @@
     var q = inp({ type: "search", class: "input", placeholder: "Buscar um texto nesta página…", "aria-label": "Buscar texto nesta página" });
     q.addEventListener("input", function () {
       var t = q.value.toLowerCase().trim();
-      secs.forEach(function (d) { var hit = !t || d.searchText.indexOf(t) >= 0; d.classList.toggle("hidden", !hit); d.outlineBtn.classList.toggle("hidden", !hit); if (t && hit) d.open = true; });
+      secs.forEach(function (d) {
+        var hit = !t || d.searchText.indexOf(t) >= 0;
+        d.classList.toggle("hidden", !hit); d.outlineBtn.classList.toggle("hidden", !hit);
+        if (t && hit) { d.open = true; d.build(); }
+        // dentro da seção, só os itens que têm o texto procurado (abertos)
+        d.sec.items.forEach(function (it) { var m = !t || it.searchText.indexOf(t) >= 0; it.classList.toggle("hidden", !m); if (t && m && !it.open) it.open = true; });
+      });
     });
 
     // ---- cabeçalho: onde estou e navegação em sequência ----

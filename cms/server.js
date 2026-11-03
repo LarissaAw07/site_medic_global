@@ -154,11 +154,14 @@ function imageUrl(site, ref) {
 const uploadExists = (name) => /^[\w.-]+$/.test(name) && fs.existsSync(path.join(store.dirs.uploads, name)) && !name.endsWith(".json");
 const uploadMeta = (name) => { try { return JSON.parse(fs.readFileSync(path.join(store.dirs.uploads, name + ".json"), "utf8")); } catch (e) { return null; } };
 
+const DOC_DATA = ["rj-row", "rn-years", "rn-current", "rj-older-title", "agr-title", "agr-sub", "agr-cover", "agr-stats", "agr-tbl", "agr-plans", "agr-nav", "agr-years", "idss-dims", "idss-orig", "src-tag"];
 function pageView(content, live, key) {
   const { site, pages } = sources(content);
   const p = pages[key];
   if (!p) return null;
-  const { units, sections } = html.extract(p.src);
+  // nas páginas montadas a partir do cadastro de anos (RN 565 / IDSS), os dados de cada ano são editados no cadastro
+  const { units, sections } = html.extract(p.src, p.generated && /^(rn565|idss)/.test(p.file) ? { dataClasses: DOC_DATA } : {});
+  sections.forEach((s) => { if (s.includes) s.includes = s.includes.filter((n) => PARTIALS[n] && pages["partial/" + p.lang + "/" + n]).map((n) => ({ key: "partial/" + p.lang + "/" + n, title: PARTIALS[n] })); });
   const draftEdits = (content.pages[key] && content.pages[key].edits) || {};
   const liveEdits = (live.pages[key] && live.pages[key].edits) || {};
   const { map, orphans } = html.resolve(units, draftEdits);
@@ -169,7 +172,7 @@ function pageView(content, live, key) {
     if (base.alt !== undefined) base.alt = decodeAttr(base.alt);
     if (base.placeholder !== undefined) base.placeholder = decodeAttr(base.placeholder);
     const value = Object.assign({}, base, d ? d.edit.value : {});
-    const r = { id: u.id, kind: u.kind, label: u.label, tag: u.tag, cls: u.cls, base, value, edited: !!d, pending: JSON.stringify(d ? d.edit.value : null) !== JSON.stringify(l ? l.edit.value : null), limits: u.limits, link: u.link, partialText: !!u.partial };
+    const r = { id: u.id, kind: u.kind, label: u.label, sr: !!u.sr, data: !!u.data, tag: u.tag, cls: u.cls, base, value, edited: !!d, pending: JSON.stringify(d ? d.edit.value : null) !== JSON.stringify(l ? l.edit.value : null), limits: u.limits, link: u.link, partialText: !!u.partial };
     if (u.kind === "image" || u.kind === "pic") { r.preview = imageUrl(site, value.image); r.basePreview = imageUrl(site, base.image); r.decorative = !!u.decorative; }
     if (u.kind === "field") Object.assign(r, { form: u.form, name: u.name, type: u.type, hasPlaceholder: u.hasPlaceholder });
     if (u.kind === "link" && /^\{\{L\.[\w.]+\}\}$/.test(u.base.href)) r.linkedData = u.base.href.slice(4, -2);

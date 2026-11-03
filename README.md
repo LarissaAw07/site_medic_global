@@ -18,8 +18,10 @@ node serve.js   # abre em http://localhost:8080
 - `assets/css/main.css`: design system (tokens, grid 4/8/12, componentes)
 - `assets/js/main.js`: navegação por necessidade, busca (Ctrl+K), filtros, formulários, consentimento LGPD, eventos GA4
 - `assets/js/rede.js`: mapa da área de atuação (Leaflet + OpenStreetMap)
-- `assets/js/rede-busca.js`: Busca combinada e Busca avançada da rede credenciada, sobre `assets/data/rede.json`
-- `src/rede-sync.js`: baixa a rede do sistema oficial (extremamedic.com) e gera `assets/data/rede.json` (roda no deploy; local: `node src/rede-sync.js`)
+- `assets/js/rede-busca.live.js`: **busca ao vivo** (em uso) — Busca combinada e Busca avançada consultando o sistema oficial (extremamedic.com) a cada pesquisa, igual à página de prod (`rede_credenciada.php`). Como o sistema antigo não libera CORS, as chamadas passam por um proxy same-origin `/rede-api/` (local: embutido no `serve.js`; produção: `deploy/nginx-medicglobal-rede-api.conf`). Combinada usa `ajax_combinada_resultado.php`; a Avançada usa os endpoints dedicados `ajax_isolada_resultado_*.php` (plano, tipo, especialidade, qualificação, urgência), com nome (texto livre) e região (todos os bairros) pelo endpoint combinado.
+- `assets/js/rede-busca.js`: versão anterior (fallback) que busca sobre o retrato estático `assets/data/rede.json`. Para voltar a ela, troque o `<script>` em `src/pages/rede-credenciada.html` (e `src/en/...`).
+- `src/rede-sync.js`: baixa a rede do sistema oficial (extremamedic.com) e gera `assets/data/rede.json` — hoje só alimenta o fallback acima (local: `node src/rede-sync.js`)
+- `assets/js/guia-medico.js`: **guia médico ao vivo** (igual `extremamedic.com/manual/`) — Tipo de guia → Estado → Cidade (carregada ao vivo de `buscacidade.php`) → "Visualizar manual", que gera o manual oficial (`manual.php`) e o exibe embutido num `<iframe>` (via `srcdoc`). O proxy `/guia-api/` (local: `serve.js`; produção: `deploy/nginx-medicglobal-guia-api.conf`) serve o sistema oficial same-origin e injeta um `<base>` para os assets (css/imagens/logos) carregarem de extremamedic. **"Todas as cidades" e "Todos os estados":** o `manual.php` oficial só gera guia de uma cidade, então nesses casos o guia busca o manual de cada cidade e os combina num documento único no cliente (uma capa, os blocos de todas as cidades, uma legenda e um rodapé; cidades sem prestadores são omitidas). Botões Imprimir (`iframe.print()`) e Abrir em nova aba (Blob).
 
 ## Painel administrativo (`/admin`)
 

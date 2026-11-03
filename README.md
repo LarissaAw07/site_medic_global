@@ -23,7 +23,11 @@ node serve.js   # abre em http://localhost:8080
 
 ## Painel administrativo (`/admin`)
 
-Servidor Node sem dependências (`cms/`) que permite editar o conteúdo sem mexer no código: textos, títulos, imagens, links e CTAs de todas as páginas (PT e EN), SEO, notícias, dados gerais (`site.json`), logotipo/favicon, formulários (campos, destinos, mensagens recebidas) e Google Analytics. **Menu principal e rodapé (`src/partials/layout.html`) não são editáveis pelo painel.**
+Servidor Node sem dependências (`cms/`) que permite editar o conteúdo sem mexer no código: textos, títulos, imagens, links e CTAs de todas as páginas, SEO, notícias, logotipo/favicon, formulários (campos, destinos, mensagens recebidas) e Google Analytics. **Menu principal e rodapé (`src/partials/layout.html`) não são editáveis pelo painel.**
+
+- **Só português no painel; inglês automático.** Cada campo alterado em português é traduzido para a página em `/en/` ao salvar (`cms/translate.js`: Google Tradutor por padrão; DeepL se `CMS_DEEPL_KEY` estiver definida). O resto do inglês continua o texto revisado de `src/en/`. Traduções ficam em cache em `<dados>/translations.json`. Se o tradutor falhar, o português é salvo e a tradução é tentada de novo ao salvar ou publicar.
+- **Informação repetida muda junto.** Endereços, telefones, e-mails e links são dados compartilhados (`{{L.x}}` de `site.json`), editados dentro do próprio campo da página onde aparecem; o endereço completo e os links do mapa são remontados a partir de rua/bairro/cidade/UF/CEP. Textos iguais em outras páginas podem ser atualizados todos de uma vez.
+- **Usuários:** até 3, cada um com as áreas que pode ver (o primeiro é o administrador principal). **Auditoria:** quem alterou o quê (antes → depois), com data e hora.
 
 - As edições ficam em `CMS_DATA_DIR` (fora do repositório): `src/` nunca é alterado pelo painel e um deploy de código não apaga o que foi editado.
 - Fluxo: salvar rascunho → visualizar → publicar (gera o site em `CMS_PUBLIC_DIR`). Cada publicação guarda a versão anterior.

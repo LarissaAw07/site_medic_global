@@ -83,10 +83,17 @@ const content = {
   },
 };
 
-// registro de ações (quem fez o quê e quando)
-function audit(user, action, detail) {
-  const line = JSON.stringify({ at: new Date().toISOString(), user: user || "-", action, detail: detail || "" }) + "\n";
-  fs.appendFileSync(path.join(DATA, "audit.log"), line, { mode: 0o600 });
+// registro de ações (quem fez o quê e quando); changes: [{ field, before, after }] com o que mudou
+function audit(user, action, detail, changes) {
+  const e = { at: new Date().toISOString(), user: user || "-", action, detail: detail || "" };
+  if (changes && changes.length) e.changes = changes;
+  fs.appendFileSync(path.join(DATA, "audit.log"), JSON.stringify(e) + "\n", { mode: 0o600 });
+}
+// registro completo, do mais recente para o mais antigo
+function auditLog() {
+  let raw = "";
+  try { raw = fs.readFileSync(path.join(DATA, "audit.log"), "utf8"); } catch (e) { return []; }
+  return raw.split("\n").filter(Boolean).map((l) => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean).reverse();
 }
 
-module.exports = { ROOT, DATA, PUBLIC, dirs, read, write, seal, open, mask, content, audit };
+module.exports = { ROOT, DATA, PUBLIC, dirs, read, write, seal, open, mask, content, audit, auditLog };

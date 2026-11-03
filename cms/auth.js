@@ -33,6 +33,23 @@ function passwordProblem(pw, email) {
   return "";
 }
 
+/* Usuários: no máximo MAX_USERS. O administrador principal (role "admin") vê e faz tudo;
+   os demais (role "editor") só veem as áreas marcadas em perms. */
+const MAX_USERS = 3;
+const PERMS = {
+  pages: "Páginas do site",
+  news: "Notícias",
+  identity: "Identidade visual",
+  forms: "Formulários",
+  analytics: "Google Analytics",
+  inbox: "Mensagens recebidas",
+  audit: "Auditoria",
+  publish: "Publicar alterações no site",
+  users: "Gerenciar usuários",
+};
+const can = (u, perm) => !!u && (u.role === "admin" || (u.perms || []).includes(perm));
+const permsOf = (u) => (u.role === "admin" ? Object.keys(PERMS) : (u.perms || []).filter((p) => PERMS[p]));
+
 const users = {
   all: () => store.read("users.json", []),
   find: (email) => users.all().find((u) => u.email === String(email || "").trim().toLowerCase()),
@@ -41,7 +58,15 @@ const users = {
     email = String(email).trim().toLowerCase();
     const list = users.all();
     let u = list.find((x) => x.email === email);
-    if (!u) { u = { email, name: opts.name || "Administrador", role: "admin", createdAt: new Date().toISOString() }; list.push(u); }
+    if (!u) {
+      if (list.length >= MAX_USERS) throw Object.assign(new Error(`Limite de ${MAX_USERS} usuários atingido.`), { status: 422 });
+      // o primeiro usuário é o administrador principal
+      u = { email, name: opts.name || "Administrador", role: list.length ? "editor" : "admin", perms: [], createdAt: new Date().toISOString() };
+      list.push(u);
+    }
+    if (opts.name) u.name = opts.name;
+    if (opts.perms && u.role !== "admin") u.perms = opts.perms.filter((p) => PERMS[p]);
+    if (opts.by) u.createdBy = u.createdBy || opts.by;
     u.hash = hashPassword(password);
     u.mustChange = !!opts.mustChange;
     u.passwordChangedAt = new Date().toISOString();
@@ -49,7 +74,25 @@ const users = {
     users.save(list);
     return u;
   },
+  update(email, fields) {
+    const list = users.all(), u = list.find((x) => x.email === email);
+    if (!u) return null;
+    if (fields.name !== undefined) u.name = fields.name;
+    if (fields.perms && u.role !== "admin") u.perms = fields.perms.filter((p) => PERMS[p]);
+    users.save(list);
+    return u;
+  },
+  remove(email) {
+    users.save(users.all().filter((x) => x.email !== email));
+    for (const [k, s] of sessions) if (s.email === email) sessions.delete(k);
+  },
 };
+// senha provisória forte (cumpre as regras de passwordProblem)
+function tempPassword() {
+  const pick = (set, n) => Array.from(crypto.randomBytes(n), (b) => set[b % set.length]).join("");
+  const s = pick("ABCDEFGHJKLMNPQRSTUVWXYZ", 3) + pick("abcdefghijkmnpqrstuvwxyz", 5) + pick("23456789", 3) + pick("#%@!*+=?", 2) + pick("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789", 3);
+  return Array.from(s).sort(() => crypto.randomBytes(1)[0] - 128).join("");
+}
 
 /* ---------- limite de tentativas ---------- */
 const ipFails = new Map(); // ip → [timestamps]
@@ -100,4 +143,4 @@ const logout = (sid) => sessions.delete(sid);
 // troca de senha encerra as outras sessões do usuário
 function dropOtherSessions(email, keep) { for (const [k, s] of sessions) if (s.email === email && k !== keep) sessions.delete(k); }
 
-module.exports = { hashPassword, verifyPassword, passwordProblem, users, login, session, logout, dropOtherSessions, IDLE };
+module.exports = { hashPassword, verifyPassword, passwordProblem, users, login, session, logout, dropOtherSessions, tempPassword, IDLE, MAX_USERS, PERMS, can, permsOf };

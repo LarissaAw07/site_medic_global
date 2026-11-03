@@ -15,6 +15,7 @@ const html = require("./html");
 const images = require("./images");
 const forms = require("./forms");
 const ga = require("./ga");
+const translate = require("./translate");
 const build = require("../build.js");
 
 const PORT = +process.env.CMS_PORT || 8788;
@@ -161,8 +162,11 @@ function pageView(content, live, key) {
     if (u.kind === "image" || u.kind === "pic") { r.preview = imageUrl(site, value.image); r.basePreview = imageUrl(site, base.image); r.decorative = !!u.decorative; }
     if (u.kind === "field") Object.assign(r, { form: u.form, name: u.name, type: u.type, hasPlaceholder: u.hasPlaceholder });
     if (u.kind === "link" && /^\{\{L\.[\w.]+\}\}$/.test(u.base.href)) r.linkedData = u.base.href.slice(4, -2);
+    r.shared = [...new Set(tokensIn(value.html).concat(tokensIn(value.href)))];
+    if (!p.generated) { const el = elsewhere(content, key, u); if (el.length) r.elsewhere = el.slice(0, 30).map((x) => x.title + (x.section ? " › " + x.section : "")); r.elsewhereCount = el.length; }
     return r;
   });
+  const shared = sharedInfo(content, out.flatMap((u) => u.shared).concat(tokensIn(JSON.stringify(p.meta))));
   const metaEdit = (content.pages[key] && content.pages[key].meta) || {};
   const meta = p.partial ? null : {
     base: { title: p.meta.title || "", description: p.meta.description || "", og: p.meta.og || "old_familia" },
@@ -174,7 +178,9 @@ function pageView(content, live, key) {
   const same = seq.filter((x) => x.group === rank.group), pos = same.findIndex((x) => x.p.key === key);
   const nav = (x) => (x ? { key: x.p.key, title: pageTitle(x.p) } : null);
   const place = { group: rank.group, area: rank.area, pos: pos + 1, total: same.length, prev: nav(same[pos - 1]), next: nav(same[pos + 1]), reviewed: reviews()[key] || null };
-  return { key, title: pageTitle(p), place, lang: p.lang, file: p.file, partial: !!p.partial, generated: p.generated, url: p.partial ? null : (p.lang === "en" ? "en/" : "") + p.file, meta, sections, units: out, orphans };
+  const ek = enKeyOf(key);
+  const english = ek && pages[ek] ? { url: p.partial ? null : "en/" + p.file, pending: !!(content.enPending || {})[key], fields: Object.keys(((content.pages[ek] || {}).edits) || {}).length } : null;
+  return { key, title: pageTitle(p), place, lang: p.lang, file: p.file, partial: !!p.partial, generated: p.generated, url: p.partial ? null : (p.lang === "en" ? "en/" : "") + p.file, meta, sections, units: out, orphans, shared, english };
 }
 const decodeAttr = (s) => String(s || "").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
 
@@ -183,10 +189,19 @@ function savePage(content, key, body) {
   const { site, pages } = sources(content);
   const p = pages[key];
   if (!p) return { status: 404, error: "Página não encontrada." };
-  const { units } = html.extract(p.src);
+  const { units, sections } = html.extract(p.src);
   const entry = content.pages[key] || { edits: {}, meta: {} };
   entry.edits = entry.edits || {}; entry.meta = entry.meta || {};
   const current = html.resolve(units, entry.edits).map;
+  // o que mudou, para a auditoria: [{ field, before, after }]
+  const changes = [];
+  const secOf = (id) => { const s = sections.find((x) => x.units.includes(id)); return s ? s.label + " › " : ""; };
+  const note = (u, prev, next) => {
+    for (const k of Object.keys(Object.assign({}, prev, next))) {
+      if (String(prev[k] == null ? "" : prev[k]) === String(next[k] == null ? "" : next[k])) continue;
+      changes.push({ field: secOf(u.id) + u.label + (VALUE_NAMES[k] ? " (" + VALUE_NAMES[k] + ")" : ""), before: summarize(k, prev[k]), after: summarize(k, next[k]) });
+    }
+  };
   // edição atual de cada campo indexada pelo id do campo no template de hoje
   const editsByUnit = {};
   for (const [uid, { edit }] of current) editsByUnit[uid] = edit;
@@ -197,7 +212,8 @@ function savePage(content, key, body) {
   for (const [id, raw] of Object.entries(body.edits || {})) {
     const u = units.find((x) => x.id === id);
     if (!u) { errors[id] = "Campo não encontrado (a página pode ter sido atualizada; recarregue)."; continue; }
-    if (raw === null) { delete editsByUnit[id]; continue; } // restaurar o original
+    const prevValue = editsByUnit[id] ? editsByUnit[id].value : baseValue(u);
+    if (raw === null) { note(u, prevValue, baseValue(u)); delete editsByUnit[id]; continue; } // restaurar o original
     const v = {}, e = [];
     if (u.kind === "text" || (u.kind === "link" && u.range)) {
       const h = html.sanitizeHtml(raw.html, valid);
@@ -230,48 +246,213 @@ function savePage(content, key, body) {
     }
     if (e.length) { errors[id] = e.join(" "); continue; }
     // igual ao original: não guarda edição
-    const base = Object.assign({}, u.base);
-    if (base.alt !== undefined) base.alt = decodeAttr(base.alt);
-    if (base.placeholder !== undefined) base.placeholder = decodeAttr(base.placeholder);
+    const base = baseValue(u);
     const same = Object.keys(v).every((k) => String(v[k]) === String(base[k]));
+    note(u, prevValue, Object.assign({}, base, v));
     if (same) delete editsByUnit[id]; else editsByUnit[id] = { kind: u.kind, base: u.base, value: v };
   }
   if (body.meta && !p.partial) {
     const m = body.meta, base = p.meta;
     const lim = { title: Math.max(70, (base.title || "").length), description: Math.max(170, (base.description || "").length) };
+    const META_NAMES = { title: "Título da página", description: "Descrição no Google", og: "Imagem de compartilhamento" };
+    const noteMeta = (k, s) => { const prev = entry.meta[k] !== undefined ? entry.meta[k] : base[k] || (k === "og" ? "old_familia" : ""); if (prev !== s) changes.push({ field: "Google e compartilhamento › " + META_NAMES[k], before: prev, after: s }); };
     for (const k of ["title", "description"]) if (m[k] !== undefined) {
       const s = String(m[k]).trim();
+      const badTok = (s.match(/\{\{\s*L\.([\w.]+)\s*\}\}/g) || []).find((t) => !valid(t.replace(/^\{\{\s*L\.|\s*\}\}$/g, "")));
       if (!s) errors["meta." + k] = "Campo obrigatório.";
       else if (s.length > lim[k]) errors["meta." + k] = `Máximo de ${lim[k]} caracteres (atual: ${s.length}).`;
       else if (/[<>]/.test(s)) errors["meta." + k] = "Não use < ou >.";
-      else if (s === base[k]) delete entry.meta[k]; else entry.meta[k] = s;
+      else if (badTok || /\{\{(?!\s*L\.)/.test(s)) errors["meta." + k] = "Trecho entre {{ }} inválido.";
+      else { noteMeta(k, s); if (s === base[k]) delete entry.meta[k]; else entry.meta[k] = s; }
     }
     if (m.og !== undefined) {
       if (!(site.photos[m.og] || (m.og.startsWith("up:") && uploadExists(m.og.slice(3))))) errors["meta.og"] = "Imagem de compartilhamento inválida.";
-      else if (m.og === (base.og || "old_familia")) delete entry.meta.og; else entry.meta.og = m.og;
+      else { noteMeta("og", m.og); if (m.og === (base.og || "old_familia")) delete entry.meta.og; else entry.meta.og = m.og; }
     }
   }
   if (Object.keys(errors).length) return { status: 422, error: "Alguns campos não foram salvos. Corrija os itens destacados.", fields: errors };
   entry.edits = editsByUnit;
   if (!Object.keys(entry.edits).length && !Object.keys(entry.meta).length) delete content.pages[key]; else content.pages[key] = entry;
-  return { ok: true };
+  return { ok: true, changes };
+}
+const baseValue = (u) => {
+  const b = Object.assign({}, u.base);
+  if (b.alt !== undefined) b.alt = decodeAttr(b.alt);
+  if (b.placeholder !== undefined) b.placeholder = decodeAttr(b.placeholder);
+  return b;
+};
+const VALUE_NAMES = { href: "destino", newTab: "nova aba", image: "imagem", alt: "texto alternativo", placeholder: "texto de exemplo", required: "obrigatório", maxlength: "máximo de caracteres" };
+function summarize(k, v) {
+  if (v == null || v === "") return "";
+  if (k === "html") return html.plain(String(v)).slice(0, 400);
+  if (k === "newTab" || k === "required") return v ? "sim" : "não";
+  if (k === "image") return String(v).replace(/^up:|^assets\/uploads\//, "");
+  return String(v).slice(0, 400);
 }
 
-/* ---------- Dados gerais (site.json) ---------- */
-const SITE_GROUPS = { legal: "Razão social e CNPJ", address: "Endereços", phones: "Telefones", wa: "WhatsApp", mail: "E-mails", links: "Links de sistemas e portais", docs: "Documentos (PDF)", ans: "Registro ANS", domain: "Domínio do site", en: "Textos em inglês" };
-function siteFields(base, merged) {
-  const out = [];
-  const walk = (o, m, pre) => {
-    for (const k of Object.keys(o)) {
-      if (k.startsWith("_") || (pre === "" && k === "photos")) continue;
-      const p = pre ? pre + "." + k : k;
-      if (o[k] && typeof o[k] === "object") walk(o[k], m[k] || {}, p);
-      else out.push({ path: p, group: SITE_GROUPS[p.split(".")[0]] || p.split(".")[0], base: String(o[k]), value: String(m[k] === undefined ? o[k] : m[k]), type: fieldType(p, String(o[k])) });
-    }
-  };
-  walk(base, merged, "");
+/* ---------- dados compartilhados ({{L.x}}): um valor, vários lugares do site ---------- */
+const SHARED_NAMES = {
+  address: "Endereço", pousoAlegre: "Sede Pouso Alegre", extrema: "Sede Extrema", street: "Rua e número", district: "Bairro", city: "Cidade", state: "UF", zip: "CEP",
+  phones: "Telefone", central: "Central de atendimento", abramge: "ABRAMGE", label: "número exibido", tel: "número para discagem", e164: "formato internacional", ouvidoriaHours: "Horário da ouvidoria",
+  wa: "WhatsApp", autorizacoes: "Autorizações", faturamento: "Faturamento", financeiro: "Financeiro", comercial: "Comercial", geral: "Geral", url: "link",
+  mail: "E-mail", ouvidoria: "Ouvidoria", links: "Link", docs: "Documento (PDF)", legal: "Dados da empresa", razao: "Razão social", cnpj: "CNPJ", ans: "Registro ANS", domain: "Domínio do site",
+};
+// derivados do endereço (montados a partir de rua, bairro, cidade, UF e CEP): não são editados direto
+const DERIVED = /^address\.\w+\.(full|maps|embed)$/;
+const sharedLabel = (p) => p.split(".").map((k) => SHARED_NAMES[k] || k).join(" · ");
+const getPath = (o, p) => p.split(".").reduce((a, k) => (a == null ? a : a[k]), o);
+function setPath(o, p, v) {
+  const ks = p.split("."), last = ks.pop();
+  let cur = o;
+  for (const k of ks) cur = cur[k] = cur[k] && typeof cur[k] === "object" ? cur[k] : {};
+  if (v === undefined) delete cur[last]; else cur[last] = v;
+}
+const baseSite = () => JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/site.json"), "utf8"));
+const tokensIn = (s) => [...String(s || "").matchAll(/\{\{L\.([\w.]+)\}\}/g)].map((m) => m[1]);
+// quantas vezes cada dado aparece no site (páginas em português, componentes e menu/rodapé)
+let tokenUses = { key: "", map: null };
+function sharedUses(content) {
+  const { pages } = sources(content);
+  if (tokenUses.key === srcCache.key) return tokenUses.map;
+  const map = {};
+  const count = (src) => tokensIn(src).forEach((t) => (map[t] = (map[t] || 0) + 1));
+  Object.values(pages).filter((p) => p.lang === "pt").forEach((p) => { count(p.src); count(JSON.stringify(p.meta)); });
+  count(fs.readFileSync(path.join(ROOT, "src/partials/layout.html"), "utf8"));
+  tokenUses = { key: srcCache.key, map };
+  return map;
+}
+function sharedInfo(content, paths) {
+  const base = baseSite(), { site } = sources(content), uses = sharedUses(content), out = {};
+  for (const p of new Set(paths)) {
+    const b = getPath(base, p);
+    if (b === undefined || typeof b === "object" || p.startsWith("en.") || p.startsWith("photos.")) continue;
+    // partes do endereço também contam onde aparecem o endereço completo e os links do mapa
+    const part = /^(address\.\w+)\.(street|district|city|state|zip)$/.exec(p);
+    const n = (uses[p] || 0) + (part ? ["full", "maps", "embed"].reduce((a, k) => a + (uses[part[1] + "." + k] || 0), 0) : 0);
+    out[p] = { label: sharedLabel(p), value: String(getPath(site, p)), base: String(b), type: fieldType(p, String(b)), uses: n || 1, derived: DERIVED.test(p) };
+  }
   return out;
 }
+// grava no rascunho os dados compartilhados alterados; textos com versão em inglês (site.json → en) são traduzidos
+async function saveShared(content, values, changes) {
+  const base = baseSite(), errors = {}, toTranslate = [];
+  const over = JSON.parse(JSON.stringify(content.site || {}));
+  for (const [p, raw] of Object.entries(values || {})) {
+    const b = getPath(base, p);
+    if (b === undefined || typeof b === "object" || DERIVED.test(p) || /^(en|photos)\./.test(p)) { errors["shared." + p] = "Dado não editável."; continue; }
+    const v = String(raw).trim(), prev = String(getPath(over, p) !== undefined ? getPath(over, p) : b);
+    const e = validSiteValue(fieldType(p, String(b)), v);
+    if (e) { errors["shared." + p] = e; continue; }
+    if (v === prev) continue;
+    changes.push({ field: "Dado compartilhado › " + sharedLabel(p), before: prev, after: v });
+    setPath(over, p, v === String(b) ? undefined : v);
+    if (getPath(base.en || {}, p) !== undefined) toTranslate.push(p);
+  }
+  if (Object.keys(errors).length) return { errors };
+  let warn = "";
+  if (toTranslate.length) {
+    try {
+      const tr = await translate.translateItems(toTranslate.map((p) => ({ text: String(getPath(over, p) !== undefined ? getPath(over, p) : getPath(base, p)) })));
+      toTranslate.forEach((p, i) => setPath(over, "en." + p, getPath(over, p) === undefined ? undefined : tr[i].text));
+    } catch (e) { warn = "O texto em inglês deste dado não pôde ser traduzido agora (" + e.message + ")."; }
+  }
+  content.site = over;
+  return { warn };
+}
+
+/* ---------- textos repetidos: o mesmo conteúdo em vários lugares do site ---------- */
+const dupSig = (u) => (u.kind === "text" || (u.kind === "link" && u.range)) && html.plain(u.base.html || "").length >= 3 ? u.kind + "|" + JSON.stringify(u.base) : null;
+let dupCache = { key: "", map: null };
+function dupIndex(content) {
+  const { pages } = sources(content);
+  if (dupCache.key === srcCache.key) return dupCache.map;
+  const map = new Map();
+  for (const p of Object.values(pages)) {
+    if (p.lang !== "pt") continue;
+    const { units, sections } = html.extract(p.src);
+    for (const u of units) {
+      const sig = dupSig(u);
+      if (!sig) continue;
+      if (!map.has(sig)) map.set(sig, []);
+      const sec = sections.find((s) => s.units.includes(u.id));
+      map.get(sig).push({ key: p.key, id: u.id, title: pageTitle(p), section: sec ? sec.label : "" });
+    }
+  }
+  dupCache = { key: srcCache.key, map };
+  return map;
+}
+const elsewhere = (content, key, u) => { const sig = dupSig(u); return sig ? (dupIndex(content).get(sig) || []).filter((x) => !(x.key === key && x.id === u.id)) : []; };
+
+/* ---------- versão em inglês: gerada a partir das edições em português ---------- */
+const enKeyOf = (k) => (k.startsWith("partial/pt/") ? "partial/en/" + k.slice(11) : k.startsWith("pt/") ? "en/" + k.slice(3) : null);
+// casa os campos das duas versões pela estrutura (as páginas em inglês têm a mesma marcação das em português)
+function alignUnits(a, b) {
+  const sig = (u) => u.kind + "|" + u.tag + "|" + (u.cls || "") + "|" + (u.range ? 1 : 0);
+  const n = a.length, m = b.length, L = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) L[i][j] = sig(a[i]) === sig(b[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const out = new Map();
+  for (let i = 0, j = 0; i < n && j < m;) {
+    if (sig(a[i]) === sig(b[j])) { out.set(a[i].id, b[j]); i++; j++; } else if (L[i + 1][j] >= L[i][j + 1]) i++; else j++;
+  }
+  return out;
+}
+/* Recalcula a versão em inglês das páginas indicadas (chaves em português). Só os campos alterados em português
+   ganham tradução; o restante do inglês continua o original do site. Falha do tradutor: o português fica salvo,
+   e a página entra em content.enPending para nova tentativa (no próximo salvamento ou na publicação). */
+async function syncEnglish(content, ptKeys) {
+  const { pages } = sources(content);
+  const plans = [], items = [];
+  const ask = (it) => items.push(it) - 1;
+  for (const ptKey of new Set(ptKeys)) {
+    const enKey = enKeyOf(ptKey), pt = pages[ptKey], en = enKey && pages[enKey];
+    if (!pt || !en) continue;
+    const ptUnits = html.extract(pt.src).units, enUnits = html.extract(en.src).units;
+    const align = alignUnits(ptUnits, enUnits);
+    const ptEntry = content.pages[ptKey] || {};
+    const edits = [];
+    for (const { unit: u, edit } of html.resolve(ptUnits, ptEntry.edits || {}).map.values()) {
+      const eu = align.get(u.id);
+      if (!eu) continue;
+      const v = edit.value, pb = baseValue(u), eb = baseValue(eu), out = {}, tr = {};
+      for (const k of Object.keys(v)) {
+        const changed = String(v[k]) !== String(pb[k]);
+        if (!changed) { out[k] = eb[k] !== undefined ? eb[k] : v[k]; continue; }
+        if (k === "html") tr.html = ask({ html: v.html });
+        else if (k === "alt" || k === "placeholder") tr[k] = ask({ text: v[k] });
+        else out[k] = v[k];
+      }
+      edits.push({ eu, out, tr });
+    }
+    const meta = {}, metaTr = {};
+    for (const [k, val] of Object.entries(ptEntry.meta || {})) { if (k === "og") meta.og = val; else metaTr[k] = ask({ text: val }); }
+    plans.push({ ptKey, enKey, edits, meta, metaTr });
+  }
+  let res = [];
+  try { res = items.length ? await translate.translateItems(items) : []; }
+  catch (e) {
+    content.enPending = Object.assign(content.enPending || {}, Object.fromEntries(plans.map((p) => [p.ptKey, true])));
+    return { error: "A versão em inglês não pôde ser traduzida agora (" + e.message + "). O português foi salvo; a tradução será tentada de novo ao salvar ou publicar." };
+  }
+  const got = (i) => res[i].html !== undefined ? res[i].html : res[i].text;
+  for (const p of plans) {
+    const edits = {};
+    for (const { eu, out, tr } of p.edits) {
+      const value = Object.assign({}, out);
+      for (const [k, i] of Object.entries(tr)) value[k] = k === "html" ? html.sanitizeHtml(got(i), tokenCheck(sources(content).site)) : got(i).replace(/[|{}<>]/g, "");
+      edits[eu.id] = { kind: eu.kind, base: eu.base, value, auto: true };
+    }
+    const meta = Object.assign({}, p.meta);
+    for (const [k, i] of Object.entries(p.metaTr)) meta[k] = got(i).replace(/[<>]/g, "");
+    if (Object.keys(edits).length || Object.keys(meta).length) content.pages[p.enKey] = { edits, meta, auto: true }; else delete content.pages[p.enKey];
+    if (content.enPending) delete content.enPending[p.ptKey];
+  }
+  if (content.enPending && !Object.keys(content.enPending).length) delete content.enPending;
+  return { ok: true };
+}
+// nomes das páginas (para a auditoria)
+const pageNames = () => { const { pages } = sources(store.content.draft()); return Object.fromEntries(Object.values(pages).map((p) => [p.key, pageTitle(p) + (p.lang === "en" ? " (inglês)" : "")])); };
+
+/* ---------- dados do site.json: tipo e validação ---------- */
 function fieldType(p, v) {
   if (/^https?:\/\//.test(v) || /\.(url|maps|embed)$/.test(p) || /^(links|docs)\./.test(p) || p === "domain") return "url";
   if (/^tel:/.test(v)) return "tel";
@@ -309,6 +490,49 @@ function validateNews(list, site) {
     if (n.en) { for (const k of ["titulo", "resumo", "intro", "tema", "migalha"]) if (!n.en[k]) errs.push(`"${n.titulo}" (inglês): ${k} é obrigatório — ou remova a versão em inglês.`); if (n.en.secoes) secs(n.en); }
   });
   return errs;
+}
+
+/* Versão em inglês das notícias: só o que mudou em português é traduzido de novo (o resto do inglês fica como estava). */
+const NEWS_TEXT = ["titulo", "resumo", "intro", "tema", "migalha", "alt"];
+async function newsEnglish(list, prev) {
+  const items = [], jobs = [];
+  const ask = (text, set) => { jobs.push(set); items.push({ text }); };
+  for (const n of list) {
+    const p = prev.find((x) => x.slug === n.slug);
+    const old = p && p.en ? JSON.parse(JSON.stringify(p.en)) : null;
+    const oldSecs = (old && old.secoes) || [];
+    const en = n.en = old || {};
+    for (const k of NEWS_TEXT) {
+      if (!n[k]) { delete en[k]; continue; }
+      if (!(old && p[k] === n[k] && old[k])) ask(n[k], (v) => (en[k] = v));
+    }
+    en.secoes = [];
+    n.secoes.forEach((sec, i) => {
+      const ps = p && p.secoes[i], os = oldSecs[i];
+      const es = en.secoes[i] = { h: "", p: [] };
+      if (os && ps.h === sec.h) es.h = os.h; else ask(sec.h, (v) => (es.h = v));
+      sec.p.forEach((t, j) => { if (os && ps.p[j] === t && os.p[j]) es.p[j] = os.p[j]; else ask(t, (v) => (es.p[j] = v)); });
+    });
+  }
+  try { (items.length ? await translate.translateItems(items) : []).forEach((r, i) => jobs[i](r.text.replace(/[<>]/g, ""))); }
+  catch (e) { return { error: "A notícia não foi salva porque a tradução automática para o inglês falhou (" + e.message + "). Tente de novo em instantes." }; }
+  return { ok: true };
+}
+const NEWS_NAMES = { titulo: "Título", resumo: "Resumo", intro: "Parágrafo de abertura", tema: "Tema", migalha: "Nome curto", alt: "Texto alternativo da imagem", foto: "Imagem", cat: "Categoria", data: "Data", leitura: "Leitura (min)", orgao: "Órgão / fonte", fonteTitulo: "Título da fonte", fonteUrl: "Link da fonte", slug: "Endereço da página" };
+function newsAudit(user, prev, list) {
+  for (const n of list) {
+    const p = prev.find((x) => x.slug === n.slug);
+    if (!p) { store.audit(user, "noticia_criada", n.titulo, [{ field: "Título", before: "", after: n.titulo }]); continue; }
+    const ch = Object.keys(NEWS_NAMES).filter((k) => String(p[k] == null ? "" : p[k]) !== String(n[k] == null ? "" : n[k])).map((k) => ({ field: NEWS_NAMES[k], before: String(p[k] == null ? "" : p[k]), after: String(n[k] == null ? "" : n[k]) }));
+    n.secoes.forEach((sec, i) => {
+      const ps = p.secoes[i] || { h: "", p: [] };
+      if (ps.h !== sec.h) ch.push({ field: `Seção ${i + 1} › título`, before: ps.h, after: sec.h });
+      if (ps.p.join("\n\n") !== sec.p.join("\n\n")) ch.push({ field: `Seção ${i + 1} › parágrafos`, before: ps.p.join(" ¶ ").slice(0, 400), after: sec.p.join(" ¶ ").slice(0, 400) });
+    });
+    for (let i = n.secoes.length; i < p.secoes.length; i++) ch.push({ field: `Seção ${i + 1}`, before: p.secoes[i].h, after: "(removida)" });
+    if (ch.length) store.audit(user, "noticia_alterada", n.titulo, ch);
+  }
+  for (const p of prev) if (!list.find((x) => x.slug === p.slug)) store.audit(user, "noticia_removida", p.titulo, [{ field: "Título", before: p.titulo, after: "" }]);
 }
 
 /* ---------- publicação ---------- */
@@ -356,8 +580,9 @@ on("POST", "/api/admin/login", async (req, res) => {
   const r = auth.login(b.email, b.password, clientIp(req));
   if (r.error) return json(res, r.status, { error: r.error });
   res.setHeader("Set-Cookie", `${COOKIE}=${r.session.sid}; HttpOnly; SameSite=Strict; Path=/${isHttps(req) ? "; Secure" : ""}; Max-Age=${12 * 3600}`);
-  json(res, 200, { csrf: r.session.csrf, user: { email: r.user.email, name: r.user.name }, mustChange: !!r.user.mustChange });
+  json(res, 200, { csrf: r.session.csrf, user: userInfo(r.user), mustChange: !!r.user.mustChange });
 }, { public: true });
+const userInfo = (u) => ({ email: u.email, name: u.name, role: u.role, perms: auth.permsOf(u), lastLogin: u.lastLogin });
 
 on("POST", "/api/admin/logout", async (req, res, s) => {
   auth.logout(s.sid);
@@ -368,8 +593,89 @@ on("POST", "/api/admin/logout", async (req, res, s) => {
 
 on("GET", "/api/admin/me", async (req, res, s) => {
   const u = auth.users.find(s.email);
-  json(res, 200, { csrf: s.csrf, user: { email: u.email, name: u.name, lastLogin: u.lastLogin }, mustChange: !!u.mustChange, idleMinutes: auth.IDLE / 60000 });
+  json(res, 200, { csrf: s.csrf, user: userInfo(u), mustChange: !!u.mustChange, idleMinutes: auth.IDLE / 60000 });
 }, { allowMustChange: true });
+
+/* ---------- usuários (até auth.MAX_USERS) ---------- */
+const usersView = () => ({
+  max: auth.MAX_USERS, perms: auth.PERMS,
+  users: auth.users.all().map((u) => Object.assign(userInfo(u), { createdAt: u.createdAt, mustChange: !!u.mustChange, locked: u.lockedUntil > Date.now() })),
+});
+function userFields(b, errors) {
+  const name = String(b.name || "").trim();
+  if (!name) errors.name = "Informe o nome.";
+  else if (name.length > 60 || /[<>{}]/.test(name)) errors.name = "Nome com até 60 caracteres, sem < > { }.";
+  const perms = Array.isArray(b.perms) ? b.perms.filter((p) => auth.PERMS[p]) : [];
+  if (!perms.length) errors.perms = "Marque pelo menos uma área que o usuário poderá ver.";
+  return { name, perms };
+}
+on("GET", "/api/admin/users", async (req, res) => json(res, 200, usersView()), { perm: "users" });
+on("POST", "/api/admin/users", async (req, res, s) => {
+  const b = await readJson(req, 10000);
+  const errors = {};
+  const { name, perms } = userFields(b, errors);
+  const email = String(b.email || "").trim().toLowerCase();
+  if (!forms.EMAIL.test(email)) errors.email = "E-mail inválido.";
+  else if (auth.users.find(email)) errors.email = "Já existe um usuário com este e-mail.";
+  if (auth.users.all().length >= auth.MAX_USERS) return json(res, 422, { error: `O painel permite no máximo ${auth.MAX_USERS} usuários. Remova um para cadastrar outro.` });
+  const pw = b.password ? String(b.password) : auth.tempPassword();
+  const prob = auth.passwordProblem(pw, email);
+  if (prob) errors.password = prob;
+  if (Object.keys(errors).length) return json(res, 422, { error: "Corrija os campos destacados.", fields: errors });
+  auth.users.upsert(email, pw, { name, perms, mustChange: true, by: s.email });
+  store.audit(s.email, "usuario_criado", email, [{ field: "Áreas liberadas", before: "", after: perms.map((p) => auth.PERMS[p]).join(", ") }]);
+  json(res, 200, Object.assign(usersView(), { created: email, password: b.password ? null : pw }));
+}, { perm: "users" });
+on("PUT", "/api/admin/users", async (req, res, s) => {
+  const b = await readJson(req, 10000);
+  const u = auth.users.find(b.email);
+  if (!u) return json(res, 404, { error: "Usuário não encontrado." });
+  const errors = {};
+  const { name, perms } = userFields(Object.assign({ perms: u.role === "admin" ? ["pages"] : u.perms }, b), errors);
+  if (u.email === s.email && u.role !== "admin" && !perms.includes("users")) errors.perms = "Você não pode tirar de si mesmo a permissão de gerenciar usuários.";
+  if (Object.keys(errors).length) return json(res, 422, { error: "Corrija os campos destacados.", fields: errors });
+  const before = { name: u.name, perms: auth.permsOf(u).map((p) => auth.PERMS[p]).join(", ") };
+  const nu = auth.users.update(u.email, { name, perms });
+  const after = { name: nu.name, perms: auth.permsOf(nu).map((p) => auth.PERMS[p]).join(", ") };
+  store.audit(s.email, "usuario_alterado", u.email, [["name", "Nome"], ["perms", "Áreas liberadas"]].filter(([k]) => before[k] !== after[k]).map(([k, l]) => ({ field: l, before: before[k], after: after[k] })));
+  json(res, 200, usersView());
+}, { perm: "users" });
+// redefine a senha de outro usuário: senha provisória (troca obrigatória no próximo acesso), desbloqueia e encerra as sessões dele
+on("POST", "/api/admin/users/reset", async (req, res, s) => {
+  const b = await readJson(req, 10000);
+  const u = auth.users.find(b.email);
+  if (!u) return json(res, 404, { error: "Usuário não encontrado." });
+  if (u.email === s.email) return json(res, 422, { error: "Para a sua própria senha, use “Trocar a minha senha”." });
+  const pw = b.password ? String(b.password) : auth.tempPassword();
+  const prob = auth.passwordProblem(pw, u.email);
+  if (prob) return json(res, 422, { error: prob, fields: { password: prob } });
+  auth.users.upsert(u.email, pw, { mustChange: true });
+  auth.dropOtherSessions(u.email, null);
+  store.audit(s.email, "senha_redefinida", u.email);
+  json(res, 200, Object.assign(usersView(), { password: b.password ? null : pw }));
+}, { perm: "users" });
+on("DELETE", "/api/admin/users", async (req, res, s, url) => {
+  const u = auth.users.find(url.searchParams.get("email"));
+  if (!u) return json(res, 404, { error: "Usuário não encontrado." });
+  if (u.email === s.email) return json(res, 422, { error: "Você não pode remover o seu próprio usuário." });
+  if (u.role === "admin") return json(res, 422, { error: "O administrador principal não pode ser removido." });
+  auth.users.remove(u.email);
+  store.audit(s.email, "usuario_removido", u.email);
+  json(res, 200, usersView());
+}, { perm: "users" });
+
+/* ---------- auditoria ---------- */
+on("GET", "/api/admin/audit", async (req, res, s, url) => {
+  const q = (url.searchParams.get("q") || "").toLowerCase(), who = url.searchParams.get("user") || "", from = url.searchParams.get("from") || "", to = url.searchParams.get("to") || "";
+  const access = url.searchParams.get("access") === "1";
+  const page = Math.max(0, +url.searchParams.get("page") || 0), size = 50;
+  const ACCESS = /^(login|logout|login_falhou)$/;
+  const list = store.auditLog().filter((e) => (access || !ACCESS.test(e.action)) && (!who || e.user === who)
+    && (!from || e.at.slice(0, 10) >= from) && (!to || e.at.slice(0, 10) <= to)
+    && (!q || JSON.stringify(e).toLowerCase().includes(q)));
+  const names = {}; auth.users.all().forEach((u) => (names[u.email] = u.name));
+  json(res, 200, { total: list.length, page, size, items: list.slice(page * size, page * size + size), users: Object.entries(names).map(([email, name]) => ({ email, name })), names, pageNames: pageNames() });
+}, { perm: "audit" });
 
 on("POST", "/api/admin/password", async (req, res, s) => {
   const b = await readJson(req, 10000);
@@ -387,20 +693,22 @@ on("POST", "/api/admin/password", async (req, res, s) => {
 
 on("GET", "/api/admin/status", async (req, res) => {
   const draft = store.content.draft(), live = store.content.live();
-  json(res, 200, { pending: pendingSummary(draft, live), lastPublish: live._at || null, lastPublishBy: live._by || null, history: store.content.history().slice(0, 15) });
+  json(res, 200, { pending: pendingSummary(draft, live), enPending: Object.keys(draft.enPending || {}), lastPublish: live._at || null, lastPublishBy: live._by || null, history: store.content.history().slice(0, 15) });
 });
 
+// páginas em português (a versão em inglês é gerada automaticamente)
 on("GET", "/api/admin/pages", async (req, res) => {
   const draft = store.content.draft(), live = store.content.live();
   const { pages } = sources(draft);
   const rv = reviews();
-  const list = ["pt", "en"].flatMap((l) => orderedPages(pages, l)).map(({ p, group, area }) => ({
+  const changed = (k) => JSON.stringify(draft.pages[k] || null) !== JSON.stringify(live.pages[k] || null);
+  const list = orderedPages(pages, "pt").map(({ p, group, area }) => ({
     key: p.key, lang: p.lang, file: p.file, title: pageTitle(p), partial: !!p.partial, group, area, reviewed: rv[p.key] || null,
     edits: draft.pages[p.key] ? Object.keys(draft.pages[p.key].edits || {}).length + Object.keys(draft.pages[p.key].meta || {}).length : 0,
-    pending: JSON.stringify(draft.pages[p.key] || null) !== JSON.stringify(live.pages[p.key] || null),
+    pending: changed(p.key) || (!!enKeyOf(p.key) && changed(enKeyOf(p.key))), enPending: !!(draft.enPending || {})[p.key],
   }));
   json(res, 200, { pages: list, groups: GROUP_ORDER });
-});
+}, { perm: "pages" });
 
 // "página revisada": marca de acompanhamento da equipe (não altera o site)
 on("POST", "/api/admin/review", async (req, res, s) => {
@@ -412,69 +720,77 @@ on("POST", "/api/admin/review", async (req, res, s) => {
   store.write("review.json", rv);
   store.audit(s.email, b.done ? "pagina_revisada" : "pagina_nao_revisada", b.key);
   json(res, 200, { reviewed: rv[b.key] || null });
-});
+}, { perm: "pages" });
 
 on("GET", "/api/admin/page", async (req, res, s, url) => {
-  const v = pageView(store.content.draft(), store.content.live(), url.searchParams.get("key"));
+  const key = url.searchParams.get("key") || "";
+  if (!/^(pt\/|partial\/pt\/)/.test(key)) return json(res, 404, { error: "A versão em inglês é traduzida automaticamente a partir do português." });
+  const v = pageView(store.content.draft(), store.content.live(), key);
   v ? json(res, 200, v) : json(res, 404, { error: "Página não encontrada." });
-});
+}, { perm: "pages" });
 
+/* Salva uma página em português: os campos, os dados compartilhados ({{L.x}}), os mesmos textos em outros
+   lugares do site (quando marcados) e, por fim, a tradução automática para o inglês de tudo o que mudou. */
 on("PUT", "/api/admin/page", async (req, res, s, url) => {
-  const key = url.searchParams.get("key");
+  const key = url.searchParams.get("key") || "";
+  if (!/^(pt\/|partial\/pt\/)/.test(key)) return json(res, 404, { error: "A versão em inglês é traduzida automaticamente a partir do português." });
   const body = await readJson(req);
   const draft = store.content.draft();
+  const changes = [];
+  const sh = await saveShared(draft, body.shared, changes);
+  if (sh.errors) return json(res, 422, { error: "Alguns campos não foram salvos. Corrija os itens destacados.", fields: sh.errors });
   const r = savePage(draft, key, body);
   if (!r.ok) return json(res, r.status, r);
-  store.content.saveDraft(draft);
-  store.audit(s.email, "rascunho_pagina", key);
-  json(res, 200, pageView(draft, store.content.live(), key));
-});
-
-on("GET", "/api/admin/site", async (req, res) => {
-  const base = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/site.json"), "utf8"));
-  const { site } = sources(store.content.draft());
-  json(res, 200, { fields: siteFields(base, site), photos: Object.keys(base.photos).filter((k) => !k.startsWith("_")).map((k) => ({ key: k, url: imageUrl(site, k) })) });
-});
-on("PUT", "/api/admin/site", async (req, res, s) => {
-  const b = await readJson(req);
-  const base = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/site.json"), "utf8"));
-  const draft = store.content.draft();
-  const fields = siteFields(base, base);
-  const errors = {}, over = {};
-  for (const f of fields) {
-    const v = b.values && b.values[f.path] !== undefined ? String(b.values[f.path]).trim() : f.value;
-    const cur = (draft.site && f.path.split(".").reduce((a, p) => (a == null ? a : a[p]), draft.site));
-    const val = b.values && b.values[f.path] !== undefined ? v : cur !== undefined ? String(cur) : f.base;
-    if (val === f.base) continue;
-    const e = validSiteValue(f.type, val, f.base);
-    if (e) { errors[f.path] = e; continue; }
-    f.path.split(".").reduce((o, p, i, arr) => (i === arr.length - 1 ? (o[p] = val) : (o[p] = o[p] || {})), over);
+  changes.push(...r.changes);
+  // o mesmo texto em outros lugares do site
+  const touched = new Set([key]), also = [];
+  const { pages } = sources(draft);
+  const units = html.extract(pages[key].src).units;
+  for (const id of body.propagate || []) {
+    if (body.edits === undefined || body.edits[id] === undefined) continue;
+    const u = units.find((x) => x.id === id);
+    if (!u) continue;
+    for (const t of elsewhere(draft, key, u)) {
+      const rr = savePage(draft, t.key, { edits: { [t.id]: body.edits[id] } });
+      if (rr.ok && rr.changes.length) { touched.add(t.key); also.push(t.title + (t.section ? " › " + t.section : "")); }
+    }
   }
-  if (Object.keys(errors).length) return json(res, 422, { error: "Corrija os campos destacados.", fields: errors });
-  draft.site = over;
+  if (also.length) changes.push({ field: "Mesmo texto atualizado também em", before: "", after: [...new Set(also)].join("; ") });
+  // tradução (inclui páginas que ficaram pendentes antes)
+  const tr = await syncEnglish(draft, [...touched, ...Object.keys(draft.enPending || {})]);
   store.content.saveDraft(draft);
-  store.audit(s.email, "rascunho_dados_gerais");
-  json(res, 200, { ok: true });
-});
+  if (changes.length) store.audit(s.email, "rascunho_pagina", key, changes);
+  json(res, 200, Object.assign(pageView(draft, store.content.live(), key), { saved: { also: [...new Set(also)], warn: [sh.warn, tr.error].filter(Boolean).join(" ") } }));
+}, { perm: "pages" });
+
+// fotos do site (para o seletor de imagens)
+on("GET", "/api/admin/site", async (req, res) => {
+  const base = baseSite();
+  const { site } = sources(store.content.draft());
+  json(res, 200, { photos: Object.keys(base.photos).filter((k) => !k.startsWith("_")).map((k) => ({ key: k, url: imageUrl(site, k) })) });
+}, { perm: ["pages", "news", "identity"] });
 
 on("GET", "/api/admin/noticias", async (req, res) => {
   const draft = store.content.draft();
   const list = draft.noticias || JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/noticias.json"), "utf8"));
   const { site } = sources(draft);
   json(res, 200, { noticias: list.map((n) => Object.assign({}, n, { _preview: n.foto ? imageUrl(site, n.foto) : "" })) });
-});
+}, { perm: "news" });
 on("PUT", "/api/admin/noticias", async (req, res, s) => {
   const b = await readJson(req);
   const draft = store.content.draft();
   const { site } = sources(draft);
-  const list = (b.noticias || []).map((n) => { const c = Object.assign({}, n); delete c._preview; c.leitura = +c.leitura; if (!c.foto) { delete c.foto; delete c.alt; } return c; });
+  const prev = draft.noticias || JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/noticias.json"), "utf8"));
+  const list = (b.noticias || []).map((n) => { const c = Object.assign({}, n); delete c._preview; delete c.en; c.leitura = +c.leitura; if (!c.foto) { delete c.foto; delete c.alt; } return c; });
   const errs = validateNews(list, site);
   if (errs.length) return json(res, 422, { error: errs.slice(0, 8).join(" "), list: errs });
+  const tr = await newsEnglish(list, prev);
+  if (tr.error) return json(res, 502, { error: tr.error });
   draft.noticias = list;
   store.content.saveDraft(draft);
-  store.audit(s.email, "rascunho_noticias");
+  newsAudit(s.email, prev, list);
   json(res, 200, { ok: true });
-});
+}, { perm: "news" });
 
 /* mídia */
 on("POST", "/api/admin/upload", async (req, res, s, url) => {
@@ -489,17 +805,17 @@ on("POST", "/api/admin/upload", async (req, res, s, url) => {
   fs.writeFileSync(path.join(store.dirs.uploads, name + ".json"), JSON.stringify({ purpose, w: v.info.w, h: v.info.h, type: v.info.mime, size: buf.length, original, at: new Date().toISOString(), by: s.email }));
   store.audit(s.email, "upload", name);
   json(res, 200, { name, ref: "up:" + name, path: "assets/uploads/" + name, url: "/admin/media/" + name, w: v.info.w, h: v.info.h, type: v.info.mime, size: buf.length });
-});
+}, { perm: ["pages", "news", "identity"] });
 on("GET", "/api/admin/media", async (req, res) => {
   const files = fs.readdirSync(store.dirs.uploads).filter((f) => !f.endsWith(".json")).map((f) => Object.assign({ name: f, ref: "up:" + f, path: "assets/uploads/" + f, url: "/admin/media/" + f }, uploadMeta(f) || {})).sort((a, b) => String(b.at).localeCompare(String(a.at)));
   json(res, 200, { files, rules: images.RULES });
-});
+}, { perm: ["pages", "news", "identity"] });
 
 /* identidade visual */
 on("GET", "/api/admin/identity", async (req, res) => {
   const d = store.content.draft().identity || {};
   json(res, 200, { identity: d, defaults: { logo: "/admin/site-assets/img/brand/logo-medicglobal-saude.png", logoNeg: "/admin/site-assets/img/brand/logo-medicglobal-saude-branco.png", favicon: "/admin/site-assets/img/brand/favicon.svg", faviconPng: "/admin/site-assets/img/brand/favicon.png" } });
-});
+}, { perm: "identity" });
 on("PUT", "/api/admin/identity", async (req, res, s) => {
   const b = await readJson(req);
   const draft = store.content.draft();
@@ -518,7 +834,7 @@ on("PUT", "/api/admin/identity", async (req, res, s) => {
   store.content.saveDraft(draft);
   store.audit(s.email, "rascunho_identidade");
   json(res, 200, { ok: true, identity: out });
-});
+}, { perm: "identity" });
 
 /* Google Analytics */
 function gaView() {
@@ -528,7 +844,7 @@ function gaView() {
   if (g.serviceAccount) { try { saEmail = JSON.parse(store.open(g.serviceAccount)).client_email; } catch (e) {} }
   return Object.assign({ enabled: false, measurementId: "", gtmId: "", propertyId: "" }, draft.analytics, { serviceAccountEmail: saEmail, apiSecret: g.apiSecret ? store.mask(store.open(g.apiSecret)) : "", lastCheck: g.lastCheck || null });
 }
-on("GET", "/api/admin/analytics", async (req, res) => json(res, 200, gaView()));
+on("GET", "/api/admin/analytics", async (req, res) => json(res, 200, gaView()), { perm: "analytics" });
 on("PUT", "/api/admin/analytics", async (req, res, s) => {
   const b = await readJson(req, 64 * 1024);
   const errors = {};
@@ -551,7 +867,7 @@ on("PUT", "/api/admin/analytics", async (req, res, s) => {
   store.content.saveDraft(draft);
   store.audit(s.email, "analytics_config");
   json(res, 200, gaView());
-});
+}, { perm: "analytics" });
 on("POST", "/api/admin/analytics/verify", async (req, res, s) => {
   const set = forms.settings(), g = set.ga || {};
   const cfg = Object.assign({}, store.content.draft().analytics);
@@ -562,7 +878,7 @@ on("POST", "/api/admin/analytics/verify", async (req, res, s) => {
   forms.saveSettings(set);
   store.audit(s.email, "analytics_verificacao");
   json(res, 200, { checks, at: set.ga.lastCheck.at });
-});
+}, { perm: "analytics" });
 
 /* formulários */
 function formsView() {
@@ -584,7 +900,7 @@ function formsView() {
   return { forms: list, smtp: { host: sm.host || "", port: sm.port || 587, user: sm.user || "", from: sm.from || "", fromName: sm.fromName || "", pass: sm.pass ? store.mask(store.open(sm.pass)) : "" } };
 }
 const draftPageSrc = (content, p) => html.apply(p.src, (content.pages[p.key] && content.pages[p.key].edits) || {}).html;
-on("GET", "/api/admin/forms", async (req, res) => json(res, 200, formsView()));
+on("GET", "/api/admin/forms", async (req, res) => json(res, 200, formsView()), { perm: ["forms", "inbox"] });
 on("PUT", "/api/admin/forms", async (req, res, s, url) => {
   const name = url.searchParams.get("name");
   const b = await readJson(req, 64 * 1024);
@@ -608,7 +924,7 @@ on("PUT", "/api/admin/forms", async (req, res, s, url) => {
   if (b.maxUploadMB !== undefined) { const d = store.content.draft(); d.forms[name] = { maxUploadMB: mb }; store.content.saveDraft(d); }
   store.audit(s.email, "formulario_config", name);
   json(res, 200, formsView());
-});
+}, { perm: "forms" });
 on("PUT", "/api/admin/smtp", async (req, res, s) => {
   const b = await readJson(req, 64 * 1024);
   const errors = {};
@@ -624,7 +940,7 @@ on("PUT", "/api/admin/smtp", async (req, res, s) => {
   forms.saveSettings(set);
   store.audit(s.email, "smtp_config");
   json(res, 200, formsView());
-});
+}, { perm: "forms" });
 on("POST", "/api/admin/smtp/test", async (req, res, s) => {
   const b = await readJson(req, 10000);
   const sm = forms.settings().smtp;
@@ -634,17 +950,17 @@ on("POST", "/api/admin/smtp/test", async (req, res, s) => {
     await require("./mail").send(Object.assign({}, sm, { pass: store.open(sm.pass) }), { to: [b.to], subject: "Teste do painel MedicGLOBAL", text: "Se você recebeu esta mensagem, o envio de e-mails dos formulários está funcionando." });
     json(res, 200, { ok: true });
   } catch (e) { json(res, 502, { error: "Falha no envio: " + e.message }); }
-});
+}, { perm: "forms" });
 on("POST", "/api/admin/webhook/test", async (req, res, s, url) => {
   const c = ((forms.settings().forms || {})[url.searchParams.get("name")]) || {};
   if (!c.webhook) return json(res, 400, { error: "Nenhum webhook configurado para este formulário." });
   try { await forms.postJson(store.open(c.webhook), { teste: true, origem: "painel MedicGLOBAL", em: new Date().toISOString() }); json(res, 200, { ok: true }); }
   catch (e) { json(res, 502, { error: "Falha no webhook: " + e.message }); }
-});
+}, { perm: "forms" });
 on("GET", "/api/admin/submissions", async (req, res, s, url) => {
   const name = url.searchParams.get("form") || "";
   json(res, 200, { items: forms.list(name).map((r) => Object.assign({}, r)) });
-});
+}, { perm: "inbox" });
 on("GET", "/api/admin/submissions/file", async (req, res, s, url) => {
   const stored = url.searchParams.get("f") || "";
   const p = /^[\w.\- ]+$/.test(stored) && path.join(store.dirs.attachments, stored);
@@ -652,7 +968,7 @@ on("GET", "/api/admin/submissions/file", async (req, res, s, url) => {
   store.audit(s.email, "anexo_baixado", stored);
   headers(res, { "Content-Type": "application/octet-stream", "Content-Disposition": `attachment; filename="${stored.replace(/^[\w-]+?-[0-9a-f]{12}-/, "")}"`, "Cache-Control": "no-store" });
   res.writeHead(200); fs.createReadStream(p).pipe(res);
-});
+}, { perm: "inbox" });
 on("GET", "/api/admin/submissions/csv", async (req, res, s, url) => {
   const name = url.searchParams.get("form") || "";
   const items = forms.list(name);
@@ -662,7 +978,7 @@ on("GET", "/api/admin/submissions/csv", async (req, res, s, url) => {
   store.audit(s.email, "csv_exportado", name);
   headers(res, { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": `attachment; filename="${name}.csv"`, "Cache-Control": "no-store" });
   res.writeHead(200); res.end(csv);
-});
+}, { perm: "inbox" });
 
 /* rascunho → visualização → publicação */
 on("POST", "/api/admin/preview", async (req, res) => {
@@ -675,18 +991,27 @@ on("POST", "/api/admin/preview", async (req, res) => {
   } catch (e) { json(res, 500, { error: "Não foi possível gerar a visualização: " + e.message }); }
 });
 on("POST", "/api/admin/publish", async (req, res, s) => {
+  const b = await readJson(req, 10000);
   const draft = store.content.draft();
+  // traduções que ficaram pendentes: nova tentativa antes de publicar
+  if (draft.enPending) {
+    const tr = await syncEnglish(draft, Object.keys(draft.enPending));
+    store.content.saveDraft(draft);
+    if (tr.error && !b.force) return json(res, 409, { error: tr.error, enPending: true });
+  }
   try { previewSite(draft); } catch (e) { return json(res, 422, { error: "O rascunho tem um problema e não foi publicado: " + e.message }); }
+  const names = pageNames(), AREAS = { site: "Dados compartilhados", noticias: "Notícias", identity: "Identidade visual", analytics: "Google Analytics", forms: "Formulários" };
+  const what = pendingSummary(draft, store.content.live()).map((p) => (p.area === "page" ? names[p.key] || p.key : AREAS[p.area] || p.area));
   const live = store.content.publish(draft, s.email);
   const r = publishSite(live);
-  store.audit(s.email, "publicado", `${r.ms} ms`);
+  store.audit(s.email, "publicado", `${r.ms} ms`, what.length ? [{ field: "Itens publicados", before: "", after: what.join("; ") }] : null);
   json(res, 200, { ok: true, at: live._at, ms: r.ms, orphans: r.orphans });
-});
+}, { perm: "publish" });
 on("POST", "/api/admin/discard", async (req, res, s) => {
   store.content.saveDraft(store.content.live());
   store.audit(s.email, "rascunho_descartado");
   json(res, 200, { ok: true });
-});
+}, { perm: "publish" });
 on("POST", "/api/admin/rollback", async (req, res, s) => {
   const b = await readJson(req, 10000);
   const v = store.content.version(String(b.id || ""));
@@ -695,7 +1020,7 @@ on("POST", "/api/admin/rollback", async (req, res, s) => {
   store.content.saveDraft(v);
   store.audit(s.email, "versao_restaurada_no_rascunho", b.id);
   json(res, 200, { ok: true });
-});
+}, { perm: "publish" });
 
 /* ---------- formulário público ---------- */
 let defsCache = { at: "", defs: null };
@@ -742,6 +1067,9 @@ async function handle(req, res) {
       if (req.method !== "GET" && (req.headers["x-csrf-token"] !== s.csrf || !sameOrigin(req))) return json(res, 403, { error: "Requisição recusada (token de segurança inválido). Recarregue a página." });
       const u = auth.users.find(s.email);
       if (u.mustChange && !fn.allowMustChange) return json(res, 403, { error: "Troque a senha provisória para continuar.", mustChange: true });
+      // permissão da área (basta uma das listadas)
+      if (fn.perm && ![].concat(fn.perm).some((p) => auth.can(u, p))) return json(res, 403, { error: "Seu usuário não tem permissão para esta área." });
+      s.user = u;
     }
     return fn(req, res, s, url);
   }

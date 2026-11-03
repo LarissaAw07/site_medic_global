@@ -1,6 +1,6 @@
 <!--@{
   "title": "Contact | Address, phone numbers and WhatsApp | MedicGLOBAL",
-  "description": "Contact MedicGLOBAL: headquarters in Pouso Alegre/MG (Av. Porfírio Ribeiro de Andrade, 90) and Extrema/MG (R. Alcebíades Wohlers, 02). Phone (35) 3435-4442, WhatsApp by department and contact form.",
+  "description": "Contact MedicGLOBAL: headquarters in Pouso Alegre/MG ({{L.address.pousoAlegre.street}}) and Extrema/MG ({{L.address.extrema.street}}). Phone {{L.phones.central.label}}, WhatsApp by department and contact form.",
   "active": "voce",
   "og": "old_hsl_recepcao",
   "crumbs": [["Customer service", "atendimento.html"], ["Contact", "contato.html"]]
@@ -43,7 +43,7 @@
         <div class="place-card">
           <span class="eyebrow" style="margin:0">{{i:pin}} Headquarters</span>
           <h2>Pouso Alegre, Minas Gerais</h2>
-          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">Av. Porfírio Ribeiro de Andrade, 90<br>Pouso Alegre/MG · CEP 37554-200</p></div>
+          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">{{L.address.pousoAlegre.street}}<br>{{L.address.pousoAlegre.city}}/{{L.address.pousoAlegre.state}} · CEP {{L.address.pousoAlegre.zip}}</p></div>
           <dl>
             <div><dt>Ombudsman</dt><dd>Mon–Fri · 7:30 a.m.–5:30 p.m.</dd></div>
             <div><dt>Call center</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
@@ -52,14 +52,14 @@
           <div class="btn-row"><a class="btn btn--light" href="{{L.address.pousoAlegre.maps}}" target="_blank" rel="noopener">{{i:route}} Directions</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
         </div>
         <div class="place-media">
-          <iframe title="Map: Av. Porfírio Ribeiro de Andrade, 90 - Pouso Alegre/MG" src="{{L.address.pousoAlegre.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe title="Map: {{L.address.pousoAlegre.street}} - {{L.address.pousoAlegre.city}}/{{L.address.pousoAlegre.state}}" src="{{L.address.pousoAlegre.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
       <article class="place" role="tabpanel" id="local-ex" aria-labelledby="tab-ex" hidden>
         <div class="place-card">
           <span class="eyebrow" style="margin:0">{{i:pin}} Headquarters</span>
           <h2>Extrema, Minas Gerais</h2>
-          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">R. Alcebíades Wohlers, 02 · Ponte Alta<br>Extrema/MG · CEP 37640-402</p></div>
+          <div><p class="xs" style="letter-spacing:.14em;text-transform:uppercase;color:var(--on-deep-2)">Address</p><p class="mt-4" style="color:#fff">{{L.address.extrema.street}} · {{L.address.extrema.district}}<br>{{L.address.extrema.city}}/{{L.address.extrema.state}} · CEP {{L.address.extrema.zip}}</p></div>
           <dl>
             <div><dt>Ombudsman</dt><dd>Mon–Fri · 7:30 a.m.–5:30 p.m.</dd></div>
             <div><dt>Call center</dt><dd><a href="{{L.phones.central.tel}}">{{L.phones.central.label}}</a></dd></div>
@@ -68,7 +68,7 @@
           <div class="btn-row"><a class="btn btn--light" href="{{L.address.extrema.maps}}" target="_blank" rel="noopener">{{i:route}} Directions</a><a class="btn btn--light" href="{{L.wa.geral.url}}" target="_blank" rel="noopener">{{i:whatsapp}} WhatsApp</a></div>
         </div>
         <div class="place-media">
-          <iframe title="Map: R. Alcebíades Wohlers, 02 · Ponte Alta - Extrema/MG" src="{{L.address.extrema.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe title="Map: {{L.address.extrema.street}} · {{L.address.extrema.district}} - {{L.address.extrema.city}}/{{L.address.extrema.state}}" src="{{L.address.extrema.embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </article>
     </div>

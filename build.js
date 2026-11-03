@@ -55,11 +55,26 @@ const deepMerge = (a, b) => {
   return out;
 };
 
+/* Endereço: rua, bairro, cidade, UF e CEP são a fonte; quando o painel muda uma dessas partes, o texto completo
+   (rodapé) e os links do mapa são remontados, para a mudança aparecer em todos os lugares de uma vez. */
+const ADDRESS_PARTS = ["street", "district", "city", "state", "zip"];
+function deriveAddresses(site, over) {
+  for (const [k, a] of Object.entries(site.address || {})) {
+    const o = (over.address || {})[k] || {};
+    if (!ADDRESS_PARTS.some((p) => o[p] !== undefined)) continue;
+    const q = `${a.street} - ${a.district ? a.district + ", " : ""}${a.city}, ${a.state}, ${a.zip}`;
+    if (o.full === undefined) a.full = [a.street, a.district, `${a.city}/${a.state}`, `CEP ${a.zip}`].filter(Boolean).join(" · ");
+    if (o.maps === undefined) a.maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q).replace(/%20/g, "+");
+    if (o.embed === undefined) a.embed = "https://www.google.com/maps?q=" + encodeURIComponent(q).replace(/%20/g, "+").replace(/%2C/g, ",") + "&output=embed";
+  }
+}
+
 /* Fontes do site já com o conteúdo do painel: usado pelo build e pelo painel (para listar os campos editáveis). */
 function loadSources(content) {
   content = content || {};
   const baseSite = JSON.parse(fs.readFileSync(path.join(SRC, "data", "site.json"), "utf8"));
   const site = deepMerge(baseSite, content.site || {});
+  deriveAddresses(site, content.site || {});
   const dataFiles = {};
   if (content.noticias) dataFiles[path.join(SRC, "data", "noticias.json")] = JSON.stringify(content.noticias);
   const vfs = content.virtual === false ? fs : overlayFs(dataFiles);

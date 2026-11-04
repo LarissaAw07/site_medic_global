@@ -96,7 +96,7 @@ select.input option, .field select option { background: var(--field); color: var
 /* ---------- estrutura: menu e conteúdo no mesmo fundo ---------- */
 .shell { display: grid; grid-template-columns: 272px minmax(0, 1fr); min-height: 100vh; }
 .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; overflow-x: hidden; padding: 22px 16px 16px; display: flex; flex-direction: column; gap: 2px; border-right: 1px solid var(--line-2); background: var(--bg); }
-.side-logo { display: flex; align-items: center; gap: 10px; padding: 0 10px 22px; text-decoration: none; }
+.side-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 0 10px 22px; text-decoration: none; }
 .side-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: .92; }
 .side-logo span { font-family: var(--f-head); font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); padding: 3px 8px; border-radius: 999px; background: var(--tint); }
 .side-group { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); padding: 16px 12px 6px; }

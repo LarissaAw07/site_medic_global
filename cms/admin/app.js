@@ -688,7 +688,6 @@
             pickImage({ purpose: "photo", sitePhotos: true }).then(function (sel) { if (!sel) return; metaChanges.og = sel.ref; ogTh.replaceChildren(h("img", { src: sel.url, alt: "" })); mark(); });
           } }, icon("image"), "Trocar imagem")), h("div", {}, h("p", { class: "small muted", text: "Imagem exibida quando a página é compartilhada (WhatsApp, redes sociais). Ideal: 1200 × 630 px." }), imgGuide("photo"))))));
       seo.querySelector(".snum").classList.add("xs");
-      addOutline(seo, "—", "Google e compartilhamento", metaEdited);
     }
 
     // ---- seções, numeradas na ordem em que aparecem na página (o conteúdo é montado ao abrir) ----
@@ -819,6 +818,8 @@
       return det;
     });
     if (secs.length === 1) { secs[0].open = true; secs[0].build(); }
+    // Google e compartilhamento fica sempre no fim da página (no índice e na lista de seções)
+    if (seo) addOutline(seo, "—", "Google e compartilhamento", JSON.stringify(P.meta.value) !== JSON.stringify(P.meta.base));
 
     // destaca no índice a seção que está na tela (a última cujo topo já passou da barra superior)
     var spyLock = 0;
@@ -874,7 +875,7 @@
       P.generated ? h("div", { class: "alert alert--info", text: dm ? "Página gerada a partir dos dados do ano (percentual, período, contratos, notas e imagens): para mudar esses dados use “Editar dados” acima. Aqui ficam só os ajustes de texto." : "Página gerada automaticamente. As edições aqui ficam por cima dos dados." }) : null,
       P.orphans.length ? h("div", { class: "alert alert--warn", text: P.orphans.length + " edição(ões) antiga(s) não foram aplicadas porque o código desta página mudou desde então. Revise os campos e salve de novo." }) : null,
       h("div", { class: "ed-layout" }, outline,
-        h("div", {}, h("div", { class: "toolbar" }, q), seo, secs, pager, savebar)));
+        h("div", {}, h("div", { class: "toolbar" }, q), secs, seo, pager, savebar)));
   }
 
   /* ---------- documentos anuais: RN 565 (reajuste) e IDSS ---------- */

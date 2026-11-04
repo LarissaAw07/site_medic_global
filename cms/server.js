@@ -246,10 +246,7 @@ function savePage(content, key, body) {
       const alt = String(raw.alt == null ? "" : raw.alt).trim();
       if (u.kind === "pic" && !(img === u.base.image || site.photos[img] || (img.startsWith("up:") && uploadExists(img.slice(3))))) e.push("Imagem inválida: envie um arquivo pela biblioteca de mídia.");
       if (u.kind === "image" && !(img === u.base.image || (img.startsWith("assets/uploads/") && uploadExists(img.slice(15))))) e.push("Imagem inválida: envie um arquivo pela biblioteca de mídia.");
-      if (alt.length > 160) e.push("Texto alternativo: máximo de 160 caracteres.");
-      if (!alt && !u.decorative && u.base.alt) e.push("Descreva a imagem (texto alternativo) para acessibilidade.");
-      if (/[|{}<>]/.test(alt)) e.push("O texto alternativo não pode conter | { } < >.");
-      v.image = img; v.alt = alt;
+      v.image = img; v.alt = alt.length > 160 || /[|{}<>]/.test(alt) ? u.base.alt || "" : alt;
     }
     if (u.kind === "field") {
       const ph = String(raw.placeholder || "").trim();
@@ -488,26 +485,27 @@ function validateNews(list, site) {
   const errs = [];
   if (!Array.isArray(list)) return ["Formato inválido."];
   const slugs = new Set();
-  const txt = (n, k, max, req = true) => { const v = n[k]; if ((v == null || String(v).trim() === "") ? req : String(v).length > max || /[<>]/.test(v)) errs.push(`"${n.titulo || n.slug || "?"}": ${k} ${v ? `tem mais de ${max} caracteres ou usa < >` : "é obrigatório"}.`); };
+  const txt = (n, k, max, req = true) => { const v = n[k]; if ((v == null || String(v).trim() === "") ? req : String(v).length > max || /[<>]/.test(v)) errs.push(`${n.titulo ? `"${n.titulo}": ` : ""}${NEWS_NAMES[k] || k} ${v ? `tem mais de ${max} caracteres ou usa < >` : "é obrigatório"}.`); };
   list.forEach((n) => {
-    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(n.slug || "") || n.slug.length > 90) errs.push(`Endereço (slug) inválido: "${n.slug}". Use letras minúsculas, números e hífens.`);
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(n.slug || "") || n.slug.length > 90) errs.push(n.slug ? `Endereço da página inválido: "${n.slug}". Use letras minúsculas, números e hífens.` : "Endereço da página é obrigatório.");
     if (slugs.has(n.slug)) errs.push(`Endereço repetido: ${n.slug}`); slugs.add(n.slug);
     if (!["noticias", "comunicados"].includes(n.cat)) errs.push(`"${n.titulo}": categoria inválida.`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(n.data || "")) errs.push(`"${n.titulo}": data inválida.`);
     if (!(Number.isInteger(+n.leitura) && +n.leitura >= 1 && +n.leitura <= 60)) errs.push(`"${n.titulo}": tempo de leitura entre 1 e 60 min.`);
-    txt(n, "titulo", 140); txt(n, "resumo", 300); txt(n, "intro", 1200); txt(n, "orgao", 60); txt(n, "tema", 60); txt(n, "migalha", 60); txt(n, "fonteTitulo", 220);
-    if (!/^https:\/\/[^\s<>"]+$/.test(n.fonteUrl || "")) errs.push(`"${n.titulo}": link da fonte precisa começar com https://.`);
+    txt(n, "titulo", 140); txt(n, "resumo", 300); txt(n, "intro", 1200); txt(n, "tema", 60, false); txt(n, "migalha", 60, false); txt(n, "fonteTitulo", 220, false);
+    // fonte é opcional: sem link, o site não mostra o bloco da fonte
+    if (n.fonteUrl && !/^https:\/\/[^\s<>"]+$/.test(n.fonteUrl)) errs.push(`"${n.titulo}": link da fonte precisa começar com https://.`);
+    if (n.fonteTitulo && !n.fonteUrl) errs.push(`"${n.titulo}": informe o link da fonte ou deixe o título da fonte em branco.`);
     if (n.foto && !(site.photos[n.foto] || (n.foto.startsWith("up:") && uploadExists(n.foto.slice(3))))) errs.push(`"${n.titulo}": imagem inválida.`);
-    if (n.foto) txt(n, "alt", 160);
-    const secs = (x) => { if (!Array.isArray(x.secoes) || x.secoes.length > 15) return errs.push(`"${n.titulo}": seções inválidas.`); x.secoes.forEach((s) => { if (!s.h || String(s.h).length > 140 || /[<>]/.test(s.h)) errs.push(`"${n.titulo}": título de seção vazio ou longo demais.`); if (!Array.isArray(s.p) || !s.p.length || s.p.some((p) => !String(p).trim() || String(p).length > 2000 || /[<>]/.test(p))) errs.push(`"${n.titulo}": parágrafos vazios, longos demais (2000) ou com < >.`); }); };
+    const secs = (x) => { if (!Array.isArray(x.secoes) || x.secoes.length > 15) return errs.push(`"${n.titulo}": seções inválidas.`); x.secoes.forEach((s) => { if (!s.h || String(s.h).length > 140 || /[<>]/.test(s.h)) errs.push(`Subtítulo de uma das partes do texto está vazio ou passa de 140 caracteres.`); if (!Array.isArray(s.p) || !s.p.length || s.p.some((p) => !String(p).trim() || String(p).length > 2000 || /[<>]/.test(p))) errs.push(`Parágrafos de uma das partes do texto estão vazios, passam de 2000 caracteres ou usam < >.`); }); };
     secs(n);
-    if (n.en) { for (const k of ["titulo", "resumo", "intro", "tema", "migalha"]) if (!n.en[k]) errs.push(`"${n.titulo}" (inglês): ${k} é obrigatório — ou remova a versão em inglês.`); if (n.en.secoes) secs(n.en); }
+    if (n.en) { for (const k of ["titulo", "resumo", "intro"]) if (!n.en[k]) errs.push(`"${n.titulo}" (inglês): ${k} é obrigatório — ou remova a versão em inglês.`); if (n.en.secoes) secs(n.en); }
   });
   return errs;
 }
 
 /* Versão em inglês das notícias: só o que mudou em português é traduzido de novo (o resto do inglês fica como estava). */
-const NEWS_TEXT = ["titulo", "resumo", "intro", "tema", "migalha", "alt"];
+const NEWS_TEXT = ["titulo", "resumo", "intro", "tema", "migalha"];
 async function newsEnglish(list, prev) {
   const items = [], jobs = [];
   const ask = (text, set) => { jobs.push(set); items.push({ text }); };
@@ -532,7 +530,7 @@ async function newsEnglish(list, prev) {
   catch (e) { return { error: "A notícia não foi salva porque a tradução automática para o inglês falhou (" + e.message + "). Tente de novo em instantes." }; }
   return { ok: true };
 }
-const NEWS_NAMES = { titulo: "Título", resumo: "Resumo", intro: "Parágrafo de abertura", tema: "Tema", migalha: "Nome curto", alt: "Texto alternativo da imagem", foto: "Imagem", cat: "Categoria", data: "Data", leitura: "Leitura (min)", orgao: "Órgão / fonte", fonteTitulo: "Título da fonte", fonteUrl: "Link da fonte", slug: "Endereço da página" };
+const NEWS_NAMES = { titulo: "Título", resumo: "Resumo", intro: "Parágrafo de abertura", tema: "Tema", migalha: "Nome curto", foto: "Imagem", cat: "Categoria", data: "Data", leitura: "Leitura (min)", fonteTitulo: "Título da fonte", fonteUrl: "Link da fonte", slug: "Endereço da página" };
 function newsAudit(user, prev, list) {
   for (const n of list) {
     const p = prev.find((x) => x.slug === n.slug);
@@ -880,7 +878,7 @@ on("PUT", "/api/admin/noticias", async (req, res, s) => {
   const draft = store.content.draft();
   const { site } = sources(draft);
   const prev = draft.noticias || JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/noticias.json"), "utf8"));
-  const list = (b.noticias || []).map((n) => { const c = Object.assign({}, n); delete c._preview; delete c.en; c.leitura = +c.leitura; if (!c.foto) { delete c.foto; delete c.alt; } return c; });
+  const list = (b.noticias || []).map((n) => { const c = Object.assign({}, n); delete c._preview; delete c.en; c.leitura = +c.leitura; if (!c.foto) delete c.foto; delete c.alt; delete c.orgao; if (!c.fonteUrl) { delete c.fonteUrl; delete c.fonteTitulo; } return c; });
   const errs = validateNews(list, site);
   if (errs.length) return json(res, 422, { error: errs.slice(0, 8).join(" "), list: errs });
   const tr = await newsEnglish(list, prev);
@@ -1001,7 +999,7 @@ function formsView() {
   return { forms: list, smtp: { host: sm.host || "", port: sm.port || 587, user: sm.user || "", from: sm.from || "", fromName: sm.fromName || "", pass: sm.pass ? store.mask(store.open(sm.pass)) : "" } };
 }
 const draftPageSrc = (content, p) => html.apply(p.src, (content.pages[p.key] && content.pages[p.key].edits) || {}).html;
-on("GET", "/api/admin/forms", async (req, res) => json(res, 200, formsView()), { perm: ["forms", "inbox"] });
+on("GET", "/api/admin/forms", async (req, res) => json(res, 200, formsView()), { perm: "forms" });
 on("PUT", "/api/admin/forms", async (req, res, s, url) => {
   const name = url.searchParams.get("name");
   const b = await readJson(req, 64 * 1024);
@@ -1058,28 +1056,6 @@ on("POST", "/api/admin/webhook/test", async (req, res, s, url) => {
   try { await forms.postJson(store.open(c.webhook), { teste: true, origem: "painel MedicGLOBAL", em: new Date().toISOString() }); json(res, 200, { ok: true }); }
   catch (e) { json(res, 502, { error: "Falha no webhook: " + e.message }); }
 }, { perm: "forms" });
-on("GET", "/api/admin/submissions", async (req, res, s, url) => {
-  const name = url.searchParams.get("form") || "";
-  json(res, 200, { items: forms.list(name).map((r) => Object.assign({}, r)) });
-}, { perm: "inbox" });
-on("GET", "/api/admin/submissions/file", async (req, res, s, url) => {
-  const stored = url.searchParams.get("f") || "";
-  const p = /^[\w.\- ]+$/.test(stored) && path.join(store.dirs.attachments, stored);
-  if (!p || !fs.existsSync(p)) return json(res, 404, { error: "Arquivo não encontrado." });
-  store.audit(s.email, "anexo_baixado", stored);
-  headers(res, { "Content-Type": "application/octet-stream", "Content-Disposition": `attachment; filename="${stored.replace(/^[\w-]+?-[0-9a-f]{12}-/, "")}"`, "Cache-Control": "no-store" });
-  res.writeHead(200); fs.createReadStream(p).pipe(res);
-}, { perm: "inbox" });
-on("GET", "/api/admin/submissions/csv", async (req, res, s, url) => {
-  const name = url.searchParams.get("form") || "";
-  const items = forms.list(name);
-  const cols = [...new Set(items.flatMap((i) => Object.keys(i.data)))];
-  const q = (v) => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
-  const csv = "﻿" + [["protocolo", "data", ...cols, "anexos"].map(q).join(";"), ...items.map((i) => [i.id, i.at, ...cols.map((c) => i.data[c]), i.files.map((f) => f.filename).join(", ")].map(q).join(";"))].join("\r\n");
-  store.audit(s.email, "csv_exportado", name);
-  headers(res, { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": `attachment; filename="${name}.csv"`, "Cache-Control": "no-store" });
-  res.writeHead(200); res.end(csv);
-}, { perm: "inbox" });
 
 /* rascunho → visualização → publicação */
 on("POST", "/api/admin/preview", async (req, res) => {

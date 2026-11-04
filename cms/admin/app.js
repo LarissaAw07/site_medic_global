@@ -105,7 +105,8 @@
     o = o || {};
     var err = h("span", { class: "err", role: "alert" });
     var counter = o.limit ? h("span", { class: "counter" }) : null;
-    var wrap = h("div", { class: "field" + (o.class ? " " + o.class : "") }, h("label", { for: input.id || null }, h("span", { text: label }), counter), input, o.hint ? h("span", { class: "hint", text: o.hint }) : null, err);
+    if (o.required) input.setAttribute("aria-required", "true");
+    var wrap = h("div", { class: "field" + (o.class ? " " + o.class : "") }, h("label", { for: input.id || null }, h("span", {}, label, o.required ? h("span", { class: "req", title: "Campo obrigatório", text: " *" }) : null), counter), input, o.hint ? h("span", { class: "hint", text: o.hint }) : null, err);
     wrap.setError = function (m) { err.textContent = m || ""; wrap.classList.toggle("has-error", !!m); };
     wrap.update = function (len) {
       if (!counter) return;
@@ -207,7 +208,6 @@
     brand: '<circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18M3 12h18"/>',
     form: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h3"/><path d="m11 17 2 2 4-4"/>',
     chart: '<path d="M4 20V11M10 20V5M16 20v-7M21 20H3"/>',
-    inbox: '<path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/>',
     history: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
     user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
     menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
@@ -232,7 +232,7 @@
   var NAV = [
     ["Conteúdo do site", [["", "Visão geral", "home"], ["pages", "Páginas", "pages", "pages"], ["news", "Notícias", "news", "news"]]],
     ["Configurações", [["identity", "Identidade visual", "brand", "identity"], ["forms", "Formulários", "form", "forms"], ["analytics", "Google Analytics", "chart", "analytics"]]],
-    ["Acompanhamento", [["inbox", "Mensagens recebidas", "inbox", "inbox"], ["audit", "Auditoria", "history", "audit"], ["users", "Usuários", "user"]]],
+    ["Acompanhamento", [["audit", "Auditoria", "history", "audit"], ["users", "Usuários", "user"]]],
   ];
   var TITLES = {}, NEED = {}; NAV.forEach(function (g) { g[1].forEach(function (n) { TITLES[n[0]] = n[1]; NEED[n[0]] = n[3]; }); });
   TITLES.page = TITLES.pages; NEED.page = "pages"; TITLES.docs = "Documentos anuais"; NEED.docs = "pages";
@@ -402,16 +402,15 @@
   /* ---------- visão geral ---------- */
   VIEWS[""] = function (view) {
     var none = Promise.resolve(null);
-    Promise.all([api("GET", "/api/admin/status"), can("pages") ? api("GET", "/api/admin/pages") : none, can("inbox") ? api("GET", "/api/admin/forms") : none]).then(function (r) {
-      var st = r[0], pages = r[1] && r[1].pages, fm = r[2] && r[2].forms;
+    Promise.all([api("GET", "/api/admin/status"), can("pages") ? api("GET", "/api/admin/pages") : none]).then(function (r) {
+      var st = r[0], pages = r[1] && r[1].pages;
       function stat(ic, val, label, small) { return h("div", { class: "stat" }, icon(ic), h("b", { class: small ? "small" : null, text: val }), h("span", { text: label })); }
-      var shortcuts = [["pages", "#/page/pt/index.html", "home", "Editar a página inicial"], ["news", "#/news/nova", "news", "Publicar uma notícia"], ["inbox", "#/inbox", "inbox", "Ver mensagens recebidas"], ["audit", "#/audit", "history", "Ver quem alterou o quê"], ["analytics", "#/analytics", "chart", "Configurar o Google Analytics"]].filter(function (x) { return can(x[0]); });
+      var shortcuts = [["pages", "#/page/pt/index.html", "home", "Editar a página inicial"], ["news", "#/news/nova", "news", "Publicar uma notícia"], ["audit", "#/audit", "history", "Ver quem alterou o quê"], ["analytics", "#/analytics", "chart", "Configurar o Google Analytics"]].filter(function (x) { return can(x[0]); });
       fill(view,
         head("Olá" + (S.user && S.user.name ? ", " + S.user.name : "") + "!", "Tudo o que dá para editar no site, organizado na mesma ordem em que aparece para o visitante."),
         h("div", { class: "stats" },
           pages ? stat("pages", pages.filter(function (p) { return p.group === "Páginas do site"; }).length, "páginas do site (inglês traduzido automaticamente)") : null,
           stat("edit", st.pending.length, "alterações aguardando publicação"),
-          fm ? stat("inbox", fm.reduce(function (a, f) { return a + f.count; }, 0), "mensagens recebidas pelos formulários") : null,
           stat("history", st.lastPublish ? fmtDate(st.lastPublish) : "Ainda não", "última publicação" + (st.lastPublishBy ? " · " + st.lastPublishBy : ""), true)),
         h("div", { class: "card" }, h("h2", { text: "Como funciona" }), h("p", { class: "desc", text: "Nada vai para o ar sem confirmação." }),
           h("ol", { class: "steps" },
@@ -586,7 +585,7 @@
       propagate[u.id] = len >= 12; // rótulos curtos ("Saiba mais") começam desmarcados
       var cb = h("input", { type: "checkbox" }); cb.checked = propagate[u.id];
       cb.addEventListener("change", function () { propagate[u.id] = cb.checked; });
-      return h("div", { class: "elsewhere" }, h("label", { class: "check" }, cb, "Aplicar a mudança também nos outros " + u.elsewhereCount + (u.elsewhereCount === 1 ? " lugar" : " lugares") + " onde este mesmo texto aparece"),
+      return h("div", { class: "elsewhere" }, h("label", { class: "check" }, cb, (u.elsewhereCount === 1 ? "Aplicar a mudança também no outro lugar" : "Aplicar a mudança também nos outros " + u.elsewhereCount + " lugares") + " onde este mesmo texto aparece"),
         h("details", { class: "xs" }, h("summary", { text: "Ver onde" }), h("ul", {}, u.elsewhere.map(function (t) { return h("li", { text: t }); }))));
     }
     function renderUnit(u) {
@@ -613,8 +612,6 @@
         if (kids.length) box.appendChild(h("div", { class: "mt" }, kids.map(renderUnit)));
       } else if (u.kind === "image" || u.kind === "pic") {
         var th = h("div", { class: "thumb" }, u.preview ? h("img", { src: u.preview, alt: "" }) : "sem prévia");
-        var alt = inp({ type: "text", value: u.value.alt });
-        alt.addEventListener("input", function () { set(u, { alt: alt.value }); });
         box.append(unitHead(u), h("div", { class: "imgrow" },
           h("div", {}, th, h("button", { class: "btn btn--ghost btn--sm btn--block", type: "button", onclick: function () {
             pickImage({ purpose: "photo", sitePhotos: u.kind === "pic" }).then(function (sel) {
@@ -623,7 +620,7 @@
               th.replaceChildren(h("img", { src: sel.url, alt: "" }));
             });
           } }, icon("image"), "Trocar imagem")),
-          h("div", {}, u.decorative ? h("p", { class: "small muted", text: "Imagem decorativa (sem texto alternativo)." }) : field("Texto alternativo (acessibilidade e SEO)", alt, { limit: 160, hint: "Descreva o que aparece na imagem." }))));
+          h("div", {}, imgGuide("photo"))));
       } else if (u.kind === "field") {
         box.append(unitHead(u, "Campo “" + u.name + "” do formulário"));
         var row = h("div", { class: "grid2" });
@@ -689,7 +686,7 @@
           field("Descrição (resultado do Google)", d, { limit: P.meta.limits.description }),
           h("div", { class: "imgrow" }, h("div", {}, ogTh, h("button", { class: "btn btn--ghost btn--sm btn--block", type: "button", onclick: function () {
             pickImage({ purpose: "photo", sitePhotos: true }).then(function (sel) { if (!sel) return; metaChanges.og = sel.ref; ogTh.replaceChildren(h("img", { src: sel.url, alt: "" })); mark(); });
-          } }, icon("image"), "Trocar imagem")), h("p", { class: "small muted", text: "Imagem exibida quando a página é compartilhada (WhatsApp, redes sociais). Ideal: 1200×630 px." })))));
+          } }, icon("image"), "Trocar imagem")), h("div", {}, h("p", { class: "small muted", text: "Imagem exibida quando a página é compartilhada (WhatsApp, redes sociais). Ideal: 1200 × 630 px." }), imgGuide("photo"))))));
       seo.querySelector(".snum").classList.add("xs");
       addOutline(seo, "—", "Google e compartilhamento", metaEdited);
     }
@@ -973,7 +970,7 @@
             i ? h("button", { class: "link-btn", type: "button", text: "↑", title: "Mover para cima", onclick: function () { imgs.splice(i - 1, 0, imgs.splice(i, 1)[0]); touch(); drawImgs(); } }) : null,
             i < imgs.length - 1 ? h("button", { class: "link-btn", type: "button", text: "↓", title: "Mover para baixo", onclick: function () { imgs.splice(i + 1, 0, imgs.splice(i, 1)[0]); touch(); drawImgs(); } }) : null,
             h("button", { class: "link-btn", type: "button", text: "Remover", onclick: function () { imgs.splice(i, 1); touch(); drawImgs(); } })));
-        }), h("label", { class: "drop doc-add", for: imgIn.id }, h("strong", { text: "+ Enviar imagens" }), h("div", { class: "xs", text: "JPG, PNG ou WebP · até 5 MB cada" })));
+        }), h("label", { class: "drop doc-add", for: imgIn.id }, h("strong", { text: "+ Enviar imagens" }), h("div", { class: "xs", text: "JPG, PNG ou WebP · até 2 MB cada" })));
       };
       imgIn.addEventListener("change", function () {
         var files = Array.prototype.slice.call(imgIn.files), errs = [];
@@ -986,7 +983,7 @@
       F.dim = h("div", { class: "field" }, h("span", { class: "err", role: "alert" }));
       F.dim.setError = function (m) { F.dim.firstChild.textContent = m || ""; };
       body = [h("div", { class: "card" }, h("h2", { text: "Resultado divulgado pela ANS" }), h("div", { class: "grid3" }, ano, base, nota), h("div", { class: "grid2" }, dims), F.dim, h("div", { class: "grid2" }, acred, bonus)),
-        h("div", { class: "card" }, h("h2", { text: "Imagens do resultado" }), h("p", { class: "desc", text: "Capturas do painel da ANS com o resultado do ano, na ordem em que devem aparecer na página." }), imgIn, grid, F.imagens)];
+        h("div", { class: "card" }, h("h2", { text: "Imagens do resultado" }), h("p", { class: "desc", text: "Capturas do painel da ANS com o resultado do ano, na ordem em que devem aparecer na página." }), imgGuide("doc"), imgIn, grid, F.imagens)];
       collect = function () { return { ano: +ano.input.value, anoBase: +base.input.value, resultado: { nota: nota.input.value.trim(), dim: dims.map(function (d) { return d.input.value.trim(); }), acred: acred.input.value, bonus: bonus.input.value }, imagens: imgs.map(function (i) { return i.path; }) }; };
     }
     var alert = h("div", { class: "alert alert--err hidden", role: "alert" });
@@ -1019,13 +1016,24 @@
   function uploadFile(file, purpose) {
     return api("POST", "/api/admin/upload?purpose=" + purpose + "&name=" + encodeURIComponent(file.name), file);
   }
+  // orientação de formato e tamanho das imagens (os mesmos limites que o servidor confere no envio)
+  var IMG_RULES = {
+    photo: { types: "JPG, PNG ou WebP", max: "2 MB", tip: "Ideal: 1920 px de largura (mínimo 400 × 300 px). Fotos em JPG ou WebP ficam mais leves." },
+    doc: { types: "JPG, PNG ou WebP", max: "2 MB", tip: "Imagem nítida do documento, com pelo menos 200 px de largura." },
+    logo: { types: "PNG, WebP ou SVG", max: "500 KB", tip: "Fundo transparente, com pelo menos 120 × 40 px. SVG mantém a nitidez em qualquer tela." },
+    favicon: { types: "PNG ou SVG", max: "200 KB", tip: "Imagem quadrada, de 180 × 180 px a 1024 × 1024 px." },
+  };
+  function imgGuide(purpose) {
+    var r = IMG_RULES[purpose];
+    return h("div", { class: "img-guide" }, icon("info"), h("span", {}, h("b", { text: "Formatos aceitos: " }), r.types + ". ", h("b", { text: "Tamanho máximo: " }), r.max + ". " + r.tip));
+  }
   function pickImage(o) {
     return new Promise(function (resolve) {
       var m, chosen = null;
       var err = h("div", { class: "alert alert--err hidden", role: "alert" });
       var grid = h("div", { class: "media-grid" });
       var fileIn = h("input", { type: "file", accept: o.purpose === "favicon" ? ".png,.svg" : o.purpose === "logo" ? ".png,.webp,.svg" : ".jpg,.jpeg,.png,.webp", class: "sr-only", id: "f" + (++uid) });
-      var rules = { photo: "JPG, PNG ou WebP · até 5 MB · mínimo 400×300 px, máximo 6000×6000 px", logo: "PNG, WebP ou SVG · até 1 MB · mínimo 120×40 px", favicon: "PNG ou SVG quadrado · até 512 KB · de 32 a 1024 px" }[o.purpose];
+      var rules = IMG_RULES[o.purpose].types + " · até " + IMG_RULES[o.purpose].max;
       var drop = h("label", { class: "drop", for: fileIn.id }, h("strong", { text: "Enviar nova imagem" }), h("div", { class: "small", text: "Clique ou arraste o arquivo aqui · " + rules }));
       function send(file) {
         err.classList.add("hidden");
@@ -1072,7 +1080,7 @@
   };
   function newsEditor(view, list, idx) {
     setCrumbs([[TITLES.news, "#/news"], [idx >= 0 ? list[idx].titulo : "Nova notícia"]]);
-    var n = idx >= 0 ? JSON.parse(JSON.stringify(list[idx])) : { slug: "", cat: "noticias", orgao: "ANS", data: new Date().toISOString().slice(0, 10), tema: "", migalha: "", leitura: 3, titulo: "", resumo: "", intro: "", secoes: [{ h: "", p: [""] }], fonteTitulo: "", fonteUrl: "" };
+    var n = idx >= 0 ? JSON.parse(JSON.stringify(list[idx])) : { slug: "", cat: "noticias", data: new Date().toISOString().slice(0, 10), tema: "", migalha: "", leitura: 3, titulo: "", resumo: "", intro: "", secoes: [{ h: "", p: [""] }], fonteTitulo: "", fonteUrl: "" };
     var changed = false;
     dirty = function () { return changed; };
     var F = {};
@@ -1080,7 +1088,7 @@
       o = o || {};
       var el = inp({ tag: o.area ? "textarea" : "input", type: o.type || (o.area ? null : "text"), value: obj[k] == null ? "" : obj[k], rows: o.rows || null });
       el.addEventListener("input", function () { obj[k] = o.type === "number" ? +el.value : el.value; changed = true; if (k === "titulo" && obj === n && idx < 0 && !slugTouched) { n.slug = slugify(el.value); F.slug.querySelector("input").value = n.slug; } });
-      var f = field(label, el, { limit: limit, hint: o.hint });
+      var f = field(label, el, { limit: limit, hint: o.hint, required: o.required });
       if (obj === n) F[k] = f;
       return f;
     }
@@ -1088,7 +1096,9 @@
     function slugify(s) { return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80); }
     var cat = inp({ tag: "select" }); [["noticias", "Notícia"], ["comunicados", "Comunicado"]].forEach(function (c) { cat.appendChild(h("option", { value: c[0], text: c[1] })); }); cat.value = n.cat;
     cat.addEventListener("change", function () { n.cat = cat.value; changed = true; });
-    var th = h("div", { class: "thumb" }, n._preview ? h("img", { src: n._preview, alt: "" }) : "Sem foto (usa a arte padrão)");
+    var NO_PHOTO = "Sem foto: a notícia usa a arte padrão do site (globo sobre fundo azul).";
+    var th = h("div", { class: "thumb" }, n._preview ? h("img", { src: n._preview, alt: "" }) : NO_PHOTO);
+    // corpo da notícia: partes com subtítulo e parágrafos, na ordem em que aparecem na página
     function secoesBox(obj, title) {
       var box = h("div", {});
       function draw() {
@@ -1096,13 +1106,15 @@
         obj.secoes.forEach(function (s, i) {
           var pTxt = inp({ tag: "textarea", rows: 5, value: s.p.join("\n\n") });
           pTxt.addEventListener("input", function () { s.p = pTxt.value.split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(Boolean); changed = true; });
-          box.appendChild(h("div", { class: "news-sec" }, txt(s, "h", "Título da seção " + (i + 1), 140), field("Parágrafos (separe com uma linha em branco)", pTxt),
-            h("p", {}, h("button", { class: "link-btn", type: "button", text: "Remover seção", onclick: function () { obj.secoes.splice(i, 1); changed = true; draw(); } }))));
+          box.appendChild(h("div", { class: "news-sec" }, h("div", { class: "news-sec-head" }, h("span", { class: "eyebrow", text: "Parte " + (i + 1) + " de " + obj.secoes.length }),
+              obj.secoes.length > 1 ? h("button", { class: "link-btn", type: "button", text: "Remover esta parte", onclick: function () { obj.secoes.splice(i, 1); changed = true; draw(); } }) : null),
+            txt(s, "h", "Subtítulo", 140, { required: true, hint: i === 0 ? "Frase curta que abre esta parte do texto (aparece em destaque na página)." : null }),
+            field("Parágrafos", pTxt, { required: true, hint: "Separe um parágrafo do outro com uma linha em branco." })));
         });
-        box.appendChild(h("button", { class: "btn btn--ghost btn--sm", type: "button", text: "+ Adicionar seção", onclick: function () { obj.secoes.push({ h: "", p: [] }); changed = true; draw(); } }));
+        box.appendChild(h("button", { class: "btn btn--ghost btn--sm", type: "button", text: "+ Adicionar parte", onclick: function () { obj.secoes.push({ h: "", p: [] }); changed = true; draw(); } }));
       }
       draw();
-      return h("div", { class: "card" }, h("h2", { text: title }), box);
+      return h("div", { class: "card" }, h("h2", { text: title }), h("p", { class: "small muted", text: "Divida o texto em partes. Cada parte tem um subtítulo e um ou mais parágrafos." }), box);
     }
     var alert = h("div", { class: "alert alert--err hidden", role: "alert" });
     var saveBtn = h("button", { class: "btn", type: "button", text: "Salvar rascunho", onclick: function () {
@@ -1112,20 +1124,21 @@
         .catch(function (e) { alert.replaceChildren(h("strong", { text: "Não foi possível salvar:" }), h("ul", {}, (e.list || [e.message]).map(function (x) { return h("li", { text: x }); }))); alert.classList.remove("hidden"); alert.scrollIntoView({ block: "center" }); })
         .then(function () { saveBtn.disabled = false; saveBtn.textContent = "Salvar rascunho"; });
     } });
-    var slugF = txt(n, "slug", "Endereço da página", 80, { hint: "Fica noticia-ENDERECO.html. Só letras minúsculas, números e hífens." });
+    var slugF = txt(n, "slug", "Endereço da página", 80, { required: true, hint: "Fica noticia-ENDERECO.html. Só letras minúsculas, números e hífens." });
     slugF.querySelector("input").addEventListener("input", function () { slugTouched = true; });
     fill(view, h("div", { class: "toolbar" }, h("a", { class: "btn btn--quiet btn--sm", href: "#/news", text: "← Notícias" })),
-      head(idx >= 0 ? "Editar notícia" : "Nova notícia", "Resumo próprio de publicação oficial, com crédito e link para a fonte."), alert,
-      h("div", { class: "card" }, h("h2", { text: "Principal" }), txt(n, "titulo", "Título", 140), slugF,
-        h("div", { class: "grid3" }, field("Categoria", cat), txt(n, "data", "Data", null, { type: "date" }), txt(n, "leitura", "Leitura (min)", null, { type: "number" })),
-        h("div", { class: "grid3" }, txt(n, "orgao", "Órgão / fonte", 60), txt(n, "tema", "Tema", 60), txt(n, "migalha", "Nome curto (migalha)", 60)),
-        txt(n, "resumo", "Resumo (cards e Google)", 300, { area: true }), txt(n, "intro", "Parágrafo de abertura", 1200, { area: true, rows: 4 })),
-      h("div", { class: "card" }, h("h2", { text: "Imagem" }), h("div", { class: "imgrow" }, h("div", {}, th,
+      head(idx >= 0 ? "Editar notícia" : "Nova notícia", "Campos com * são obrigatórios."), alert,
+      h("div", { class: "card" }, h("h2", { text: "Informações principais" }), txt(n, "titulo", "Título", 140, { required: true }), slugF,
+        h("div", { class: "grid3" }, field("Categoria", cat, { required: true }), txt(n, "data", "Data", null, { type: "date", required: true }), txt(n, "leitura", "Tempo de leitura (min)", null, { type: "number" })),
+        h("div", { class: "grid2" }, txt(n, "tema", "Tema", 60, { hint: "Aparece ao lado da data. Ex.: Rol de procedimentos." }), txt(n, "migalha", "Nome curto", 60, { hint: "Usado no caminho de navegação no topo da página." })),
+        txt(n, "intro", "Parágrafo de abertura", 1200, { area: true, rows: 4, required: true }), txt(n, "resumo", "Resumo", 300, { area: true, required: true, hint: "Aparece nos cards de notícias e no resultado do Google." })),
+      h("div", { class: "card" }, h("h2", { text: "Imagem de capa" }), h("div", { class: "imgrow" }, h("div", {}, th,
         h("button", { class: "btn btn--ghost btn--sm btn--block", type: "button", text: "Trocar imagem", onclick: function () { pickImage({ purpose: "photo", sitePhotos: true }).then(function (s) { if (!s) return; n.foto = s.ref; changed = true; th.replaceChildren(h("img", { src: s.url, alt: "" })); }); } }),
-        h("button", { class: "link-btn", type: "button", text: "Sem foto", onclick: function () { delete n.foto; n.alt = ""; changed = true; th.replaceChildren("Sem foto (usa a arte padrão)"); } })),
-        txt(n, "alt", "Texto alternativo da imagem", 160))),
-      secoesBox(n, "Conteúdo"),
-      h("div", { class: "card" }, h("h2", { text: "Fonte oficial" }), txt(n, "fonteTitulo", "Título da publicação original", 220), txt(n, "fonteUrl", "Link da publicação original", 500, { type: "url", hint: "Precisa começar com https://" })),
+        h("button", { class: "link-btn", type: "button", text: "Usar a arte padrão", onclick: function () { delete n.foto; changed = true; th.replaceChildren(NO_PHOTO); } })),
+        h("div", {}, imgGuide("photo"), h("p", { class: "small muted", text: "A imagem é opcional. Sem foto, o card e a página da notícia mostram a arte padrão do site, para o espaço não ficar vazio." })))),
+      secoesBox(n, "Corpo da notícia"),
+      h("div", { class: "card" }, h("h2", { text: "Fonte oficial (opcional)" }), h("p", { class: "small muted", text: "Sem link, a página da notícia não mostra o bloco da fonte: aparecem só os botões de compartilhar." }),
+        txt(n, "fonteTitulo", "Título da publicação original", 220), txt(n, "fonteUrl", "Link da publicação original", 500, { type: "url", hint: "Precisa começar com https://" })),
       h("div", { class: "alert alert--info", text: "A versão em inglês desta notícia é traduzida automaticamente ao salvar. Só o que mudar em português é traduzido de novo." }),
       h("div", { class: "savebar" }, h("span", { class: "grow", text: "As alterações entram no site após Publicar." }), h("a", { class: "btn btn--ghost", href: "#/news", text: "Cancelar" }), saveBtn));
   }
@@ -1135,10 +1148,10 @@
     api("GET", "/api/admin/identity").then(function (r) {
       var cur = {}; Object.keys(r.identity || {}).forEach(function (k) { cur[k] = r.identity[k].name; });
       var changed = false; dirty = function () { return changed; };
-      var items = [["logo", "Logotipo (fundo claro)", "logo", "Cabeçalho e rodapé. PNG/WebP com fundo transparente ou SVG."], ["logoNeg", "Logotipo (fundo escuro)", "logo", "Versão branca, usada sobre fotos e fundos escuros."], ["favicon", "Favicon", "favicon", "Ícone da aba do navegador (SVG ou PNG quadrado)."], ["faviconPng", "Ícone para celulares", "favicon", "PNG quadrado, recomendado 180×180 px ou maior."]];
+      var items = [["logo", "Logotipo (fundo claro)", "logo", "Cabeçalho e rodapé do site."], ["logoNeg", "Logotipo (fundo escuro)", "logo", "Versão branca, usada sobre fotos e fundos escuros."], ["favicon", "Favicon", "favicon", "Ícone da aba do navegador."], ["faviconPng", "Ícone para celulares", "favicon", "Ícone usado quando o site é salvo na tela inicial do celular."]];
       var cards = items.map(function (it) {
         var k = it[0], th = h("div", { class: "thumb thumb--contain" }, h("img", { src: r.identity[k] ? "/admin/media/" + r.identity[k].name : r.defaults[k], alt: "" }));
-        return h("div", { class: "card" }, h("h2", { text: it[1] }), h("p", { class: "desc", text: it[3] }), h("div", { class: "imgrow" }, th, h("div", { class: "actions" },
+        return h("div", { class: "card" }, h("h2", { text: it[1] }), h("p", { class: "desc", text: it[3] }), imgGuide(it[2]), h("div", { class: "imgrow" }, th, h("div", { class: "actions" },
           h("button", { class: "btn btn--ghost btn--sm", type: "button", text: "Enviar nova versão", onclick: function () { pickImage({ purpose: it[2] }).then(function (s) { if (!s) return; cur[k] = s.name; changed = true; th.replaceChildren(h("img", { src: s.url, alt: "" })); }); } }),
           r.identity[k] ? h("button", { class: "btn btn--quiet btn--sm", type: "button", text: "Voltar ao original", onclick: function () { delete cur[k]; changed = true; th.replaceChildren(h("img", { src: r.defaults[k], alt: "" })); } }) : null)));
       });
@@ -1177,8 +1190,8 @@
         return h("tr", {}, h("td", { text: x.label }), h("td", { text: x.name }), h("td", { text: { email: "E-mail", tel: "Telefone", textarea: "Texto longo", select: "Lista", radio: "Opções", file: "Arquivo", text: "Texto" }[x.type] || x.type }), h("td", { text: x.required ? "Sim" : "Não" }), h("td", { text: x.options.length ? x.options.join(" · ") : x.maxlength ? "máx. " + x.maxlength : "" }));
       });
       return h("div", { class: "card" },
-        h("div", { class: "page-head" }, h("div", {}, h("h2", { text: f.title }), h("p", { text: "Página: " + f.pageTitle + " · " + f.count + " mensagem(ns) recebida(s)" })),
-          h("div", { class: "actions" }, h("a", { class: "btn btn--ghost btn--sm", href: "#/inbox/" + f.name, text: "Ver mensagens" }), h("a", { class: "btn btn--ghost btn--sm", href: "#/page/" + f.page, text: "Editar textos e campos" }))),
+        h("div", { class: "page-head" }, h("div", {}, h("h2", { text: f.title }), h("p", { text: "Página: " + f.pageTitle })),
+          h("div", { class: "actions" }, h("a", { class: "btn btn--ghost btn--sm", href: "#/page/" + f.page, text: "Editar textos e campos" }))),
         h("label", { class: "check" }, en, "Formulário ativo"), h("div", { class: "xs muted", text: "Desativado, o servidor recusa os envios e o visitante vê a mensagem de envio indisponível." }), h("div", { class: "mt" }),
         fe, fh, f.webhook ? h("p", { class: "small" }, h("button", { class: "link-btn", type: "button", text: "Testar webhook", onclick: function () { api("POST", "/api/admin/webhook/test?name=" + f.name).then(function () { toast("Webhook respondeu com sucesso.", "ok"); }).catch(fail); } }), " · ",
           h("button", { class: "link-btn", type: "button", text: "Remover webhook", onclick: function () { api("PUT", "/api/admin/forms?name=" + f.name, { enabled: en.checked, emails: emails.value, clearWebhook: true }).then(function (nr) { toast("Webhook removido.", "ok"); formsView(view, nr); }).catch(fail); } })) : null,
@@ -1203,31 +1216,8 @@
           var to = inp({ type: "email", value: S.user ? S.user.email : "" });
           var m = modal([h("h2", { text: "E-mail de teste" }), field("Enviar para", to), h("div", { class: "actions" }, h("button", { class: "btn", type: "button", text: "Enviar", onclick: function () { api("POST", "/api/admin/smtp/test", { to: to.value }).then(function () { toast("E-mail de teste enviado.", "ok"); m.close(); }).catch(fail); } }))]);
         } })));
-    fill(view, head("Formulários", "Destinos de envio, ativação e regras de cada formulário do site. Todas as mensagens ficam guardadas em Mensagens recebidas."), cards, smtp);
+    fill(view, head("Formulários", "Destinos de envio, ativação e regras de cada formulário do site."), cards, smtp);
   }
-
-  /* ---------- mensagens recebidas ---------- */
-  VIEWS.inbox = function (view, parts) {
-    api("GET", "/api/admin/forms").then(function (r) {
-      var name = parts[0] || (r.forms[0] && r.forms[0].name);
-      var sel = inp({ tag: "select", "aria-label": "Formulário" });
-      r.forms.forEach(function (f) { sel.appendChild(h("option", { value: f.name, text: f.title + " (" + f.count + ")" })); });
-      sel.value = name;
-      sel.addEventListener("change", function () { location.hash = "#/inbox/" + sel.value; });
-      api("GET", "/api/admin/submissions?form=" + encodeURIComponent(name)).then(function (s) {
-        var def = r.forms.find(function (f) { return f.name === name; }) || { fields: [] };
-        var label = function (k) { var f = def.fields.find(function (x) { return x.name === k; }); return f ? f.label : k; };
-        fill(view, head("Mensagens recebidas", "Envios dos formulários do site (dados pessoais: acesso restrito, siga a LGPD)."),
-          h("div", { class: "toolbar" }, sel, s.items.length ? h("a", { class: "btn btn--ghost btn--sm", href: "/api/admin/submissions/csv?form=" + encodeURIComponent(name), text: "Exportar CSV" }) : null),
-          s.items.length ? s.items.map(function (it) {
-            return h("details", { class: "sec" }, h("summary", {}, (it.data.nome || it.data.email || it.id), h("span", { class: "count", text: fmtDate(it.at) })),
-              h("div", { class: "sec-body" }, Object.keys(it.data).map(function (k) { return h("div", { class: "sub" }, h("span", { class: "xs muted", text: label(k) }), h("span", { text: it.data[k] })); }),
-                it.files.map(function (f) { return h("div", { class: "sub" }, h("span", { class: "xs muted", text: "Anexo" }), h("a", { href: "/api/admin/submissions/file?f=" + encodeURIComponent(f.stored), text: f.filename + " (" + fmtSize(f.size) + ")" })); }),
-                h("p", { class: "xs muted", text: "Protocolo " + it.id + (it.page ? " · enviado em " + it.page : "") + (it.notify.length ? " · " + it.notify.map(function (n) { return n.via + ": " + (n.ok ? "ok" : "falhou (" + n.error + ")"); }).join(", ") : " · sem destino configurado (só no painel)") })));
-          }) : h("div", { class: "card" }, h("p", { class: "muted", text: "Nenhuma mensagem recebida neste formulário." })));
-      }).catch(fail);
-    }).catch(fail);
-  };
 
   /* ---------- Google Analytics ---------- */
   VIEWS.analytics = function (view) {
@@ -1283,7 +1273,7 @@
     rascunho_pagina: "Editou uma página", noticia_criada: "Criou uma notícia", noticia_alterada: "Editou uma notícia", noticia_removida: "Removeu uma notícia", rascunho_noticias: "Editou as notícias",
     publicado: "Publicou o site", rascunho_descartado: "Descartou o rascunho", versao_restaurada_no_rascunho: "Restaurou uma versão anterior no rascunho",
     rascunho_identidade: "Alterou a identidade visual", analytics_config: "Alterou o Google Analytics", analytics_verificacao: "Verificou o Google Analytics",
-    formulario_config: "Alterou um formulário", smtp_config: "Alterou o servidor de e-mail", upload: "Enviou uma imagem", anexo_baixado: "Baixou um anexo", csv_exportado: "Exportou mensagens (CSV)",
+    formulario_config: "Alterou um formulário", smtp_config: "Alterou o servidor de e-mail", upload: "Enviou uma imagem",
     pagina_revisada: "Marcou página como revisada", pagina_nao_revisada: "Desmarcou página revisada", rascunho_dados_gerais: "Alterou dados gerais",
     usuario_criado: "Cadastrou um usuário", usuario_alterado: "Alterou um usuário", usuario_removido: "Removeu um usuário", senha_redefinida: "Redefiniu a senha de um usuário", senha_alterada: "Trocou a própria senha",
     setup: "Configuração inicial", admin_definido: "Definiu o administrador", login: "Entrou no painel", logout: "Saiu do painel", login_falhou: "Tentativa de acesso com senha incorreta",
@@ -1349,7 +1339,7 @@
         h("button", { class: "btn btn--ghost", type: "button", text: "Copiar", onclick: function () { if (navigator.clipboard) navigator.clipboard.writeText(pw).then(function () { toast("Senha copiada.", "ok"); }); } }),
         h("button", { class: "btn", type: "button", text: "Pronto", onclick: function () { m.close(); } }))]);
   }
-  var PERM_DESC = { pages: "Editar textos, imagens e links das páginas", news: "Criar e editar notícias", identity: "Logotipo e favicon", forms: "Destinos e regras dos formulários", analytics: "Configuração do GA4", inbox: "Ler mensagens dos formulários (dados pessoais)", audit: "Ver o registro de alterações", publish: "Colocar as alterações no ar e restaurar versões", users: "Cadastrar, editar e remover usuários" };
+  var PERM_DESC = { pages: "Editar textos, imagens e links das páginas", news: "Criar e editar notícias", identity: "Logotipo e favicon", forms: "Destinos e regras dos formulários", analytics: "Configuração do GA4", audit: "Ver o registro de alterações", publish: "Colocar as alterações no ar e restaurar versões", users: "Cadastrar, editar e remover usuários" };
   function userForm(r, u, done) {
     var isNew = !u, isMain = !!u && u.role === "admin";
     var name = inp({ type: "text", value: u ? u.name : "", maxlength: 60 });

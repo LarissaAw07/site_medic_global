@@ -42,7 +42,6 @@ const PERMS = {
   identity: "Identidade visual",
   forms: "Formulários",
   analytics: "Google Analytics",
-  inbox: "Mensagens recebidas",
   audit: "Auditoria",
   publish: "Publicar alterações no site",
   users: "Gerenciar usuários",

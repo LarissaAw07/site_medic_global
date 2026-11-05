@@ -36,6 +36,7 @@ const UI = {
     noPctShort: "Não informado",
     newTab: " (abre em nova aba)",
     docsBack: "Voltar para a central de documentos",
+    pdfTitle: "Relação de contratos",
     help: `Dúvidas sobre o reajuste do seu contrato? Fale com a <a href="atendimento.html">central de atendimento</a>.`,
     // página interna
     agrTitle: (y) => `Agrupamento de contratos RN 565 — ${y}`,
@@ -86,6 +87,7 @@ const UI = {
     noPctShort: "Not stated",
     newTab: " (opens in a new tab)",
     docsBack: "Back to the document center",
+    pdfTitle: "List of contracts",
     help: `Questions about your contract's adjustment? Contact our <a href="atendimento.html">customer service</a>.`,
     agrTitle: (y) => `RN 565 contract pool — ${y}`,
     agrCrumb: (y) => `Contract pool ${y}`,
@@ -121,12 +123,20 @@ module.exports = function (fs = require("fs")) {
     const U = UI[lang];
     const pages = path.join(__dirname, ...(lang === "pt" ? [] : ["en"]), "pages");
     const pct = (a) => (a.percentual ? (lang === "en" ? a.percentual.replace(",", ".") : a.percentual) : null);
+    // ano com página própria: tem a relação de contratos ou um conteúdo escrito no painel
+    const temPagina = (a) => !!(a.contratos || a.conteudo);
+    // conteúdo escrito no painel (texto e imagens), já limpo e traduzido pelo painel
+    const rich = (a) => { const h = lang === "en" ? a.conteudoEn || a.conteudo : a.conteudo; return h ? `
+        <div class="doc-rich mt-8">
+${h}
+        </div>` : ""; };
+    const pdfHref = (a) => a.pdfFile || `{{L.docs.${a.pdf}}}`;
     for (const f of fs.readdirSync(pages)) if (/^rn565-agrupamento-\d{4}\.html$/.test(f)) fs.unlinkSync(path.join(pages, f));
 
     // ---------- Página principal: histórico de todos os anos ----------
-    const acao = (a, cls = "btn btn--sm") => a.contratos
+    const acao = (a, cls = "btn btn--sm") => temPagina(a)
       ? `<a class="${cls}" href="${file(a)}">{{i:eye}} ${U.view}</a>`
-      : `<a class="${cls}" href="${a.pdfFile || `{{L.docs.${a.pdf}}}`}" target="_blank" rel="noopener" download data-doc="${a.pdfFile ? "RN565" : "RN309"} ${a.ano}">{{i:download}} ${U.download}<span class="sr-only">${U.newTab}</span></a>`;
+      : `<a class="${cls}" href="${pdfHref(a)}" target="_blank" rel="noopener" download data-doc="${a.pdfFile ? "RN565" : "RN309"} ${a.ano}">{{i:download}} ${U.download}<span class="sr-only">${U.newTab}</span></a>`;
     const row = (a) => `        <li class="rj-row${a === atual ? " is-current" : ""}" id="ano-${a.ano}">
           <span class="rj-year">${a.ano}</span>
           <div class="rj-info">
@@ -207,11 +217,11 @@ ${anteriores.map((a) => row(a).replace(/^ {8}/gm, "          ")).join("\n")}
 `);
 
     // ---------- Páginas internas: um agrupamento por ano ----------
-    const comContratos = anos.filter((a) => a.contratos);
+    const comContratos = anos.filter(temPagina);
     comContratos.forEach((a, i) => {
       const newer = comContratos[i - 1], older = comContratos[i + 1];
       const planos = [];
-      a.contratos.forEach((c) => {
+      (a.contratos || []).forEach((c) => {
         let p = planos.find((x) => x.plano === c.plano && x.registro === c.registro);
         if (!p) planos.push((p = { plano: c.plano, registro: c.registro, n: 0 }));
         p.n++;
@@ -255,12 +265,12 @@ ${anteriores.map((a) => row(a).replace(/^ {8}/gm, "          ")).join("\n")}
       <div class="news-body">
         <dl class="agr-stats">
           <div><dt>${U.stats.pct}</dt><dd>${pct(a) || `<span class="review-flag">${U.noPct}</span>`}</dd></div>
-          <div><dt>${U.stats.period}</dt><dd>${U.validity(a)}</dd></div>
+          <div><dt>${U.stats.period}</dt><dd>${U.validity(a)}</dd></div>${a.contratos ? `
           <div><dt>${U.stats.contracts}</dt><dd>${a.contratos.length}</dd></div>
-          <div><dt>${U.stats.plans}</dt><dd>${planos.length}</dd></div>
+          <div><dt>${U.stats.plans}</dt><dd>${planos.length}</dd></div>` : ""}
         </dl>
-        <p class="lead mt-7">${esc(U.descricao(a))}</p>
-
+        <p class="lead mt-7">${esc(U.descricao(a))}</p>${rich(a)}
+${a.contratos ? `
         <section class="mt-8" aria-labelledby="agr-t" data-filter data-filter-items="#agr-rows tr" data-filter-empty="#agr-none">
           <div class="agr-tools">
             <h2 id="agr-t" style="font-size:var(--t-h3)">${U.tblTitle}</h2>
@@ -284,12 +294,17 @@ ${a.contratos.map((c) => `                <tr><td>${esc(c.contrato)}</td><td>${e
 ${planos.map((p) => `            <li><strong>${esc(p.plano)}</strong><span>${U.cols[2]} ${esc(p.registro)}</span><span class="agr-plans-n">${U.plansCount(p.n)}</span></li>`).join("\n")}
           </ul>
         </section>
-
+` : `
+        <section class="mt-8" aria-labelledby="agr-pdf">
+          <h2 id="agr-pdf" class="mb-6" style="font-size:var(--t-h3)">${U.pdfTitle}</h2>
+          <a class="btn" href="${pdfHref(a)}" target="_blank" rel="noopener" download data-doc="${a.pdfFile ? "RN565" : "RN309"} ${a.ano}">{{i:download}} ${U.download}<span class="sr-only">${U.newTab}</span></a>
+        </section>
+`}
         <nav class="agr-nav mt-8" aria-label="${U.otherYears}">
           ${older ? `<a class="agr-nav-step" href="${file(older)}" rel="prev">{{i:chevron-left}}<span><small>${U.prev}</small>${older.ano}</span></a>` : "<span></span>"}
           ${newer ? `<a class="agr-nav-step agr-nav-step--next" href="${file(newer)}" rel="next"><span><small>${U.next}</small>${newer.ano}</span>{{i:chevron-right}}</a>` : "<span></span>"}
         </nav>
-        <div class="agr-years mt-6"><span class="agr-years-label">${U.otherYears}:</span>${anos.map((o) => o === a ? `<span aria-current="page">${o.ano}</span>` : `<a href="${o.contratos ? file(o) : "rn565.html#ano-" + o.ano}">${o.ano}</a>`).join("")}</div>
+        <div class="agr-years mt-6"><span class="agr-years-label">${U.otherYears}:</span>${anos.map((o) => o === a ? `<span aria-current="page">${o.ano}</span>` : `<a href="${temPagina(o) ? file(o) : "rn565.html#ano-" + o.ano}">${o.ano}</a>`).join("")}</div>
         <p class="small mt-7">${U.help}</p>
         <a class="news-back mt-6" href="rn565.html#ano-${a.ano}">{{i:chevron-left}} ${U.back}</a>
       </div>

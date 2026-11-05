@@ -171,11 +171,18 @@ function extract(src, opts = {}) {
         picTokens(ch, el);
         if (depth > 0 && !ctx.inlineDone) {
           const t = src.slice(ch.start, ch.end);
-          if (hasWords(t) && !/\{\{(?:i:|>|pic:)/.test(t) && el.tag !== "#root") {
-            let s = ch.start, e = ch.end;
-            while (s < e && /\s/.test(src[s])) s++;
-            while (e > s && /\s/.test(src[e - 1])) e--;
-            push({ kind: "text", tag: el.tag, cls: attrVal(el, "class") || "", range: [s, e], base: { html: src.slice(s, e) }, partial: true }, el);
+          if (hasWords(t) && el.tag !== "#root") {
+            // texto ao lado de um ícone (ex.: "{{i:phone}} Ligar agora"): cada trecho entre os ícones vira um campo
+            const re = /\{\{(?:i:|>|pic:)[^}]*\}\}/g, segs = [];
+            let last = 0, m;
+            while ((m = re.exec(t))) { segs.push([last, m.index]); last = m.index + m[0].length; }
+            segs.push([last, t.length]);
+            for (const [a, b] of segs) {
+              let s = ch.start + a, e = ch.start + b;
+              while (s < e && /\s/.test(src[s])) s++;
+              while (e > s && /\s/.test(src[e - 1])) e--;
+              if (e > s && hasWords(src.slice(s, e))) push({ kind: "text", tag: el.tag, cls: attrVal(el, "class") || "", range: [s, e], base: { html: src.slice(s, e) }, partial: true }, el);
+            }
           }
         }
         continue;
@@ -376,11 +383,67 @@ function validHref(h, validToken) {
   const tok = /^\{\{L\.([\w.]+)\}\}$/.exec(h);
   if (tok) return !!(validToken && validToken(tok[1]));
   if (/^(https?:\/\/)[^\s<>"']+$/i.test(h)) return true;
+  // mailto:/tel: com um dado compartilhado (ex.: mailto:{{L.mail.ouvidoria}})
+  const pre = /^(mailto:|tel:)\{\{L\.([\w.]+)\}\}$/i.exec(h);
+  if (pre) return !!(validToken && validToken(pre[2]));
   if (/^mailto:[^\s<>"']+@[^\s<>"']+$/i.test(h)) return true;
   if (/^tel:\+?[\d-]{6,20}$/i.test(h)) return true;
   if (/^#[\w-]*$/.test(h)) return true;
-  if (/^(\.\.\/)?[\w-]+\.html([?#][\w\-=&%.]*)?$/.test(h)) return true;
+  // página do site, com parâmetros e âncora opcionais (ex.: planos.html?plano=BLUE%20200#contato)
+  if (/^(\.\.\/)?[\w-]+\.html(\?[\w\-=&%.+]*)?(#[\w-]*)?$/.test(h)) return true;
   return false;
+}
+
+/* ---------- conteúdo livre das páginas da RN 565 e do IDSS (editor com barra de formatação) ----------
+   Só a marcação que o site estiliza: títulos, parágrafos, negrito/itálico, links, listas, citação, tabelas, imagens
+   com legenda e linha divisória. Nada de fonte, cor, tamanho ou estilo solto: a tipografia é sempre a do site.
+   imgOk(src) decide quais imagens valem (arquivos enviados pelo painel). */
+const RICH = { p: [], h2: [], h3: [], h4: [], strong: [], em: [], a: ["href", "target"], ul: [], ol: [], li: [], blockquote: [], table: [], thead: [], tbody: [], tr: [], th: ["colspan", "rowspan"], td: ["colspan", "rowspan"], figure: [], img: ["src", "alt"], figcaption: [], br: [], hr: [] };
+const RICH_RENAME = { b: "strong", i: "em", h1: "h2", h5: "h4", h6: "h4", div: "p" };
+const RICH_VOID = new Set(["br", "hr", "img"]);
+const RICH_CLASSES = /^(al-left|al-center|al-right|al-justify|img-half)$/;
+const escAttr = (s) => esc(s).replace(/'/g, "&#39;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
+function sanitizeRich(input, imgOk) {
+  const src = String(input || "").replace(/<(script|style|iframe|object|embed|svg|template|noscript|title|head)\b[\s\S]*?<\/\1\s*>/gi, "");
+  const out = [], open = [];
+  const re = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][\w-]*)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)\s*\/?>|[^<]+|</g;
+  let m;
+  while ((m = re.exec(src))) {
+    const t = m[0];
+    if (t.startsWith("<!--")) continue;
+    if (!m[2]) { out.push(t === "<" ? "&lt;" : esc(decode(t)).replace(/\{/g, "&#123;").replace(/\}/g, "&#125;")); continue; }
+    let tag = m[2].toLowerCase();
+    tag = RICH_RENAME[tag] || tag;
+    if (!RICH[tag]) continue;
+    if (m[1]) { const k = open.lastIndexOf(tag); if (k >= 0) { for (let x = open.length - 1; x >= k; x--) out.push(`</${open[x]}>`); open.length = k; } continue; }
+    const attrs = {};
+    const ar = /([^\s=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
+    let a;
+    while ((a = ar.exec(m[3] || ""))) attrs[a[1].toLowerCase()] = decode(a[2] != null ? a[2] : a[3] != null ? a[3] : a[4] != null ? a[4] : "");
+    const keep = [];
+    if (tag === "a") {
+      const href = String(attrs.href || "").trim();
+      if (href && validHref(href, null)) keep.push(`href="${escAttr(href)}"`);
+      if (attrs.target === "_blank") keep.push('target="_blank" rel="noopener"');
+    }
+    if (tag === "img") {
+      const s = String(attrs.src || "").trim();
+      if (!imgOk || !imgOk(s)) continue; // imagem que não foi enviada pelo painel: fica de fora
+      keep.push(`src="${escAttr(s)}"`, `alt="${escAttr(String(attrs.alt || "").replace(/[<>{}|]/g, "").slice(0, 160))}"`);
+    }
+    if (tag === "th" || tag === "td") for (const k of ["colspan", "rowspan"]) if (/^[2-9]$/.test(attrs[k] || "")) keep.push(`${k}="${attrs[k]}"`);
+    const cls = String(attrs.class || "").split(/\s+/).filter((c) => RICH_CLASSES.test(c));
+    if (cls.length) keep.push(`class="${cls.join(" ")}"`);
+    out.push(`<${tag}${keep.length ? " " + keep.join(" ") : ""}>`);
+    if (!RICH_VOID.has(tag)) open.push(tag);
+  }
+  for (let x = open.length - 1; x >= 0; x--) out.push(`</${open[x]}>`);
+  return out.join("")
+    .replace(/<(p|h2|h3|h4|li|blockquote|figcaption)>(\s|&nbsp;|<br>)*<\/\1>/g, "")
+    .replace(/<figure( class="[^"]*")?>\s*<\/figure>/g, "")
+    .replace(/<a( [^>]*)?>\s*<\/a>/g, "")
+    .replace(/<a>([\s\S]*?)<\/a>/g, "$1") // link sem destino válido vira texto
+    .trim();
 }
 
 /* ---------- aplicação das edições ---------- */
@@ -451,4 +514,4 @@ function apply(src, edits) {
   return { html: out, orphans, applied: map.size };
 }
 
-module.exports = { parse, extract, apply, resolve, sanitizeHtml, validHref, plain, esc, limitFor };
+module.exports = { parse, extract, apply, resolve, sanitizeHtml, sanitizeRich, validHref, plain, esc, limitFor };

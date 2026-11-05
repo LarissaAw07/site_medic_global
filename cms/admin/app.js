@@ -878,6 +878,333 @@
         h("div", {}, h("div", { class: "toolbar" }, q), secs, seo, pager, savebar)));
   }
 
+  /* ---------- editor de conteúdo (texto e imagens em qualquer ordem) ----------
+     Barra: Código-Fonte, imagem, título, negrito, itálico, link, listas, recuo, citação, tabela, alinhamento e mais opções.
+     Sem fonte, cor ou tamanho: o conteúdo sai sempre com a tipografia do site. O servidor limpa de novo ao salvar. */
+  var RICH_ALLOW = { P: 1, H2: 1, H3: 1, H4: 1, STRONG: 1, EM: 1, A: 1, UL: 1, OL: 1, LI: 1, BLOCKQUOTE: 1, TABLE: 1, THEAD: 1, TBODY: 1, TR: 1, TH: 1, TD: 1, FIGURE: 1, IMG: 1, FIGCAPTION: 1, BR: 1, HR: 1 };
+  var RICH_RENAME = { B: "STRONG", I: "EM", H1: "H2", H5: "H4", H6: "H4", DIV: "P" };
+  var RICH_CLASSES = /^(al-left|al-center|al-right|al-justify|img-half)$/;
+  var RICH_BLOCK = /^(P|H2|H3|H4|UL|OL|BLOCKQUOTE|TABLE|FIGURE|HR)$/;
+  function richClean(html) {
+    var doc = new DOMParser().parseFromString("<div>" + (html || "") + "</div>", "text/html"), root = doc.body.firstChild;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) return;
+        if (n.nodeType !== 1) { n.remove(); return; }
+        var tag = n.tagName, st = (n.getAttribute("style") || "").toLowerCase();
+        if (/^(SCRIPT|STYLE|META|LINK|IFRAME|OBJECT|EMBED|SVG|NOSCRIPT|TITLE)$/.test(tag)) { n.remove(); return; }
+        // negrito/itálico que vêm do Word como <span style="font-weight:bold">
+        if (tag === "SPAN" && /font-weight:\s*(bold|[6-9]00)/.test(st)) tag = "STRONG";
+        else if (tag === "SPAN" && /font-style:\s*italic/.test(st)) tag = "EM";
+        tag = RICH_RENAME[tag] || tag;
+        if (!RICH_ALLOW[tag]) { walk(n); while (n.firstChild) n.parentNode.insertBefore(n.firstChild, n); n.remove(); return; }
+        var el = n;
+        if (tag !== n.tagName) { el = doc.createElement(tag); while (n.firstChild) el.appendChild(n.firstChild); n.parentNode.replaceChild(el, n); ["class", "href", "src", "alt", "target"].forEach(function (a) { if (n.hasAttribute(a)) el.setAttribute(a, n.getAttribute(a)); }); }
+        var keep = {};
+        if (tag === "A") { var hr = el.getAttribute("href") || ""; if (/^(https?:|mailto:|tel:|#|(\.\.\/)?[\w-]+\.html)/i.test(hr)) keep.href = hr; if (el.getAttribute("target") === "_blank") { keep.target = "_blank"; keep.rel = "noopener"; } }
+        if (tag === "IMG") { var s = el.getAttribute("src") || ""; if (/^(\/admin\/(media|site-assets)\/|assets\/)/.test(s)) keep.src = s; keep.alt = el.getAttribute("alt") || ""; }
+        if (tag === "TD" || tag === "TH") ["colspan", "rowspan"].forEach(function (k) { var v = el.getAttribute(k); if (/^[2-9]$/.test(v || "")) keep[k] = v; });
+        var cls = (el.getAttribute("class") || "").split(/\s+/).filter(function (c) { return RICH_CLASSES.test(c); }).join(" ");
+        if (!cls && /text-align:\s*center/.test(st)) cls = "al-center"; else if (!cls && /text-align:\s*right/.test(st)) cls = "al-right";
+        Array.prototype.slice.call(el.attributes).forEach(function (a) { el.removeAttribute(a.name); });
+        Object.keys(keep).forEach(function (k) { el.setAttribute(k, keep[k]); });
+        if (cls) el.setAttribute("class", cls);
+        if (tag === "IMG" && !keep.src) { el.remove(); return; }
+        walk(el);
+      });
+    })(root);
+    // imagem solta vira figura; texto solto vira parágrafo
+    Array.prototype.slice.call(root.querySelectorAll("img")).forEach(function (img) {
+      if (img.parentNode.tagName === "FIGURE") return;
+      var f = doc.createElement("figure"); img.parentNode.insertBefore(f, img); f.appendChild(img);
+      if (f.parentNode !== root && f.parentNode.tagName === "P") { var p = f.parentNode; p.parentNode.insertBefore(f, p.nextSibling); if (!p.textContent.trim()) p.remove(); }
+    });
+    var buf = null;
+    Array.prototype.slice.call(root.childNodes).forEach(function (n) {
+      if (n.nodeType === 3 && !n.textContent.trim()) { if (!buf) n.remove(); else buf.appendChild(n); return; }
+      var inline = n.nodeType === 3 || !RICH_BLOCK.test(n.tagName);
+      if (inline) { if (!buf) { buf = doc.createElement("p"); root.insertBefore(buf, n); } buf.appendChild(n); } else buf = null;
+    });
+    Array.prototype.slice.call(root.querySelectorAll("p,h2,h3,h4,li,blockquote")).forEach(function (e) { if (!e.textContent.trim() && !e.querySelector("img")) e.remove(); });
+    return root.innerHTML.trim();
+  }
+  var RICH_ICONS = {
+    src: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4"/>', img: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-9 9"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+    ul: '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+    ol: '<path d="M10 6h10M10 12h10M10 18h10M4 5h1.5v4M4 9h3M4 14.5c.4-.6 1-.9 1.6-.9.8 0 1.4.5 1.4 1.2 0 1.1-3 2-3 3.2h3"/>',
+    out: '<path d="M21 6H11M21 12H11M21 18H11M7 9l-3 3 3 3"/>', ind: '<path d="M21 6H11M21 12H11M21 18H11M4 9l3 3-3 3"/>',
+    quote: '<path d="M7 7H4v5h3l-1 5M17 7h-3v5h3l-1 5"/>', table: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16M15 4v16"/>',
+    al: '<path d="M4 6h16M4 10h10M4 14h16M4 18h10"/>', alc: '<path d="M4 6h16M7 10h10M4 14h16M7 18h10"/>', alr: '<path d="M4 6h16M10 10h10M4 14h16M10 18h10"/>', alj: '<path d="M4 6h16M4 10h16M4 14h16M4 18h16"/>',
+    more: '<circle cx="12" cy="5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="19" r="1.3"/>', car: '<path d="M6 9l6 6 6-6"/>',
+    undo: '<path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>', redo: '<path d="M15 14l5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h3"/>',
+    eraser: '<path d="M7 20h13M5 15l9-9 5 5-9 9H7z"/>', hr: '<path d="M3 12h18"/>', trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'
+  };
+  function richSvg(n, cls) { return '<svg' + (cls ? ' class="' + cls + '"' : "") + ' viewBox="0 0 24 24" aria-hidden="true">' + RICH_ICONS[n] + "</svg>"; }
+  function richEditor(initial, onChange) {
+    var savedRange = null, sourceMode = false, open = null;
+    var host = h("div", { class: "red" });
+    host.innerHTML =
+      '<div class="red-bar" role="toolbar" aria-label="Formatação do conteúdo">' +
+        '<button class="tb" type="button" data-a="source" aria-pressed="false" title="Ver e editar o código HTML">' + richSvg("src") + "Código-Fonte</button>" +
+        '<button class="tb" type="button" data-a="image" title="Inserir imagem (JPG, PNG ou WebP até 2 MB)">' + richSvg("img") + '</button><input type="file" accept=".jpg,.jpeg,.png,.webp" class="hidden">' +
+        '<select class="tb-sel" data-a="block" title="Escolha o título" aria-label="Escolha o título"><option value="" disabled>Escolha o título</option><option value="p">Parágrafo</option><option value="h2">Título</option><option value="h3">Subtítulo</option><option value="h4">Subtítulo menor</option></select>' +
+        '<span class="sep"></span>' +
+        '<button class="tb tb-b" type="button" data-a="bold" title="Negrito (Ctrl+B)" aria-pressed="false">B</button>' +
+        '<button class="tb tb-i" type="button" data-a="italic" title="Itálico (Ctrl+I)" aria-pressed="false">I</button>' +
+        '<button class="tb" type="button" data-a="link" title="Link (Ctrl+K)">' + richSvg("link") + "</button>" +
+        '<span class="sep"></span>' +
+        '<button class="tb" type="button" data-a="ul" title="Lista com marcadores" aria-pressed="false">' + richSvg("ul") + "</button>" +
+        '<button class="tb" type="button" data-a="ol" title="Lista numerada" aria-pressed="false">' + richSvg("ol") + "</button>" +
+        '<span class="sep"></span>' +
+        '<button class="tb" type="button" data-a="outdent" title="Diminuir recuo (listas)">' + richSvg("out") + "</button>" +
+        '<button class="tb" type="button" data-a="indent" title="Aumentar recuo (listas)">' + richSvg("ind") + "</button>" +
+        '<span class="sep"></span>' +
+        '<button class="tb" type="button" data-a="quote" title="Citação" aria-pressed="false">' + richSvg("quote") + "</button>" +
+        '<span class="tdd"><button class="tb" type="button" data-a="table" title="Tabela" aria-haspopup="true">' + richSvg("table") + richSvg("car", "car") + "</button></span>" +
+        '<span class="tdd"><button class="tb" type="button" data-a="align" title="Alinhamento" aria-haspopup="true">' + richSvg("al") + richSvg("car", "car") + "</button></span>" +
+        '<span class="sep"></span>' +
+        '<span class="tdd"><button class="tb" type="button" data-a="more" title="Mais opções" aria-haspopup="true">' + richSvg("more") + "</button></span>" +
+      "</div>" +
+      '<div class="red-area site-text" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Conteúdo da página" data-ph="Escreva o conteúdo da página. Use a barra acima para títulos, listas, tabelas e imagens."></div>' +
+      '<textarea class="red-src hidden" spellcheck="false" aria-label="Código HTML"></textarea>' +
+      '<div class="red-foot"><span class="st"></span><span>Fonte, tamanhos e cores seguem o site automaticamente</span></div>';
+    var bar = host.querySelector(".red-bar"), area = host.querySelector(".red-area"), src = host.querySelector(".red-src"), file = host.querySelector("input[type=file]"), foot = host.querySelector(".st"), blockSel = bar.querySelector("[data-a=block]");
+    area.innerHTML = richClean(initial || "");
+    var alive = function () { return document.body.contains(host); };
+
+    function value() { return sourceMode ? richClean(src.value) : richClean(area.innerHTML); }
+    function changed(silent) {
+      var words = (area.textContent.trim().match(/\S+/g) || []).length, imgs = area.querySelectorAll("img").length, tables = area.querySelectorAll("table").length;
+      foot.textContent = words + (words === 1 ? " palavra" : " palavras") + " · " + imgs + (imgs === 1 ? " imagem" : " imagens") + (tables ? " · " + tables + (tables === 1 ? " tabela" : " tabelas") : "");
+      if (!silent && onChange) onChange();
+    }
+    function inArea(node) { return node && (node === area || area.contains(node)); }
+    function saveSel() { var s = getSelection(); if (s.rangeCount && inArea(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange(); }
+    function restoreSel() { area.focus(); if (savedRange) { var s = getSelection(); s.removeAllRanges(); s.addRange(savedRange); } }
+    function closest(re) { var s = getSelection(); if (!s.rangeCount) return null; var n = s.anchorNode; while (n && n !== area) { if (n.nodeType === 1 && re.test(n.tagName)) return n; n = n.parentNode; } return null; }
+    function exec(cmd, val) { restoreSel(); document.execCommand(cmd, false, val || null); normalize(); }
+    // depois de um comando do navegador: troca <b>/<i>/<div>/<span> e estilos pela marcação limpa, sem perder o cursor
+    function normalize() {
+      area.querySelectorAll("b,i,span,font,div").forEach(function (n) {
+        var t = { B: "strong", I: "em" }[n.tagName];
+        if (t) { var e = document.createElement(t); while (n.firstChild) e.appendChild(n.firstChild); n.replaceWith(e); }
+        else if (n.tagName === "DIV" && n.parentNode === area) { var p = document.createElement("p"); while (n.firstChild) p.appendChild(n.firstChild); n.replaceWith(p); }
+        else if (n.tagName !== "DIV") { while (n.firstChild) n.parentNode.insertBefore(n.firstChild, n); n.remove(); }
+      });
+      area.querySelectorAll("[style]").forEach(function (n) { n.removeAttribute("style"); });
+      updateState(); changed();
+    }
+    function updateState() {
+      if (sourceMode) return;
+      var set = function (a, on) { var b = bar.querySelector('[data-a="' + a + '"]'); if (b) b.setAttribute("aria-pressed", on ? "true" : "false"); };
+      set("bold", !!closest(/^(STRONG|B)$/)); set("italic", !!closest(/^(EM|I)$/));
+      set("ul", !!closest(/^UL$/)); set("ol", !!closest(/^OL$/)); set("quote", !!closest(/^BLOCKQUOTE$/));
+      var b = closest(/^(P|H2|H3|H4)$/); blockSel.value = b ? b.tagName.toLowerCase() : "";
+      var inList = !!closest(/^LI$/); bar.querySelector("[data-a=indent]").disabled = !inList; bar.querySelector("[data-a=outdent]").disabled = !inList;
+    }
+    function closeAll() { if (open) { open.remove(); open = null; } }
+    function menu(btn, items, right) {
+      closeAll(); saveSel();
+      var m = h("div", { class: "red-menu" + (right ? " right" : ""), role: "menu" });
+      items.forEach(function (it) {
+        if (it === "-") { m.appendChild(h("hr")); return; }
+        if (it.title) { m.appendChild(h("div", { class: "mt", text: it.title })); return; }
+        if (it.node) { m.appendChild(it.node); return; }
+        var b = h("button", { type: "button", role: "menuitem" }); b.innerHTML = it.icon ? richSvg(it.icon) : ""; b.appendChild(h("span", { text: it.label }));
+        b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { closeAll(); it.run(); });
+        m.appendChild(b);
+      });
+      btn.parentNode.appendChild(m); open = m;
+    }
+    function popAt(node, build) {
+      closeAll();
+      var p = h("div", { class: "red-pop" }); build(p);
+      var hb = host.getBoundingClientRect(), r = node.getBoundingClientRect();
+      p.style.top = (r.bottom - hb.top + 8) + "px"; p.style.left = Math.max(10, Math.min(r.left - hb.left, hb.width - 350)) + "px";
+      host.appendChild(p); open = p;
+      var f = p.querySelector("input"); if (f) setTimeout(function () { f.focus(); if (f.select) f.select(); });
+      return p;
+    }
+    var pbtn = function (label, cls, fn) { return h("button", { type: "button", class: "pbtn" + (cls ? " " + cls : ""), text: label, onclick: fn }); };
+    document.addEventListener("mousedown", function onDown(e) { if (!alive()) return document.removeEventListener("mousedown", onDown); if (open && !open.contains(e.target) && !e.target.closest("[aria-haspopup]")) closeAll(); });
+    host.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
+
+    /* link */
+    function linkDialog() {
+      saveSel();
+      var a = closest(/^A$/), s = getSelection();
+      if (!a && (!s.rangeCount || s.isCollapsed || !inArea(s.anchorNode))) { toast("Selecione o texto que vai virar link.", "err"); return; }
+      popAt(a || s.getRangeAt(0), function (p) {
+        var u = h("input", { type: "url", placeholder: "https://… ou planos.html" }), nt = h("input", { type: "checkbox" });
+        u.value = a ? a.getAttribute("href") : ""; nt.checked = a ? a.target === "_blank" : true;
+        function ok() {
+          var hr = u.value.trim();
+          if (!/^(https?:\/\/\S+|mailto:\S+@\S+|tel:\+?[\d-]{6,}|#[\w-]*|[\w-]+\.html([?#]\S*)?)$/i.test(hr)) { u.classList.add("bad"); toast("Use https://…, mailto:, tel: ou uma página do site (ex.: planos.html).", "err"); return; }
+          closeAll(); restoreSel();
+          var link = a;
+          if (!link) { document.execCommand("createLink", false, hr); link = closest(/^A$/) || area.querySelector('a[href="' + hr.replace(/"/g, "") + '"]'); }
+          if (link) { link.setAttribute("href", hr); if (nt.checked) { link.target = "_blank"; link.rel = "noopener"; } else { link.removeAttribute("target"); link.removeAttribute("rel"); } }
+          normalize();
+        }
+        u.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); ok(); } });
+        p.append(h("label", {}, "Endereço do link", u), h("label", { class: "chk" }, nt, "Abrir em nova aba"),
+          h("div", { class: "row" }, a ? pbtn("Remover link", "danger", function () { closeAll(); var r = document.createRange(); r.selectNodeContents(a); var s2 = getSelection(); s2.removeAllRanges(); s2.addRange(r); document.execCommand("unlink"); normalize(); }) : null,
+            pbtn("Cancelar", "ghost", function () { closeAll(); restoreSel(); }), pbtn(a ? "Salvar" : "Inserir", "", ok)));
+      });
+    }
+
+    /* imagem: enviada ao servidor (validada) e inserida onde está o cursor */
+    function insertImage(j, name) {
+      restoreSel();
+      var alt = String(name || "").replace(/\.[a-z]+$/i, "").replace(/[-_]+/g, " ").replace(/["<>{}|]/g, "").slice(0, 160);
+      var fig = '<figure><img src="' + j.url + '" alt="' + alt + '"><figcaption>Legenda da imagem</figcaption></figure><p><br></p>';
+      var b = closest(/^(P|H2|H3|H4|BLOCKQUOTE|UL|OL|TABLE|FIGURE)$/);
+      while (b && b.parentNode !== area) b = b.parentNode;
+      if (b) { var r = document.createRange(); r.setStartAfter(b); r.collapse(true); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      else { area.focus(); var r2 = document.createRange(); r2.selectNodeContents(area); r2.collapse(false); var s3 = getSelection(); s3.removeAllRanges(); s3.addRange(r2); }
+      document.execCommand("insertHTML", false, fig); normalize();
+      toast("Imagem inserida. Clique nela para mudar a descrição, o tamanho ou a legenda.", "ok");
+    }
+    function upload(f) {
+      if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { toast("Formato não aceito. Envie JPG, PNG ou WebP.", "err"); return; }
+      if (f.size > 2 * 1048576) { toast("Imagem acima de 2 MB. Reduza o arquivo e envie de novo.", "err"); return; }
+      foot.textContent = "Enviando imagem…";
+      uploadFile(f, "doc").then(function (j) { insertImage(j, f.name); }).catch(function (e) { changed(true); fail(e); });
+    }
+    file.addEventListener("change", function () { var f = file.files[0]; file.value = ""; if (f) upload(f); });
+    function figureDialog(fig) {
+      area.querySelectorAll("figure.is-sel").forEach(function (x) { x.classList.remove("is-sel"); }); fig.classList.add("is-sel");
+      var img = fig.querySelector("img");
+      popAt(img, function (p) {
+        var alt = h("input", { type: "text", maxlength: 160 }); alt.value = img.getAttribute("alt") || "";
+        alt.addEventListener("input", function () { img.setAttribute("alt", alt.value.replace(/["<>{}|]/g, "")); changed(); });
+        var cap = h("input", { type: "checkbox" }); cap.checked = !!fig.querySelector("figcaption");
+        cap.addEventListener("change", function () { var c = fig.querySelector("figcaption"); if (cap.checked && !c) fig.appendChild(h("figcaption", { text: "Legenda da imagem" })); else if (!cap.checked && c) c.remove(); changed(); });
+        var segW = h("div", { class: "seg" }), segP = h("div", { class: "seg" });
+        function marks() {
+          segW.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", (b.getAttribute("data-w") === "half") === fig.classList.contains("img-half")); });
+          segP.querySelectorAll("button").forEach(function (b) { var c = b.getAttribute("data-p"); b.setAttribute("aria-pressed", c ? fig.classList.contains(c) : !fig.classList.contains("al-center") && !fig.classList.contains("al-right")); });
+        }
+        [["full", "Inteira"], ["half", "Metade"]].forEach(function (x) { segW.appendChild(h("button", { type: "button", "data-w": x[0], text: x[1], onclick: function () { fig.classList.toggle("img-half", x[0] === "half"); marks(); changed(); } })); });
+        [["", "Esquerda"], ["al-center", "Centro"], ["al-right", "Direita"]].forEach(function (x) { segP.appendChild(h("button", { type: "button", "data-p": x[0], text: x[1], onclick: function () { fig.classList.remove("al-center", "al-right"); if (x[0]) fig.classList.add(x[0]); marks(); changed(); } })); });
+        marks();
+        p.append(h("label", {}, "Descrição da imagem (acessibilidade e Google)", alt),
+          h("div", { class: "pop-lbl", text: "Largura e posição" }), h("div", { class: "seg-row" }, segW, segP),
+          h("label", { class: "chk" }, cap, "Mostrar legenda (edite o texto direto embaixo da imagem)"),
+          h("div", { class: "row" }, pbtn("Remover imagem", "danger", function () { closeAll(); fig.remove(); changed(); }), pbtn("Pronto", "", function () { closeAll(); fig.classList.remove("is-sel"); })));
+      });
+    }
+    area.addEventListener("click", function (e) { var f = e.target.closest("figure"); if (f && e.target.tagName === "IMG") figureDialog(f); else area.querySelectorAll("figure.is-sel").forEach(function (x) { x.classList.remove("is-sel"); }); });
+    area.addEventListener("dragstart", function (e) { if (e.target.tagName === "IMG") e.preventDefault(); });
+
+    /* tabela */
+    function tableMenu(btn) {
+      var td = closest(/^(TD|TH)$/), pick = h("div", { class: "grid-pick" }), lbl = h("div", { class: "grid-lbl", text: "Escolha o tamanho" });
+      for (var r = 1; r <= 6; r++) for (var c = 1; c <= 6; c++) (function (r, c) {
+        var s = h("span", { role: "button", tabindex: "0", "aria-label": r + " linhas por " + c + " colunas" });
+        s.addEventListener("mouseenter", function () { pick.querySelectorAll("span").forEach(function (x, i) { x.classList.toggle("on", Math.floor(i / 6) < r && i % 6 < c); }); lbl.textContent = r + " × " + c + " (1ª linha como cabeçalho)"; });
+        s.addEventListener("mousedown", function (e) { e.preventDefault(); });
+        s.addEventListener("click", function () { closeAll(); insertTable(r, c); });
+        s.addEventListener("keydown", function (e) { if (e.key === "Enter") { closeAll(); insertTable(r, c); } });
+        pick.appendChild(s);
+      })(r, c);
+      var cell = function (tr) { var x = document.createElement(tr.parentNode.tagName === "THEAD" ? "th" : "td"); x.innerHTML = "<br>"; return x; };
+      var items = [{ title: "Inserir tabela" }, { node: pick }, { node: lbl }];
+      if (td) items = items.concat(["-", { title: "Tabela atual" },
+        { label: "Inserir linha abaixo", run: function () { var tr = td.parentNode, n = document.createElement("tr"); for (var i = 0; i < tr.cells.length; i++) { var d = document.createElement("td"); d.innerHTML = "<br>"; n.appendChild(d); } if (tr.parentNode.tagName === "THEAD") td.closest("table").querySelector("tbody").prepend(n); else tr.after(n); changed(); } },
+        { label: "Inserir coluna à direita", run: function () { var i = td.cellIndex; td.closest("table").querySelectorAll("tr").forEach(function (tr) { tr.cells[Math.min(i, tr.cells.length - 1)].after(cell(tr)); }); changed(); } },
+        { label: "Excluir linha", run: function () { var t = td.closest("table"); td.parentNode.remove(); if (!t.querySelector("tbody tr")) t.remove(); changed(); } },
+        { label: "Excluir coluna", run: function () { var i = td.cellIndex, t = td.closest("table"); t.querySelectorAll("tr").forEach(function (tr) { if (tr.cells[i]) tr.cells[i].remove(); }); if (!t.querySelector("td,th")) t.remove(); changed(); } },
+        { label: "Excluir tabela", icon: "trash", run: function () { td.closest("table").remove(); changed(); } }]);
+      menu(btn, items);
+    }
+    function insertTable(r, c) {
+      var t = "<table><thead><tr>", j; for (j = 0; j < c; j++) t += "<th>Título " + (j + 1) + "</th>"; t += "</tr></thead><tbody>";
+      for (var i = 1; i < Math.max(r, 2); i++) { t += "<tr>"; for (j = 0; j < c; j++) t += "<td><br></td>"; t += "</tr>"; }
+      restoreSel(); document.execCommand("insertHTML", false, t + "</tbody></table><p><br></p>"); normalize();
+    }
+
+    /* alinhamento: vira uma classe do site (nada de estilo solto). No site, o texto é justificado por padrão. */
+    function setAlign(cls) {
+      restoreSel();
+      var s = getSelection(); if (!s.rangeCount) return;
+      var r = s.getRangeAt(0), blocks = [];
+      area.querySelectorAll("p,h2,h3,h4,li,blockquote,figure,td,th").forEach(function (b) { if (r.intersectsNode(b) && !b.querySelector("p,li,td,th")) blocks.push(b); });
+      if (!blocks.length) { var b = closest(/^(P|H2|H3|H4|LI|BLOCKQUOTE|FIGURE|TD|TH)$/); if (b) blocks.push(b); }
+      blocks.forEach(function (b) { b.classList.remove("al-left", "al-center", "al-right", "al-justify"); if (cls) b.classList.add(cls); if (!b.className) b.removeAttribute("class"); });
+      changed();
+    }
+
+    /* código-fonte */
+    function toggleSource(btn) {
+      closeAll();
+      if (!sourceMode) { src.value = richClean(area.innerHTML).replace(/(<\/(p|h2|h3|h4|ul|ol|li|blockquote|table|tr|figure)>)/g, "$1\n").replace(/(<(ul|ol|table|thead|tbody|tr)>)/g, "$1\n"); src.style.height = Math.max(320, area.offsetHeight) + "px"; area.classList.add("hidden"); src.classList.remove("hidden"); src.focus(); }
+      else { area.innerHTML = richClean(src.value); src.classList.add("hidden"); area.classList.remove("hidden"); area.focus(); toast("Código aplicado. Marcação que mudaria a tipografia do site (fontes, cores, tamanhos) e scripts foram removidos.", "ok"); }
+      sourceMode = !sourceMode; btn.setAttribute("aria-pressed", String(sourceMode));
+      bar.querySelectorAll(".tb, .tb-sel").forEach(function (b) { if (b !== btn) b.disabled = sourceMode; });
+      changed();
+    }
+
+    bar.addEventListener("mousedown", function (e) { if (e.target.closest("button")) { saveSel(); e.preventDefault(); } });
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-a]"); if (!b || b.tagName === "SELECT" || b.disabled) return;
+      var a = b.getAttribute("data-a"), isOpen = open && open.parentNode === b.parentNode;
+      if (a === "source") return toggleSource(b);
+      if (a === "image") { saveSel(); return file.click(); }
+      if (a === "bold" || a === "italic") return exec(a);
+      if (a === "link") return linkDialog();
+      if (a === "ul") return exec("insertUnorderedList");
+      if (a === "ol") return exec("insertOrderedList");
+      if (a === "indent" || a === "outdent") { if (!closest(/^LI$/)) return toast("O recuo funciona dentro de listas.", "err"); return exec(a); }
+      if (a === "quote") return exec("formatBlock", closest(/^BLOCKQUOTE$/) ? "p" : "blockquote");
+      if (a === "table") return isOpen ? closeAll() : tableMenu(b);
+      if (a === "align") return isOpen ? closeAll() : menu(b, [{ label: "Justificado (padrão do site)", icon: "alj", run: function () { setAlign(""); } }, { label: "Alinhar à esquerda", icon: "al", run: function () { setAlign("al-left"); } }, { label: "Centralizar", icon: "alc", run: function () { setAlign("al-center"); } }, { label: "Alinhar à direita", icon: "alr", run: function () { setAlign("al-right"); } }]);
+      if (a === "more") return isOpen ? closeAll() : menu(b, [{ label: "Desfazer", icon: "undo", run: function () { exec("undo"); } }, { label: "Refazer", icon: "redo", run: function () { exec("redo"); } }, "-",
+        { label: "Remover formatação do trecho", icon: "eraser", run: function () { exec("removeFormat"); exec("unlink"); } }, { label: "Inserir linha divisória", icon: "hr", run: function () { exec("insertHTML", "<hr><p><br></p>"); } }, "-",
+        { label: "Limpar todo o conteúdo", icon: "trash", run: function () { confirmDialog("Limpar todo o conteúdo?", "O texto e as imagens deste editor saem (é preciso salvar depois).", "Limpar", true).then(function (ok) { if (ok) { area.innerHTML = ""; changed(); } }); } }], true);
+    });
+    blockSel.addEventListener("mousedown", saveSel);
+    blockSel.addEventListener("change", function () { exec("formatBlock", blockSel.value); });
+    area.addEventListener("keydown", function (e) {
+      var k = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && k === "k") { e.preventDefault(); linkDialog(); }
+      if ((e.ctrlKey || e.metaKey) && k === "u") e.preventDefault(); // sublinhado não existe no site
+      if (e.key === "Tab" && closest(/^LI$/)) { e.preventDefault(); exec(e.shiftKey ? "outdent" : "indent"); }
+    });
+    // colar: só o conteúdo, sem a formatação de origem; imagem colada é enviada como arquivo
+    area.addEventListener("paste", function (e) {
+      e.preventDefault();
+      var d = e.clipboardData, hh = d.getData("text/html"), t = d.getData("text/plain");
+      var img = Array.prototype.filter.call(d.files || [], function (f) { return /^image\//.test(f.type); })[0];
+      if (img && !hh) { saveSel(); upload(img); return; }
+      var out = hh ? richClean(hh.replace(/<img [^>]*>/gi, "")) : t.split(/\r?\n\s*\r?\n/).map(function (p) { return "<p>" + escHtml(p).replace(/\r?\n/g, "<br>") + "</p>"; }).join("");
+      document.execCommand("insertHTML", false, out); normalize();
+      if (hh) toast("Colado sem a formatação de origem: fontes, cores e tamanhos são os do site." + (/<img /i.test(hh) ? " Imagens coladas de outro lugar não entram: use o botão de imagem." : ""), "ok");
+    });
+    area.addEventListener("input", normalize);
+    document.addEventListener("selectionchange", function onSel() { if (!alive()) return document.removeEventListener("selectionchange", onSel); if (inArea(getSelection().anchorNode)) { saveSel(); updateState(); } });
+    src.addEventListener("input", function () { if (onChange) onChange(); });
+    changed(true);
+    return { el: host, value: value };
+  }
+  // prévia de como o conteúdo aparece no site (tipografia do site), uma por área
+  function sitePreview(type) {
+    var title = h("h1"), crumb = h("div", { class: "crumb" }), body = h("div", { class: "site-text site-rich" });
+    var box = function (k) { return h("div", { class: "box" }, h("span", { class: "k", text: k }), h("div", { class: "bars" }, h("i"), h("i"), h("i"))); };
+    var el = h("div", { class: "card" }, h("h2", { text: "Como aparece no site" }), h("p", { class: "desc", text: "Prévia da página do ano com a tipografia do site. Atualiza enquanto você escreve. Para ver a página completa, salve e use Visualizar rascunho." }),
+      h("div", { class: "site-page" }, crumb, h("div", { class: "hero" }, title),
+        box(type === "rn565" ? "Resumo do reajuste" : "Nota e dimensões"),
+        type === "idss" ? box("Notas por dimensão") : null,
+        h("div", { class: "s-content" }, h("span", { class: "pill", text: "Conteúdo da página" }), body),
+        box(type === "rn565" ? "Contratos do agrupamento" : "Imagens do resultado")));
+    return { el: el, update: function (ano, extra, html) {
+      crumb.textContent = "Início › MedicGLOBAL › Documentos › " + (type === "rn565" ? "RN 565 › Agrupamento " : "IDSS › IDSS ") + ano;
+      title.textContent = type === "rn565" ? "Agrupamento de contratos RN 565 — " + ano : "IDSS " + ano + (extra ? " (ano-base " + extra + ")" : "");
+      body.innerHTML = html || '<p class="empty">Sem conteúdo. Escreva no editor acima.</p>';
+    } };
+  }
+
   /* ---------- documentos anuais: RN 565 (reajuste) e IDSS ---------- */
   var DOC_INFO = {
     rn565: { title: "Reajuste de contratos (RN 565)", unit: "agrupamento", page: function (a) { return "pt/rn565-agrupamento-" + a + ".html"; }, main: "pt/rn565.html" },
@@ -903,7 +1230,7 @@
               h("td", { text: type === "rn565" ? (x.contratos.length ? x.contratos.length + " contratos" : "PDF") : x.imagens.length + " imagem(ns)" }),
               h("td", {}, h("div", { class: "actions" },
                 h("a", { class: "btn btn--ghost btn--sm", href: "#/docs/" + type + "/" + x.ano }, icon("edit"), "Editar dados"),
-                type === "idss" || x.contratos.length ? h("a", { class: "btn btn--quiet btn--sm", href: "#/page/" + D.page(x.ano) }, "Textos da página") : null)));
+                type === "idss" || x.contratos.length || x.conteudo ? h("a", { class: "btn btn--quiet btn--sm", href: "#/page/" + D.page(x.ano) }, "Textos da página") : null)));
           }))))));
     }).catch(fail);
   };
@@ -916,6 +1243,18 @@
     var nextYear = latest ? latest.ano + 1 : new Date().getFullYear();
     var ano = mk("ano", "Ano", cur ? cur.ano : nextYear, { num: true });
     var body, collect;
+    // conteúdo da página do ano (texto e imagens em qualquer ordem) e a prévia de como aparece no site
+    var prev = sitePreview(type), getExtra = function () { return ""; };
+    var editor = richEditor(cur ? cur.conteudo : "", function () { touch(); refreshPrev(); });
+    var refreshPrev = function () { prev.update(ano.input.value, getExtra(), editor.value()); };
+    ano.input.addEventListener("input", refreshPrev);
+    F.conteudo = h("div", { class: "field" }, h("span", { class: "err", role: "alert" }));
+    F.conteudo.setError = function (m) { F.conteudo.firstChild.textContent = m || ""; };
+    var contentCard = function (where) {
+      return h("div", { class: "card" }, h("h2", { text: "Conteúdo da página" }),
+        h("p", { class: "desc", text: where + " Opcional. Use a barra para títulos, listas, tabelas, links e imagens, na ordem que quiser. A versão em inglês é traduzida automaticamente ao salvar." }),
+        editor.el, F.conteudo);
+    };
     if (type === "rn565") {
       var ini = mk("inicio", "Início da aplicação", cur ? cur.inicio : "01/05/" + nextYear, { ph: "DD/MM/AAAA" });
       var fim = mk("fim", "Fim da aplicação", cur ? cur.fim : "30/04/" + (nextYear + 1), { ph: "DD/MM/AAAA" });
@@ -949,13 +1288,16 @@
       F.contratos = field("Relação de contratos", area, { hint: "Uma linha por contrato: contrato; plano; registro ANS (separados por ponto e vírgula ou tabulação — dá para colar direto do Excel)." });
       F.pdfFile = h("div", {});
       body = [h("div", { class: "card" }, h("h2", { text: "Dados do reajuste" }), h("div", { class: "grid2" }, ano, pct, ini, fim)),
+        contentCard("Aparece na página do ano, depois do resumo do reajuste e antes da tabela de contratos."), prev.el,
         h("div", { class: "card" }, h("h2", { text: "Contratos do agrupamento" }), h("p", { class: "desc", text: "Cole a relação de contratos ou importe uma planilha salva em CSV. Se o agrupamento só existir em PDF, envie o arquivo abaixo." }),
           h("div", { class: "actions" }, h("label", { class: "btn btn--ghost btn--sm", for: csvIn.id }, "Importar planilha (CSV)"), latest && latest.contratos.length && isNew ? h("button", { class: "btn btn--quiet btn--sm", type: "button", text: "Copiar a relação de " + latest.ano, onclick: function () { area.value = latest.contratos.map(function (c) { return [c.contrato, c.plano, c.registro].join(";"); }).join("\n"); touch(); parse(); } }) : null, count), csvIn,
           h("div", { class: "mt" }), F.contratos, h("h3", { class: "mt", text: "Ou: PDF do agrupamento" }), pdfIn, pdfBox, F.pdfFile)];
-      collect = function () { return { ano: +ano.input.value, percentual: pct.input.value, inicio: ini.input.value, fim: fim.input.value, contratos: rows, pdfFile: pdfFile || "" }; };
+      collect = function () { return { ano: +ano.input.value, percentual: pct.input.value, inicio: ini.input.value, fim: fim.input.value, contratos: rows, pdfFile: pdfFile || "", conteudo: editor.value() }; };
     } else {
       var res = cur ? cur.resultado : { nota: "", dim: ["", "", "", ""], acred: "Operadora não bonificada", bonus: "0,0000 · Operadora não bonificada" };
       var base = mk("anoBase", "Ano-base", cur ? cur.anoBase : nextYear - 1, { num: true });
+      getExtra = function () { return base.input.value; };
+      base.input.addEventListener("input", function () { refreshPrev(); });
       ano.input.addEventListener("input", function () { if (isNew && +ano.input.value > 1999) base.input.value = +ano.input.value - 1; });
       var nota = mk("nota", "Nota IDSS", res.nota, { ph: "0,4859", num: true });
       var DIMS = [["IDQS", "Qualidade em Atenção à Saúde"], ["IDGA", "Garantia de Acesso"], ["IDSM", "Sustentabilidade no Mercado"], ["IDGR", "Gestão de Processos e Regulação"]];
@@ -984,23 +1326,25 @@
       F.dim = h("div", { class: "field" }, h("span", { class: "err", role: "alert" }));
       F.dim.setError = function (m) { F.dim.firstChild.textContent = m || ""; };
       body = [h("div", { class: "card" }, h("h2", { text: "Resultado divulgado pela ANS" }), h("div", { class: "grid3" }, ano, base, nota), h("div", { class: "grid2" }, dims), F.dim, h("div", { class: "grid2" }, acred, bonus)),
-        h("div", { class: "card" }, h("h2", { text: "Imagens do resultado" }), h("p", { class: "desc", text: "Capturas do painel da ANS com o resultado do ano, na ordem em que devem aparecer na página." }), imgGuide("doc"), imgIn, grid, F.imagens)];
-      collect = function () { return { ano: +ano.input.value, anoBase: +base.input.value, resultado: { nota: nota.input.value.trim(), dim: dims.map(function (d) { return d.input.value.trim(); }), acred: acred.input.value, bonus: bonus.input.value }, imagens: imgs.map(function (i) { return i.path; }) }; };
+        h("div", { class: "card" }, h("h2", { text: "Imagens do resultado" }), h("p", { class: "desc", text: "Capturas do painel da ANS com o resultado do ano, na ordem em que devem aparecer na página." }), imgGuide("doc"), imgIn, grid, F.imagens),
+        contentCard("Aparece na página do ano, depois das notas por dimensão e antes das imagens do resultado."), prev.el];
+      collect = function () { return { ano: +ano.input.value, anoBase: +base.input.value, resultado: { nota: nota.input.value.trim(), dim: dims.map(function (d) { return d.input.value.trim(); }), acred: acred.input.value, bonus: bonus.input.value }, imagens: imgs.map(function (i) { return i.path; }), conteudo: editor.value() }; };
     }
     var alert = h("div", { class: "alert alert--err hidden", role: "alert" });
     var saveBtn = h("button", { class: "btn", type: "button", text: isNew ? "Cadastrar ano" : "Salvar alterações", onclick: function () {
       Object.keys(F).forEach(function (k) { if (F[k].setError) F[k].setError(""); }); alert.classList.add("hidden");
       var b = Object.assign(collect(), cur ? { original: cur.ano } : {});
-      saveBtn.disabled = true;
+      var label = saveBtn.textContent;
+      saveBtn.disabled = true; saveBtn.textContent = b.conteudo ? "Salvando e traduzindo…" : "Salvando…";
       api("PUT", "/api/admin/docs?type=" + type, b).then(function (j) {
         changed = false; toast((isNew ? "Ano " + b.ano + " cadastrado" : "Dados de " + b.ano + " salvos") + " no rascunho. Publique para colocar no ar.", "ok");
         refreshStatus(); navPages = null; refreshPagesNav();
-        location.hash = type === "rn565" && !b.contratos.length ? "#/page/" + D.main : "#/page/" + j.key;
+        location.hash = type === "rn565" && !b.contratos.length && !b.conteudo ? "#/page/" + D.main : "#/page/" + j.key;
       }).catch(function (e) {
         var f = e.fields || {};
         Object.keys(f).forEach(function (k) { var t = F[k] || (k === "nota" ? F.nota : null); if (t && t.setError) t.setError(f[k]); });
         alert.textContent = e.message; alert.classList.remove("hidden"); alert.scrollIntoView({ block: "center" });
-      }).then(function () { saveBtn.disabled = false; });
+      }).then(function () { saveBtn.disabled = false; saveBtn.textContent = label; });
     } });
     var del = !isNew ? h("button", { class: "btn btn--quiet", type: "button", onclick: function () {
       confirmDialog("Remover o ano " + cur.ano + "?", "A página deste ano sai do site (português e inglês) na próxima publicação.", "Remover", true).then(function (ok) {
@@ -1011,6 +1355,7 @@
       head(isNew ? "Cadastrar novo ano · " + D.title : D.title + " · " + cur.ano, "A página do ano é gerada automaticamente em português e em inglês, no mesmo modelo dos anos anteriores, e entra no histórico."),
       alert, body,
       h("div", { class: "savebar" }, h("span", { class: "grow", text: "As alterações entram no site após Publicar." }), del, h("a", { class: "btn btn--ghost", href: "#/docs/" + type, text: "Cancelar" }), saveBtn));
+    refreshPrev();
   }
 
   /* ---------- seletor de imagem (envio com validação + biblioteca) ---------- */
@@ -1172,10 +1517,10 @@
       var en = h("input", { type: "checkbox" }); en.checked = f.enabled;
       var emails = inp({ type: "text", value: f.emails.join(", "), placeholder: "atendimento@medicglobal.com.br, outro@…" });
       var hook = inp({ type: "url", value: "", placeholder: f.webhook ? "Configurado (" + f.webhook + ") — preencha para trocar" : "https://… (opcional: CRM, planilha, automação)" });
-      var mb = inp({ type: "number", min: 1, max: 50, value: f.maxUploadMB });
+      var mb = inp({ type: "number", min: 1, max: 10240, value: f.maxUploadMB });
       var fe = field("Enviar aviso por e-mail para", emails, { hint: "Separe vários e-mails por vírgula. Requer o servidor de e-mail (SMTP) configurado abaixo." });
       var fh = field("Webhook (envio automático dos dados)", hook, { hint: "Recebe um POST em JSON a cada envio. O endereço fica cifrado no servidor." });
-      var fm = field("Tamanho máximo do anexo (MB)", mb, { hint: "Vale para o site e para o servidor. Atualize também o texto do rótulo do campo na página." });
+      var fm = field("Tamanho máximo do anexo (MB)", mb, { hint: "Padrão: 1024 MB (1 GB). O servidor aceita até 10240 MB (10 GB). Vale para o site e para o servidor. Atualize também o texto do rótulo do campo na página." });
       var hasFile = f.fields.some(function (x) { return x.type === "file"; });
       var save = h("button", { class: "btn btn--sm", type: "button", text: "Salvar destinos", onclick: function () {
         [fe, fh, fm].forEach(function (x) { x.setError(""); });

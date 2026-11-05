@@ -186,7 +186,7 @@ function build(opts = {}) {
       const a = content.analytics || {}, live = !content.preview;
       const cfg = { ga: live && a.enabled && a.measurementId ? a.measurementId : "", gtm: live && a.enabled && a.gtmId ? a.gtmId : "", forms: live };
       // limite do anexo (Trabalhe conosco) definido no painel; o servidor aplica o mesmo limite
-      const mb = (content.forms && content.forms.trabalhe_conosco && content.forms.trabalhe_conosco.maxUploadMB) || 10;
+      const mb = (content.forms && content.forms.trabalhe_conosco && content.forms.trabalhe_conosco.maxUploadMB) || 1024;
       html = html.replace(/data-max-bytes="\d+"/g, `data-max-bytes="${mb * 1048576}"`);
       html = html.replace("</head>", `<script>window.MG_CFG=${JSON.stringify(cfg)}</script>\n</head>`);
     }

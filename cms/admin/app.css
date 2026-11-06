@@ -115,7 +115,6 @@ select.input option, .field select option { background: var(--field); color: var
 .dd-item .lbl { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .dd-item:hover { background: var(--tint); color: var(--ink); }
 .dd-item.is-active { background: var(--panel); color: var(--glow); font-weight: 600; }
-.dd-add { color: var(--glow); font-weight: 500; margin-top: 4px; }
 .dd-item .mark { margin-top: 6px; }
 .side .nav--dd.is-active { background: transparent; color: var(--glow); }
 .side .nav--dd .grow { overflow-wrap: anywhere; }
@@ -521,3 +520,7 @@ select::-ms-expand { display: none; }
 .site-page .s-content { margin: 0 26px 18px; padding: 22px 0 14px; border-top: 2px dashed #D9A43A; border-bottom: 2px dashed #D9A43A; position: relative; }
 .site-page .s-content .pill { position: absolute; top: -12px; left: 0; background: #FBE7B6; color: #6B4A06; font: 600 .7rem "Montserrat", sans-serif; border-radius: 999px; padding: 3px 10px; }
 @media (max-width: 640px) { .red-area { padding: 16px; } .site-page .crumb, .site-page .hero { padding-left: 16px; padding-right: 16px; } .site-page .box, .site-page .s-content { margin-left: 16px; margin-right: 16px; } }
+
+/* menu lateral: sem ícones nos itens; setas menores */
+.side .dd-chev .ico, .side .dd-chev .ico svg { width: 14px; height: 14px; }
+.side .dd-chev .ico svg { stroke-width: 1.4; }

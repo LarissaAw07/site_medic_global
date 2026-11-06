@@ -254,7 +254,7 @@
       NAV.map(function (g) {
         var items = g[1].filter(function (n) { return can(n[3]); });
         if (!items.length) return null;
-        return [h("div", { class: "side-group", text: g[0] }), items.map(function (n) { return n[0] === "pages" ? menusNav() : h("a", { class: "nav", href: "#/" + n[0], "data-nav": n[0] }, icon(n[2]), n[1]); })];
+        return [h("div", { class: "side-group", text: g[0] }), items.map(function (n) { return n[0] === "pages" ? menusNav() : h("a", { class: "nav", href: "#/" + n[0], "data-nav": n[0] }, n[1]); })];
       }),
       h("div", { class: "side-user" }, h("span", { class: "avatar", text: initials }),
         h("div", { class: "who" }, h("b", { text: (S.user && S.user.name) || "Administrador" }), h("span", { text: S.user ? S.user.email : "" })),
@@ -287,7 +287,7 @@
     return DD.map(function (d) {
       var list = h("div", { class: "dd", id: "dd-" + d[0], hidden: true });
       var btn = h("button", { class: "nav nav--dd", type: "button", "data-dd": d[0], "aria-expanded": "false", "aria-controls": "dd-" + d[0], onclick: function () { toggleDd(d[0]); } },
-        icon(d[2]), h("span", { class: "grow", text: d[1] }), h("span", { class: "dd-chev" }, icon("chev")));
+        h("span", { class: "grow", text: d[1] }), h("span", { class: "dd-chev" }, icon("chev")));
       return h("div", { class: "dd-wrap" }, btn, list);
     });
   }
@@ -307,7 +307,7 @@
         var items = r.pages.filter(function (p) { return p.group === d[3]; });
         fill(list, items.map(function (p) {
           return h("a", { class: "dd-item", href: "#/page/" + p.key, "data-key": p.key }, h("span", { class: "lbl", text: p.title }), p.pending ? h("i", { class: "mark on", title: "Alterações ainda não publicadas" }) : null);
-        }), d[4] ? h("a", { class: "dd-item dd-add", href: "#/docs/" + d[4] + "/novo", "data-doc": d[4] }, h("span", { class: "lbl", text: "+ Cadastrar novo ano" })) : null);
+        }));
       });
       markDd();
     }).catch(fail);
@@ -315,7 +315,6 @@
   // destaca o item aberto e abre o menu em que ele está
   function markDd() {
     document.querySelectorAll(".dd-item[data-key]").forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("data-key") === S.openKey); });
-    document.querySelectorAll(".dd-add").forEach(function (a) { a.classList.toggle("is-active", a.getAttribute("data-doc") === S.openDoc); });
     document.querySelectorAll(".nav--dd").forEach(function (b) { b.classList.toggle("is-active", !!document.querySelector("#" + b.getAttribute("aria-controls") + " .dd-item.is-active")); });
     var cur = document.querySelector(".dd-item.is-active");
     if (cur) toggleDd(cur.closest(".dd").id.slice(3), true);

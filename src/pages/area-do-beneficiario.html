@@ -1,0 +1,68 @@
+<!--@{
+  "title": "Área do Beneficiário | Acesso com matrícula e senha | MedicGLOBAL",
+  "description": "Entre na Área do Beneficiário MedicGLOBAL com a sua matrícula e senha para consultar carteirinha, boletos, autorizações e dados do plano.",
+  "active": "voce",
+  "og": "old_medica_paciente",
+  "crumbs": [["Para você", "beneficiario.html"], ["Área do Beneficiário", "area-do-beneficiario.html"]],
+  "extraScripts": "<script src=\"assets/js/area-do-beneficiario.js\" defer></script>"
+}@-->
+
+<!-- Acesso à Área do Beneficiário (substitui a tela de cliente.medicglobal.com.br no visual do site).
+     Formulário à esquerda e painel da marca à direita (o inverso do Guia médico).
+     Por enquanto só a parte visual; a ligação com o sistema de login será feita depois. -->
+<section class="section ab-sec" aria-labelledby="t">
+  <div class="wrap">
+    {{crumbs}}
+    <div class="ab-shell" data-area-beneficiario>
+      <div class="ab-card">
+        <div class="ab-card-head">
+          <span class="ab-lock">{{i:lock}}</span>
+          <div>
+            <h1 id="t">Seja bem-vindo!</h1>
+            <p class="muted">Entre com a matrícula da sua carteirinha e a sua senha.</p>
+          </div>
+        </div>
+        <form class="ab-form" novalidate>
+          <div class="field">
+            <label for="ab-mat">Matrícula</label>
+            <div class="ab-input">{{i:card}}<input id="ab-mat" name="matricula" inputmode="numeric" autocomplete="username" required aria-describedby="ab-mat-err"></div>
+            <span class="error" id="ab-mat-err">Informe a sua matrícula.</span>
+          </div>
+          <div class="field">
+            <label for="ab-senha">Senha</label>
+            <div class="ab-input">{{i:lock}}<input id="ab-senha" name="senha" type="password" autocomplete="current-password" required aria-describedby="ab-senha-err"><button type="button" class="ab-eye" aria-pressed="false" aria-controls="ab-senha">Mostrar</button></div>
+            <span class="error" id="ab-senha-err">Informe a sua senha.</span>
+          </div>
+          <div class="ab-row">
+            <label class="check"><input type="checkbox" name="lembrar"> Lembrar dados de acesso</label>
+            <a class="ab-forgot" href="{{L.links.recuperarSenha}}" target="_blank" rel="noopener">Esqueceu a senha?</a>
+          </div>
+          <button class="btn ab-go" type="submit">Acessar</button>
+          <p class="ab-status" role="status" hidden></p>
+        </form>
+        <div class="ab-first">
+          <span>Primeira vez por aqui?</span>
+          <a class="btn btn--ghost btn--sm" href="{{L.links.primeiroAcesso}}" target="_blank" rel="noopener">Fazer primeiro acesso</a>
+        </div>
+        <p class="ab-safe">{{i:shield}} Ambiente seguro. A MedicGLOBAL não pede a sua senha por telefone, e-mail ou WhatsApp.</p>
+      </div>
+
+      <div class="ab-brand">
+        <svg class="ab-deco" viewBox="0 0 400 400" fill="none" aria-hidden="true"><circle cx="40" cy="380" r="90"/><circle cx="40" cy="380" r="160"/><circle cx="40" cy="380" r="230" stroke-dasharray="2 8"/></svg>
+        <img class="ab-logo" src="assets/img/brand/logo-medicglobal-saude-branco.png" alt="MedicGLOBAL Saúde" width="200" height="80">
+        <div class="ab-intro">
+          <span class="ab-eyebrow">Área do Beneficiário</span>
+          <h2>Seu plano, na palma da mão</h2>
+          <p>Depois de entrar, você consulta tudo o que precisa sobre o seu plano em um só lugar.</p>
+        </div>
+        <ul class="ab-feats" role="list">
+          <li><span>{{i:card}}</span><strong>Carteirinha</strong><small>Dados para o atendimento</small></li>
+          <li><span>{{i:receipt}}</span><strong>Boletos</strong><small>Segunda via e pagamentos</small></li>
+          <li><span>{{i:file-check}}</span><strong>Autorizações</strong><small>Acompanhe os pedidos</small></li>
+          <li><span>{{i:doc}}</span><strong>Meu plano</strong><small>Cobertura e abrangência</small></li>
+        </ul>
+      </div>
+    </div>
+    <p class="ab-help">Problemas para entrar? <a href="atendimento.html#beneficiario">Fale com o atendimento</a></p>
+  </div>
+</section>

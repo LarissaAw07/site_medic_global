@@ -27,7 +27,7 @@ const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=
 const PARTIALS = { "plan-cards": "Cards dos planos", "store-buttons": "Botões das lojas de aplicativo" };
 // ordem do site (sequência do menu principal), usada na lista de páginas e no "anterior/próxima" do editor
 const SITE_ORDER = [
-  ["index.html", "Início"], ["beneficiario.html", "Para você"], ["planos.html", "Planos"], ["rede-credenciada.html", "Rede de cuidado"], ["guia-medico.html", "Rede de cuidado"],
+  ["index.html", "Início"], ["beneficiario.html", "Para você"], ["planos.html", "Planos"], ["rede-credenciada.html", "Rede de cuidado"], ["area-do-beneficiario.html", "Para você"], ["guia-medico.html", "Rede de cuidado"],
   ["telemedicina.html", "Serviços"], ["servicos.html", "Serviços"], ["atendimento.html", "Atendimento"], ["contato.html", "Atendimento"],
   ["medicglobal.html", "MedicGLOBAL"], ["trabalhe-conosco.html", "MedicGLOBAL"], ["documentos.html", "MedicGLOBAL"],
   ["conteudos.html", "Conteúdos"], ["artigo-reajuste-2020.html", "Conteúdos"], ["privacidade.html", "Rodapé"], ["404.html", "Página de erro"],
@@ -129,7 +129,7 @@ function sources(content) {
   return srcCache.data;
 }
 // nomes das páginas no painel (as demais usam o título da própria página)
-const PAGE_NAMES = { "index.html": "Página inicial", "planos.html": "Planos", "rede-credenciada.html": "Rede credenciada", "guia-medico.html": "Guia médico", "telemedicina.html": "Telemedicina", "servicos.html": "Serviços", "beneficiario.html": "Área do beneficiário", "atendimento.html": "Atendimento e ouvidoria", "contato.html": "Contato", "medicglobal.html": "Institucional (MedicGLOBAL)", "conteudos.html": "Conteúdos", "documentos.html": "Documentos", "trabalhe-conosco.html": "Trabalhe conosco", "privacidade.html": "Política de privacidade", "404.html": "Página não encontrada (404)", "rn565.html": "Histórico de reajustes", "idss.html": "Histórico do IDSS" };
+const PAGE_NAMES = { "index.html": "Página inicial", "planos.html": "Planos", "rede-credenciada.html": "Rede credenciada", "guia-medico.html": "Guia médico", "telemedicina.html": "Telemedicina", "servicos.html": "Serviços", "beneficiario.html": "Área do beneficiário", "area-do-beneficiario.html": "Acesso à Área do Beneficiário", "atendimento.html": "Atendimento e ouvidoria", "contato.html": "Contato", "medicglobal.html": "Institucional (MedicGLOBAL)", "conteudos.html": "Conteúdos", "documentos.html": "Documentos", "trabalhe-conosco.html": "Trabalhe conosco", "privacidade.html": "Política de privacidade", "404.html": "Página não encontrada (404)", "rn565.html": "Histórico de reajustes", "idss.html": "Histórico do IDSS" };
 const pageTitle = (p) => {
   if (p.partial) return p.meta.title;
   if (PAGE_NAMES[p.file]) return PAGE_NAMES[p.file];

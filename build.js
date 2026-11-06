@@ -301,7 +301,8 @@ function build(opts = {}) {
       };
       let html = finish(bust(render(partial("layout"), Object.assign({}, ctx, { content: body }))));
       // em /en/ os arquivos estáticos ficam um nível acima
-      if (L.dir) html = html.replace(/(href|src)="assets\//g, '$1="../assets/');
+      if (L.dir) html = html.replace(/(href|src)="assets\//g, '$1="../assets/')
+        .replace(/srcset="([^"]*)"/g, (_, v) => `srcset="${v.replace(/(^|,\s*)assets\//g, "$1../assets/")}"`);
       fs.writeFileSync(path.join(langOut, file), html);
       written.add(path.join(L.dir, file));
       if (!meta.noindex) sitemap.push(url);
@@ -322,6 +323,7 @@ function build(opts = {}) {
   if (!opts.quiet) log("✓ sitemap.xml, robots.txt");
   return report;
 }
+
 
 module.exports = build;
 module.exports.loadSources = loadSources;

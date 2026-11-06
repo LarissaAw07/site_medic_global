@@ -45,12 +45,12 @@ node cms/server.js                           # http://127.0.0.1:8788/admin (site
 
 ### Produção (VPS) — uma vez
 
-1. Node 18+ na VPS; usuário de sistema `medicglobal`; pastas `/opt/medicglobal/app` (código), `/var/lib/medicglobal-cms` (dados, permissão 700) e a pasta atual do nginx (`VPS_PATH`) com escrita para `medicglobal`.
+1. Node 22 ou 24 (LTS com suporte) na VPS; usuário de sistema `medicglobal`; pastas `/opt/medicglobal/app` (código), `/var/lib/medicglobal-cms` (dados, permissão 700) e a pasta atual do nginx (`VPS_PATH`) com escrita para `medicglobal`.
 2. `/etc/medicglobal-cms.env` a partir de `deploy/medicglobal-cms.env.example` (gerar `CMS_SECRET_KEY` com `openssl rand -hex 32`).
 3. Serviço: `deploy/medicglobal-cms.service` → `systemctl enable --now medicglobal-cms`.
-4. nginx: incluir `deploy/nginx-medicglobal-cms.conf` no `server {}` do site.
+4. nginx: criar as zonas de limite no `http {}` (ver o topo de `deploy/nginx-medicglobal-cms.conf`) e incluir `deploy/nginx-medicglobal-cms.conf` no `server {}` do site.
 5. Administrador: `sudo -u medicglobal env $(cat /etc/medicglobal-cms.env | xargs) node /opt/medicglobal/app/cms/setup.js email@dominio` (anote a senha provisória exibida).
-6. GitHub: segredo `VPS_APP_PATH=/opt/medicglobal/app`, variável `CMS_ENABLED=true` e permissão para o usuário do deploy rodar `sudo systemctl restart medicglobal-cms` sem senha. Com isso, o deploy envia o código e reinicia o serviço (que regera o site com o conteúdo do painel). Sem `CMS_ENABLED`, o deploy continua 100% estático, como antes.
+6. GitHub: segredos `VPS_APP_PATH=/opt/medicglobal/app` e `VPS_KNOWN_HOSTS` (identidade da VPS, gerada uma vez com `ssh-keyscan -p PORTA -H HOST`), variável `CMS_ENABLED=true` e permissão para o usuário do deploy rodar `sudo systemctl restart medicglobal-cms` sem senha. Com isso, o deploy envia o código e reinicia o serviço (que regera o site com o conteúdo do painel). Sem `CMS_ENABLED`, o deploy continua 100% estático, como antes.
 
 ## Pendências antes de publicar (detalhes em `mapa-de-migracao.html`)
 

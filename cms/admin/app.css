@@ -64,7 +64,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .checklist li.ok { color: var(--ok); } .checklist li.ok::before { content: "✓ "; }
 
 /* ---------- formulário ---------- */
-.field { display: grid; gap: 6px; margin-bottom: 16px; min-width: 0; }
+.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin-bottom: 16px; min-width: 0; }
 .field > label, .label { font-weight: 600; font-size: .84rem; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
 .field .hint { font-size: .78rem; color: var(--ink-3); }
 .input, .field input[type=text], .field input[type=email], .field input[type=password], .field input[type=url], .field input[type=number], .field input[type=date], .field input[type=search], .field select, .field textarea, .rich {
@@ -422,7 +422,7 @@ select::-ms-expand { display: none; }
 .field input[type=date] { padding-right: 12px; }
 .field input[type=date]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .75; filter: invert(1); opacity: .7; margin-left: 6px; }
 .field input[type=number] { padding-right: 8px; }
-.field input[type=file] { max-width: 100%; }
+.field input[type=file] { max-width: 100%; min-width: 0; }
 /* campo obrigatório */
 .req { color: var(--glow); font-weight: 700; }
 /* orientação de formato e tamanho das imagens */
@@ -531,6 +531,7 @@ select::-ms-expand { display: none; }
 @media (max-width: 640px) {
   input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]), select, textarea { font-size: max(16px, 1em); }
   .btn { white-space: normal; text-align: center; }
+  .red .tb-sel { font-size: 16px; }
   .table.audit thead { display: none; }
   .table.audit, .table.audit tbody { display: block; width: 100%; }
   .table.audit td { display: block; }
@@ -539,3 +540,12 @@ select::-ms-expand { display: none; }
   .table.audit td:nth-child(3) { grid-column: 1 / -1; margin-top: 8px; }
   .table.audit tr:last-child { border-bottom: 0; }
 }
+
+/* envios recebidos (formulários) */
+.sub-card { display: grid; gap: 10px; }
+.sub-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.sub-rows { display: grid; gap: 6px; }
+.sub-row { display: grid; grid-template-columns: minmax(120px, 200px) minmax(0, 1fr); gap: 4px 14px; font-size: .9rem; }
+.sub-k { color: var(--ink-3); font-weight: 600; font-size: .82rem; }
+.sub-v { overflow-wrap: anywhere; white-space: pre-wrap; }
+@media (max-width: 640px) { .sub-row { grid-template-columns: minmax(0, 1fr); gap: 0; } }

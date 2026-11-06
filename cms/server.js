@@ -732,7 +732,7 @@ on("POST", "/api/admin/login", async (req, res) => {
   if (!sameOrigin(req)) return json(res, 403, { error: "Origem não permitida." });
   const b = await readJson(req, 10000);
   if (!b.email || !b.password) return json(res, 400, { error: "Informe o e-mail e a senha." });
-  const r = auth.login(b.email, b.password, clientIp(req));
+  const r = await auth.login(b.email, b.password, clientIp(req));
   if (r.error) return json(res, r.status, { error: r.error });
   res.setHeader("Set-Cookie", `${COOKIE}=${r.session.sid}; HttpOnly; SameSite=Strict; Path=/${isHttps(req) ? "; Secure" : ""}; Max-Age=${12 * 3600}`);
   json(res, 200, { csrf: r.session.csrf, user: userInfo(r.user), mustChange: !!r.user.mustChange });
@@ -754,7 +754,7 @@ on("GET", "/api/admin/me", async (req, res, s) => {
 /* ---------- usuários (até auth.MAX_USERS) ---------- */
 const usersView = () => ({
   max: auth.MAX_USERS, perms: auth.PERMS,
-  users: auth.users.all().map((u) => Object.assign(userInfo(u), { createdAt: u.createdAt, mustChange: !!u.mustChange, locked: u.lockedUntil > Date.now() })),
+  users: auth.users.all().map((u) => Object.assign(userInfo(u), { createdAt: u.createdAt, mustChange: !!u.mustChange, locked: auth.isLocked(u.email) })),
 });
 function userFields(b, errors) {
   const name = String(b.name || "").trim();
@@ -785,6 +785,7 @@ on("PUT", "/api/admin/users", async (req, res, s) => {
   const b = await readJson(req, 10000);
   const u = auth.users.find(b.email);
   if (!u) return json(res, 404, { error: "Usuário não encontrado." });
+  if (u.role === "admin" && s.user.role !== "admin") return json(res, 403, { error: "Só o administrador principal pode alterar a própria conta." });
   const errors = {};
   const { name, perms } = userFields(Object.assign({ perms: u.role === "admin" ? ["pages"] : u.perms }, b), errors);
   if (u.email === s.email && u.role !== "admin" && !perms.includes("users")) errors.perms = "Você não pode tirar de si mesmo a permissão de gerenciar usuários.";
@@ -801,10 +802,13 @@ on("POST", "/api/admin/users/reset", async (req, res, s) => {
   const u = auth.users.find(b.email);
   if (!u) return json(res, 404, { error: "Usuário não encontrado." });
   if (u.email === s.email) return json(res, 422, { error: "Para a sua própria senha, use “Trocar a minha senha”." });
+  // segurança: quem não é o administrador principal não pode redefinir a senha dele (evita assumir o acesso total)
+  if (u.role === "admin") return json(res, 403, { error: "A senha do administrador principal só pode ser trocada por ele mesmo, em “Trocar a minha senha”." });
   const pw = b.password ? String(b.password) : auth.tempPassword();
   const prob = auth.passwordProblem(pw, u.email);
   if (prob) return json(res, 422, { error: prob, fields: { password: prob } });
   auth.users.upsert(u.email, pw, { mustChange: true });
+  auth.unlock(u.email);
   auth.dropOtherSessions(u.email, null);
   store.audit(s.email, "senha_redefinida", u.email);
   json(res, 200, Object.assign(usersView(), { password: b.password ? null : pw }));
@@ -835,7 +839,13 @@ on("GET", "/api/admin/audit", async (req, res, s, url) => {
 on("POST", "/api/admin/password", async (req, res, s) => {
   const b = await readJson(req, 10000);
   const list = auth.users.all(), u = list.find((x) => x.email === s.email);
-  if (!auth.verifyPassword(b.current || "", u.hash)) return json(res, 400, { error: "A senha atual está incorreta.", fields: { current: "Senha atual incorreta." } });
+  if (!(await auth.verifyPasswordAsync(b.current || "", u.hash))) {
+    // 5 erros da senha atual na mesma sessão: a sessão é encerrada (impede adivinhar a senha por aqui)
+    s.pwFails = (s.pwFails || 0) + 1;
+    store.audit(s.email, "senha_atual_incorreta");
+    if (s.pwFails >= 5) { auth.logout(s.sid); return json(res, 401, { error: "Muitas tentativas com a senha atual incorreta. Entre novamente.", auth: false }); }
+    return json(res, 400, { error: "A senha atual está incorreta.", fields: { current: "Senha atual incorreta." } });
+  }
   const prob = auth.passwordProblem(b.next, u.email);
   if (prob) return json(res, 422, { error: prob, fields: { next: prob } });
   if (b.next === b.current) return json(res, 422, { error: "A nova senha precisa ser diferente da atual.", fields: { next: "Use uma senha diferente da atual." } });
@@ -846,8 +856,9 @@ on("POST", "/api/admin/password", async (req, res, s) => {
   json(res, 200, { ok: true });
 }, { allowMustChange: true });
 
-on("GET", "/api/admin/status", async (req, res) => {
+on("GET", "/api/admin/status", async (req, res, s) => {
   const draft = store.content.draft(), live = store.content.live();
+  if (!["pages", "news", "identity", "forms", "analytics", "publish"].some((p) => auth.can(s.user, p))) return json(res, 200, { pending: [], enPending: [], lastPublish: live._at || null, lastPublishBy: null, history: [] });
   json(res, 200, { pending: pendingSummary(draft, live), enPending: Object.keys(draft.enPending || {}), lastPublish: live._at || null, lastPublishBy: live._by || null, history: store.content.history().slice(0, 15) });
 });
 
@@ -943,6 +954,8 @@ on("POST", "/api/admin/upload", async (req, res, s, url) => {
   // PDF (documentos anuais): só confere a assinatura do formato e o tamanho
   const v = purpose === "pdf" ? (buf.length > PDF_MAX ? { error: "PDF grande demais (máximo de 15 MB)." } : buf.subarray(0, 5).toString() !== "%PDF-" ? { error: "O arquivo não é um PDF válido." } : { info: { type: "pdf", mime: "application/pdf", w: 0, h: 0 } }) : images.validate(buf, purpose);
   if (v.error) return json(res, 422, { error: v.error });
+  // SVG pode conter código: só o administrador principal envia (os demais usam PNG ou WebP)
+  if (v.info.type === "svg" && s.user.role !== "admin") return json(res, 403, { error: "Por segurança, só o administrador principal pode enviar SVG. Envie o logotipo em PNG ou WebP." });
   const name = crypto.createHash("sha256").update(buf).digest("hex").slice(0, 20) + "." + v.info.type;
   fs.writeFileSync(path.join(store.dirs.uploads, name), buf, { mode: 0o644 });
   const original = String(url.searchParams.get("name") || "").replace(/[^\w.\- ]/g, "_").slice(0, 100);
@@ -1110,8 +1123,8 @@ on("POST", "/api/admin/preview", async (req, res) => {
     const key = String(b.key || "pt/index.html");
     const [lang, file] = key.startsWith("partial/") ? ["pt", "index.html"] : key.split("/");
     json(res, 200, { url: "/admin/preview/" + (lang === "en" ? "en/" : "") + file, orphans: r.orphans });
-  } catch (e) { json(res, 500, { error: "Não foi possível gerar a visualização: " + e.message }); }
-});
+  } catch (e) { console.error(e); json(res, 500, { error: "Não foi possível gerar a visualização. Tente novamente; se continuar, avise o suporte." }); }
+}, { perm: ["pages", "news", "identity", "publish"] });
 on("POST", "/api/admin/publish", async (req, res, s) => {
   const b = await readJson(req, 10000);
   const draft = store.content.draft();
@@ -1164,9 +1177,20 @@ async function publicForm(req, res, name) {
   if (/multipart\/form-data/.test(ct)) {
     const b = /boundary=(?:"([^"]+)"|([^;]+))/.exec(ct);
     if (!b) return json(res, 400, { ok: false, error: "Envio inválido." });
+    const limit = (maxMB + 1) * 1024 * 1024, label = maxMB >= 1024 && maxMB % 1024 === 0 ? maxMB / 1024 + " GB" : maxMB + " MB";
+    // tudo conferido ANTES de receber o arquivo: tamanho declarado, limite de envios por IP, envios simultâneos e espaço em disco
+    const declared = +req.headers["content-length"] || 0;
+    // recusa sem receber o corpo: responde e fecha a conexão (não grava nem lê o arquivo)
+    const refuse = (status, error) => { res.setHeader("Connection", "close"); res.on("finish", () => req.destroy()); return json(res, status, { ok: false, error }); };
+    if (declared > limit) return refuse(413, `O arquivo passa do limite de ${label}.`);
+    const ip = clientIp(req);
+    if (forms.overLimit(ip)) return refuse(429, "Muitos envios em sequência. Aguarde alguns minutos.");
+    const slot = forms.startUpload(ip, declared || limit, store.dirs.attachments);
+    if (slot.error) return refuse(slot.status, slot.error);
     // anexo gravado direto no disco enquanto chega (limite do formulário + 1 MB para os demais campos)
-    try { ({ fields, files } = await forms.parseMultipartStream(req, b[1] || b[2], (maxMB + 1) * 1024 * 1024, store.dirs.attachments, maxMB >= 1024 && maxMB % 1024 === 0 ? maxMB / 1024 + " GB" : maxMB + " MB")); }
+    try { ({ fields, files } = await forms.parseMultipartStream(req, b[1] || b[2], limit, store.dirs.attachments, label)); }
     catch (e) { return json(res, e.status || 400, { ok: false, error: e.message }); }
+    finally { slot.end(); }
     const r = await forms.submit(def, fields, files, clientIp(req), maxMB);
     return json(res, r.status, r.body);
   }
@@ -1176,6 +1200,31 @@ async function publicForm(req, res, name) {
   const r = await forms.submit(def, fields, files, clientIp(req), maxMB);
   json(res, r.status, r.body);
 }
+
+/* ---------- envios recebidos pelos formulários (dados pessoais: permissão própria, guarda de 6 meses — forms.RETENTION_MONTHS) ---------- */
+on("GET", "/api/admin/submissions", async (req, res, s, url) => {
+  const defs = liveDefs();
+  const names = [...new Set([...Object.keys(defs), ...fs.readdirSync(store.dirs.submissions).filter((f) => f.endsWith(".jsonl")).map((f) => f.slice(0, -6))])];
+  const list = names.map((n) => ({ name: n, title: (defs[n] && defs[n].title) || forms.NAMES[n] || n, count: forms.list(n).length }));
+  const name = url.searchParams.get("form") || (list.find((x) => x.count) || list[0] || {}).name || "";
+  const labels = {}; ((defs[name] && defs[name].fields) || []).forEach((f) => (labels[f.name] = f.label));
+  const items = name ? forms.list(name).slice(0, 500).map((r) => ({ id: r.id, at: r.at, page: r.page, data: r.data, files: (r.files || []).map((f) => ({ filename: f.filename, stored: f.stored, size: f.size })) })) : [];
+  json(res, 200, { forms: list, form: name, labels, items, retentionMonths: forms.RETENTION_MONTHS });
+}, { perm: "submissions" });
+on("GET", "/api/admin/submissions/file", async (req, res, s, url) => {
+  const f = forms.attachmentPath(url.searchParams.get("form"), url.searchParams.get("id"), url.searchParams.get("file"));
+  if (!f) return json(res, 404, { error: "Arquivo não encontrado (pode ter sido excluído)." });
+  store.audit(s.email, "anexo_baixado", f.filename);
+  headers(res, { "Content-Type": "application/pdf", "Content-Disposition": `attachment; filename="${f.filename.replace(/[^\w.\- ]/g, "_")}"`, "Cache-Control": "no-store" });
+  res.writeHead(200);
+  fs.createReadStream(f.path).pipe(res);
+}, { perm: "submissions" });
+on("DELETE", "/api/admin/submissions", async (req, res, s, url) => {
+  const name = url.searchParams.get("form"), r = forms.removeSubmission(name, url.searchParams.get("id"));
+  if (!r) return json(res, 404, { error: "Envio não encontrado." });
+  store.audit(s.email, "envio_excluido", (forms.NAMES[name] || name) + " · protocolo " + r.id);
+  json(res, 200, { ok: true });
+}, { perm: "submissions" });
 
 /* ---------- servidor ---------- */
 const ADMIN_CSP = "default-src 'self'; img-src 'self' data: blob: https://images.unsplash.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
@@ -1263,6 +1312,9 @@ if (require.main === module) {
   const r = publishSite(store.content.live());
   console.log(`Site gerado em ${store.PUBLIC} (${r.ms} ms)`);
   if (Object.keys(r.orphans).length) console.warn("Edições que não encontraram o elemento original (o código da página mudou):", JSON.stringify(r.orphans));
+  // guarda limitada dos envios dos formulários (LGPD): limpeza ao iniciar e a cada 12 h
+  const purge = () => { try { const n = forms.purge(); if (n) { console.log(`${n} envio(s) com mais de ${forms.RETENTION_MONTHS} meses excluído(s).`); store.audit("sistema", "envios_expirados", String(n)); } } catch (e) { console.error("Limpeza dos envios:", e.message); } };
+  purge(); setInterval(purge, 12 * 3600 * 1000).unref();
   const server = http.createServer((req, res) => handle(req, res).catch((e) => {
     if (!res.headersSent) json(res, e.status || 500, { error: e.status ? e.message : "Erro interno." });
     if (!e.status) console.error(e);

@@ -20,7 +20,8 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node com suporte de segurança (o 20 deixou de receber correções em abril/2026). Use a mesma versão na VPS.
+          node-version: 24
 
       # Atualiza a rede credenciada a partir do sistema oficial (se ele estiver fora do ar, mantém o assets/data/rede.json do repositório)
       - name: Sincronizar a rede credenciada
@@ -41,7 +42,11 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
-          ssh-keyscan -p "${{ secrets.VPS_PORT || '22' }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+          # identidade do servidor conferida: o segredo VPS_KNOWN_HOSTS guarda a linha do known_hosts da VPS
+          # (gerar UMA vez num computador de confiança: ssh-keyscan -p PORTA -H HOST). Sem ele, o deploy para.
+          if [ -z "${{ secrets.VPS_KNOWN_HOSTS }}" ]; then echo "::error::Configure o segredo VPS_KNOWN_HOSTS (identidade da VPS)."; exit 1; fi
+          echo "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       # Modo estático (padrão): o HTML gerado aqui substitui o da VPS
       - name: Enviar arquivos para a VPS (rsync)

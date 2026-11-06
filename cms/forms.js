@@ -143,6 +143,24 @@ const cleanup = (files) => (files || []).forEach((f) => { if (f.path) fs.rmSync(
 const rate = { ok: new Map(), any: new Map() };
 function hits(map, ip) { const now = Date.now(), l = (map.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000); map.set(ip, l); return l; }
 const limited = (ip) => hits(rate.ok, ip).length >= 6 || hits(rate.any, ip).push(Date.now()) > 30;
+// conferido ANTES de receber um anexo: a mesma regra, sem contar a tentativa (ela é contada depois, em submit)
+const overLimit = (ip) => hits(rate.ok, ip).length >= 6 || hits(rate.any, ip).length >= 30;
+
+/* Envios com anexo em andamento: no máximo 1 por IP e 3 no total ao mesmo tempo, e só se o disco tiver espaço
+   para o anexo mais uma reserva de 2 GB (um robô não consegue encher o disco do servidor). */
+const uploading = new Map(); let uploadingTotal = 0;
+const MAX_UPLOADS = 3, DISK_RESERVE = 2 * 1024 * 1024 * 1024;
+function startUpload(ip, bytesNeeded, dir) {
+  if ((uploading.get(ip) || 0) >= 1) return { status: 429, error: "Já existe um envio em andamento a partir desta rede. Aguarde ele terminar." };
+  if (uploadingTotal >= MAX_UPLOADS) return { status: 503, error: "Muitos envios de arquivo neste momento. Tente novamente em alguns minutos." };
+  try {
+    const st = fs.statfsSync(dir);
+    if (st.bavail * st.bsize < bytesNeeded + DISK_RESERVE) return { status: 503, error: "Envio de arquivos temporariamente indisponível. Tente novamente mais tarde ou use outro canal de contato." };
+  } catch (e) {}
+  uploading.set(ip, (uploading.get(ip) || 0) + 1); uploadingTotal++;
+  let done = false;
+  return { end() { if (done) return; done = true; uploadingTotal--; const v = (uploading.get(ip) || 1) - 1; if (v) uploading.set(ip, v); else uploading.delete(ip); } };
+}
 
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]{2,}$/;
 function validateSubmission(def, fields, files, maxMB) {
@@ -195,7 +213,7 @@ async function submit(def, fields, files, ip, maxMB) {
   const label = (n) => (def.fields.find((f) => f.name === n) || {}).label || n;
   const text = `Novo envio do formulário "${def.title}" no site MedicGLOBAL\n${record.at}\n\n` +
     Object.entries(record.data).map(([k, v]) => `${label(k)}: ${v}`).join("\n") +
-    (record.files.length ? `\n\nAnexos (disponíveis no painel): ${record.files.map((f) => f.filename).join(", ")}` : "") + `\n\nProtocolo: ${id}`;
+    (record.files.length ? `\n\nAnexos (disponíveis no painel, em Envios recebidos, por ${RETENTION_MONTHS} meses): ${record.files.map((f) => f.filename).join(", ")}` : "") + `\n\nProtocolo: ${id}`;
 
   // destinos: e-mail (SMTP configurado no painel) e webhook (CRM/automação)
   if (cfg.emails && cfg.emails.length && s.smtp && s.smtp.host) {
@@ -233,4 +251,53 @@ function list(name) {
   return fs.readFileSync(p, "utf8").trim().split("\n").filter(Boolean).map((l) => JSON.parse(l)).reverse();
 }
 
-module.exports = { definitions, settings, saveSettings, parseMultipart, parseMultipartStream, cleanup, DEFAULT_UPLOAD_MB, submit, list, postJson, NAMES, EMAIL };
+/* ---------- envios recebidos: guarda por tempo limitado (LGPD), consulta, download do anexo e exclusão ---------- */
+const RETENTION_MONTHS = 6;
+const validName = (n) => /^[\w-]+$/.test(String(n || ""));
+const fileOf = (name) => path.join(store.dirs.submissions, name + ".jsonl");
+function writeList(name, newestFirst) {
+  const lines = newestFirst.slice().reverse().map((r) => JSON.stringify(r) + "\n").join("");
+  const tmp = fileOf(name) + ".tmp";
+  fs.writeFileSync(tmp, lines, { mode: 0o600 });
+  fs.renameSync(tmp, fileOf(name));
+}
+const dropFiles = (r) => (r.files || []).forEach((f) => { if (/^[\w.\- ]+$/.test(f.stored)) fs.rmSync(path.join(store.dirs.attachments, f.stored), { force: true }); });
+// apaga envios (e anexos) com mais de RETENTION_MONTHS meses e restos de envios interrompidos; devolve quantos saíram
+function purge() {
+  const limit = new Date(); limit.setMonth(limit.getMonth() - RETENTION_MONTHS);
+  let removed = 0;
+  for (const f of fs.readdirSync(store.dirs.submissions)) {
+    if (!f.endsWith(".jsonl")) continue;
+    const name = f.slice(0, -6), all = list(name), keep = all.filter((r) => new Date(r.at) >= limit);
+    if (keep.length === all.length) continue;
+    all.filter((r) => new Date(r.at) < limit).forEach(dropFiles);
+    removed += all.length - keep.length;
+    writeList(name, keep);
+  }
+  // anexos sem envio correspondente (envio interrompido) com mais de 1 dia
+  const day = Date.now() - 24 * 3600 * 1000;
+  for (const f of fs.readdirSync(store.dirs.attachments)) {
+    const p = path.join(store.dirs.attachments, f);
+    try { const st = fs.statSync(p); if (f.startsWith("tmp-") && st.mtimeMs < day) fs.rmSync(p, { force: true }); else if (st.mtimeMs < limit.getTime()) fs.rmSync(p, { force: true }); } catch (e) {}
+  }
+  return removed;
+}
+function removeSubmission(name, id) {
+  if (!validName(name)) return null;
+  const all = list(name), r = all.find((x) => x.id === id);
+  if (!r) return null;
+  dropFiles(r);
+  writeList(name, all.filter((x) => x !== r));
+  return r;
+}
+// caminho do anexo, só se ele pertencer ao envio indicado
+function attachmentPath(name, id, stored) {
+  if (!validName(name)) return null;
+  const r = list(name).find((x) => x.id === id);
+  const f = r && (r.files || []).find((x) => x.stored === stored);
+  if (!f || !/^[\w.\- ]+$/.test(f.stored)) return null;
+  const p = path.join(store.dirs.attachments, f.stored);
+  return fs.existsSync(p) ? { path: p, filename: f.filename } : null;
+}
+
+module.exports = { RETENTION_MONTHS, purge, removeSubmission, attachmentPath, overLimit, startUpload, definitions, settings, saveSettings, parseMultipart, parseMultipartStream, cleanup, DEFAULT_UPLOAD_MB, submit, list, postJson, NAMES, EMAIL };

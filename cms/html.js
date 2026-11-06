@@ -134,7 +134,7 @@ function limitFor(kind, tag, baseText) {
 /* Campos editáveis de um template.
    Tipos: text (HTML de texto), link (href/alvo + texto quando o link é só texto), image (<img>), pic (token {{pic:...}}),
    field (placeholder/obrigatório/tamanho máximo de um campo de formulário). */
-function extract(src) {
+function extract(src, opts = {}) {
   const root = parse(src);
   const units = [];
   let n = 0;
@@ -144,19 +144,20 @@ function extract(src) {
 
   const startSection = (el) => {
     const label = sectionLabel(src, el, pendingComment);
-    section = { id: "s" + (sections.length + 1), label, units: [] };
+    section = { id: "s" + (sections.length + 1), label, units: [], el };
     sections.push(section);
     pendingComment = null;
   };
   let curLink = null;
-  const push = (u) => { if (curLink && !u.link) u.link = curLink; if (!section) { section = { id: "s0", label: "Conteúdo", units: [] }; sections.push(section); } section.units.push(add(u).id); };
+  const nodeOf = new Map(); // campo -> elemento onde ele está (para agrupar por blocos repetidos)
+  const push = (u, node) => { if (curLink && !u.link) u.link = curLink; if (!section) { section = { id: "s0", label: "Conteúdo", units: [], el: root }; sections.push(section); } section.units.push(add(u).id); nodeOf.set(u.id, node); };
 
-  function picTokens(t) {
+  function picTokens(t, node) {
     const re = /\{\{pic:([^}]+)\}\}/g; let m;
     const txt = src.slice(t.start, t.end);
     while ((m = re.exec(txt))) {
       const [key, alt = ""] = m[1].split("|");
-      push({ kind: "pic", tag: "img", range: [t.start + m.index, t.start + m.index + m[0].length], token: m[1], base: { image: key, alt }, limits: { alt: 160 } });
+      push({ kind: "pic", tag: "img", range: [t.start + m.index, t.start + m.index + m[0].length], token: m[1], base: { image: key, alt }, limits: { alt: 160 } }, node);
     }
   }
 
@@ -167,14 +168,21 @@ function extract(src) {
         if (ch.type === "el") startSection(ch);
       }
       if (ch.type === "text") {
-        picTokens(ch);
+        picTokens(ch, el);
         if (depth > 0 && !ctx.inlineDone) {
           const t = src.slice(ch.start, ch.end);
-          if (hasWords(t) && !/\{\{(?:i:|>|pic:)/.test(t) && el.tag !== "#root") {
-            let s = ch.start, e = ch.end;
-            while (s < e && /\s/.test(src[s])) s++;
-            while (e > s && /\s/.test(src[e - 1])) e--;
-            push({ kind: "text", tag: el.tag, cls: attrVal(el, "class") || "", range: [s, e], base: { html: src.slice(s, e) }, partial: true });
+          if (hasWords(t) && el.tag !== "#root") {
+            // texto ao lado de um ícone (ex.: "{{i:phone}} Ligar agora"): cada trecho entre os ícones vira um campo
+            const re = /\{\{(?:i:|>|pic:)[^}]*\}\}/g, segs = [];
+            let last = 0, m;
+            while ((m = re.exec(t))) { segs.push([last, m.index]); last = m.index + m[0].length; }
+            segs.push([last, t.length]);
+            for (const [a, b] of segs) {
+              let s = ch.start + a, e = ch.start + b;
+              while (s < e && /\s/.test(src[s])) s++;
+              while (e > s && /\s/.test(src[e - 1])) e--;
+              if (e > s && hasWords(src.slice(s, e))) push({ kind: "text", tag: el.tag, cls: attrVal(el, "class") || "", range: [s, e], base: { html: src.slice(s, e) }, partial: true }, el);
+            }
           }
         }
         continue;
@@ -188,7 +196,7 @@ function extract(src) {
     const tag = el.tag;
     if (tag === "img") {
       const srcA = attr(el, "src");
-      if (srcA && !/\{\{/.test(srcA.value || "")) push({ kind: "image", tag, el: elRef(el), base: { image: srcA.value, alt: attrVal(el, "alt") || "" }, limits: { alt: 160 }, decorative: attrVal(el, "aria-hidden") === "true" });
+      if (srcA && !/\{\{/.test(srcA.value || "")) push({ kind: "image", tag, el: elRef(el), base: { image: srcA.value, alt: attrVal(el, "alt") || "" }, limits: { alt: 160 }, decorative: attrVal(el, "aria-hidden") === "true" }, el);
       return;
     }
     if (tag === "input" || tag === "select" || tag === "textarea") {
@@ -197,7 +205,7 @@ function extract(src) {
         const form = closest(el, "form");
         push({ kind: "field", tag, el: elRef(el), form: form ? attrVal(form, "data-validate") || "" : "", name, type,
           base: { placeholder: attrVal(el, "placeholder") || "", required: !!attr(el, "required"), maxlength: attrVal(el, "maxlength") || "" }, limits: { placeholder: 90 },
-          hasPlaceholder: tag !== "select" && !["checkbox", "radio", "file"].includes(type) });
+          hasPlaceholder: tag !== "select" && !["checkbox", "radio", "file"].includes(type) }, el);
       }
       if (tag === "textarea") return;
       if (tag === "select") return;
@@ -212,10 +220,10 @@ function extract(src) {
       if (range && hasWords(src.slice(range[0], range[1]))) {
         u.range = range; u.base.html = src.slice(range[0], range[1]);
         u.limits.html = limitFor("text", "a", plain(u.base.html));
-        push(u);
+        push(u, el);
         return;
       }
-      push(u);
+      push(u, el);
       const prev = curLink; curLink = u.id;
       walk(el, depth, ctx);
       curLink = prev;
@@ -224,19 +232,76 @@ function extract(src) {
     const range = inlineRange(src, el);
     if (range && hasWords(src.slice(range[0], range[1]))) {
       const html = src.slice(range[0], range[1]);
-      push({ kind: "text", tag, cls: attrVal(el, "class") || "", range, base: { html }, limits: { html: limitFor("text", tag, plain(html)) } });
+      push({ kind: "text", tag, cls: attrVal(el, "class") || "", range, base: { html }, limits: { html: limitFor("text", tag, plain(html)) } }, el);
       return;
     }
     walk(el, depth, ctx);
   }
 
   walk(root, 0, {});
+  const chain = new Map();
+  for (const u of units) {
+    const a = []; for (let n = nodeOf.get(u.id); n; n = n.parent) a.unshift(n);
+    chain.set(u.id, a);
+    // texto só para leitores de tela: fica nas opções de acessibilidade
+    if (a.some((n) => hasClass(n, "sr-only"))) u.sr = true;
+    // trechos montados a partir de dados (ex.: linhas dos anos do RN 565/IDSS): editados no próprio cadastro
+    if (opts.dataClasses && a.some((n) => opts.dataClasses.some((c) => hasClass(n, c)))) u.data = true;
+  }
   for (const u of units) {
     u.label = unitLabel(u);
     if (u.kind === "text" && !u.limits) u.limits = { html: limitFor("text", u.tag, plain(u.base.html)) };
     if (u.el) { u.openStart = u.el.start; u.openEnd = u.el.openEnd; }
   }
-  return { units, sections: sections.filter((s) => s.units.length) };
+  const out = sections.filter((s) => s.units.length);
+  out.forEach((s, i) => {
+    s.parts = partsOf(s.el, s.units, chain);
+    const inner = src.slice(s.el.start, s.el.end);
+    // menu de âncoras ("Nesta página") faz parte do banner que vem antes dele
+    if (i > 0 && s.units.every((id) => { const u = units[+id.slice(1) - 1]; return u.kind === "link" && /^#/.test(u.base.href); })) s.join = true;
+    if (i === 0 && /\b(hero|page-hero)\b/.test(attrVal(s.el, "class") || "") && /<h1\b/.test(inner)) s.label = "Banner principal";
+    const parts = [...inner.matchAll(/\{\{>\s*([\w-]+)\s*\}\}/g)].map((m) => m[1]);
+    if (parts.length) s.includes = [...new Set(parts)];
+    delete s.el;
+  });
+  return { units, sections: out };
+}
+
+/* Divide uma seção em partes, na ordem da página: campos soltos (título, texto, botões) e listas de itens repetidos
+   (slides, cards, documentos, linhas de tabela), para o painel mostrar cada item recolhido com o próprio título. */
+const sigOf = (el) => el.tag + "." + ((attrVal(el, "class") || "").split(/\s+/)[0] || "");
+const ITEMISH = /^(article|li|a|details|figure|tr|dl|label)$/;
+function partsOf(el, ids, chain) {
+  const out = [];
+  const fields = (seg) => { const l = out[out.length - 1]; if (l && l.ids) l.ids.push(...seg); else out.push({ ids: seg.slice() }); };
+  (function rec(el, ids) {
+    const kidOf = (id) => { const a = chain.get(id), k = a.indexOf(el); return k >= 0 ? a[k + 1] : undefined; };
+    const segs = [];
+    ids.forEach((id) => { const k = kidOf(id), l = segs[segs.length - 1]; if (l && l.k === k) l.ids.push(id); else segs.push({ k, ids: [id] }); });
+    // lista: filhos com a mesma marcação, cada um com 2+ campos (ou 3+ filhos com cara de item)
+    const count = {};
+    segs.forEach((g) => { if (g.k && g.ids.length >= 2) count[sigOf(g.k)] = (count[sigOf(g.k)] || 0) + 1; });
+    const list = Object.keys(count).filter((sg) => count[sg] >= 3 || (count[sg] >= 2 && (ITEMISH.test(sg.split(".")[0]) || /card|slide|item|doc|row|step|faq|col/.test(sg))))
+      .sort((a, b) => count[b] - count[a])[0];
+    segs.forEach((g) => {
+      if (!g.k) return fields(g.ids);
+      if (list && sigOf(g.k) === list) {
+        const l = out[out.length - 1];
+        if (l && l.items && l.sig === list) l.items.push({ ids: g.ids }); else out.push({ sig: list, items: [{ ids: g.ids }] });
+        return;
+      }
+      rec(g.k, g.ids);
+    });
+  })(el, ids);
+  // lista de um item só vira campos soltos
+  const res = [];
+  out.forEach((p) => {
+    if (p.items && p.items.length < 2) p = { ids: p.items[0].ids };
+    delete p.sig;
+    const l = res[res.length - 1];
+    if (p.ids && l && l.ids) l.ids.push(...p.ids); else res.push(p);
+  });
+  return res;
 }
 
 // referência leve ao elemento (posições no texto), sem a árvore inteira
@@ -318,11 +383,67 @@ function validHref(h, validToken) {
   const tok = /^\{\{L\.([\w.]+)\}\}$/.exec(h);
   if (tok) return !!(validToken && validToken(tok[1]));
   if (/^(https?:\/\/)[^\s<>"']+$/i.test(h)) return true;
+  // mailto:/tel: com um dado compartilhado (ex.: mailto:{{L.mail.ouvidoria}})
+  const pre = /^(mailto:|tel:)\{\{L\.([\w.]+)\}\}$/i.exec(h);
+  if (pre) return !!(validToken && validToken(pre[2]));
   if (/^mailto:[^\s<>"']+@[^\s<>"']+$/i.test(h)) return true;
   if (/^tel:\+?[\d-]{6,20}$/i.test(h)) return true;
   if (/^#[\w-]*$/.test(h)) return true;
-  if (/^(\.\.\/)?[\w-]+\.html([?#][\w\-=&%.]*)?$/.test(h)) return true;
+  // página do site, com parâmetros e âncora opcionais (ex.: planos.html?plano=BLUE%20200#contato)
+  if (/^(\.\.\/)?[\w-]+\.html(\?[\w\-=&%.+]*)?(#[\w-]*)?$/.test(h)) return true;
   return false;
+}
+
+/* ---------- conteúdo livre das páginas da RN 565 e do IDSS (editor com barra de formatação) ----------
+   Só a marcação que o site estiliza: títulos, parágrafos, negrito/itálico, links, listas, citação, tabelas, imagens
+   com legenda e linha divisória. Nada de fonte, cor, tamanho ou estilo solto: a tipografia é sempre a do site.
+   imgOk(src) decide quais imagens valem (arquivos enviados pelo painel). */
+const RICH = { p: [], h2: [], h3: [], h4: [], strong: [], em: [], a: ["href", "target"], ul: [], ol: [], li: [], blockquote: [], table: [], thead: [], tbody: [], tr: [], th: ["colspan", "rowspan"], td: ["colspan", "rowspan"], figure: [], img: ["src", "alt"], figcaption: [], br: [], hr: [] };
+const RICH_RENAME = { b: "strong", i: "em", h1: "h2", h5: "h4", h6: "h4", div: "p" };
+const RICH_VOID = new Set(["br", "hr", "img"]);
+const RICH_CLASSES = /^(al-left|al-center|al-right|al-justify|img-half)$/;
+const escAttr = (s) => esc(s).replace(/'/g, "&#39;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
+function sanitizeRich(input, imgOk) {
+  const src = String(input || "").replace(/<(script|style|iframe|object|embed|svg|template|noscript|title|head)\b[\s\S]*?<\/\1\s*>/gi, "");
+  const out = [], open = [];
+  const re = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][\w-]*)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)\s*\/?>|[^<]+|</g;
+  let m;
+  while ((m = re.exec(src))) {
+    const t = m[0];
+    if (t.startsWith("<!--")) continue;
+    if (!m[2]) { out.push(t === "<" ? "&lt;" : esc(decode(t)).replace(/\{/g, "&#123;").replace(/\}/g, "&#125;")); continue; }
+    let tag = m[2].toLowerCase();
+    tag = RICH_RENAME[tag] || tag;
+    if (!RICH[tag]) continue;
+    if (m[1]) { const k = open.lastIndexOf(tag); if (k >= 0) { for (let x = open.length - 1; x >= k; x--) out.push(`</${open[x]}>`); open.length = k; } continue; }
+    const attrs = {};
+    const ar = /([^\s=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
+    let a;
+    while ((a = ar.exec(m[3] || ""))) attrs[a[1].toLowerCase()] = decode(a[2] != null ? a[2] : a[3] != null ? a[3] : a[4] != null ? a[4] : "");
+    const keep = [];
+    if (tag === "a") {
+      const href = String(attrs.href || "").trim();
+      if (href && validHref(href, null)) keep.push(`href="${escAttr(href)}"`);
+      if (attrs.target === "_blank") keep.push('target="_blank" rel="noopener"');
+    }
+    if (tag === "img") {
+      const s = String(attrs.src || "").trim();
+      if (!imgOk || !imgOk(s)) continue; // imagem que não foi enviada pelo painel: fica de fora
+      keep.push(`src="${escAttr(s)}"`, `alt="${escAttr(String(attrs.alt || "").replace(/[<>{}|]/g, "").slice(0, 160))}"`);
+    }
+    if (tag === "th" || tag === "td") for (const k of ["colspan", "rowspan"]) if (/^[2-9]$/.test(attrs[k] || "")) keep.push(`${k}="${attrs[k]}"`);
+    const cls = String(attrs.class || "").split(/\s+/).filter((c) => RICH_CLASSES.test(c));
+    if (cls.length) keep.push(`class="${cls.join(" ")}"`);
+    out.push(`<${tag}${keep.length ? " " + keep.join(" ") : ""}>`);
+    if (!RICH_VOID.has(tag)) open.push(tag);
+  }
+  for (let x = open.length - 1; x >= 0; x--) out.push(`</${open[x]}>`);
+  return out.join("")
+    .replace(/<(p|h2|h3|h4|li|blockquote|figcaption)>(\s|&nbsp;|<br>)*<\/\1>/g, "")
+    .replace(/<figure( class="[^"]*")?>\s*<\/figure>/g, "")
+    .replace(/<a( [^>]*)?>\s*<\/a>/g, "")
+    .replace(/<a>([\s\S]*?)<\/a>/g, "$1") // link sem destino válido vira texto
+    .trim();
 }
 
 /* ---------- aplicação das edições ---------- */
@@ -393,4 +514,4 @@ function apply(src, edits) {
   return { html: out, orphans, applied: map.size };
 }
 
-module.exports = { parse, extract, apply, resolve, sanitizeHtml, validHref, plain, esc, limitFor };
+module.exports = { parse, extract, apply, resolve, sanitizeHtml, sanitizeRich, validHref, plain, esc, limitFor };

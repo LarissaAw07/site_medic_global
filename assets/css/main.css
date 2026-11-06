@@ -1747,6 +1747,32 @@ de .btn--store-alt { --b-bg: transparent; --b-fg: var(--ink); --b-bd: rgba(11,27
 .news-body .lead, .prose--full .lead { max-width: none; }
 .news-body p, .news-body li, .prose--full p, .prose--full li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
+/* Conteúdo escrito no painel (páginas de cada ano da RN 565 e do IDSS): só usa a tipografia do site */
+.doc-rich > *:first-child { margin-top: 0; }
+.doc-rich > *:last-child { margin-bottom: 0; }
+.doc-rich h2 { font-size: var(--t-h3); margin: 1.6em 0 .6em; }
+.doc-rich h3 { font-size: var(--t-h4); margin: 1.5em 0 .5em; }
+.doc-rich h4 { font-size: 1.125rem; letter-spacing: -.01em; margin: 1.3em 0 .4em; }
+.doc-rich p, .doc-rich ul, .doc-rich ol { margin: 0 0 1em; }
+.doc-rich ul, .doc-rich ol { padding-left: 1.2em; }
+.doc-rich ul { list-style: disc; } .doc-rich ol { list-style: decimal; }
+.doc-rich li + li { margin-top: .4em; }
+.doc-rich li ul, .doc-rich li ol { margin: .4em 0 0; }
+.doc-rich a { color: var(--globo); text-decoration: underline; text-underline-offset: 2px; }
+.doc-rich strong { font-weight: 600; }
+.doc-rich blockquote { margin: 1.2em 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--medic); color: var(--ink-2); }
+.doc-rich hr { border: 0; border-top: 1px solid var(--line); margin: 1.6em 0; }
+.doc-rich table { display: block; overflow-x: auto; width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: var(--t-sm); }
+.doc-rich th, .doc-rich td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc-rich th { background: var(--mist); font-family: var(--f-head); font-weight: 500; }
+.doc-rich figure { margin: 1.4em 0; }
+.doc-rich figure img { width: 100%; border-radius: var(--r-md); border: 1px solid var(--line-2); }
+.doc-rich figure.img-half { width: 50%; }
+@media (max-width: 640px) { .doc-rich figure.img-half { width: 100%; } }
+.doc-rich figcaption { margin-top: 8px; font-size: var(--t-xs); color: var(--ink-3); }
+.doc-rich .al-left { text-align: left; } .doc-rich .al-center { text-align: center; } .doc-rich .al-right { text-align: right; } .doc-rich .al-justify { text-align: justify; }
+.doc-rich figure.al-center { margin-left: auto; margin-right: auto; } .doc-rich figure.al-right { margin-left: auto; }
+
 /* "Depois da contratação" → rodapé: quadros um pouco mais visíveis, esmaecendo aos poucos até o azul do rodapé */
 .mosaic .mosaic-grid span { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.6); }
 .mosaic .mosaic-grid {

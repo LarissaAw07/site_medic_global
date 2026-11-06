@@ -2,6 +2,8 @@
    a partir de src/data/noticias.json (executado por build.js), em português (src/pages, src/partials)
    e em inglês (src/en/pages, src/en/partials).
    Notícia sem "foto" recebe automaticamente o fundo dos banners (partial globe-art) no card e na página.
+   Notícia sem link da fonte ("fonteUrl") não mostra a linha nem o bloco da fonte: ficam só os botões de compartilhar.
+   O texto alternativo da foto é o próprio título da notícia.
    Notícia sem o bloco "en" não entra na versão em inglês (nem card, nem página), para não misturar idiomas.
    São referências informativas de fontes oficiais (ANS, Ministério da Saúde): resumos próprios, com
    crédito e link para a publicação original — não são comunicados da MedicGLOBAL. */
@@ -11,16 +13,16 @@ const path = require("path");
 const UI = {
   pt: {
     cat: { noticias: "Notícias", comunicados: "Comunicados" },
-    org: (o) => o,
     date: (d) => d.split("-").reverse().join("/"),
     contents: "Conteúdos",
     back: (c) => `Voltar para ${c.toLowerCase()}`,
     read: (m) => `Leitura de ${m} min`,
-    ref: "Referência informativa · Fonte:",
+    ref: "Referência informativa ·",
+    refLink: "ver publicação original",
     newTab: " (abre em nova aba)",
     caption: "Imagem ilustrativa.",
     srcLabel: "Fonte original",
-    srcLine: (o, t, d) => `<strong>${o}</strong> — “${t}”, publicado em ${d}.`,
+    srcLine: (t, d) => `${t ? `“${t}”, p` : "P"}ublicado em ${d}.`,
     srcBtn: "Ler a publicação oficial",
     disclaimer: "Resumo elaborado pela MedicGLOBAL a partir da publicação oficial, como referência informativa. Não se trata de comunicado da MedicGLOBAL. Em caso de divergência, prevalece o texto da fonte.",
     help: `Dúvidas sobre o seu plano? Fale com a <a href="atendimento.html">central de atendimento</a>.`,
@@ -31,16 +33,16 @@ const UI = {
   },
   en: {
     cat: { noticias: "News", comunicados: "Notices" },
-    org: (o) => ({ "Ministério da Saúde": "Ministry of Health (Brazil)" })[o] || o,
     date: (d) => { const [y, m, dd] = d.split("-"); return `${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][+m - 1]} ${+dd}, ${y}`; },
     contents: "Content",
     back: (c) => `Back to ${c.toLowerCase()}`,
     read: (m) => `${m} min read`,
-    ref: "Informational reference · Source:",
+    ref: "Informational reference ·",
+    refLink: "see the original publication",
     newTab: " (opens in a new tab)",
     caption: "Illustrative image.",
     srcLabel: "Original source",
-    srcLine: (o, t, d) => `<strong>${o}</strong> — “${t}” (in Portuguese), published on ${d}.`,
+    srcLine: (t, d) => `${t ? `“${t}” (in Portuguese), p` : "P"}ublished on ${d}.`,
     srcBtn: "Read the official publication",
     disclaimer: "Summary prepared by MedicGLOBAL from the official publication, for information purposes only. This is not a MedicGLOBAL notice. In case of any discrepancy, the source text prevails.",
     share: "Share",
@@ -73,21 +75,21 @@ module.exports = function (fs = require("fs")) {
 
     const card = (n, sizes = "(min-width:1100px) 30vw, 100vw") =>
       `<a class="card-post card-post--ext" data-cat="${n.cat}" href="${file(n)}">${n.foto ? `<div class="img">{{pic:${n.foto}||800|${sizes}}}</div>` : `<div class="img img--globe">{{> globe-art}}</div>`}` +
-      `<div class="post-meta"><span class="cat">${U.cat[n.cat]}</span><time datetime="${n.data}">${U.date(n.data)}</time><span class="src-tag">${esc(U.org(n.orgao))}</span></div>` +
+      `<div class="post-meta"><span class="cat">${U.cat[n.cat]}</span><time datetime="${n.data}">${U.date(n.data)}</time></div>` +
       `<h3>${esc(n.titulo)}</h3><p>${esc(n.resumo)}</p></a>`;
 
     fs.writeFileSync(path.join(partials, "noticias-cards.html"), news.map((n) => card(n)).join("\n") + "\n");
 
     news.forEach((n) => {
       const others = news.filter((o) => o !== n).sort((a, b) => (b.cat === n.cat) - (a.cat === n.cat)).slice(0, 3);
-      const cat = U.cat[n.cat], org = esc(U.org(n.orgao));
+      const cat = U.cat[n.cat], src = !!n.fonteUrl;
       const meta = {
         title: `${n.titulo} | ${U.contents} | MedicGLOBAL`,
         description: n.resumo,
         active: "conteudos",
         og: n.foto || "old_hsl_fachada",
         crumbs: [[U.contents, "conteudos.html"], [cat, `conteudos.html#cat=${n.cat}`], [n.migalha, file(n)]],
-        jsonld: [{ "@context": "https://schema.org", "@type": "NewsArticle", headline: n.titulo, inLanguage: lang === "pt" ? "pt-BR" : "en", datePublished: n.data, isBasedOn: n.fonteUrl, author: { "@type": "Organization", name: "MedicGLOBAL" }, publisher: { "@type": "Organization", name: "MedicGLOBAL" } }],
+        jsonld: [{ "@context": "https://schema.org", "@type": "NewsArticle", headline: n.titulo, inLanguage: lang === "pt" ? "pt-BR" : "en", datePublished: n.data, ...(src ? { isBasedOn: n.fonteUrl } : {}), author: { "@type": "Organization", name: "MedicGLOBAL" }, publisher: { "@type": "Organization", name: "MedicGLOBAL" } }],
       };
       const secoes = n.secoes.map((s) => `        <h2>${esc(s.h)}</h2>\n${s.p.map((p) => `        <p>${esc(p)}</p>`).join("\n")}`).join("\n");
       const html = `<!--@${JSON.stringify(meta, null, 2)}@-->
@@ -99,22 +101,21 @@ module.exports = function (fs = require("fs")) {
       <a class="news-back" href="conteudos.html#cat=${n.cat}">{{i:chevron-left}} ${U.back(cat)}</a>
       <div class="post-meta mb-6"><span class="cat">${cat}</span><time datetime="${n.data}">${U.date(n.data)}</time><span>${esc(n.tema)}</span><span>${U.read(n.leitura)}</span></div>
       <h1 class="balance news-title">${esc(n.titulo)}</h1>
-      <p class="news-src-line">${U.ref} <a href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${org}<span class="sr-only">${U.newTab}</span></a></p>
-    </div>
+${src ? `      <p class="news-src-line">${U.ref} <a href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${U.refLink}<span class="sr-only">${U.newTab}</span></a></p>\n` : ""}    </div>
   </header>
-  <div class="wrap"><figure class="news-figure">${n.foto ? `<div class="img-round" style="aspect-ratio:21/9">{{pic:${n.foto}|${esc(n.alt)}|2000|(min-width:1360px) 1300px, 100vw|eager}}</div><figcaption>${U.caption}</figcaption>` : `<div class="img-round img--globe" style="aspect-ratio:21/9">{{> globe-art}}</div>`}</figure></div>
+  <div class="wrap"><figure class="news-figure">${n.foto ? `<div class="img-round" style="aspect-ratio:21/9">{{pic:${n.foto}|${esc(n.titulo).replace(/[|{}]/g, "")}|2000|(min-width:1360px) 1300px, 100vw|eager}}</div><figcaption>${U.caption}</figcaption>` : `<div class="img-round img--globe" style="aspect-ratio:21/9">{{> globe-art}}</div>`}</figure></div>
   <div class="section section--tight">
     <div class="wrap">
       <div class="prose news-body">
         <p class="lead">${esc(n.intro)}</p>
 ${secoes}
-        <div class="news-source">
+${src ? `        <div class="news-source">
           <p class="news-source-label">${U.srcLabel}</p>
-          <p>${U.srcLine(org, esc(n.fonteTitulo), U.date(n.data))}</p>
+          <p>${U.srcLine(esc(n.fonteTitulo || ""), U.date(n.data))}</p>
           <a class="btn btn--sm" href="${esc(n.fonteUrl)}" target="_blank" rel="noopener">${U.srcBtn}<span class="sr-only">${U.newTab}</span></a>
           <p class="xs muted">${U.disclaimer}</p>
         </div>
-        ${U.shareBar}
+` : ""}        ${U.shareBar}
         <p class="small mt-7">${U.help}</p>
         <a class="news-back mt-6" href="conteudos.html#cat=${n.cat}">{{i:chevron-left}} ${U.back(cat)}</a>
       </div>

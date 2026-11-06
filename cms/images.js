@@ -33,20 +33,20 @@ function dims(buf) {
   return null;
 }
 
-// regras por uso da imagem
+// regras por uso da imagem (limites de tamanho pensados para manter a qualidade sem pesar no carregamento do site)
 const RULES = {
-  photo:   { label: "Foto de conteúdo", types: ["jpg", "png", "webp"], maxBytes: 5 * 1024 * 1024, minW: 400, minH: 300, maxW: 6000, maxH: 6000 },
-  logo:    { label: "Logotipo", types: ["png", "webp", "svg"], maxBytes: 1024 * 1024, minW: 120, minH: 40, maxW: 3000, maxH: 1500 },
-  favicon: { label: "Favicon", types: ["png", "svg"], maxBytes: 512 * 1024, minW: 32, minH: 32, maxW: 1024, maxH: 1024, square: true },
+  photo:   { label: "Foto de conteúdo", types: ["jpg", "png", "webp"], maxBytes: 2 * 1024 * 1024, minW: 400, minH: 300, maxW: 6000, maxH: 6000 },
+  logo:    { label: "Logotipo", types: ["png", "webp", "svg"], maxBytes: 500 * 1024, minW: 120, minH: 40, maxW: 3000, maxH: 1500 },
+  favicon: { label: "Favicon", types: ["png", "svg"], maxBytes: 200 * 1024, minW: 32, minH: 32, maxW: 1024, maxH: 1024, square: true },
   // capturas de resultados (IDSS): costumam ser faixas largas e baixas
-  doc:     { label: "Imagem de documento", types: ["jpg", "png", "webp"], maxBytes: 5 * 1024 * 1024, minW: 200, minH: 60, maxW: 6000, maxH: 8000 },
+  doc:     { label: "Imagem de documento", types: ["jpg", "png", "webp"], maxBytes: 2 * 1024 * 1024, minW: 200, minH: 60, maxW: 6000, maxH: 8000 },
 };
 
 function validate(buf, purpose) {
   const r = RULES[purpose];
   if (!r) return { error: "Tipo de imagem desconhecido." };
   if (!buf || !buf.length) return { error: "Arquivo vazio." };
-  if (buf.length > r.maxBytes) return { error: `Arquivo muito grande (${(buf.length / 1048576).toFixed(1)} MB). Máximo para ${r.label.toLowerCase()}: ${(r.maxBytes / 1048576).toFixed(r.maxBytes < 1048576 ? 1 : 0)} MB.` };
+  if (buf.length > r.maxBytes) return { error: `Arquivo muito grande (${(buf.length / 1048576).toFixed(1)} MB). Máximo para ${r.label.toLowerCase()}: ${r.maxBytes < 1048576 ? Math.round(r.maxBytes / 1024) + " KB" : r.maxBytes / 1048576 + " MB"}. Reduza ou comprima a imagem antes de enviar.` };
   const d = dims(buf);
   if (!d) return { error: `Formato não reconhecido. Aceitos: ${r.types.map((t) => t.toUpperCase()).join(", ")}.` };
   if (d.type === "svg-unsafe") return { error: "O SVG contém scripts ou conteúdo externo e foi recusado por segurança." };

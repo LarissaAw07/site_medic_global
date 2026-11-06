@@ -467,8 +467,9 @@
     if (!/\.pdf$/i.test(file.name) || (file.type && file.type !== "application/pdf")) return T("Formato não aceito: envie o currículo em PDF.", "File type not accepted: please send your résumé as a PDF.");
     var max = +field.getAttribute("data-max-bytes");
     if (file.size <= max) return "";
-    var size = function (b) { return b >= 1073741824 ? (b / 1073741824).toFixed(2) + " GB" : (b / 1048576).toFixed(1) + " MB"; };
-    return T("O arquivo tem " + size(file.size).replace(".", ",") + " e ultrapassa o limite de " + size(max).replace(".", ",").replace(",0 ", " ") + ".", "The file is " + size(file.size) + ", which exceeds the " + size(max).replace(".0 ", " ") + " limit.");
+    // 1 GB, 1,25 GB, 850 MB (sem zeros sobrando)
+    var size = function (b) { return b >= 1073741824 ? +(b / 1073741824).toFixed(2) + " GB" : +(b / 1048576).toFixed(1) + " MB"; };
+    return T("O arquivo tem " + size(file.size).replace(".", ",") + " e ultrapassa o limite de " + size(max).replace(".", ",") + ".", "The file is " + size(file.size) + ", which exceeds the " + size(max) + " limit.");
   }
   function checkFile(field) {
     var err = errFor(field), problem = fileProblem(field);

@@ -25,7 +25,7 @@ node serve.js   # abre em http://localhost:8080
 
 ## Painel administrativo (`/admin`)
 
-Servidor Node sem dependências (`cms/`) que permite editar o conteúdo sem mexer no código: textos, títulos, imagens, links e CTAs de todas as páginas, SEO, notícias, logotipo/favicon, formulários (campos, destinos, mensagens recebidas) e Google Analytics. **Menu principal e rodapé (`src/partials/layout.html`) não são editáveis pelo painel.**
+Servidor Node sem dependências (`cms/`) que permite editar o conteúdo sem mexer no código: textos, títulos, imagens, links e CTAs de todas as páginas, SEO, notícias, logotipo/favicon, formulários (campos e destinos de envio) e Google Analytics. **Menu principal e rodapé (`src/partials/layout.html`) não são editáveis pelo painel.**
 
 - **Só português no painel; inglês automático.** Cada campo alterado em português é traduzido para a página em `/en/` ao salvar (`cms/translate.js`: Google Tradutor por padrão; DeepL se `CMS_DEEPL_KEY` estiver definida). O resto do inglês continua o texto revisado de `src/en/`. Traduções ficam em cache em `<dados>/translations.json`. Se o tradutor falhar, o português é salvo e a tradução é tentada de novo ao salvar ou publicar.
 - **Informação repetida muda junto.** Endereços, telefones, e-mails e links são dados compartilhados (`{{L.x}}` de `site.json`), editados dentro do próprio campo da página onde aparecem; o endereço completo e os links do mapa são remontados a partir de rua/bairro/cidade/UF/CEP. Textos iguais em outras páginas podem ser atualizados todos de uma vez.

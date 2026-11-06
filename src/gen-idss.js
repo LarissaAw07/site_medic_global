@@ -278,7 +278,10 @@ ${D.map((d, k) => `            <li><span class="idss-dim-n">${k + 1}</span><div>
           <p class="xs muted mt-5">${U.dimsNote}</p>
         </section>
 
-        <div class="idss-orig mt-8">
+${(() => { const h = lang === "en" ? r.conteudoEn || r.conteudo : r.conteudo; return h ? `        <div class="doc-rich mt-8">
+${h}
+        </div>
+` : ""; })()}        <div class="idss-orig mt-8">
 ${corpo.join("\n")}
         </div>
 

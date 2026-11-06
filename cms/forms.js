@@ -83,6 +83,61 @@ function parseMultipart(buf, boundary) {
   return { fields, files };
 }
 
+/* multipart lido em fluxo: os arquivos vão direto para o disco (anexos de até 1 GB sem ocupar a memória).
+   Devolve { fields, files: [{ field, filename, type, path, size, head }] } ou rejeita com status 413/400.
+   Quem chama apaga os arquivos temporários (cleanup) se o envio não for aceito. */
+const DEFAULT_UPLOAD_MB = 1024;
+function parseMultipartStream(req, boundary, limit, tmpDir, label) {
+  return new Promise((resolve, reject) => {
+    const delim = Buffer.from("\r\n--" + boundary);
+    const fields = {}, files = [];
+    let buf = Buffer.from("\r\n"), state = "start", total = 0, cur = null, done = false;
+    const fail = (status, msg) => { if (done) return; done = true; if (cur && cur.fd != null) fs.closeSync(cur.fd); if (cur && cur.path) fs.rmSync(cur.path, { force: true }); cleanup(files); req.resume(); reject(Object.assign(new Error(msg), { status })); };
+    const emit = (chunk) => {
+      if (!cur || !chunk.length) return;
+      if (cur.file) { if (cur.fd != null) { fs.writeSync(cur.fd, chunk); cur.size += chunk.length; if (cur.head.length < 8) cur.head = Buffer.concat([cur.head, chunk.subarray(0, 8)]).subarray(0, 8); } }
+      else { cur.data.push(chunk); cur.size += chunk.length; if (cur.size > 64 * 1024) fail(400, "Campo grande demais."); }
+    };
+    const endPart = () => {
+      if (!cur) return;
+      if (cur.file) { if (cur.fd != null) { fs.closeSync(cur.fd); cur.fd = null; files.push({ field: cur.name, filename: cur.filename, type: cur.type, path: cur.path, size: cur.size, head: cur.head }); } }
+      else fields[cur.name] = Buffer.concat(cur.data).toString("utf8");
+      cur = null;
+    };
+    const step = () => {
+      for (;;) {
+        if (state === "start" || state === "body") {
+          const i = buf.indexOf(delim);
+          if (i < 0) { const keep = Math.max(0, buf.length - delim.length); if (state === "body") emit(buf.subarray(0, keep)); buf = buf.subarray(keep); return; }
+          if (state === "body") { emit(buf.subarray(0, i)); endPart(); }
+          if (buf.length < i + delim.length + 2) { buf = buf.subarray(i); state = state === "body" ? "start" : state; return; }
+          const tail = buf.subarray(i + delim.length, i + delim.length + 2).toString();
+          if (tail === "--") { state = "end"; return; }
+          buf = buf.subarray(i + delim.length + 2); state = "head";
+        } else if (state === "head") {
+          const he = buf.indexOf("\r\n\r\n");
+          if (he < 0) { if (buf.length > 8192) fail(400, "Envio inválido."); return; }
+          const head = buf.subarray(0, he).toString("utf8"); buf = buf.subarray(he + 4); state = "body";
+          const name = /name="([^"]*)"/i.exec(head), file = /filename="([^"]*)"/i.exec(head), ct = /content-type:\s*([^\r\n]+)/i.exec(head);
+          cur = { name: name ? name[1] : "", file: !!file, filename: file ? file[1] : "", type: ct ? ct[1].trim() : "", size: 0, data: [], head: Buffer.alloc(0) };
+          if (cur.file && cur.filename && cur.name) { cur.path = path.join(tmpDir, "tmp-" + crypto.randomBytes(10).toString("hex")); cur.fd = fs.openSync(cur.path, "w", 0o600); }
+          if (!cur.name) cur = null;
+        } else return;
+      }
+    };
+    req.on("data", (c) => {
+      if (done) return;
+      total += c.length;
+      if (total > limit) return fail(413, `O arquivo passa do limite de ${label || Math.round(limit / 1048576) + " MB"}.`);
+      buf = Buffer.concat([buf, c]);
+      try { step(); } catch (e) { fail(400, "Envio inválido."); }
+    });
+    req.on("end", () => { if (done) return; done = true; if (cur && cur.fd != null) fs.closeSync(cur.fd); if (state !== "end") { cleanup(files); if (cur && cur.path) fs.rmSync(cur.path, { force: true }); return reject(Object.assign(new Error("Envio incompleto."), { status: 400 })); } resolve({ fields, files }); });
+    req.on("error", (e) => fail(400, "Envio interrompido."));
+  });
+}
+const cleanup = (files) => (files || []).forEach((f) => { if (f.path) fs.rmSync(f.path, { force: true }); });
+
 /* ---------- envio ---------- */
 // por IP, em 10 minutos: até 6 envios aceitos e até 30 tentativas (inclusive as recusadas pela validação)
 const rate = { ok: new Map(), any: new Map() };
@@ -90,16 +145,16 @@ function hits(map, ip) { const now = Date.now(), l = (map.get(ip) || []).filter(
 const limited = (ip) => hits(rate.ok, ip).length >= 6 || hits(rate.any, ip).push(Date.now()) > 30;
 
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]{2,}$/;
-function validateSubmission(def, fields, files, cfg) {
+function validateSubmission(def, fields, files, maxMB) {
   const errors = {}, clean = {};
-  const maxFileBytes = (cfg.maxUploadMB || 10) * 1024 * 1024;
+  const maxFileBytes = maxMB * 1024 * 1024, maxLabel = maxMB >= 1024 && maxMB % 1024 === 0 ? maxMB / 1024 + " GB" : maxMB + " MB";
   for (const f of def.fields) {
     if (f.type === "file") {
       const file = files.find((x) => x.field === f.name);
       if (!file) { if (f.required) errors[f.name] = "Anexe o arquivo."; continue; }
-      if (file.data.length > maxFileBytes) { errors[f.name] = `O arquivo passa do limite de ${cfg.maxUploadMB || 10} MB.`; continue; }
-      if (/pdf/.test(f.accept) && file.data.subarray(0, 5).toString("ascii") !== "%PDF-") { errors[f.name] = "Envie um arquivo PDF."; continue; }
-      clean[f.name] = { file: true, filename: path.basename(file.filename).replace(/[^\w.\- ]/g, "_").slice(0, 120), size: file.data.length, data: file.data };
+      if (file.size > maxFileBytes) { errors[f.name] = `O arquivo passa do limite de ${maxLabel}.`; continue; }
+      if (/pdf/.test(f.accept) && file.head.subarray(0, 5).toString("ascii") !== "%PDF-") { errors[f.name] = "Envie um arquivo PDF."; continue; }
+      clean[f.name] = { file: true, filename: path.basename(file.filename).replace(/[^\w.\- ]/g, "_").slice(0, 120), size: file.size, tmp: file.path };
       continue;
     }
     const v = String(fields[f.name] == null ? "" : fields[f.name]).replace(/\r\n/g, "\n").trim();
@@ -115,14 +170,17 @@ function validateSubmission(def, fields, files, cfg) {
   return { errors, clean };
 }
 
-async function submit(def, fields, files, ip) {
+async function submit(def, fields, files, ip, maxMB) {
   const s = settings(), cfg = (s.forms && s.forms[def.name]) || {};
   if (cfg.enabled === false) return { status: 403, body: { ok: false, error: "Este formulário está temporariamente desativado." } };
   // armadilha para robôs: campo invisível preenchido ou envio rápido demais
-  if (fields._hp) return { status: 200, body: { ok: true } };
-  if (limited(ip)) return { status: 429, body: { ok: false, error: "Muitos envios em sequência. Aguarde alguns minutos." } };
-  const { errors, clean } = validateSubmission(def, fields, files, cfg);
-  if (Object.keys(errors).length) return { status: 422, body: { ok: false, error: "Revise os campos destacados.", fields: errors } };
+  if (fields._hp) { cleanup(files); return { status: 200, body: { ok: true } }; }
+  if (limited(ip)) { cleanup(files); return { status: 429, body: { ok: false, error: "Muitos envios em sequência. Aguarde alguns minutos." } }; }
+  const { errors, clean } = validateSubmission(def, fields, files, maxMB || DEFAULT_UPLOAD_MB);
+  // arquivos que não serão guardados (recusados ou não pedidos pelo formulário) saem do disco
+  const kept = new Set(Object.values(clean).filter((v) => v && v.file).map((v) => v.tmp));
+  cleanup(files.filter((f) => !kept.has(f.path)));
+  if (Object.keys(errors).length) { cleanup(files); return { status: 422, body: { ok: false, error: "Revise os campos destacados.", fields: errors } }; }
 
   hits(rate.ok, ip).push(Date.now());
   const id = new Date().toISOString().slice(0, 10) + "-" + crypto.randomBytes(6).toString("hex");
@@ -130,7 +188,7 @@ async function submit(def, fields, files, ip) {
   for (const [k, v] of Object.entries(clean)) {
     if (v && v.file) {
       const stored = id + "-" + v.filename;
-      fs.writeFileSync(path.join(store.dirs.attachments, stored), v.data, { mode: 0o600 });
+      fs.renameSync(v.tmp, path.join(store.dirs.attachments, stored));
       record.files.push({ field: k, filename: v.filename, stored, size: v.size });
     } else record.data[k] = v;
   }
@@ -175,4 +233,4 @@ function list(name) {
   return fs.readFileSync(p, "utf8").trim().split("\n").filter(Boolean).map((l) => JSON.parse(l)).reverse();
 }
 
-module.exports = { definitions, settings, saveSettings, parseMultipart, submit, list, postJson, NAMES, EMAIL };
+module.exports = { definitions, settings, saveSettings, parseMultipart, parseMultipartStream, cleanup, DEFAULT_UPLOAD_MB, submit, list, postJson, NAMES, EMAIL };

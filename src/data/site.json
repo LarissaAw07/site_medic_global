@@ -71,6 +71,7 @@
     "ouvidoria": "ouvidoria@medicglobal.com.br"
   },
   "links": {
+    "cliente": "https://cliente.medicglobal.com.br/",
     "beneficiario": "https://extremamedic.com/cliente/",
     "beneficiarioLegado": "http://187.60.158.90:8080/CSSOL_BENEFICIARIO/Login.aspx?ReturnUrl=%2fCSSOL_BENEFICIARIO%2fprincipal_benef.aspx",
     "primeiroAcesso": "https://extremamedic.com/cliente/primeiro_acesso.php",

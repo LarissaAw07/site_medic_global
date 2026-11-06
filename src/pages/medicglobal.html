@@ -8,7 +8,7 @@
 
 <style>
 /* Antes/Agora mais compacto */
-.wipe { aspect-ratio: 21/5; min-height: 260px; }
+.wipe { aspect-ratio: auto; height: max(260px, calc((min(100vw, 1760px) - 2 * var(--gutter)) * 5 / 21)); }
 .wipe-pane { padding: 20px 32px; }
 .wipe-word { font-size: clamp(2rem, 1rem + 3.4vw, 4.5rem); }
 .wipe-pane p { margin-top: 10px; max-width: 46ch; }

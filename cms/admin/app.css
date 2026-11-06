@@ -64,7 +64,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .checklist li.ok { color: var(--ok); } .checklist li.ok::before { content: "✓ "; }
 
 /* ---------- formulário ---------- */
-.field { display: grid; gap: 6px; margin-bottom: 16px; }
+.field { display: grid; gap: 6px; margin-bottom: 16px; min-width: 0; }
 .field > label, .label { font-weight: 600; font-size: .84rem; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; align-items: center; }
 .field .hint { font-size: .78rem; color: var(--ink-3); }
 .input, .field input[type=text], .field input[type=email], .field input[type=password], .field input[type=url], .field input[type=number], .field input[type=date], .field input[type=search], .field select, .field textarea, .rich {
@@ -179,7 +179,7 @@ select.input option, .field select option { background: var(--field); color: var
 .bar { height: 8px; border-radius: 99px; background: var(--field); overflow: hidden; }
 .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--medic), var(--glow)); transition: width .3s; }
 .plist-group { margin-bottom: 26px; }
-.plist-group > h3, .plist-group > summary { display: flex; align-items: center; gap: 10px; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin: 0 0 10px; }
+.plist-group > h3, .plist-group > summary { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); margin: 0 0 10px; }
 .plist-group > summary { cursor: pointer; padding: 6px 0 12px; text-transform: none; letter-spacing: 0; font-size: .86rem; }
 .plist-group > h3 .badge { text-transform: none; letter-spacing: 0; }
 .plist { display: grid; gap: 8px; }
@@ -349,13 +349,14 @@ select.input option, .field select option { background: var(--field); color: var
 }
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
-  .side { position: fixed; inset: 0 auto 0 0; width: 290px; z-index: 50; transform: translateX(-100%); transition: transform .2s; }
-  .shell.nav-open .side { transform: none; box-shadow: 0 0 0 100vmax rgba(0,24,27,.55); }
+  /* fechado, o menu fica fora da tela e também fora do alcance do teclado (Tab) e do leitor de tela */
+  .side { position: fixed; inset: 0 auto 0 0; width: 290px; z-index: 50; transform: translateX(-100%); visibility: hidden; transition: transform .2s, visibility 0s .2s; }
+  .shell.nav-open .side { transform: none; visibility: visible; transition: transform .2s; box-shadow: 0 0 0 100vmax rgba(0,24,27,.55); }
   .side a.nav.is-active::before { display: none; }
   .menu-btn { display: inline-flex; }
   .top { padding: 10px 16px; }
   .content { padding: 20px 16px 32px; }
-  .grid2, .grid3, .perm-grid { grid-template-columns: 1fr; }
+  .grid2, .grid3, .perm-grid { grid-template-columns: minmax(0, 1fr); }
   .imgrow { grid-template-columns: 1fr; }
   .hide-sm { display: none !important; }
   .crumbs { font-size: .8rem; }
@@ -524,3 +525,17 @@ select::-ms-expand { display: none; }
 /* menu lateral: sem ícones nos itens; setas menores */
 .side .dd-chev .ico, .side .dd-chev .ico svg { width: 14px; height: 14px; }
 .side .dd-chev .ico svg { stroke-width: 1.4; }
+
+/* celular: campos com 16px (o iPhone não dá zoom ao tocar), botões com texto longo quebram a linha,
+   auditoria em cartões (data e usuário lado a lado, o que mudou embaixo) */
+@media (max-width: 640px) {
+  input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]), select, textarea { font-size: max(16px, 1em); }
+  .btn { white-space: normal; text-align: center; }
+  .table.audit thead { display: none; }
+  .table.audit, .table.audit tbody { display: block; width: 100%; }
+  .table.audit td { display: block; }
+  .table.audit tr { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 16px; padding: 14px 0; border-bottom: 1px solid var(--line-2); }
+  .table.audit td { padding: 0; border: 0; min-width: 0; overflow-wrap: anywhere; }
+  .table.audit td:nth-child(3) { grid-column: 1 / -1; margin-top: 8px; }
+  .table.audit tr:last-child { border-bottom: 0; }
+}

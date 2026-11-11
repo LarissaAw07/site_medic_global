@@ -1,8 +1,11 @@
 # Publicar em hospedagem HTML + PHP (IIS / Windows — web.config)
 
 O site é estático; só a **busca da rede** e o **guia médico** precisam de PHP
-(proxies para `extremamedic.com`, que não libera CORS). O painel `/admin` (Node)
-**não** roda aqui — nesse modelo você edita em outro lugar e sobe os estáticos.
+(proxies para `extremamedic.com`, que não libera CORS).
+
+> **Painel de edição nesta hospedagem:** há uma versão do `/admin` em **PHP + MySQL** que roda
+> aqui mesmo, editando o conteúdo das páginas `.html` já publicadas. Veja `deploy/PAINEL-ADMIN-PHP.md`.
+> (O painel `/admin` original, em Node, continua existindo para quem roda numa VPS com `build.js`.)
 
 > Hospedagem **IIS (Windows)**: o roteamento fica em `web.config` (módulo URL Rewrite).
 > Não use `.htaccess` (é do Apache).

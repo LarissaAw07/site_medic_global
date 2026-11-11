@@ -232,7 +232,7 @@
   var NAV = [
     ["Conteúdo do site", [["", "Visão geral", "home"], ["pages", "Páginas", "pages", "pages"], ["news", "Notícias", "news", "news"]]],
     ["Configurações", [["identity", "Identidade visual", "brand", "identity"], ["forms", "Formulários", "form", "forms"], ["analytics", "Google Analytics", "chart", "analytics"]]],
-    ["Acompanhamento", [["audit", "Auditoria", "history", "audit"], ["users", "Usuários", "user"]]],
+    ["Acompanhamento", [["submissions", "Envios recebidos", "form", "submissions"], ["audit", "Auditoria", "history", "audit"], ["users", "Usuários", "user"]]],
   ];
   var TITLES = {}, NEED = {}; NAV.forEach(function (g) { g[1].forEach(function (n) { TITLES[n[0]] = n[1]; NEED[n[0]] = n[3]; }); });
   TITLES.page = TITLES.pages; NEED.page = "pages"; TITLES.docs = "Documentos anuais"; NEED.docs = "pages";
@@ -1564,6 +1564,39 @@
     fill(view, head("Formulários", "Destinos de envio, ativação e regras de cada formulário do site."), cards, smtp);
   }
 
+  /* ---------- Envios recebidos pelos formulários (dados pessoais) ---------- */
+  var subForm = "";
+  VIEWS.submissions = function (view) {
+    api("GET", "/api/admin/submissions" + (subForm ? "?form=" + encodeURIComponent(subForm) : "")).then(function (r) {
+      subForm = r.form;
+      var tabs = h("div", { class: "toolbar" }, r.forms.map(function (f) {
+        return h("button", { class: "btn btn--sm " + (f.name === r.form ? "" : "btn--ghost"), type: "button", "aria-pressed": String(f.name === r.form), text: f.title + " (" + f.count + ")", onclick: function () { subForm = f.name; VIEWS.submissions(view); } });
+      }));
+      var fmtSize = function (b) { return b >= 1048576 ? (b / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(b / 1024)) + " KB"; };
+      var cards = r.items.map(function (it) {
+        var rows = Object.keys(it.data || {}).map(function (k) {
+          var v = it.data[k]; if (v === "" || v == null) return null;
+          return h("div", { class: "sub-row" }, h("span", { class: "sub-k", text: r.labels[k] || k }), h("span", { class: "sub-v", text: String(v) }));
+        });
+        var files = (it.files || []).map(function (f) {
+          return h("a", { class: "btn btn--ghost btn--sm", href: "/api/admin/submissions/file?form=" + encodeURIComponent(r.form) + "&id=" + encodeURIComponent(it.id) + "&file=" + encodeURIComponent(f.stored), download: f.filename, text: "Baixar " + f.filename + " (" + fmtSize(f.size) + ")" });
+        });
+        var del = h("button", { class: "btn btn--quiet btn--sm", type: "button", text: "Excluir envio", onclick: function () {
+          confirmDialog("Excluir este envio?", "Os dados e o anexo do protocolo " + it.id + " são apagados do servidor. Não dá para desfazer.", "Excluir", true).then(function (ok) {
+            if (ok) api("DELETE", "/api/admin/submissions?form=" + encodeURIComponent(r.form) + "&id=" + encodeURIComponent(it.id)).then(function () { toast("Envio excluído.", "ok"); VIEWS.submissions(view); }).catch(fail);
+          });
+        } });
+        return h("div", { class: "card sub-card" },
+          h("div", { class: "sub-head" }, h("b", { text: fmtDate(it.at) }), h("span", { class: "xs muted", text: "Protocolo " + it.id })),
+          h("div", { class: "sub-rows" }, rows), h("div", { class: "actions mt" }, files, del));
+      });
+      fill(view, head("Envios recebidos", "Mensagens enviadas pelos formulários do site. Contêm dados pessoais: ficam guardadas por " + r.retentionMonths + " meses e depois são excluídas automaticamente."),
+        r.forms.length ? tabs : null,
+        cards.length ? cards : h("div", { class: "card" }, h("p", { class: "muted", text: "Nenhum envio guardado para este formulário." })),
+        r.items.length >= 500 ? h("p", { class: "small muted", text: "Mostrando os 500 envios mais recentes." }) : null);
+    }).catch(fail);
+  };
+
   /* ---------- Google Analytics ---------- */
   VIEWS.analytics = function (view) {
     api("GET", "/api/admin/analytics").then(function (g) { gaView(view, g); }).catch(fail);
@@ -1618,10 +1651,10 @@
     rascunho_pagina: "Editou uma página", noticia_criada: "Criou uma notícia", noticia_alterada: "Editou uma notícia", noticia_removida: "Removeu uma notícia", rascunho_noticias: "Editou as notícias",
     publicado: "Publicou o site", rascunho_descartado: "Descartou o rascunho", versao_restaurada_no_rascunho: "Restaurou uma versão anterior no rascunho",
     rascunho_identidade: "Alterou a identidade visual", analytics_config: "Alterou o Google Analytics", analytics_verificacao: "Verificou o Google Analytics",
-    formulario_config: "Alterou um formulário", smtp_config: "Alterou o servidor de e-mail", upload: "Enviou uma imagem",
+    formulario_config: "Alterou um formulário", anexo_baixado: "Baixou um anexo de envio", envio_excluido: "Excluiu um envio de formulário", envios_expirados: "Envios excluídos pelo prazo de guarda", smtp_config: "Alterou o servidor de e-mail", upload: "Enviou uma imagem",
     pagina_revisada: "Marcou página como revisada", pagina_nao_revisada: "Desmarcou página revisada", rascunho_dados_gerais: "Alterou dados gerais",
     usuario_criado: "Cadastrou um usuário", usuario_alterado: "Alterou um usuário", usuario_removido: "Removeu um usuário", senha_redefinida: "Redefiniu a senha de um usuário", senha_alterada: "Trocou a própria senha",
-    setup: "Configuração inicial", admin_definido: "Definiu o administrador", login: "Entrou no painel", logout: "Saiu do painel", login_falhou: "Tentativa de acesso com senha incorreta",
+    setup: "Configuração inicial", admin_definido: "Definiu o administrador", login: "Entrou no painel", logout: "Saiu do painel", login_falhou: "Tentativa de acesso com senha incorreta", senha_atual_incorreta: "Errou a senha atual ao tentar trocá-la",
   };
   var auditQ = { q: "", user: "", from: "", to: "", access: false, page: 0 };
   VIEWS.audit = function (view) {
@@ -1741,8 +1774,9 @@
           h("div", { class: "ucard-perms" }, u.role === "admin" ? h("span", { class: "badge badge--ok", text: "Todas as áreas" }) : u.perms.map(function (p) { return h("span", { class: "badge badge--line", text: r.perms[p] }); })),
           h("div", { class: "xs muted" }, "Último acesso: " + fmtDate(u.lastLogin), u.mustChange ? " · aguardando troca da senha provisória" : "", u.locked ? " · bloqueado por tentativas incorretas" : ""),
           h("div", { class: "actions" },
-            h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () { userForm(r, u, reload); } }, icon("edit"), u.role === "admin" ? "Editar nome" : "Editar permissões"),
-            !me ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () {
+            // a conta do administrador principal só é alterada por ele mesmo
+            u.role !== "admin" || me ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () { userForm(r, u, reload); } }, icon("edit"), u.role === "admin" ? "Editar nome" : "Editar permissões") : null,
+            !me && u.role !== "admin" ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () {
               confirmDialog("Redefinir a senha de " + u.name + "?", "Uma senha provisória será criada agora. As sessões abertas desse usuário são encerradas e ele precisará trocar a senha ao entrar.", "Redefinir senha").then(function (ok) {
                 if (ok) api("POST", "/api/admin/users/reset", { email: u.email }).then(function (nr) { showPassword("Senha redefinida", u.email, nr.password); reload(); }).catch(fail);
               });

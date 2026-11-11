@@ -22,6 +22,21 @@ const GENERATED = /^(noticia-.+|rn565(-agrupamento-\d{4})?|idss(-\d{4})?|mapa-de
 
 /* Sistema de arquivos "por cima" de src/: no build do painel, o que os geradores gravam em src/ fica em memória,
    e os dados editados (site.json, noticias.json) substituem os do repositório só neste build. */
+// Largura de um JPEG (lê o cabeçalho SOF), para o srcset das fotos locais; null se não for JPEG válido
+function jpegWidth(file) {
+  try {
+    const b = fs.readFileSync(file);
+    if (b[0] !== 0xff || b[1] !== 0xd8) return null;
+    for (let i = 2; i + 9 < b.length;) {
+      if (b[i] !== 0xff) return null;
+      const m = b[i + 1], len = b.readUInt16BE(i + 2);
+      if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) return b.readUInt16BE(i + 7);
+      i += 2 + len;
+    }
+  } catch (e) {}
+  return null;
+}
+
 function overlayFs(dataFiles) {
   const files = new Map(), gone = new Set();
   const key = (p) => path.resolve(p);
@@ -121,8 +136,13 @@ function build(opts = {}) {
     const [key, alt = "", w = "1400", sizes = "100vw", eager] = spec.split("|");
     const id = photoPath(key);
     if (!id) throw new Error("Foto desconhecida: " + key);
-    // Fotos locais (ex.: provisórias do site antigo em assets/img/provisorio/): arquivo único, sem srcset
-    if (id.startsWith("assets/")) return `<img src="${id}" alt="${alt}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+    // Fotos locais (ex.: provisórias do site antigo em assets/img/provisorio/). Se existir a versão reduzida
+    // "nome-800.jpg" ao lado, o navegador escolhe pelo tamanho da tela (o celular baixa a de 800px).
+    if (id.startsWith("assets/")) {
+      const small = id.replace(/(\.\w+)$/, "-800$1"), natural = fs.existsSync(path.join(ROOT, small)) && jpegWidth(path.join(ROOT, id));
+      const set = natural ? ` srcset="${small} 800w, ${id} ${natural}w" sizes="${sizes}"` : "";
+      return `<img src="${id}"${set} alt="${alt}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+    }
     const max = parseInt(w, 10);
     const widths = [480, 800, 1200, 1600, 2000].filter((x) => x <= max);
     if (!widths.includes(max)) widths.push(max);
@@ -281,7 +301,8 @@ function build(opts = {}) {
       };
       let html = finish(bust(render(partial("layout"), Object.assign({}, ctx, { content: body }))));
       // em /en/ os arquivos estáticos ficam um nível acima
-      if (L.dir) html = html.replace(/(href|src)="assets\//g, '$1="../assets/');
+      if (L.dir) html = html.replace(/(href|src)="assets\//g, '$1="../assets/')
+        .replace(/srcset="([^"]*)"/g, (_, v) => `srcset="${v.replace(/(^|,\s*)assets\//g, "$1../assets/")}"`);
       fs.writeFileSync(path.join(langOut, file), html);
       written.add(path.join(L.dir, file));
       if (!meta.noindex) sitemap.push(url);
@@ -302,6 +323,7 @@ function build(opts = {}) {
   if (!opts.quiet) log("✓ sitemap.xml, robots.txt");
   return report;
 }
+
 
 module.exports = build;
 module.exports.loadSources = loadSources;

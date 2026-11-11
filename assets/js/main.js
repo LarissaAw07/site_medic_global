@@ -103,6 +103,8 @@
     if (willOpen) drawer.removeAttribute("inert"); else drawer.setAttribute("inert", "");
   }
   if (toggle) toggle.addEventListener("click", function () { toggleDrawer(); });
+  // tocar num link do menu fecha o menu (inclusive links para seções da mesma página) e libera a rolagem
+  if (drawer) drawer.addEventListener("click", function (e) { if (e.target.closest("a[href]")) toggleDrawer(false); });
 
   /* Seletor de idioma: abre o menu, guarda a escolha e mantém a seção atual (#âncora) na outra versão */
   $$("[data-lang]").forEach(function (box) {

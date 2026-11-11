@@ -20,6 +20,26 @@ function verifyPassword(pw, stored) {
   const got = crypto.scryptSync(String(pw), Buffer.from(salt, "base64"), expected.length, { N: +N, r: +r, p: +p, maxmem: SCRYPT.maxmem });
   return crypto.timingSafeEqual(expected, got);
 }
+// versão assíncrona (login e troca de senha): o cálculo pesado não trava o servidor enquanto roda.
+// No máximo 4 verificações ao mesmo tempo; com muitas tentativas simultâneas, as excedentes são recusadas (429).
+let running = 0; const waiting = [];
+const MAX_RUNNING = 4, MAX_WAITING = 40;
+function slot() {
+  if (running < MAX_RUNNING) { running++; return Promise.resolve(); }
+  if (waiting.length >= MAX_WAITING) return Promise.reject(Object.assign(new Error("Muitas tentativas de acesso neste momento. Aguarde um minuto e tente novamente."), { status: 429 }));
+  return new Promise((r) => waiting.push(r));
+}
+function release() { const next = waiting.shift(); if (next) next(); else running--; }
+async function verifyPasswordAsync(pw, stored) {
+  const [alg, N, r, p, salt, hash] = String(stored || "").split("$");
+  if (alg !== "scrypt") return false;
+  const expected = Buffer.from(hash, "base64");
+  await slot();
+  try {
+    const got = await new Promise((ok, fail) => crypto.scrypt(String(pw), Buffer.from(salt, "base64"), expected.length, { N: +N, r: +r, p: +p, maxmem: SCRYPT.maxmem }, (e, k) => (e ? fail(e) : ok(k))));
+    return crypto.timingSafeEqual(expected, got);
+  } finally { release(); }
+}
 // usado quando o e-mail não existe, para a resposta levar o mesmo tempo (não revela quais e-mails são válidos)
 const DUMMY = hashPassword(crypto.randomBytes(16).toString("hex"));
 
@@ -41,6 +61,7 @@ const PERMS = {
   news: "Notícias",
   identity: "Identidade visual",
   forms: "Formulários",
+  submissions: "Envios recebidos (dados pessoais)",
   analytics: "Google Analytics",
   audit: "Auditoria",
   publish: "Publicar alterações no site",
@@ -93,34 +114,55 @@ function tempPassword() {
   return Array.from(s).sort(() => crypto.randomBytes(1)[0] - 128).join("");
 }
 
-/* ---------- limite de tentativas ---------- */
+/* ---------- limite de tentativas ----------
+   Por rede (IP): 20 erros em 15 min bloqueiam a rede. Por conta: o bloqueio progressivo vale só para a rede de
+   onde vieram os erros, assim quem erra a senha de outro lugar não consegue trancar o acesso do administrador. */
 const ipFails = new Map(); // ip → [timestamps]
+const accFails = new Map(); // "email|ip" → { failed, until, last }
+const accKey = (email, ip) => String(email || "").trim().toLowerCase() + "|" + ip;
+function lockedFor(email, ip) { const a = accFails.get(accKey(email, ip)); return a && a.until > Date.now() ? a.until : 0; }
+// alguma rede está bloqueada para esta conta? (aviso na tela de usuários)
+function isLocked(email) { const now = Date.now(); for (const [k, a] of accFails) if (k.startsWith(email + "|") && a.until > now) return true; return false; }
+function unlock(email) { for (const k of [...accFails.keys()]) if (k.startsWith(email + "|")) accFails.delete(k); }
+// limpeza periódica para os mapas não crescerem sem fim
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, l] of ipFails) if (!l.some((t) => now - t < 15 * 60 * 1000)) ipFails.delete(ip);
+  for (const [k, a] of accFails) if (a.until < now && now - (a.last || 0) > 24 * 3600 * 1000) accFails.delete(k);
+}, 30 * 60 * 1000).unref();
 function ipBlocked(ip) {
   const now = Date.now(), list = (ipFails.get(ip) || []).filter((t) => now - t < 15 * 60 * 1000);
   ipFails.set(ip, list);
   return list.length >= 20;
 }
 
-function login(email, password, ip) {
+async function login(email, password, ip) {
   if (ipBlocked(ip)) return { error: "Muitas tentativas a partir desta rede. Aguarde 15 minutos e tente novamente.", status: 429 };
-  const list = users.all();
-  const u = list.find((x) => x.email === String(email || "").trim().toLowerCase());
-  if (u && u.lockedUntil > Date.now()) {
-    const min = Math.ceil((u.lockedUntil - Date.now()) / 60000);
+  const until = lockedFor(email, ip);
+  if (until) {
+    const min = Math.ceil((until - Date.now()) / 60000);
     return { error: `Acesso bloqueado temporariamente por tentativas incorretas. Tente novamente em ${min} min.`, status: 429 };
   }
-  const ok = verifyPassword(password, u ? u.hash : DUMMY) && !!u;
+  const found = users.find(email);
+  let ok;
+  try { ok = (await verifyPasswordAsync(password, found ? found.hash : DUMMY)) && !!found; }
+  catch (e) { return { error: e.message, status: e.status || 500 }; }
   if (!ok) {
     ipFails.get(ip).push(Date.now());
-    if (u) {
-      u.failed = (u.failed || 0) + 1;
-      // a partir de 5 erros seguidos: bloqueio de 15 min (dobrando a cada novo erro, até 24 h)
-      if (u.failed >= 5) u.lockedUntil = Date.now() + Math.min(15 * 60 * 1000 * 2 ** (u.failed - 5), 24 * 3600 * 1000);
-      users.save(list);
+    if (found) {
+      const k = accKey(email, ip), a = accFails.get(k) || { failed: 0, until: 0 };
+      a.failed++; a.last = Date.now();
+      // a partir de 5 erros seguidos desta rede: bloqueio de 15 min para esta rede (dobrando a cada novo erro, até 24 h)
+      if (a.failed >= 5) a.until = Date.now() + Math.min(15 * 60 * 1000 * 2 ** (a.failed - 5), 24 * 3600 * 1000);
+      accFails.set(k, a);
     }
     store.audit(email, "login_falhou", ip);
     return { error: "E-mail ou senha incorretos.", status: 401 };
   }
+  accFails.delete(accKey(email, ip));
+  // relê a lista depois da verificação (outra gravação pode ter acontecido enquanto a senha era conferida)
+  const list = users.all(), u = list.find((x) => x.email === found.email);
+  if (!u) return { error: "E-mail ou senha incorretos.", status: 401 };
   u.failed = 0; u.lockedUntil = 0; u.lastLogin = new Date().toISOString();
   users.save(list);
   const sid = crypto.randomBytes(32).toString("base64url");
@@ -142,4 +184,4 @@ const logout = (sid) => sessions.delete(sid);
 // troca de senha encerra as outras sessões do usuário
 function dropOtherSessions(email, keep) { for (const [k, s] of sessions) if (s.email === email && k !== keep) sessions.delete(k); }
 
-module.exports = { hashPassword, verifyPassword, passwordProblem, users, login, session, logout, dropOtherSessions, tempPassword, IDLE, MAX_USERS, PERMS, can, permsOf };
+module.exports = { isLocked, unlock, verifyPasswordAsync, hashPassword, verifyPassword, passwordProblem, users, login, session, logout, dropOtherSessions, tempPassword, IDLE, MAX_USERS, PERMS, can, permsOf };

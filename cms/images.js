@@ -25,7 +25,12 @@ function dims(buf) {
   const head = buf.toString("utf8", 0, Math.min(buf.length, 4096));
   if (/<svg[\s>]/i.test(head)) {
     const s = buf.toString("utf8");
-    if (/<script|<foreignObject|\bon\w+\s*=|javascript:|<iframe|<embed|<object|xlink:href\s*=\s*["']\s*(?:https?:|data:)/i.test(s)) return { type: "svg-unsafe" };
+    // recusa qualquer coisa que possa executar código ou buscar conteúdo externo: scripts, eventos (on...),
+    // animações que trocam atributos (set/animate), entidades numéricas (usadas para disfarçar "javascript:"),
+    // links que não sejam internos (#id), importações de estilo e endereços externos em url()
+    if (/<script|<foreignObject|\bon\w+\s*=|javascript:|vbscript:|<iframe|<embed|<object|<set\b|<animate|<handler|<!ENTITY|<\?xml-stylesheet|@import|url\(\s*["']?\s*(?:https?:|data:|\/\/)|&#/i.test(s)) return { type: "svg-unsafe" };
+    // links: só internos (#id) ou imagem embutida em PNG/JPEG/GIF/WebP (comum em logotipos exportados)
+    if (/\b(?:xlink:)?href\s*=\s*["']\s*(?!#|data:image\/(?:png|jpe?g|gif|webp);base64,)/i.test(s)) return { type: "svg-unsafe" };
     const vb = /viewBox\s*=\s*["'][\d.\-]+[\s,]+[\d.\-]+[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(s);
     const w = /<svg[^>]*\swidth\s*=\s*["']([\d.]+)/i.exec(s), h = /<svg[^>]*\sheight\s*=\s*["']([\d.]+)/i.exec(s);
     return { type: "svg", mime: "image/svg+xml", w: Math.round(w ? +w[1] : vb ? +vb[1] : 0), h: Math.round(h ? +h[1] : vb ? +vb[2] : 0) };

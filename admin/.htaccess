@@ -1,0 +1,4 @@
+# Apache (se a hospedagem não for IIS): bloqueia config, bibliotecas e dados do painel
+RedirectMatch 404 ^/admin/(lib|data|tools)(/|$)
+RedirectMatch 404 ^/admin/config(\.sample)?\.php$
+DirectoryIndex index.php

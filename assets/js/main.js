@@ -522,7 +522,7 @@
       data.append("_lgpd", "1");
       data.append("_page", location.pathname);
       if (btn) btn.disabled = true;
-      fetch("/api/forms/" + encodeURIComponent(name), { method: "POST", body: data, credentials: "same-origin" })
+      fetch((window.MG_CFG.formsUrl || "/api/forms/") + encodeURIComponent(name), { method: "POST", body: data, credentials: "same-origin" })
         .then(function (r) { return r.json().catch(function () { return { ok: false }; }).then(function (j) { j.status = r.status; return j; }); })
         .then(function (j) {
           if (j.ok) return done();

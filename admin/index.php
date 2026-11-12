@@ -53,16 +53,17 @@ function route_setup() {
     }
   }
   layout('Primeiro acesso', function() use ($err) { ?>
-    <div class="card narrow">
+    <div class="login-card">
+      <div class="brandmark"><b>MedicGLOBAL</b> <span class="badge">painel</span></div>
       <h1>Criar administrador</h1>
-      <p class="muted">Este é o primeiro acesso. Crie o usuário administrador do painel.</p>
+      <p class="lead">Este é o primeiro acesso. Crie o usuário administrador do painel.</p>
       <?php if ($err) echo '<p class="alert err">'.h($err).'</p>'; ?>
       <form method="post">
         <?php csrf_field(); ?>
         <label>E-mail <input type="email" name="email" required value="<?=h($_POST['email']??'')?>"></label>
         <label>Senha (mín. 8 caracteres) <input type="password" name="password" required minlength="8"></label>
         <label>Repita a senha <input type="password" name="password2" required></label>
-        <button class="btn primary" type="submit">Criar e entrar</button>
+        <button class="btn" type="submit">Criar e entrar</button>
       </form>
     </div>
   <?php }, false); }
@@ -77,15 +78,16 @@ function route_login() {
     $err = $msg;
   }
   layout('Entrar', function() use ($err) { ?>
-    <div class="card narrow">
-      <h1>Painel MedicGLOBAL</h1>
-      <p class="muted">Entre para editar o conteúdo do site.</p>
+    <div class="login-card">
+      <div class="brandmark"><b>MedicGLOBAL</b> <span class="badge">painel</span></div>
+      <h1>Entrar</h1>
+      <p class="lead">Acesse para editar o conteúdo do site.</p>
       <?php if ($err) echo '<p class="alert err">'.h($err).'</p>'; ?>
       <form method="post">
         <?php csrf_field(); ?>
         <label>E-mail <input type="email" name="email" required autofocus value="<?=h($_POST['email']??'')?>"></label>
         <label>Senha <input type="password" name="password" required></label>
-        <button class="btn primary" type="submit">Entrar</button>
+        <button class="btn" type="submit">Entrar</button>
       </form>
     </div>
   <?php }, false); }
@@ -96,16 +98,22 @@ function route_home() {
   $pt = array_filter($pages, fn($p)=>$p['lang']==='pt');
   $en = array_filter($pages, fn($p)=>$p['lang']==='en');
   layout('Páginas', function() use ($pt, $en) { ?>
-    <div class="bar">
-      <h1>Páginas do site</h1>
-      <div class="bar-actions"><a class="btn" href="?p=audit">Auditoria</a></div>
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Conteúdo</div>
+        <h1>Páginas do site</h1>
+        <p>Escolha uma página para editar textos, links, imagens e SEO. O menu e o rodapé do site não são editados aqui.</p>
+      </div>
     </div>
-    <p class="muted">Escolha uma página para editar textos, links, imagens e SEO. O menu e o rodapé do site não são editados aqui.</p>
-    <h2 class="group">Português</h2>
-    <div class="grid"><?php foreach ($pt as $p) page_card($p); ?></div>
+    <div class="plist-group">
+      <h3>Português</h3>
+      <div class="plist"><?php $i=0; foreach ($pt as $p) page_card($p, ++$i); ?></div>
+    </div>
     <?php if ($en): ?>
-      <h2 class="group">Inglês (/en)</h2>
-      <div class="grid"><?php foreach ($en as $p) page_card($p); ?></div>
+    <div class="plist-group">
+      <h3>Inglês (/en)</h3>
+      <div class="plist"><?php $i=0; foreach ($en as $p) page_card($p, ++$i); ?></div>
+    </div>
     <?php endif; ?>
   <?php }); }
 
@@ -122,48 +130,57 @@ function route_edit() {
   $saved = isset($_GET['ok']);
   $enPrefix = strpos($file, 'en/') === 0 ? '../' : '';
 
+  $crumbs = [['Páginas','?p=home'], [$meta['label'], '']];
   layout('Editar · '.$meta['label'], function() use ($ex, $byId, $seo, $meta, $file, $hash, $saved, $enPrefix) { ?>
-    <div class="bar">
-      <div>
-        <a class="back" href="?p=home">← Páginas</a>
-        <h1>Editar: <?=h($meta['label'])?> <span class="muted small"><?=h($meta['base'])?></span></h1>
-      </div>
-      <div class="bar-actions">
-        <a class="btn" href="<?=h($enPrefix.$meta['base'])?>" target="_blank" rel="noopener">Ver página ↗</a>
-        <a class="btn" href="?p=history&file=<?=urlencode($file)?>">Backups</a>
-      </div>
-    </div>
     <?php if ($saved) echo '<p class="alert ok">Alterações salvas e publicadas.</p>'; ?>
     <?php if (!empty($_GET['err'])) echo '<p class="alert err">'.h($_GET['err']).'</p>'; ?>
+
+    <div class="ed-head">
+      <div>
+        <div class="eyebrow">Editando página</div>
+        <h1><?=h($meta['label'])?></h1>
+        <div class="url"><?=h($meta['base'])?></div>
+      </div>
+      <div class="actions">
+        <a class="btn ghost" href="<?=h($enPrefix.$meta['base'])?>" target="_blank" rel="noopener">Ver página ↗</a>
+        <a class="btn ghost" href="?p=history&file=<?=urlencode($file)?>">Backups</a>
+      </div>
+    </div>
 
     <form method="post" action="?p=save" id="editor" data-enprefix="<?=h($enPrefix)?>">
       <?php csrf_field(); ?>
       <input type="hidden" name="file" value="<?=h($file)?>">
       <input type="hidden" name="h" value="<?=h($hash)?>">
 
-      <section class="block">
-        <h2 class="sec">SEO — busca e redes sociais</h2>
-        <label>Título da aba / Google (title)
-          <input type="text" name="seo[title]" maxlength="70" value="<?=h($seo['title'])?>">
-        </label>
-        <label>Descrição para o Google (meta description)
-          <textarea name="seo[desc]" rows="2" maxlength="180"><?=h($seo['desc'])?></textarea>
-        </label>
-      </section>
+      <details class="sec" open>
+        <summary><span class="snum">SEO</span><span class="stitle">Busca e redes sociais</span><span class="chev">›</span></summary>
+        <div class="sec-body">
+          <div class="unit">
+            <label class="flabel">Título da aba / Google (title)</label>
+            <input type="text" name="seo[title]" maxlength="70" value="<?=h($seo['title'])?>">
+          </div>
+          <div class="unit">
+            <label class="flabel">Descrição para o Google (meta description)</label>
+            <textarea name="seo[desc]" rows="2" maxlength="180" class="auto"><?=h($seo['desc'])?></textarea>
+          </div>
+        </div>
+      </details>
 
-      <?php foreach ($ex['sections'] as $s): ?>
-        <section class="block">
-          <h2 class="sec"><?=h($s->label)?></h2>
-          <?php foreach ($s->units as $id): field_editor($byId[$id], $enPrefix); endforeach; ?>
-        </section>
+      <?php $sn=0; foreach ($ex['sections'] as $s): $sn++; ?>
+        <details class="sec" open>
+          <summary><span class="snum"><?=$sn?></span><span class="stitle"><?=h($s->label)?></span><span class="chev">›</span></summary>
+          <div class="sec-body">
+            <?php foreach ($s->units as $id): field_editor($byId[$id], $enPrefix); endforeach; ?>
+          </div>
+        </details>
       <?php endforeach; ?>
 
       <div class="savebar">
-        <button class="btn primary" type="submit">Salvar e publicar</button>
-        <a class="btn" href="?p=home">Cancelar</a>
+        <button class="btn" type="submit">Salvar e publicar</button>
+        <a class="btn ghost" href="?p=home">Cancelar</a>
       </div>
     </form>
-  <?php }); }
+  <?php }, true, $crumbs); }
 
 function route_save() {
   $u = Auth::requireLogin();
@@ -255,16 +272,16 @@ function route_history() {
   $meta = Store::meta($file, strpos($file,'en/')===0?'en':'pt');
   $list = Store::backups($file);
   layout('Backups · '.$meta['label'], function() use ($list, $file, $meta) { ?>
-    <div class="bar"><div><a class="back" href="?p=edit&file=<?=urlencode($file)?>">← Editar</a><h1>Backups — <?=h($meta['label'])?></h1></div></div>
+    <div class="page-head"><div><a class="back" href="?p=edit&file=<?=urlencode($file)?>">← Editar</a><h1>Backups — <?=h($meta['label'])?></h1></div></div>
     <p class="muted">Cada vez que você salva, a versão anterior fica guardada aqui. É possível restaurá-la.</p>
     <?php if (!$list): ?><div class="card"><p>Nenhum backup ainda.</p></div><?php else: ?>
-    <table class="tbl">
+    <table class="table">
       <thead><tr><th>Quando</th><th>Por</th><th></th></tr></thead>
       <tbody><?php foreach ($list as $b): ?>
         <tr><td><?=h($b['at'])?></td><td><?=h($b['user_email'])?></td>
         <td><form method="post" action="?p=restore" onsubmit="return confirm('Restaurar esta versão? A versão atual vira um novo backup.')">
           <?php csrf_field(); ?><input type="hidden" name="file" value="<?=h($file)?>"><input type="hidden" name="id" value="<?=h($b['id'])?>">
-          <button class="btn small" type="submit">Restaurar</button></form></td></tr>
+          <button class="btn ghost small" type="submit">Restaurar</button></form></td></tr>
       <?php endforeach; ?></tbody>
     </table>
     <?php endif; ?>
@@ -289,9 +306,9 @@ function route_audit() {
   Auth::requireLogin();
   $log = Store::auditLog();
   layout('Auditoria', function() use ($log) { ?>
-    <div class="bar"><div><a class="back" href="?p=home">← Páginas</a><h1>Auditoria</h1></div></div>
+    <div class="page-head"><div><a class="back" href="?p=home">← Páginas</a><h1>Auditoria</h1></div></div>
     <p class="muted">Quem alterou o quê, e quando.</p>
-    <table class="tbl">
+    <table class="table">
       <thead><tr><th>Quando</th><th>Usuário</th><th>Ação</th><th>Detalhe</th><th>Mudanças</th></tr></thead>
       <tbody><?php foreach ($log as $e): $ch = $e['changes'] ? json_decode($e['changes'], true) : []; ?>
         <tr><td class="nowrap"><?=h($e['at'])?></td><td><?=h($e['user_email'])?></td><td><?=h($e['action'])?></td><td><?=h($e['detail'])?></td>
@@ -314,7 +331,7 @@ function route_account() {
     else { Auth::setPassword($u['id'], $new); Store::audit($u['email'],'password','Trocou a própria senha'); $msg = 'Senha atualizada.'; }
   }
   layout('Minha conta', function() use ($u, $msg, $err) { ?>
-    <div class="bar"><div><a class="back" href="?p=home">← Páginas</a><h1>Minha conta</h1></div></div>
+    <div class="page-head"><div><a class="back" href="?p=home">← Páginas</a><h1>Minha conta</h1></div></div>
     <div class="card narrow">
       <p class="muted"><?=h($u['email'])?></p>
       <?php if ($msg) echo '<p class="alert ok">'.h($msg).'</p>'; if ($err) echo '<p class="alert err">'.h($err).'</p>'; ?>
@@ -322,7 +339,7 @@ function route_account() {
         <label>Senha atual <input type="password" name="current" required></label>
         <label>Nova senha <input type="password" name="password" required minlength="8"></label>
         <label>Repita a nova senha <input type="password" name="password2" required></label>
-        <button class="btn primary" type="submit">Trocar senha</button>
+        <button class="btn" type="submit">Trocar senha</button>
       </form>
     </div>
   <?php }); }
@@ -333,19 +350,21 @@ function chg($unit, $label, $before, $after) { return ['field'=>$label.' · '.$u
 
 function csrf_field() { echo '<input type="hidden" name="csrf" value="'.h(csrf_token()).'">'; }
 
-function page_card($p) {
+function page_card($p, $n = 1) {
   $href = '?p=edit&file='.urlencode($p['file']); ?>
-  <a class="pcard" href="<?=$href?>">
-    <span class="pcard-name"><?=h($p['label'])?></span>
-    <span class="pcard-file"><?=h($p['base'])?></span>
+  <a class="prow" href="<?=$href?>">
+    <span class="num"><?=$n?></span>
+    <span><span class="t"><?=h($p['label'])?></span><span class="f"><?=h($p['base'])?></span></span>
+    <span class="go">›</span>
   </a>
 <?php }
 
 function field_editor($u, $enPrefix) {
   $name = 'e['.$u->id.']';
+  $sr = $u->sr ?? false;
   $limit = $u->limits->html ?? ($u->limits->placeholder ?? 300);
-  echo '<div class="field '.($u->sr ?? false ? 'sr' : '').'">';
-  echo '<div class="flabel">'.h($u->label).($u->sr ?? false ? ' <span class="tag">leitores de tela</span>' : '').'</div>';
+  echo '<div class="unit">';
+  echo '<label class="flabel">'.h($u->label).($sr ? ' <span class="tag">leitores de tela</span>' : '').'</label>';
 
   if ($u->kind === 'text' || ($u->kind === 'link' && isset($u->base->html))) {
     $val = $u->base->html ?? '';
@@ -354,10 +373,10 @@ function field_editor($u, $enPrefix) {
     else echo '<input type="text" name="'.$name.'[html]" maxlength="'.(int)$limit.'" value="'.h($val).'">';
   }
   if ($u->kind === 'link') {
-    echo '<div class="row">';
-    echo '<label class="sub">Destino (URL ou página.html) <input type="text" name="'.$name.'[href]" value="'.h($u->base->href).'"></label>';
+    echo '<div class="linkbox"><div class="row">';
+    echo '<label class="sub">Destino (URL ou página.html)<input type="text" name="'.$name.'[href]" value="'.h($u->base->href).'"></label>';
     echo '<label class="chk"><input type="checkbox" name="'.$name.'[newTab]" '.($u->base->newTab?'checked':'').'> Abrir em nova aba</label>';
-    echo '</div>';
+    echo '</div></div>';
   }
   if ($u->kind === 'image') {
     $src = $u->base->image;
@@ -365,14 +384,14 @@ function field_editor($u, $enPrefix) {
     echo '<div class="imgrow">';
     echo '<img class="thumb" src="'.h($preview).'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">';
     echo '<div class="imgfields">';
-    echo '<label class="sub">Arquivo da imagem <input type="text" name="'.$name.'[image]" value="'.h($src).'" data-img></label>';
-    echo '<label class="sub">Texto alternativo (alt) <input type="text" name="'.$name.'[alt]" maxlength="160" value="'.h($u->base->alt).'"></label>';
-    echo '<button type="button" class="btn small upload">Enviar nova imagem…</button>';
+    echo '<label class="sub">Arquivo da imagem<input type="text" name="'.$name.'[image]" value="'.h($src).'" data-img></label>';
+    echo '<label class="sub">Texto alternativo (alt)<input type="text" name="'.$name.'[alt]" maxlength="160" value="'.h($u->base->alt).'"></label>';
+    echo '<button type="button" class="btn ghost small upload">Enviar nova imagem…</button>';
     echo '</div></div>';
   }
   if ($u->kind === 'field') {
     echo '<div class="row">';
-    if ($u->hasPlaceholder) echo '<label class="sub">Texto de exemplo (placeholder) <input type="text" name="'.$name.'[placeholder]" maxlength="90" value="'.h($u->base->placeholder).'"></label>';
+    if ($u->hasPlaceholder) echo '<label class="sub">Texto de exemplo (placeholder)<input type="text" name="'.$name.'[placeholder]" maxlength="90" value="'.h($u->base->placeholder).'"></label>';
     echo '<label class="chk"><input type="checkbox" name="'.$name.'[required]" '.($u->base->required?'checked':'').'> Obrigatório</label>';
     echo '</div>';
   }
@@ -381,8 +400,9 @@ function field_editor($u, $enPrefix) {
 
 /* ================= LAYOUT ================= */
 
-function layout($title, $body, $chrome = true) {
+function layout($title, $body, $chrome = true, $crumbs = null) {
   $u = class_exists('Auth') ? Auth::current() : null;
+  $active = $_GET['p'] ?? 'home';
   header('X-Content-Type-Options: nosniff');
   header('Referrer-Policy: same-origin'); ?>
 <!doctype html><html lang="pt-BR"><head>
@@ -390,15 +410,34 @@ function layout($title, $body, $chrome = true) {
 <meta name="robots" content="noindex, nofollow">
 <title><?=h($title)?> · Painel MedicGLOBAL</title>
 <link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="ui/app.css">
 </head><body>
 <?php if ($chrome && $u): ?>
-<header class="top">
-  <a class="brand" href="?p=home">MedicGLOBAL <span>painel</span></a>
-  <nav><a href="?p=home">Páginas</a><a href="?p=audit">Auditoria</a><a href="?p=account">Conta</a><a class="out" href="?p=logout">Sair</a></nav>
-</header>
+<div class="shell">
+  <aside class="side">
+    <a class="side-logo" href="?p=home"><b>MedicGLOBAL</b> <span class="badge">painel</span></a>
+    <div class="side-group">Conteúdo</div>
+    <a class="nav <?=$active==='home'||$active==='edit'?'is-active':''?>" href="?p=home">Páginas</a>
+    <div class="side-group">Registros</div>
+    <a class="nav <?=$active==='audit'?'is-active':''?>" href="?p=audit">Auditoria</a>
+    <a class="nav <?=$active==='account'?'is-active':''?>" href="?p=account">Minha conta</a>
+    <a class="nav" href="?p=logout">Sair</a>
+    <div class="side-user">
+      <span class="avatar"><?=h(strtoupper(mb_substr($u['email'],0,1)))?></span>
+      <span class="who"><b><?=h(explode('@',$u['email'])[0])?></b><span><?=h($u['email'])?></span></span>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="top"><nav class="crumbs"><?php if ($crumbs) { $last=count($crumbs)-1; foreach ($crumbs as $i=>$c){ if($i) echo '<span class="sep">/</span>'; if($i===$last||empty($c[1])) echo '<b>'.h($c[0]).'</b>'; else echo '<a href="'.h($c[1]).'">'.h($c[0]).'</a>'; } } else echo '<b>'.h($title).'</b>'; ?></nav></header>
+    <main class="content"><?php $body(); ?></main>
+  </div>
+</div>
+<?php else: ?>
+<div class="login"><?php $body(); ?></div>
 <?php endif; ?>
-<main class="wrap"><?php $body(); ?></main>
 <script src="ui/app.js"></script>
 </body></html><?php }
 

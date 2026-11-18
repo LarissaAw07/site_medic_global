@@ -2143,6 +2143,13 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .rb-err { display: none; color: #B42318; }
 .rb.is-error .rb-err { display: block; }
 .rb.is-error .rb-stat { display: none; }
+.rb-plan { display: grid; gap: 14px; padding: 24px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--white); }
+.rb-plan[hidden] { display: none; }
+.rb-plan h3 { font-size: 1.125rem; color: var(--ink); }
+.rb-plan dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; margin: 0; }
+.rb-plan dt { font-family: var(--f-head); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.rb-plan dd { margin: 2px 0 0; font-family: var(--f-head); font-weight: 500; color: var(--globo); }
+.rb-plan-warn { margin: 0; padding: 12px 14px; border-radius: 12px; background: #FEF3F2; color: #B42318; font-size: var(--t-xs); line-height: 1.55; text-align: justify; }
 .rb-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--header-h) + 16px); }
 .rb-count { font-family: var(--f-head); }
 .rb-count strong { font-size: 1.5rem; color: var(--globo); margin-right: 4px; }

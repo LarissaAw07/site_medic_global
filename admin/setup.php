@@ -27,6 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // crie o administrador entre a publicação dos arquivos e o primeiro acesso de vocês)
   elseif (!hash_equals((string)(Cfg::get('db')['pass'] ?? ''), (string)($_POST['dbpass'] ?? '')) || (string)(Cfg::get('db')['pass'] ?? '') === '') { $error = 'Senha do banco de dados incorreta.'; usleep(800000); }
   elseif (!preg_match(Forms::EMAIL, $email)) $error = 'E-mail inválido.';
+  elseif (($chosen = (string)($_POST['pw'] ?? '')) !== '') {
+    // senha escolhida: precisa cumprir as regras; não é provisória, então não exige troca
+    if ($chosen !== (string)($_POST['pw2'] ?? '')) $error = 'As senhas não conferem.';
+    elseif ($prob = Auth::passwordProblem($chosen, $email)) $error = $prob;
+    else {
+      Auth::upsert($email, $chosen, ['mustChange' => false]);
+      audit('setup', 'admin_definido', $email);
+      $done = ['email' => $email, 'pw' => null];
+    }
+  }
   else {
     // 16 caracteres sem símbolos ambíguos, com maiúscula, minúscula, número e símbolo
     $sets = ['ABCDEFGHJKLMNPQRSTUVWXYZ', 'abcdefghijkmnopqrstuvwxyz', '23456789', '#%+=@!?'];
@@ -61,16 +71,23 @@ $css = substr(md5_file(__DIR__ . '/app.css'), 0, 8);
     <img src="/admin/logo.png" alt="MedicGLOBAL Saúde">
     <h1>Primeiro acesso</h1>
 <?php if ($done): ?>
+<?php if ($done['pw'] === null): ?>
+    <p class="lead">Administrador principal criado com a senha que você escolheu.</p>
+    <div class="alert alert--info" role="status"><strong>Usuário:</strong> <?= h($done['email']) ?></div>
+<?php else: ?>
     <p class="lead">Administrador principal criado. Anote a senha provisória agora: ela não fica gravada em lugar nenhum e será pedida a troca no primeiro acesso.</p>
     <div class="alert alert--info" role="status"><strong>Usuário:</strong> <?= h($done['email']) ?><br><strong>Senha provisória:</strong> <code><?= h($done['pw']) ?></code></div>
+<?php endif; ?>
     <a class="btn btn--block" href="/admin/">Ir para o login</a>
 <?php else: ?>
-    <p class="lead">Nenhum administrador cadastrado ainda. Informe o e-mail do administrador principal; uma senha provisória forte será gerada.</p>
+    <p class="lead">Nenhum administrador cadastrado ainda. Informe o e-mail do administrador principal e, se quiser, a senha dele.</p>
     <?php if ($error): ?><div class="alert alert--err" role="alert"><?= h($error) ?></div><?php endif; ?>
     <form method="post" action="/admin/setup.php" novalidate>
       <input type="hidden" name="t" value="<?= h($token) ?>">
       <div class="field"><label for="email"><span>E-mail<span class="req" title="Campo obrigatório"> *</span></span></label><input id="email" name="email" type="email" autocomplete="username" required value="<?= h($email) ?>" placeholder="seu.email@medicglobal.com.br"></div>
       <div class="field"><label for="dbpass"><span>Senha do banco de dados<span class="req" title="Campo obrigatório"> *</span></span></label><input id="dbpass" name="dbpass" type="password" autocomplete="off" required><span class="hint">A mesma que está em admin/config.php (confirma que é você quem administra o servidor).</span></div>
+      <div class="field"><label for="pw"><span>Senha do administrador (opcional)</span></label><input id="pw" name="pw" type="password" autocomplete="new-password"><span class="hint">Em branco: uma senha provisória forte é gerada. Preenchida: 12+ caracteres, com maiúsculas, minúsculas, números e símbolo.</span></div>
+      <div class="field"><label for="pw2"><span>Confirme a senha</span></label><input id="pw2" name="pw2" type="password" autocomplete="new-password"></div>
       <button class="btn btn--block" type="submit">Criar administrador</button>
     </form>
 <?php endif; ?>

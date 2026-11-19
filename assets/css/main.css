@@ -2112,8 +2112,8 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .rb { display: grid; gap: 24px; align-items: start; }
 @media (min-width: 1100px) {
   .rb { grid-template-columns: minmax(340px, 400px) 1fr; gap: 40px; }
-  /* painel fixo com rolagem própria: com o mouse em cima, a roda rola os filtros e não os resultados */
-  .rb-side { position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(0,98,109,.3) transparent; }
+  /* painel sem rolagem interna nem limite de altura; fica fixo (sticky) só quando cabe inteiro na tela (classe via JS) */
+  .rb-side.is-sticky { position: sticky; top: calc(var(--header-h) + 16px); }
 }
 .rb-side .dd-list { overscroll-behavior: contain; }
 .rb-side { display: grid; gap: 16px; padding: 28px; border-radius: var(--r-lg); background: #EFF7F8; border: 1px solid var(--line); }
@@ -2161,15 +2161,28 @@ main:has(> section.mosaic:last-child) + .site-footer { overflow-x: clip; overflo
 .rb-addr { font-size: var(--t-sm); color: var(--ink-2); line-height: 1.55; }
 .rb-addr strong { color: var(--ink); font-weight: 500; font-family: var(--f-head); }
 .rb-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; }
-.rb-qs { display: inline-flex; gap: 4px; }
-.rb-q { width: 24px; height: 24px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--globo); color: var(--white); font-family: var(--f-head); font-size: .7rem; font-weight: 600; cursor: help; flex-shrink: 0; }
+.rb-qs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+/* Selos de qualificação no padrão ANS: letra branca em quadro preto; acreditação = "A" + sigla da entidade */
+.ans-q { display: inline-flex; align-items: flex-end; flex-shrink: 0; line-height: 1; cursor: help; }
+.ans-q b { width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 3px; background: #1A1A1A; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 900; letter-spacing: 0; }
+.ans-q--a b { border-radius: 3px 0 3px 3px; }
+.ans-q--a small { display: inline-block; margin-left: 1px; padding: 1px 3px; border-radius: 2px; background: #1A1A1A; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 8px; font-weight: 700; letter-spacing: .02em; line-height: 1.1; }
+.rb-quals { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 2px 0 0; padding: 0; list-style: none; font-size: var(--t-xs); color: var(--ink-2); }
+.rb-quals li { display: inline-flex; align-items: center; gap: 8px; }
+.rb-quals-ent { color: var(--ink-3); font-family: var(--f-head); font-size: .68rem; letter-spacing: .06em; }
 .rb-urg { background: #FDECEA; color: #B42318; }
 .rb-none { grid-column: 1 / -1; padding: 24px; border-radius: var(--r-lg); background: var(--mist); color: var(--ink-2); }
 .rb-more { justify-self: center; }
 .rb-more[hidden], .rb-start[hidden], .rb-head[hidden] { display: none; }
 .rb-foot { display: grid; gap: 12px; margin-top: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
-.rb-legend ul { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; font-size: var(--t-xs); color: var(--ink-2); }
-.rb-legend li { display: inline-flex; align-items: center; gap: 8px; }
+.rb-legend { padding: 20px 24px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--white); }
+.rb-legend-cols { display: grid; gap: 14px 40px; }
+@media (min-width: 640px) { .rb-legend-cols { grid-template-columns: 1fr 1fr; } }
+.rb-legend-cols h4 { margin: 0 0 10px; font-family: var(--f-head); font-size: .78rem; font-weight: 600; color: var(--ink); }
+.rb-legend ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: var(--t-sm); color: var(--ink-2); }
+.rb-legend li { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 10px; }
+.rb-legend li .ans-q { justify-self: start; }
+.rb-legend-note { margin: 14px 0 0; }
 
 
 /* Guia médico (guia-medico.html): painel da marca (passos + destaques) à esquerda e formulário à direita */

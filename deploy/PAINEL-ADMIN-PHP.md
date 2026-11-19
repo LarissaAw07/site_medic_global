@@ -41,7 +41,10 @@ Você **não** sobe `admin/config.php` (é criado no servidor, passo 2) nem `adm
 3. **Acesse `https://seusite/admin/`.** No primeiro acesso aparece a tela **Primeiro acesso**: informe o e-mail do
    administrador principal e a **senha do banco de dados** (a do `config.php`, que prova que é você quem administra o
    servidor); uma senha provisória forte é mostrada uma única vez e a troca é obrigatória no login
-   (o mesmo que o `node cms/setup.js` faz no Node).
+   (o mesmo que o `node cms/setup.js` faz no Node). Se preferir, preencha também a senha do administrador nessa
+   tela: ela passa a valer direto, sem troca obrigatória.
+   Para redefinir o login/senha depois (com acesso ao terminal do servidor):
+   `php admin/tools/set-admin.php email@dominio` (a senha é pedida no terminal).
 4. Edite, visualize e **Publicar**: o site da raiz é regenerado com o conteúdo do painel.
 
 ## Requisitos da hospedagem

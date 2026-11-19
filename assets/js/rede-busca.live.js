@@ -53,6 +53,42 @@
     });
   }
 
+  /* ---------- Qualificações no padrão da ANS (QUALISS) ----------
+     Acreditação: "A" + sigla da entidade acreditadora (CBA, DICQ, IQG, ONA, PALC).
+     Atributos: E, N, P, Q, R. Mesmos textos da legenda do sistema oficial. */
+  var ANS_ACRED = ["CBA", "DICQ", "IQG", "ONA", "PALC"];
+  var ANS = {
+    ACBA: T("Padrão internacional de qualidade", "International quality standard"),
+    ADICQ: T("Padrão nacional de qualidade", "National quality standard"),
+    AIQG: T("Padrão internacional de qualidade", "International quality standard"),
+    AONA: T("Padrão nacional de qualidade", "National quality standard"),
+    APALC: T("Padrão nacional de qualidade", "National quality standard"),
+    E: T("Título de especialista", "Specialist title"),
+    N: T("Comunicação de eventos adversos", "Adverse event reporting"),
+    P: T("Profissional com especialização", "Professional with specialization"),
+    Q: T("Qualidade monitorada", "Monitored quality"),
+    R: T("Profissional com residência", "Professional with residency")
+  };
+  var ANS_ORDER = ["ACBA", "ADICQ", "AIQG", "AONA", "APALC", "E", "N", "P", "Q", "R"];
+  // nome do arquivo do selo (LOGO_03_E, LOGO_ONA, icone-Aona…) -> código ANS
+  function qualCode(tok) {
+    var t = String(tok || "").toUpperCase();
+    if (ANS[t]) return t;
+    if (ANS_ACRED.indexOf(t) >= 0) return "A" + t;
+    var m = t.match(/(?:^|_)A?(CBA|DICQ|IQG|ONA|PALC)$/); if (m) return "A" + m[1];
+    var l = t.slice(-1);
+    return /[A-Z]/.test(l) ? l : "";
+  }
+  function sortQuals(arr) {
+    return arr.sort(function (a, b) { var x = ANS_ORDER.indexOf(a), y = ANS_ORDER.indexOf(b); return (x < 0 ? 99 : x) - (y < 0 ? 99 : y); });
+  }
+  function qualDesc(c) { return ANS[c] || qualMap[c] || c; }
+  function qualBadge(c) {
+    var d = esc(qualDesc(c) + (c.length > 1 ? " (" + c.slice(1) + ")" : ""));
+    var inner = c.length > 1 ? '<b>A</b><small>' + esc(c.slice(1)) + "</small>" : "<b>" + esc(c) + "</b>";
+    return '<span class="ans-q' + (c.length > 1 ? " ans-q--a" : "") + '" title="' + d + '" aria-hidden="true">' + inner + "</span>";
+  }
+
   /* ---------- Parsing dos blocos (mesmo algoritmo de src/rede-sync.js) ---------- */
   var ENT = { nbsp: " ", amp: "&", quot: '"', apos: "'", lt: "<", gt: ">" };
   function clean(s) {
@@ -74,7 +110,7 @@
       tipo: clean((block.match(/Tipo de Estabelecimento:\s*([^<]*)/i) || [])[1] || ""),
       especialidades: [],
       local: "", endereco: "", bairro: "", cep: "", fone: "", cidade: "", uf: "",
-      quals: (function () { var m, set = {}, re = /qualificacao\/LOGO_\w*?_?([A-Z])\.jpg/gi; while ((m = re.exec(block))) set[m[1].toUpperCase()] = 1; return Object.keys(set); })()
+      quals: (function () { var m, c, set = {}, re = /qualificacao\/(?:LOGO_(?:\d+_)?|icone-)([A-Za-z_]+)\.jpe?g/gi; while ((m = re.exec(block))) { c = qualCode(m[1]); if (c) set[c] = 1; } return sortQuals(Object.keys(set)); })()
     };
     var ps = (block.match(/<p[^>]*>[\s\S]*?<\/p>/g) || []).map(function (p) { return p.replace(/^<p[^>]*>/, "").replace(/<\/p>$/, ""); }).filter(function (p) { return clean(p) && !/Tipo de Estabelecimento/i.test(p); });
     var esp = null;
@@ -151,13 +187,16 @@
   /* ---------- Resultados (renderização idêntica à versão estática) ---------- */
   function card(e) {
     var tel = phones(e), addr = [nice(e.endereco), [nice(e.bairro), e.cep && "CEP " + e.cep].filter(Boolean).join(" · "), nice(e.cidade) + "/" + e.uf];
-    var q = (e.quals || []).map(function (l) { var d = qualMap[l]; return '<span class="rb-q" title="' + esc(d || l) + '" aria-label="' + esc(d || l) + '">' + l + "</span>"; }).join("");
+    var qs = e.quals || [];
+    var q = qs.map(qualBadge).join("");
+    var qList = qs.length ? '<ul class="rb-quals" aria-label="' + T("Qualificações (padrão ANS)", "Qualifications (ANS standard)") + '">' +
+      qs.map(function (c) { return "<li>" + qualBadge(c) + "<span>" + esc(qualDesc(c)) + (c.length > 1 ? ' <span class="rb-quals-ent">' + esc(c.slice(1)) + "</span>" : "") + "</span></li>"; }).join("") + "</ul>" : "";
     var maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([e.endereco, e.bairro, e.cidade + " - " + e.uf, e.cep].filter(Boolean).join(", "));
     return '<li class="rb-item">' +
       '<div class="rb-item-top"><span class="rb-kind">' + (e.modo === "profissional" ? T("Profissional", "Professional") : T("Prestador", "Provider")) + (e.tipo ? " · " + esc(nice(e.tipo)) : "") + "</span>" +
-      (e.urgencia ? '<span class="badge rb-urg">' + T("Urgência e emergência", "Urgent and emergency care") + "</span>" : "") + (q ? '<span class="rb-qs">' + q + "</span>" : "") + "</div>" +
+      (e.urgencia ? '<span class="badge rb-urg">' + T("Urgência e emergência", "Urgent and emergency care") + "</span>" : "") + (q ? '<span class="rb-qs" aria-hidden="true">' + q + "</span>" : "") + "</div>" +
       "<h3>" + esc(nice(e.nome)) + "</h3>" + (e.registro ? '<p class="rb-reg">' + esc(e.registro) + "</p>" : "") +
-      (e.especialidades.length ? '<p class="rb-esp">' + e.especialidades.map(function (s) { return esc(nice(s)); }).join(" · ") + "</p>" : "") +
+      (e.especialidades.length ? '<p class="rb-esp">' + e.especialidades.map(function (s) { return esc(nice(s)); }).join(" · ") + "</p>" : "") + qList +
       '<p class="rb-addr">' + (e.local ? "<strong>" + esc(nice(e.local)) + "</strong><br>" : "") + addr.filter(Boolean).map(esc).join("<br>") + "</p>" +
       '<div class="rb-actions"><a class="btn btn--sm" href="' + maps + '" target="_blank" rel="noopener">' + T("Como chegar", "Directions") + "</a>" +
       tel.map(function (p) { return '<a class="btn btn--ghost btn--sm" href="' + p.tel + '" data-track="click_telefone">' + esc(p.label) + "</a>"; }).join("") + "</div></li>";
@@ -318,7 +357,7 @@
       var planos = r[0].map(function (o) { return { v: o.v, t: o.t }; });
       var tipos = r[1].map(function (o) { tipoById[o.v] = o.t; tipoByName[norm(o.t)] = o.v; return { v: o.v, t: nice(o.t) }; });
       var esps = r[2]; espNames = esps.map(function (o) { return o.t; });
-      var quals = r[3].map(function (o) { var letra = (o.t.match(/-\s*([A-Z])\s*$/) || [])[1] || ""; var nome = o.t.replace(/\s*-\s*[A-Z]\s*$/, "").replace(/\.$/, ""); if (letra) qualMap[letra] = nice(nome); return { v: o.v, t: nice(nome) }; });
+      var quals = r[3].map(function (o) { var letra = (o.t.match(/-\s*([A-Z])\s*$/) || [])[1] || ""; var nome = o.t.replace(/\s*-\s*[A-Z]\s*$/, "").replace(/\.$/, ""); if (letra) qualMap[letra] = nice(nome); return { v: o.v, t: (letra && ANS[letra] ? ANS[letra] : nice(nome)) + (letra ? " (" + letra + ")" : "") }; });
       var estados = ["MG", "SP"].map(function (u) { return { v: u, t: UF[u] }; });
 
       // Combinada
@@ -384,14 +423,18 @@
   $("#rb-comb").addEventListener("reset", function () { setTimeout(function () { if (ready) { setModo(modo); fill(C.cidade, [], T("Todas as cidades", "All cities")); fill(C.bairro, [], T("Todos os bairros", "All districts")); } }, 0); });
   $("#rb-av").addEventListener("submit", function (e) { e.preventDefault(); if (ready) runAv(); });
   more.addEventListener("click", page);
-  // Desktop: roda do mouse sobre o painel de filtros não rola a página
+  // Painel "Buscar na rede": sem rolagem interna. Acompanha o scroll da página (sticky) só quando cabe inteiro
+  // na tela; se for mais alto que a janela, fica no fluxo normal — nunca corta conteúdo.
   var side = $(".rb-side"), desk = window.matchMedia("(min-width: 1100px)");
-  if (side) side.addEventListener("wheel", function (e) {
-    if (!desk.matches) return;
-    var el = e.target.closest(".dd-list") || side, d = e.deltaY;
-    var noScroll = el.scrollHeight <= el.clientHeight;
-    var atTop = d < 0 && el.scrollTop <= 0, atEnd = d > 0 && el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-    if (noScroll || atTop || atEnd) e.preventDefault();
-  }, { passive: false });
+  function fitSide() {
+    if (!side) return;
+    var hh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 80;
+    side.classList.toggle("is-sticky", desk.matches && side.offsetHeight <= window.innerHeight - hh - 32);
+  }
+  if (side) {
+    fitSide();
+    window.addEventListener("resize", fitSide);
+    if (window.ResizeObserver) new ResizeObserver(fitSide).observe(side);
+  }
   showMetodo();
 })();

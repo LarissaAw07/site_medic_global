@@ -170,6 +170,7 @@
   var espNames = [];         // nomes de especialidade (para o datalist)
   var tipoById = {};         // id -> nome do tipo de estabelecimento
   var tipoByName = {};       // nome normalizado -> id (atalhos/pills)
+  var tiposAll = [], estadosAll = [], espsAll = []; // listas completas (combinada sem plano)
   var items = [], shown = 0, busy = false;
   var list = $(".rb-list"), more = $(".rb-more"), head = $(".rb-head"), start = $(".rb-start");
   var UF = { MG: "Minas Gerais", SP: "São Paulo" };
@@ -182,6 +183,62 @@
     modo = m;
     $$("[data-modo]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-modo") === m ? "true" : "false"); });
     if (C.esp.closest(".field")) C.esp.closest(".field").hidden = m !== "profissional";
+    cascadeComb("tipo");
+  }
+  /* Cascata da combinada (igual prod, rede_credenciada.php):
+       plano+modo -> tipo (buscatipoestabelecimento) -> estado (buscaestado) -> cidade (buscacidade)
+       -> bairro (buscabairro) -> especialidade (buscaespecialidade, só com cidade).
+     Sem plano os endpoints acima voltam vazios: usa as listas completas e a cascata por região (por-regiao-*). */
+  var cascSeq = 0;
+  var LEVELS = ["tipo", "estado", "cidade", "bairro", "esp"];
+  function optsClean(h) { return optionsOf(h).filter(function (o) { return o.v && o.v !== "0" && o.v !== "Todos" && !/^Tod[oa]s$/i.test(o.v); }); }
+  function cascParams() {
+    return { plano: C.plano.value, modo: modo === "profissional" ? "medico" : "servico", estabelecimento: C.tipo.value || "Todos",
+             estado: C.estado.value, cidade: C.cidade.value, bairro: C.bairro.value };
+  }
+  var loaders = {
+    tipo: function (p) {
+      if (!p.plano) return Promise.resolve(tiposAll);
+      return apiGet("buscatipoestabelecimento.php?" + qs({ plano: p.plano, empresa: 0, modo: p.modo }))
+        .then(function (h) { return optsClean(h).map(function (o) { return { v: o.v, t: nice(o.t) }; }); });
+    },
+    estado: function (p) {
+      if (!p.plano) return Promise.resolve(estadosAll);
+      return apiGet("buscaestado.php?" + qs({ plano: p.plano, empresa: 0, modo: p.modo, estabelecimento: p.estabelecimento }))
+        .then(function (h) { return optsClean(h).map(function (o) { return { v: o.v, t: UF[o.v] || nice(o.t) }; }); });
+    },
+    cidade: function (p) {
+      if (!p.estado) return Promise.resolve([]);
+      var url = p.plano ? "buscacidade.php?" + qs({ modo: p.modo, estado: p.estado, plano: p.plano }) : "por-regiao-busca-cidade.php?estado=" + p.estado;
+      return apiGet(url).then(optsClean);
+    },
+    bairro: function (p) {
+      if (!p.estado || !p.cidade) return Promise.resolve([]);
+      var url = p.plano ? "buscabairro.php?" + qs({ estado: p.estado, plano: p.plano, cidade: p.cidade, modo: p.modo, estabelecimento: p.estabelecimento })
+                        : "por-regiao-busca-bairro.php?estado=" + p.estado + "&cidade=" + p.cidade;
+      return apiGet(url).then(optsClean);
+    },
+    esp: function (p) {
+      if (!p.plano || !p.cidade || p.modo !== "medico") return Promise.resolve(espsAll);
+      return apiGet("buscaespecialidade.php?" + qs({ plano: p.plano, empresa: 0, cidade: p.cidade, bairro: p.bairro, modo: p.modo, estabelecimento: p.estabelecimento }))
+        .then(function (h) { return optsClean(h).map(function (o) { return { v: o.v, t: nice(o.t) }; }); });
+    }
+  };
+  var PH = function (k) { return { tipo: T("Todos os tipos", "All types"), estado: T("Todos os estados", "All states"), cidade: T("Todas as cidades", "All cities"), bairro: T("Todos os bairros", "All districts"), esp: T("Todas as especialidades", "All specialties") }[k]; };
+  var FALLBACK = { tipo: function () { return tiposAll; }, estado: function () { return estadosAll; }, cidade: function () { return []; }, bairro: function () { return []; }, esp: function () { return espsAll; } };
+  // recarrega, em ordem, os níveis a partir de "from" (cada um mantém o valor atual se ainda existir na nova lista)
+  function cascadeComb(from) {
+    var seq = ++cascSeq, i = LEVELS.indexOf(from);
+    var step = function (k) {
+      if (k >= LEVELS.length || seq !== cascSeq) return Promise.resolve();
+      var lv = LEVELS[k];
+      return loaders[lv](cascParams()).catch(function () { return FALLBACK[lv](); }).then(function (vals) {
+        if (seq !== cascSeq) return;
+        fill(C[lv], vals, PH(lv));
+        return step(k + 1);
+      });
+    };
+    return step(i < 0 ? 0 : i);
   }
 
   /* ---------- Resultados (renderização idêntica à versão estática) ---------- */
@@ -248,6 +305,35 @@
     promise.then(function (res) { show(res, params); }).catch(fail);
   }
 
+  /* ---------- Dados do plano e situação (igual prod: ajax_info.php, exibido acima dos resultados) ---------- */
+  var planInfo = document.createElement("section");
+  planInfo.className = "rb-plan"; planInfo.hidden = true;
+  planInfo.setAttribute("aria-label", T("Dados do plano e situação", "Plan details and status"));
+  head.parentNode.insertBefore(planInfo, head);
+  var infoSeq = 0;
+  function loadPlanInfo(plano) {
+    var seq = ++infoSeq;
+    planInfo.hidden = true; planInfo.innerHTML = "";
+    if (!plano) return;
+    apiGet("ajax_info.php?" + qs({ plano: plano })).then(function (h) {
+      if (seq !== infoSeq) return;
+      var txt = clean(h);
+      var f = function (re) { return ((txt.match(re) || [])[1] || "").trim(); };
+      var nome = f(/Nome Comercial:\s*(.*?)\s*(?:Contrata|Registro ANS|$)/i),
+          contr = f(/Contrata[çc][ãa]o:\s*(.*?)\s*(?:Registro ANS|Situa|$)/i),
+          ans = f(/Registro ANS:\s*([\d.\-\/]+)/i),
+          sit = f(/Situa[çc][ãa]o:\s*(.*?)\s*(?:ATEN[ÇC][ÃA]O|$)/i),
+          aviso = f(/ATEN[ÇC][ÃA]O:\s*(.*)$/i);
+      if (!nome && !ans) return;
+      var row = function (k, v) { return v ? "<div><dt>" + k + "</dt><dd>" + esc(v) + "</dd></div>" : ""; };
+      planInfo.innerHTML = "<h3>" + T("Dados do plano e situação", "Plan details and status") + "</h3><dl>" +
+        row(T("Nome comercial", "Commercial name"), nome) + row(T("Registro ANS", "ANS registration"), ans) +
+        row(T("Contratação", "Contract type"), contr) + row(T("Situação", "Status"), sit) + "</dl>" +
+        (aviso ? '<p class="rb-plan-warn"><strong>' + T("Atenção:", "Attention:") + "</strong> " + esc(aviso) + "</p>" : "");
+      planInfo.hidden = false;
+    }).catch(function () {});
+  }
+
   /* ---------- Busca combinada (resultado ao vivo pelo endpoint universal) ---------- */
   function runComb() {
     var m = modo === "profissional" ? "medico" : "servico";
@@ -257,6 +343,7 @@
       var sel = pair[1]; if (sel.value && !(sel === C.esp && modo !== "profissional")) params.push([sel.closest(".field").querySelector("label").textContent, txt(sel)]);
     });
     if (p.nome) params.push([T("Nome", "Name"), p.nome]);
+    if (!busy) loadPlanInfo(p.plano);
     run(query("ajax_combinada_resultado.php?" + qs(p), modo), params);
   }
 
@@ -284,6 +371,7 @@
     var m = A.metodo.value;
     if (!m) { A.metodo.focus(); return; }
     var label = function (sel) { return sel.closest(".field").querySelector("label").textContent; };
+    if (!busy) loadPlanInfo(m === "plano" ? A.plano.value : "");
     if (m === "plano") {
       if (!A.plano.value) { A.plano.focus(); return; }
       // endpoint dedicado da isolada (igual prod): já traz profissionais + prestadores do plano
@@ -362,7 +450,9 @@
 
       // Combinada
       fill(C.plano, planos, T("Todos os planos", "All plans"));
+      tiposAll = tipos;
       fill(C.tipo, tipos, T("Todos os tipos", "All types"));
+      estadosAll = estados; espsAll = esps.map(function (o) { return { v: o.v, t: nice(o.t) }; });
       fill(C.estado, estados, T("Todos os estados", "All states"));
       fill(C.cidade, [], T("Todas as cidades", "All cities"));
       fill(C.bairro, [], T("Todos os bairros", "All districts"));
@@ -379,22 +469,6 @@
     });
   }
 
-  // cascata de cidade/bairro na combinada (por região, sem depender de plano)
-  function loadCidadesComb() {
-    var uf = C.estado.value;
-    if (!uf) { fill(C.cidade, [], T("Todas as cidades", "All cities")); fill(C.bairro, [], T("Todos os bairros", "All districts")); return; }
-    apiGet("por-regiao-busca-cidade.php?estado=" + uf).then(function (h) {
-      fill(C.cidade, optionsOf(h).filter(function (o) { return o.v && o.v !== "0"; }), T("Todas as cidades", "All cities"));
-      fill(C.bairro, [], T("Todos os bairros", "All districts"));
-    });
-  }
-  function loadBairrosComb() {
-    var uf = C.estado.value, cid = C.cidade.value;
-    if (!uf || !cid) { fill(C.bairro, [], T("Todos os bairros", "All districts")); return; }
-    apiGet("por-regiao-busca-bairro.php?estado=" + uf + "&cidade=" + cid).then(function (h) {
-      fill(C.bairro, optionsOf(h).filter(function (o) { return o.v && o.v !== "0"; }), T("Todos os bairros", "All districts"));
-    });
-  }
 
   initFilters().then(function () {
     ready = true;
@@ -414,13 +488,16 @@
 
   /* ---------- Eventos ---------- */
   $$("[data-modo]").forEach(function (b) { b.addEventListener("click", function () { if (ready) setModo(b.getAttribute("data-modo")); }); });
-  C.estado.addEventListener("change", function () { if (ready) loadCidadesComb(); });
-  C.cidade.addEventListener("change", function () { if (ready) loadBairrosComb(); });
+  C.plano.addEventListener("change", function () { if (ready) cascadeComb("tipo"); });
+  C.tipo.addEventListener("change", function () { if (ready && C.plano.value) cascadeComb("estado"); });
+  C.estado.addEventListener("change", function () { if (ready) cascadeComb("cidade"); });
+  C.cidade.addEventListener("change", function () { if (ready) cascadeComb("bairro"); });
+  C.bairro.addEventListener("change", function () { if (ready && C.plano.value) cascadeComb("esp"); });
   A.metodo.addEventListener("change", showMetodo);
   A.estado.addEventListener("change", function () { if (ready) loadCidadesAv(); });
   A.cidade.addEventListener("change", function () { if (ready) loadBairrosAv(); });
   $("#rb-comb").addEventListener("submit", function (e) { e.preventDefault(); if (ready) runComb(); });
-  $("#rb-comb").addEventListener("reset", function () { setTimeout(function () { if (ready) { setModo(modo); fill(C.cidade, [], T("Todas as cidades", "All cities")); fill(C.bairro, [], T("Todos os bairros", "All districts")); } }, 0); });
+  $("#rb-comb").addEventListener("reset", function () { setTimeout(function () { if (ready) setModo(modo); }, 0); });
   $("#rb-av").addEventListener("submit", function (e) { e.preventDefault(); if (ready) runAv(); });
   more.addEventListener("click", page);
   // Painel "Buscar na rede": sem rolagem interna. Acompanha o scroll da página (sticky) só quando cabe inteiro

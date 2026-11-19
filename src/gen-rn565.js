@@ -162,7 +162,6 @@ ${h}
 <section class="page-hero rn-hero" aria-labelledby="t">
   <div class="rn-hero-bg" aria-hidden="true">{{pic:old_rn565_banner||1600|100vw|eager}}</div>
   <div class="wrap">
-    {{crumbs}}
     <div class="grid" style="align-items:end">
       <div class="c-1-7">
         <span class="eyebrow">${U.eyebrow}</span>
@@ -239,7 +238,6 @@ ${anteriores.map((a) => row(a).replace(/^ {8}/gm, "          ")).join("\n")}
 <article class="news agr">
   <header class="page-hero" style="padding-bottom:0">
     <div class="wrap">
-      {{crumbs}}
       <a class="news-back" href="rn565.html#ano-${a.ano}">{{i:chevron-left}} ${U.back}</a>
       <div class="post-meta mb-6"><span class="cat">RN 565</span><span>${U.cat}</span>${a === atual ? `<span class="src-tag">${U.current}</span>` : ""}</div>
     </div>

@@ -1485,7 +1485,7 @@ html.a11y-guide .a11y-guide-bar { display: block; }
 /* Banners (home e páginas internas): conteúdo mais alto e compacto para caber inteiro em telas de notebook */
 @media (min-width: 1100px) {
   .hero { padding-top: calc(var(--header-h) + 40px); }
-  .hero--page { padding-top: calc(var(--header-h) + 20px); }
+  .hero--page { padding-top: calc(var(--header-h) + 40px); }
   .hero--page .crumbs { margin-bottom: 16px; }
   .hero-copy .lead { font-size: var(--t-md); margin-bottom: 24px; }
   .hero-copy .eyebrow { margin-bottom: 16px; }

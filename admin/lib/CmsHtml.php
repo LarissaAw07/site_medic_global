@@ -273,7 +273,7 @@ final class CmsHtml
     }
     private static function hasWords(string $s): bool
     {
-        return preg_match('/[\p{L}\p{N}]/u', self::plain(preg_replace('/\{\{L\.[\w.]+\}\}/', '', $s))) === 1;
+        return preg_match('/[\p{L}\p{N}]/u', self::plain(preg_replace('/\{\{(?:L\.[\w.]+|[a-z]+)\}\}/', '', $s))) === 1;
     }
 
     private static function isIcon(string $src, $n): bool
@@ -558,6 +558,26 @@ final class CmsHtml
     private static function sectionLabel(string $src, $el, $comment): string
     {
         $W = self::WS;
+        // 1º: o nome que o visitante vê no site — o chapéu (eyebrow) da seção ou, sem ele, o título dela
+        $visible = function (string $html): string {
+            $t = self::plain(preg_replace('/\{\{[^}]*\}\}/', '', $html) ?? $html);
+            $t = self::trim(preg_replace('/' . self::WS . '+/u', ' ', $t) ?? $t);
+            return self::len16($t) > 70 ? self::slice16($t, 0, 70) . '…' : $t;
+        };
+        $inner0 = self::slice($src, $el->start, $el->end);
+        if (preg_match('/<(span|p|div|small|strong)\b[^>]*class="[^"]*\beyebrow\b[^"]*"[^>]*>([\s\S]*?)<\/\1>/u', $inner0, $eb)) {
+            $t = $visible($eb[2]);
+            if ($t !== '') return $t;
+        }
+        $lb0 = self::attrVal($el, 'aria-labelledby');
+        if ($lb0 !== null && $lb0 !== '' && preg_match('/id=["\']' . preg_quote($lb0, '/') . '["\'][^>]*>([\s\S]*?)<\/h[1-6]>/u', $src, $hm)) {
+            $t = $visible($hm[1]);
+            if ($t !== '') return $t;
+        }
+        if (preg_match('/<h[1-3]\b[^>]*>([\s\S]*?)<\/h[1-3]>/u', $inner0, $h0)) {
+            $t = $visible($h0[1]);
+            if ($t !== '') return $t;
+        }
         if ($comment !== null && $comment !== '') {
             $t = self::trim(preg_replace('/' . $W . '+/u', ' ', $comment) ?? $comment);
             $t = preg_replace('/^\d+' . $W . '*·' . $W . '*/u', '', $t) ?? $t;

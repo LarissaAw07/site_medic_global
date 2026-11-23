@@ -5,7 +5,7 @@
 final class Auth {
   const IDLE = 2 * 60 * 60 * 1000;      // sessão expira após 2 h sem uso
   const ABSOLUTE = 12 * 60 * 60 * 1000; // e no máximo 12 h depois do login
-  const MAX_USERS = 3;
+  const MAX_USERS = 5;  // sem contar o usuário master
   const PERMS = [
     'pages' => 'Páginas do site',
     'news' => 'Notícias',
@@ -37,8 +37,14 @@ final class Auth {
     if ($email && str_contains(mb_strtolower($pw), mb_strtolower(explode('@', (string)$email)[0]))) return 'A senha não pode conter o seu usuário.';
     return '';
   }
-  static function can($u, $perm) { return $u && (($u['role'] ?? '') === 'admin' || in_array($perm, $u['perms'] ?? [], true)); }
-  static function permsOf($u) { return ($u['role'] ?? '') === 'admin' ? array_keys(self::PERMS) : array_values(array_filter($u['perms'] ?? [], fn($p) => isset(self::PERMS[$p]))); }
+  // "master": conta única, acesso total, fora do limite de usuários; "admin": administrador principal (acesso total)
+  static function isSuper($u) { return in_array($u['role'] ?? '', ['admin', 'master'], true); }
+  static function isMaster($u) { return ($u['role'] ?? '') === 'master'; }
+  static function can($u, $perm) { return $u && (self::isSuper($u) || in_array($perm, $u['perms'] ?? [], true)); }
+  static function permsOf($u) { return self::isSuper($u) ? array_keys(self::PERMS) : array_values(array_filter($u['perms'] ?? [], fn($p) => isset(self::PERMS[$p]))); }
+  // usuários que contam no limite (o master não conta)
+  static function counted() { return count(array_filter(self::all(), fn($u) => !self::isMaster($u))); }
+  static function master() { foreach (self::all() as $u) if (self::isMaster($u)) return $u; return null; }
 
   /* ---------- usuários (no máximo MAX_USERS; o primeiro é o administrador principal) ---------- */
   static function all() { $l = kv_read('users', []); return is_array($l) ? $l : []; }
@@ -49,13 +55,16 @@ final class Auth {
     $list = self::all(); $i = null;
     foreach ($list as $k => $x) if ($x['email'] === $email) $i = $k;
     if ($i === null) {
-      if (count($list) >= self::MAX_USERS) throw new ApiError(422, 'Limite de ' . self::MAX_USERS . ' usuários atingido.');
-      $list[] = ['email' => $email, 'name' => ($opts['name'] ?? '') ?: 'Administrador', 'role' => $list ? 'editor' : 'admin', 'perms' => [], 'createdAt' => iso_now()];
+      $master = !empty($opts['master']);
+      if ($master && self::master()) throw new ApiError(422, 'Já existe um usuário master.');
+      if (!$master && self::counted() >= self::MAX_USERS) throw new ApiError(422, 'Limite de ' . self::MAX_USERS . ' usuários atingido.');
+      $hasAdmin = (bool) array_filter($list, fn($x) => ($x['role'] ?? '') === 'admin');
+      $list[] = ['email' => $email, 'name' => ($opts['name'] ?? '') ?: ($master ? 'Master' : 'Administrador'), 'role' => $master ? 'master' : ($hasAdmin ? 'editor' : 'admin'), 'perms' => [], 'createdAt' => iso_now()];
       $i = count($list) - 1;
     }
     $u = &$list[$i];
     if (!empty($opts['name'])) $u['name'] = $opts['name'];
-    if (isset($opts['perms']) && $u['role'] !== 'admin') $u['perms'] = array_values(array_filter($opts['perms'], fn($p) => isset(self::PERMS[$p])));
+    if (isset($opts['perms']) && !self::isSuper($u)) $u['perms'] = array_values(array_filter($opts['perms'], fn($p) => isset(self::PERMS[$p])));
     if (!empty($opts['by'])) $u['createdBy'] = ($u['createdBy'] ?? '') ?: $opts['by'];
     $u['hash'] = self::hashPassword($password);
     $u['mustChange'] = !empty($opts['mustChange']);
@@ -69,7 +78,7 @@ final class Auth {
     $list = self::all();
     foreach ($list as $k => $u) if ($u['email'] === $email) {
       if (array_key_exists('name', $fields)) $list[$k]['name'] = $fields['name'];
-      if (isset($fields['perms']) && $u['role'] !== 'admin') $list[$k]['perms'] = array_values(array_filter($fields['perms'], fn($p) => isset(self::PERMS[$p])));
+      if (isset($fields['perms']) && !self::isSuper($u)) $list[$k]['perms'] = array_values(array_filter($fields['perms'], fn($p) => isset(self::PERMS[$p])));
       self::save($list);
       return $list[$k];
     }

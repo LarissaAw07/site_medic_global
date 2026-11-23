@@ -137,6 +137,11 @@ ul, ol { margin: 0; padding: 0; }
 .deep h1, .deep h2, .deep h3, .deep h4 { color: var(--white); }
 .deep .lead, .deep .muted { color: var(--on-deep-2); }
 .deep .eyebrow { color: var(--glow); }
+/* "Destaque" do painel (<em>): trecho na cor da marca, sem itálico; em fundo escuro usa o tom claro */
+em { font-style: normal; color: var(--medic); }
+.deep em, .site-footer em, .glass-feature em, .is-focal em, .phone-top em { color: var(--glow); }
+/* no corpo de notícias e páginas de texto corrido, <em> vem do botão "Itálico" do editor: continua itálico */
+.prose em { font-style: italic; color: inherit; }
 .deep .eyebrow::before { background: var(--glow); }
 
 /* ---------- Tipografia utilitária ---------- */

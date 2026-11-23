@@ -88,10 +88,11 @@ select.input option, .field select option { background: var(--field); color: var
 .alert--warn { background: var(--warn-bg); color: var(--warn); border-color: rgba(244,198,109,.25); }
 .alert--info { background: var(--tint); color: var(--ink-2); border-color: var(--line); }
 .rich { min-height: 44px; white-space: pre-wrap; overflow-wrap: anywhere; }
-.rich em { color: var(--glow); font-style: normal; font-weight: 600; }
+.rich em, .rich i { color: var(--glow); font-style: normal; font-weight: 600; }
 .rich-bar { display: inline-flex; gap: 4px; }
 .rich-bar button { border: 1px solid var(--line); background: var(--field); border-radius: 999px; font-size: .72rem; font-weight: 600; padding: 2px 10px; cursor: pointer; color: var(--ink-2); }
 .rich-bar button:hover { background: var(--tint); border-color: var(--tint-2); color: var(--glow); }
+.rich-bar button[aria-pressed="true"] { background: var(--tint); border-color: var(--glow); color: var(--glow); }
 
 /* ---------- estrutura: menu e conteúdo no mesmo fundo ---------- */
 .shell { display: grid; grid-template-columns: 272px minmax(0, 1fr); min-height: 100vh; }

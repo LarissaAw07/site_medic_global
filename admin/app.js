@@ -55,6 +55,72 @@
     }
     return walk(doc.body.firstChild).replace(/(<br>)+$/, "");
   }
+  /* Destaque/Negrito nos campos curtos: liga e desliga pela marcação (não pelo estilo calculado, que o CSS do
+     destaque muda e confundia o execCommand). Seleção dentro de um trecho marcado → tira só a parte selecionada;
+     cursor parado dentro dele → tira o trecho inteiro; seleção sem marcação → aplica. */
+  function selRange(ed) {
+    var s = window.getSelection();
+    if (!s || !s.rangeCount) return null;
+    var r = s.getRangeAt(0);
+    return ed.contains(r.commonAncestorContainer) ? r : null;
+  }
+  function inlineHits(ed, re) {
+    var r = selRange(ed); if (!r) return [];
+    var hits = [];
+    [r.startContainer, r.endContainer].forEach(function (n) {
+      for (; n && n !== ed; n = n.parentNode) if (n.nodeType === 1 && re.test(n.tagName) && hits.indexOf(n) < 0) hits.push(n);
+    });
+    if (!r.collapsed) Array.prototype.forEach.call(ed.querySelectorAll("*"), function (el) {
+      if (!re.test(el.tagName) || hits.indexOf(el) >= 0 || !r.intersectsNode(el)) return;
+      var x = document.createRange(); x.selectNodeContents(el);
+      if (x.compareBoundaryPoints(Range.END_TO_START, r) < 0 && x.compareBoundaryPoints(Range.START_TO_END, r) > 0) hits.push(el);
+    });
+    // só os mais externos (um destaque dentro de outro sai junto)
+    return hits.filter(function (el) { return !hits.some(function (o) { return o !== el && o.contains(el); }); });
+  }
+  function toggleInline(ed, re, tag) {
+    var r = selRange(ed); if (!r) { ed.focus(); return; }
+    var hits = inlineHits(ed, re), sel = window.getSelection();
+    var unwrapAll = function (root) { Array.prototype.slice.call(root.querySelectorAll("*")).forEach(function (el) { if (re.test(el.tagName)) { while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el); el.remove(); } }); };
+    if (hits.length) {
+      var firstMid = null, lastMid = null, wasCollapsed = r.collapsed;
+      hits.forEach(function (el) {
+        var pre = null, post = null, mid;
+        if (!wasCollapsed) {
+          var a = document.createRange(), b = document.createRange(), c = document.createRange();
+          c.selectNodeContents(el);
+          if (el.contains(r.startContainer)) { a.setStart(el, 0); a.setEnd(r.startContainer, r.startOffset); c.setStart(r.startContainer, r.startOffset); pre = a; }
+          if (el.contains(r.endContainer)) { b.setStart(r.endContainer, r.endOffset); b.setEnd(el, el.childNodes.length); c.setEnd(r.endContainer, r.endOffset); post = b; }
+          var wrap = function (rg) { if (!rg || !rg.toString()) return null; var w = document.createElement(el.tagName); w.appendChild(rg.cloneContents()); return w; };
+          pre = wrap(pre); post = wrap(post);
+          mid = c.cloneContents();
+        } else {
+          mid = document.createDocumentFragment(); while (el.firstChild) mid.appendChild(el.firstChild);
+        }
+        unwrapAll(mid);
+        var m0 = mid.firstChild, m1 = mid.lastChild, parent = el.parentNode;
+        if (pre) parent.insertBefore(pre, el);
+        parent.insertBefore(mid, el);
+        if (post) parent.insertBefore(post, el);
+        el.remove();
+        if (m0 && !firstMid) firstMid = m0;
+        if (m1) lastMid = m1;
+      });
+      // seleciona de novo o trecho que perdeu a marcação
+      if (!wasCollapsed && firstMid && lastMid) {
+        var nr = document.createRange(); nr.setStartBefore(firstMid); nr.setEndAfter(lastMid);
+        sel.removeAllRanges(); sel.addRange(nr);
+      }
+    } else if (!r.collapsed) {
+      var w = document.createElement(tag);
+      w.appendChild(r.extractContents()); unwrapAll(w);
+      r.insertNode(w);
+      var nr2 = document.createRange(); nr2.selectNodeContents(w);
+      sel.removeAllRanges(); sel.addRange(nr2);
+    } else { toast("Selecione o trecho primeiro."); return; }
+    ed.normalize();
+    ed.dispatchEvent(new Event("input"));
+  }
   function fmtDate(iso) { if (!iso) return "—"; var d = new Date(iso); return d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); }
   function fmtSize(b) { return b > 1048576 ? (b / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(b / 1024)) + " KB"; }
 
@@ -239,7 +305,8 @@
   ];
   var TITLES = {}, NEED = {}; NAV.forEach(function (g) { g[1].forEach(function (n) { TITLES[n[0]] = n[1]; NEED[n[0]] = n[3]; }); });
   TITLES.page = TITLES.pages; NEED.page = "pages"; TITLES.docs = "Documentos anuais"; NEED.docs = "pages";
-  function can(p) { return !p || !!(S.user && (S.user.role === "admin" || (S.user.perms || []).indexOf(p) >= 0)); }
+  function isSuper(u) { return !!u && (u.role === "admin" || u.role === "master"); }
+  function can(p) { return !p || !!(S.user && (isSuper(S.user) || (S.user.perms || []).indexOf(p) >= 0)); }
   var dirty = null; // função que diz se a tela atual tem alterações não salvas
   // trilha "onde estou" no topo: [["Páginas do site", "#/pages"], ["Página inicial"]]
   function setCrumbs(list) {
@@ -547,9 +614,15 @@
       if (rich) {
         var ed = h("div", { class: "rich", contenteditable: "true", role: "textbox", "aria-multiline": "true", id: "f" + (++uid) });
         ed.innerHTML = cleanInline(html);
-        var bar = h("span", { class: "rich-bar" },
-          h("button", { type: "button", text: "Destaque", title: "Texto em destaque (cor da marca)", onmousedown: function (e) { e.preventDefault(); document.execCommand("italic"); ed.dispatchEvent(new Event("input")); } }),
-          h("button", { type: "button", text: "Negrito", onmousedown: function (e) { e.preventDefault(); document.execCommand("bold"); ed.dispatchEvent(new Event("input")); } }));
+        var bDest = h("button", { type: "button", text: "Destaque", title: "Texto em destaque (cor da marca). Clique de novo para tirar.", "aria-pressed": "false", onmousedown: function (e) { e.preventDefault(); toggleInline(ed, /^(EM|I)$/, "em"); syncBar(); } });
+        var bBold = h("button", { type: "button", text: "Negrito", title: "Negrito. Clique de novo para tirar.", "aria-pressed": "false", onmousedown: function (e) { e.preventDefault(); toggleInline(ed, /^(STRONG|B)$/, "strong"); syncBar(); } });
+        var bar = h("span", { class: "rich-bar" }, bDest, bBold);
+        // botões acesos quando o cursor/seleção está dentro de um destaque ou negrito
+        var syncBar = function () {
+          bDest.setAttribute("aria-pressed", String(inlineHits(ed, /^(EM|I)$/).length > 0));
+          bBold.setAttribute("aria-pressed", String(inlineHits(ed, /^(STRONG|B)$/).length > 0));
+        };
+        document.addEventListener("selectionchange", function () { if (document.activeElement === ed) syncBar(); });
         ed.addEventListener("paste", function (e) { e.preventDefault(); document.execCommand("insertText", false, (e.clipboardData || window.clipboardData).getData("text/plain")); });
         ed.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); if (u.tag !== "h1" && u.tag !== "h2") document.execCommand("insertLineBreak"); } });
         ed.addEventListener("input", function () { var o = {}; o[key] = cleanInline(ed.innerHTML); set(u, o); });
@@ -1722,7 +1795,7 @@
   }
   var PERM_DESC = { pages: "Editar textos, imagens e links das páginas", news: "Criar e editar notícias", identity: "Logotipo e favicon", forms: "Destinos e regras dos formulários", analytics: "Configuração do GA4", audit: "Ver o registro de alterações", publish: "Colocar as alterações no ar e restaurar versões", users: "Cadastrar, editar e remover usuários" };
   function userForm(r, u, done) {
-    var isNew = !u, isMain = !!u && u.role === "admin";
+    var isNew = !u, isMain = isSuper(u);
     var name = inp({ type: "text", value: u ? u.name : "", maxlength: 60 });
     var email = inp({ type: "email", value: u ? u.email : "", disabled: !isNew || null, autocomplete: "off" });
     var pw = inp({ type: "text", value: "", autocomplete: "off", placeholder: "Em branco: o painel gera uma senha forte" });
@@ -1756,7 +1829,7 @@
       }).then(function () { btn.disabled = false; });
     } }, alert, h("div", { class: "grid2" }, F.name, F.email), isNew ? F.password : null,
       h("h3", { class: "mt", text: "O que este usuário pode ver no painel" }),
-      h("p", { class: "small muted", text: isMain ? "Administrador principal: acesso a todas as áreas." : "Visão geral e Usuários (para trocar a própria senha) aparecem sempre. As demais áreas só aparecem se marcadas." }),
+      h("p", { class: "small muted", text: isMain ? (u.role === "master" ? "Usuário master: acesso a todas as áreas." : "Administrador principal: acesso a todas as áreas.") : "Visão geral e Usuários (para trocar a própria senha) aparecem sempre. As demais áreas só aparecem se marcadas." }),
       permList, h("div", { class: "field" }, permErr),
       h("div", { class: "actions" }, h("button", { class: "btn btn--ghost", type: "button", text: "Cancelar", onclick: function () { m.close(); } }), btn));
     m = modal([h("h2", { text: isNew ? "Novo usuário" : "Editar " + u.name }), form], { wide: true });
@@ -1765,7 +1838,8 @@
     var mine = h("div", { class: "card" }, h("h2", { text: "Trocar a minha senha" }), h("p", { class: "desc", text: (S.user ? S.user.name + " · " + S.user.email + ". " : "") + "Ao trocar a senha, as outras sessões abertas com este usuário são encerradas." }), passwordForm(false, function () { route(); }));
     if (!can("users")) { fill(view, head("Usuários", "Sua conta de acesso ao painel."), mine); return; }
     api("GET", "/admin/api.php/users").then(function (r) {
-      var full = r.users.length >= r.max;
+      var used = r.used != null ? r.used : r.users.length, full = used >= r.max;
+      var iAmMaster = !!S.user && S.user.role === "master";
       var reload = function () { VIEWS.users(view); };
       var initials = function (u) { return (u.name || u.email).split(/[\s@.]+/).slice(0, 2).map(function (x) { return x.charAt(0).toUpperCase(); }).join(""); };
       var cards = r.users.map(function (u) {
@@ -1773,27 +1847,27 @@
         return h("div", { class: "ucard" },
           h("div", { class: "ucard-top" }, h("span", { class: "avatar", text: initials(u) }),
             h("div", { class: "grow" }, h("b", { text: u.name }), h("div", { class: "small muted", text: u.email }),
-              u.role === "admin" || me ? h("div", { class: "ucard-badges" }, u.role === "admin" ? h("span", { class: "badge", text: "Administrador principal" }) : null, me ? h("span", { class: "badge badge--line", text: "Você" }) : null) : null)),
-          h("div", { class: "ucard-perms" }, u.role === "admin" ? h("span", { class: "badge badge--ok", text: "Todas as áreas" }) : u.perms.map(function (p) { return h("span", { class: "badge badge--line", text: r.perms[p] }); })),
+              isSuper(u) || me ? h("div", { class: "ucard-badges" }, isSuper(u) ? h("span", { class: "badge", text: u.role === "master" ? "Master" : "Administrador principal" }) : null, me ? h("span", { class: "badge badge--line", text: "Você" }) : null) : null)),
+          h("div", { class: "ucard-perms" }, isSuper(u) ? h("span", { class: "badge badge--ok", text: "Todas as áreas" }) : u.perms.map(function (p) { return h("span", { class: "badge badge--line", text: r.perms[p] }); })),
           h("div", { class: "xs muted" }, "Último acesso: " + fmtDate(u.lastLogin), u.mustChange ? " · aguardando troca da senha provisória" : "", u.locked ? " · bloqueado por tentativas incorretas" : ""),
           h("div", { class: "actions" },
-            // a conta do administrador principal só é alterada por ele mesmo
-            u.role !== "admin" || me ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () { userForm(r, u, reload); } }, icon("edit"), u.role === "admin" ? "Editar nome" : "Editar permissões") : null,
-            !me && u.role !== "admin" ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () {
+            // a conta do master só é alterada por ele mesmo; a do administrador principal, por ele ou pelo master
+            !isSuper(u) || me || (u.role === "admin" && iAmMaster) ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () { userForm(r, u, reload); } }, icon("edit"), isSuper(u) ? "Editar nome" : "Editar permissões") : null,
+            !me && u.role !== "master" && (u.role !== "admin" || iAmMaster) ? h("button", { class: "btn btn--ghost btn--sm", type: "button", onclick: function () {
               confirmDialog("Redefinir a senha de " + u.name + "?", "Uma senha provisória será criada agora. As sessões abertas desse usuário são encerradas e ele precisará trocar a senha ao entrar.", "Redefinir senha").then(function (ok) {
                 if (ok) api("POST", "/admin/api.php/users/reset", { email: u.email }).then(function (nr) { showPassword("Senha redefinida", u.email, nr.password); reload(); }).catch(fail);
               });
             } }, icon("key"), "Redefinir senha") : null,
-            !me && u.role !== "admin" ? h("button", { class: "btn btn--quiet btn--sm", type: "button", onclick: function () {
+            !me && !isSuper(u) ? h("button", { class: "btn btn--quiet btn--sm", type: "button", onclick: function () {
               confirmDialog("Remover " + u.name + "?", "O acesso de " + u.email + " ao painel é encerrado na hora. O histórico dele continua na Auditoria.", "Remover", true).then(function (ok) {
                 if (ok) api("DELETE", "/admin/api.php/users?email=" + encodeURIComponent(u.email)).then(function () { toast("Usuário removido.", "ok"); reload(); }).catch(fail);
               });
             } }, icon("trash"), "Remover") : null));
       });
-      fill(view, head("Usuários", "Até " + r.max + " pessoas com acesso ao painel. Cada uma vê só as áreas liberadas para ela.",
+      fill(view, head("Usuários", "Até " + r.max + " pessoas com acesso ao painel (além do usuário master). Cada uma vê só as áreas liberadas para ela.",
         h("button", { class: "btn", type: "button", disabled: full || null, title: full ? "Limite de " + r.max + " usuários atingido" : null, onclick: function () { userForm(r, null, reload); } }, "+ Novo usuário")),
         full ? h("div", { class: "alert alert--info", text: "Limite de " + r.max + " usuários atingido. Para cadastrar outra pessoa, remova um usuário." }) : null,
-        h("div", { class: "ucards" }, cards), h("p", { class: "small muted", text: r.users.length + " de " + r.max + " usuários cadastrados" }), mine);
+        h("div", { class: "ucards" }, cards), h("p", { class: "small muted", text: used + " de " + r.max + " usuários cadastrados" }), mine);
     }).catch(fail);
   };
 

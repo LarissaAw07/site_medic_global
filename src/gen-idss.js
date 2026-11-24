@@ -148,7 +148,6 @@ ${ind}</li>`;
 <section class="page-hero rn-hero" aria-labelledby="t">
   <div class="rn-hero-bg" aria-hidden="true">{{pic:old_rn565_banner||1600|100vw|eager}}</div>
   <div class="wrap">
-    {{crumbs}}
     <div class="grid" style="align-items:end">
       <div class="c-1-7">
         <span class="eyebrow">${U.eyebrow}</span>
@@ -239,7 +238,6 @@ ${anteriores.map((r) => row(r, "          ")).join("\n")}
 <article class="news agr idss">
   <header class="page-hero" style="padding-bottom:0">
     <div class="wrap">
-      {{crumbs}}
       <a class="news-back" href="idss.html#ano-${r.ano}">{{i:chevron-left}} ${U.back}</a>
       <div class="post-meta mb-6"><span class="cat">IDSS</span><span>${U.sub}</span>${r === atual ? `<span class="src-tag">${U.latest}</span>` : ""}</div>
     </div>

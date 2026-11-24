@@ -97,7 +97,6 @@ module.exports = function (fs = require("fs")) {
 <article class="news">
   <header class="page-hero" style="padding-bottom:48px">
     <div class="wrap">
-      {{crumbs}}
       <a class="news-back" href="conteudos.html#cat=${n.cat}">{{i:chevron-left}} ${U.back(cat)}</a>
       <div class="post-meta mb-6"><span class="cat">${cat}</span><time datetime="${n.data}">${U.date(n.data)}</time><span>${esc(n.tema)}</span><span>${U.read(n.leitura)}</span></div>
       <h1 class="balance news-title">${esc(n.titulo)}</h1>

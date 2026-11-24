@@ -111,9 +111,9 @@ on('GET', '/me', function ($s) {
   json_out(200, ['csrf' => $s['csrf'], 'user' => user_info($u), 'mustChange' => !empty($u['mustChange']), 'idleMinutes' => Auth::IDLE / 60000]);
 }, ['allowMustChange' => true]);
 
-/* usuários (até Auth::MAX_USERS) */
+/* usuários (até Auth::MAX_USERS, sem contar o master) */
 function users_view() {
-  return ['max' => Auth::MAX_USERS, 'perms' => Auth::PERMS, 'users' => array_map(fn($u) => array_merge(user_info($u), ['createdAt' => $u['createdAt'] ?? null, 'mustChange' => !empty($u['mustChange']), 'locked' => Auth::isLocked($u['email'])]), Auth::all())];
+  return ['max' => Auth::MAX_USERS, 'used' => Auth::counted(), 'perms' => Auth::PERMS, 'users' => array_map(fn($u) => array_merge(user_info($u), ['createdAt' => $u['createdAt'] ?? null, 'mustChange' => !empty($u['mustChange']), 'locked' => Auth::isLocked($u['email'])]), Auth::all())];
 }
 function user_fields($b, &$errors) {
   $name = trim(str_or($b['name'] ?? ''));
@@ -130,7 +130,7 @@ on('POST', '/users', function ($s) {
   $email = mb_strtolower(trim(str_or($b['email'] ?? '')));
   if (!preg_match(Forms::EMAIL, $email)) $errors['email'] = 'E-mail inválido.';
   elseif (Auth::find($email)) $errors['email'] = 'Já existe um usuário com este e-mail.';
-  if (count(Auth::all()) >= Auth::MAX_USERS) json_out(422, ['error' => 'O painel permite no máximo ' . Auth::MAX_USERS . ' usuários. Remova um para cadastrar outro.']);
+  if (Auth::counted() >= Auth::MAX_USERS) json_out(422, ['error' => 'O painel permite no máximo ' . Auth::MAX_USERS . ' usuários. Remova um para cadastrar outro.']);
   $pw = !empty($b['password']) ? js_str($b['password']) : Auth::tempPassword();
   $prob = Auth::passwordProblem($pw, $email);
   if ($prob) $errors['password'] = $prob;
@@ -143,10 +143,11 @@ on('PUT', '/users', function ($s) {
   $b = read_json(10000);
   $u = Auth::find($b['email'] ?? '');
   if (!$u) json_out(404, ['error' => 'Usuário não encontrado.']);
-  if ($u['role'] === 'admin' && $s['user']['role'] !== 'admin') json_out(403, ['error' => 'Só o administrador principal pode alterar a própria conta.']);
+  if (Auth::isMaster($u) && !Auth::isMaster($s['user'])) json_out(403, ['error' => 'Só o usuário master pode alterar a própria conta.']);
+  if ($u['role'] === 'admin' && !Auth::isSuper($s['user'])) json_out(403, ['error' => 'Só o administrador principal pode alterar a própria conta.']);
   $errors = [];
-  [$name, $perms] = user_fields(array_merge(['perms' => $u['role'] === 'admin' ? ['pages'] : ($u['perms'] ?? [])], $b), $errors);
-  if ($u['email'] === $s['email'] && $u['role'] !== 'admin' && !in_array('users', $perms, true)) $errors['perms'] = 'Você não pode tirar de si mesmo a permissão de gerenciar usuários.';
+  [$name, $perms] = user_fields(array_merge(['perms' => Auth::isSuper($u) ? ['pages'] : ($u['perms'] ?? [])], $b), $errors);
+  if ($u['email'] === $s['email'] && !Auth::isSuper($u) && !in_array('users', $perms, true)) $errors['perms'] = 'Você não pode tirar de si mesmo a permissão de gerenciar usuários.';
   if ($errors) json_out(422, ['error' => 'Corrija os campos destacados.', 'fields' => $errors]);
   $areas = fn($x) => implode(', ', array_map(fn($p) => Auth::PERMS[$p], Auth::permsOf($x)));
   $before = ['name' => $u['name'] ?? '', 'perms' => $areas($u)];
@@ -163,7 +164,8 @@ on('POST', '/users/reset', function ($s) {
   $u = Auth::find($b['email'] ?? '');
   if (!$u) json_out(404, ['error' => 'Usuário não encontrado.']);
   if ($u['email'] === $s['email']) json_out(422, ['error' => 'Para a sua própria senha, use “Trocar a minha senha”.']);
-  if ($u['role'] === 'admin') json_out(403, ['error' => 'A senha do administrador principal só pode ser trocada por ele mesmo, em “Trocar a minha senha”.']);
+  if (Auth::isMaster($u)) json_out(403, ['error' => 'A senha do usuário master só pode ser trocada por ele mesmo, em “Trocar a minha senha”.']);
+  if ($u['role'] === 'admin' && !Auth::isMaster($s['user'])) json_out(403, ['error' => 'A senha do administrador principal só pode ser trocada por ele mesmo, em “Trocar a minha senha”.']);
   $pw = !empty($b['password']) ? js_str($b['password']) : Auth::tempPassword();
   $prob = Auth::passwordProblem($pw, $u['email']);
   if ($prob) json_out(422, ['error' => $prob, 'fields' => ['password' => $prob]]);
@@ -177,6 +179,7 @@ on('DELETE', '/users', function ($s) {
   $u = Auth::find(q('email'));
   if (!$u) json_out(404, ['error' => 'Usuário não encontrado.']);
   if ($u['email'] === $s['email']) json_out(422, ['error' => 'Você não pode remover o seu próprio usuário.']);
+  if (Auth::isMaster($u)) json_out(422, ['error' => 'O usuário master não pode ser removido.']);
   if ($u['role'] === 'admin') json_out(422, ['error' => 'O administrador principal não pode ser removido.']);
   Auth::remove($u['email']);
   audit($s['email'], 'usuario_removido', $u['email']);
@@ -377,7 +380,7 @@ on('POST', '/upload', function ($s) {
   if ($purpose === 'pdf') $v = strlen($buf) > PDF_MAX ? ['error' => 'PDF grande demais (máximo de 15 MB).'] : (substr($buf, 0, 5) !== '%PDF-' ? ['error' => 'O arquivo não é um PDF válido.'] : ['info' => ['type' => 'pdf', 'mime' => 'application/pdf', 'w' => 0, 'h' => 0]]);
   else $v = Images::validate($buf, $purpose);
   if (isset($v['error'])) json_out(422, ['error' => $v['error']]);
-  if ($v['info']['type'] === 'svg' && $s['user']['role'] !== 'admin') json_out(403, ['error' => 'Por segurança, só o administrador principal pode enviar SVG. Envie o logotipo em PNG ou WebP.']);
+  if ($v['info']['type'] === 'svg' && !Auth::isSuper($s['user'])) json_out(403, ['error' => 'Por segurança, só o administrador principal pode enviar SVG. Envie o logotipo em PNG ou WebP.']);
   $name = substr(hash('sha256', $buf), 0, 20) . '.' . $v['info']['type'];
   $dir = mg_dirs()['uploads'];
   file_put_contents("$dir/$name", $buf); @chmod("$dir/$name", 0644);
